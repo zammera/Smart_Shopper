@@ -4,6 +4,11 @@ body {
     background-repeat: no-repeat;
 }
 
+.navbar {
+    background-color: green;
+    
+}
+
 #start {
     filter:opacity(100%);
     position: absolute;
