@@ -54,3 +54,11 @@ body {
     width: 150px;
     font-size: 50%
 }
+
+.btn-custom-color {
+    background-color: rgb(161, 253, 177);
+}
+
+.createNew, .editOld {
+    margin-top: 40px;
+}
