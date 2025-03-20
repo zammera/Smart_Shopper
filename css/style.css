@@ -4,10 +4,33 @@ body {
     background-repeat: no-repeat;
 }
 
-.navbar {
-    background-color: green;
-    
+/*Start of Navbar CSS*/
+
+.navbar-custom {
+    background-color: rgb(161 253 177 / 75%);
 }
+
+.navbar h1{
+    color: black;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 50px;
+}
+
+.navbar h1:hover {
+    color:white;
+}
+
+.btnso {
+    margin-bottom: 20px;
+    background-color: rgb(185, 4, 4);
+    border-radius: 20px;
+    height: 50px;
+    width: 150px;
+}
+
+/*End of NavBar CSS*/
 
 #start {
     filter:opacity(100%);
@@ -25,7 +48,7 @@ body {
 }
 
 .butdef {
-    background-color: green;
+    background-color: rgb(161, 253, 177);
     border-radius: 20px;
     height: 50px;
     width: 150px;
