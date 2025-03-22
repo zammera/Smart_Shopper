@@ -227,14 +227,23 @@ body {
 
 /*              Start of History CSS                    */
 
+#historyContainer {
+    height: 80vh;
+    background-color: white;
+    border-radius: 10px;
+    margin-top: 12vh;
+    padding-top: 10px;
+}
+
 .itemsHistorySection {
-    height: 30vh;
+    margin-bottom: 10px;
     width: 100%;
 }
 
 .sectionTitle {
-    width: 18vw;
-    margin: 0 auto 8px auto;
+    width: 30vw;
+    margin-right: auto;
+    margin-left: auto;
     font-size: 200%;
     color: black;
     background-color: green;
@@ -244,7 +253,7 @@ body {
 }
 
 .itemContainer {
-    height: 23vh;
+    height: 10vh;
     width: 100%;
     border: 2px solid black;
     filter:opacity(100%);
