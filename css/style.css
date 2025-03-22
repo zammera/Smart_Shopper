@@ -222,4 +222,47 @@ body {
 }
 
 
-/*              End of Change Area CSS                 */
+/*              End of Change Area CSS                  */
+
+
+/*              Start of History CSS                    */
+
+.itemsHistorySection {
+    height: 30vh;
+    width: 100%;
+}
+
+.sectionTitle {
+    width: 18vw;
+    margin: 0 auto 8px auto;
+    font-size: 200%;
+    color: black;
+    background-color: green;
+    background: lightgreen;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.itemContainer {
+    height: 23vh;
+    width: 100%;
+    border: 2px solid black;
+    filter:opacity(100%);
+    font-size: 200%;
+    color: white;
+    background-color: gray;
+    background: rgb(128 128 128 / 50% );
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+
+.item {
+    display: inline-block;
+    height: 20.5vh;
+    width: 140px;
+    text-align: center;
+    background: lightgreen;
+    border: 2px solid black;
+}
+
+/*              End of History CSS                      */
