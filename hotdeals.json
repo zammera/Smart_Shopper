@@ -159,6 +159,14 @@
         "discount_price": 7.50,
         "savings": 7.49,
         "store": "Walmart Supercenter - Salem, NH"
+      },
+      {
+        "item": "Nature Valley Granola Bars (12 ct)",
+        "discount": "50%",
+        "original_price": 4.99,
+        "discount_price": 2.50,
+        "savings": 2.49,
+        "store": "Trader Joe's - Nashua, NH"  
       }
     ]
   }
