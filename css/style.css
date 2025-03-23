@@ -228,50 +228,56 @@ body {
 /*              Start of History CSS                    */
 
 #historyContainer {
-    height: 80vh;
+    min-width: 1200px;
+    height: 820px;
     background-color: white;
-    border-radius: 10px;
-    margin-top: 12vh;
+    border-radius: 40px;
+    margin-top: 100px;
     padding-top: 10px;
 }
 
 .itemsHistorySection {
     margin-bottom: 10px;
+    height: 250px;
+    min-height: 200px;
     width: 100%;
 }
 
 .sectionTitle {
-    width: 30vw;
+    height: 45px;
+    width: 300px;
     margin-right: auto;
     margin-left: auto;
     font-size: 200%;
     color: black;
-    background-color: green;
-    background: lightgreen;
+    background-color: #A1FDB1;
     border-radius: 10px;
     text-align: center;
 }
 
 .itemContainer {
-    height: 10vh;
+    height: 200px;
     width: 100%;
+    min-height: 180px;
+    padding: 14px;
     border: 2px solid black;
     filter:opacity(100%);
     font-size: 200%;
     color: white;
     background-color: gray;
     background: rgb(128 128 128 / 50% );
-    overflow-x: scroll;
-    overflow-y: hidden;
+    overflow-y: auto;
+    white-space: nowrap;
 }
 
 .item {
-    display: inline-block;
-    height: 20.5vh;
-    width: 140px;
+    display: inline-flex;
+    height: 150px;
+    width: 150px;
     text-align: center;
-    background: lightgreen;
+    background-color: #A1FDB1;
     border: 2px solid black;
+    border-radius: 12px;
 }
 
 /*              End of History CSS                      */
