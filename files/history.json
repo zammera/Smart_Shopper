@@ -1,0 +1,268 @@
+[
+    {
+      "store": "SuperMart",
+      "price": 3.99,
+      "item_name": "Organic Bananas",
+      "sale_price": null,
+      "url": ""
+    },
+    {
+      "store": "SuperMart",
+      "price": 2.50,
+      "item_name": "Whole Milk",
+      "sale_price": 2.00,
+      "url": ""
+    },
+      {
+      "store": "FreshFoods",
+      "price": 5.99,
+      "item_name": "Salmon Fillet",
+      "sale_price": null,
+      "url": ""
+    },
+    {
+      "store": "SuperMart",
+      "price": 1.25,
+      "item_name": "Loaf of Bread",
+      "sale_price": null,
+      "url": ""
+    },
+    {
+      "store": "FreshFoods",
+      "price": 4.50,
+      "item_name": "Strawberries",
+      "sale_price": 3.99,
+      "url": ""
+    },
+    {
+      "store": "GroceryPlus",
+      "price": 6.75,
+      "item_name": "Ground Beef",
+      "sale_price": null,
+      "url": ""
+    },
+    {
+      "store": "GroceryPlus",
+      "price": 2.99,
+      "item_name": "Canned Tomatoes",
+      "sale_price": null,
+      "url": ""
+    },
+    {
+      "store": "SuperMart",
+      "price": 3.99,
+      "item_name": "Organic Bananas",
+      "sale_price": null,
+      "url": ""
+    },
+    {
+      "store": "FreshFoods",
+      "price": 8.50,
+      "item_name": "Chicken Breast",
+      "sale_price": 7.99,
+      "url": ""
+    },
+    {
+      "store": "GroceryPlus",
+      "price": 1.75,
+      "item_name": "Pasta",
+      "sale_price": null,
+      "url": ""
+    },
+      {
+      "store": "SuperMart",
+      "price": 4.25,
+      "item_name": "Eggs (dozen)",
+      "sale_price": null,
+      "url": ""
+    },
+    {
+      "store": "FreshFoods",
+      "price": 2.75,
+      "item_name": "Apples",
+      "sale_price": 2.25,
+      "url": ""
+    },
+    {
+      "store": "GroceryPlus",
+      "price": 9.99,
+      "item_name": "Olive Oil",
+      "sale_price": null,
+      "url": ""
+    },
+    {
+      "store": "SuperMart",
+      "price": 2.50,
+      "item_name": "Whole Milk",
+      "sale_price": 2.00,
+      "url": ""
+    },
+    {
+      "store": "FreshFoods",
+      "price": 5.50,
+      "item_name": "Blueberries",
+      "sale_price": null,
+      "url": ""
+    },
+      {
+      "store": "GroceryPlus",
+      "price": 3.50,
+      "item_name": "Rice",
+      "sale_price": null,
+      "url": ""
+    },
+    {
+      "store": "SuperMart",
+      "price": 1.50,
+      "item_name": "Cereal",
+      "sale_price": 1.25,
+      "url": ""
+    },
+    {
+      "store": "FreshFoods",
+      "price": 6.25,
+      "item_name": "Avocado",
+      "sale_price": null,
+      "url": ""
+    },
+    {
+      "store": "GroceryPlus",
+      "price": 7.50,
+      "item_name": "Cheese",
+      "sale_price": null,
+      "url": ""
+    },
+    {
+      "store": "SuperMart",
+      "price": 4.75,
+      "item_name": "Yogurt",
+      "sale_price": null,
+      "url": ""
+    },
+      {
+      "store": "FreshFoods",
+      "price": 3.25,
+      "item_name": "Oranges",
+      "sale_price": 2.99,
+      "url": ""
+    },
+    {
+      "store": "GroceryPlus",
+      "price": 2.25,
+      "item_name": "Beans",
+      "sale_price": null,
+      "url": ""
+    },
+    {
+      "store": "SuperMart",
+      "price": 1.99,
+      "item_name": "Chips",
+      "sale_price": null,
+      "url": ""
+    },
+    {
+      "store": "FreshFoods",
+      "price": 7.00,
+      "item_name": "Shrimp",
+      "sale_price": 6.50,
+      "url": ""
+    },
+      {
+      "store": "GroceryPlus",
+      "price": 8.00,
+      "item_name": "Coffee",
+      "sale_price": null,
+      "url": ""
+    },
+    {
+      "store": "SuperMart",
+      "price": 3.99,
+      "item_name": "Organic Bananas",
+      "sale_price": null,
+      "url": ""
+    },
+    {
+      "store": "FreshFoods",
+      "price": 4.00,
+      "item_name": "Grapes",
+      "sale_price": null,
+      "url": ""
+    },
+    {
+      "store": "GroceryPlus",
+      "price": 5.00,
+      "item_name": "Butter",
+      "sale_price": 4.50,
+      "url": ""
+    },
+    {
+      "store": "SuperMart",
+      "price": 2.50,
+      "item_name": "Whole Milk",
+      "sale_price": 2.00,
+      "url": ""
+    },
+    {
+      "store": "FreshFoods",
+      "price": 9.00,
+      "item_name": "Lobster tail",
+      "sale_price": null,
+      "url": ""
+    },
+    {
+      "store": "GroceryPlus",
+      "price": 6.00,
+      "item_name": "Tea",
+      "sale_price": null,
+      "url": ""
+    },
+    {
+      "store": "SuperMart",
+      "price": 2.00,
+      "item_name": "Soda",
+      "sale_price": null,
+      "url": ""
+    },
+    {
+      "store": "FreshFoods",
+      "price": 3.00,
+      "item_name": "Kiwi",
+      "sale_price": 2.50,
+      "url": ""
+    },
+    {
+      "store": "GroceryPlus",
+      "price": 10.00,
+      "item_name": "Honey",
+      "sale_price": null,
+      "url": ""
+    },
+      {
+      "store": "SuperMart",
+      "price": 3.75,
+      "item_name": "Ice cream",
+      "sale_price": null,
+      "url": ""
+    },
+    {
+      "store": "FreshFoods",
+      "price": 4.80,
+      "item_name": "Mango",
+      "sale_price": null,
+      "url": ""
+    },
+    {
+      "store": "GroceryPlus",
+      "price": 1.80,
+      "item_name": "Salt",
+      "sale_price": null,
+      "url": ""
+    },
+    {
+      "store": "SuperMart",
+      "price": 2.80,
+      "item_name": "Cookies",
+      "sale_price": 2.50,
+      "url": ""
+    }
+]
