@@ -1,7 +1,7 @@
 body {
     background-image: url(../images/market-background.jpg);
     background-size: 100vw 100vh;
-    background-repeat: no-repeat;
+    background-repeat: repeat;
 }
 
 /*Start of Navbar CSS*/
@@ -46,6 +46,7 @@ body {
     padding: 20px;
     border-radius: 20px;
 }
+
 
 .butdef {
     background-color: rgb(161, 253, 177);
@@ -247,43 +248,7 @@ body {
 }
 
 
-.autocomplete-items {
-    position: absolute;
-    z-index: 99;
-    top: 100%; /* Position below the input field */
-    left: 0;
-    right: 0;
-    background-color: #fff;
-    max-height: 100px;
-    overflow-y: auto;
-    margin-bottom: 100px;
-  }
-  
-  .autocomplete-items div {
-    padding: 10px;
-    cursor: pointer;
-  }
-  
-  .autocomplete-items div:hover {
-    background-color: #f1f1f1;
-  }
-
-    /* Style for error messages */
-  .error-message {
-    color: red;
-    font-size: 0.9em;
-    margin-top: 5px;
-    display: none; /* Hidden by default */
-  }
-
-    
-  .invalid {
-    border: 1px solid red;
-  }
-
-
-/*              End of Change Area CSS                  */
-
+/*              End of Change Area CSS                 */
 
 /*              Start of History CSS                    */
 
@@ -420,3 +385,37 @@ body {
 }
 
 /*              End of History CSS                      */
+
+.autocomplete-items {
+    position: absolute;
+    z-index: 99;
+    top: 100%; /* Position below the input field */
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    max-height: 100px;
+    overflow-y: auto;
+    margin-bottom: 100px;
+  }
+  
+  .autocomplete-items div {
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .autocomplete-items div:hover {
+    background-color: #f1f1f1;
+  }
+
+    /* Style for error messages */
+  .error-message {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 5px;
+    display: none; /* Hidden by default */
+  }
+
+    
+  .invalid {
+    border: 1px solid red;
+  }

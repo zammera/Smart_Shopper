@@ -1,0 +1,173 @@
+{
+    "hotdeals": [
+      {
+        "item": "Organic Bananas (1 lb)",
+        "discount": "25%",
+        "original_price": 0.99,
+        "discount_price": 0.74,
+        "savings": 0.25,
+        "store": "Hannaford Supermarket - Lowell, MA"
+      },
+      {
+        "item": "Eggland’s Best Large Eggs (12 ct)",
+        "discount": "BOGO",
+        "original_price": 4.49,
+        "discount_price": 2.25,
+        "savings": 2.24,
+        "store": "Market Basket - Tewksbury, MA"
+      },
+      {
+        "item": "Kraft Shredded Cheese (8 oz)",
+        "discount": "33%",
+        "original_price": 3.99,
+        "discount_price": 2.67,
+        "savings": 1.32,
+        "store": "Stop & Shop - Chelmsford, MA"
+      },
+      {
+        "item": "Tide Laundry Detergent (92 oz)",
+        "discount": "BOGO",
+        "original_price": 12.99,
+        "discount_price": 6.50,
+        "savings": 6.49,
+        "store": "Walmart Supercenter - Hudson, NH"
+      },
+      {
+        "item": "Strawberries (1 lb)",
+        "discount": "40%",
+        "original_price": 3.99,
+        "discount_price": 2.39,
+        "savings": 1.60,
+        "store": "Whole Foods Market - Andover, MA"
+      },
+      {
+        "item": "Pepsi 12-pack cans",
+        "discount": "BOGO",
+        "original_price": 7.99,
+        "discount_price": 4.00,
+        "savings": 3.99,
+        "store": "Shaw's - Nashua, NH"
+      },
+      {
+        "item": "Barilla Pasta (16 oz)",
+        "discount": "50%",
+        "original_price": 1.99,
+        "discount_price": 1.00,
+        "savings": 0.99,
+        "store": "Trader Joe's - Tyngsborough, MA"
+      },
+      {
+        "item": "Hass Avocados (each)",
+        "discount": "30%",
+        "original_price": 1.50,
+        "discount_price": 1.05,
+        "savings": 0.45,
+        "store": "ALDI - Chelmsford, MA"
+      },
+      {
+        "item": "Chicken Breast (Boneless, Skinless, per lb)",
+        "discount": "20%",
+        "original_price": 4.99,
+        "discount_price": 3.99,
+        "savings": 1.00,
+        "store": "Market Basket - Billerica, MA"
+      },
+      {
+        "item": "Quaker Oats (42 oz)",
+        "discount": "BOGO",
+        "original_price": 5.99,
+        "discount_price": 3.00,
+        "savings": 2.99,
+        "store": "Hannaford Supermarket - Dracut, MA"
+      },
+      {
+        "item": "Chobani Greek Yogurt (5.3 oz)",
+        "discount": "10 for $10",
+        "original_price": 1.39,
+        "discount_price": 1.00,
+        "savings": 0.39,
+        "store": "Stop & Shop - Westford, MA"
+      },
+      {
+        "item": "Lettuce (Romaine Hearts, 3 ct)",
+        "discount": "25%",
+        "original_price": 3.99,
+        "discount_price": 2.99,
+        "savings": 1.00,
+        "store": "Shaw's - Groton, MA"
+      },
+      {
+        "item": "Oscar Mayer Deli Fresh Turkey (9 oz)",
+        "discount": "BOGO",
+        "original_price": 5.49,
+        "discount_price": 2.75,
+        "savings": 2.74,
+        "store": "Market Basket - Wilmington, MA"
+      },
+      {
+        "item": "Gala Apples (per lb)",
+        "discount": "30%",
+        "original_price": 1.69,
+        "discount_price": 1.18,
+        "savings": 0.51,
+        "store": "Whole Foods Market - Bedford, MA"
+      },
+      {
+        "item": "Hellmann’s Mayonnaise (30 oz)",
+        "discount": "BOGO",
+        "original_price": 6.99,
+        "discount_price": 3.50,
+        "savings": 3.49,
+        "store": "Stop & Shop - Reading, MA"
+      },
+      {
+        "item": "Stonyfield Organic Yogurt (32 oz)",
+        "discount": "20%",
+        "original_price": 5.49,
+        "discount_price": 4.39,
+        "savings": 1.10,
+        "store": "Hannaford Supermarket - Pelham, NH"
+      },
+      {
+        "item": "Breyers Ice Cream (48 oz)",
+        "discount": "BOGO",
+        "original_price": 6.29,
+        "discount_price": 3.15,
+        "savings": 3.14,
+        "store": "Market Basket - Haverhill, MA"
+      },
+      {
+        "item": "Green Bell Peppers (each)",
+        "discount": "33%",
+        "original_price": 1.50,
+        "discount_price": 1.00,
+        "savings": 0.50,
+        "store": "Shaw's - Merrimack, NH"
+      },
+      {
+        "item": "Folgers Classic Roast Coffee (30.5 oz)",
+        "discount": "25%",
+        "original_price": 10.99,
+        "discount_price": 8.24,
+        "savings": 2.75,
+        "store": "Stop & Shop - Bedford, MA"
+      },
+      {
+        "item": "Charmin Ultra Soft Toilet Paper (12 Mega Rolls)",
+        "discount": "BOGO",
+        "original_price": 14.99,
+        "discount_price": 7.50,
+        "savings": 7.49,
+        "store": "Walmart Supercenter - Salem, NH"
+      },
+      {
+        "item": "Nature Valley Granola Bars (12 ct)",
+        "discount": "50%",
+        "original_price": 4.99,
+        "discount_price": 2.50,
+        "savings": 2.49,
+        "store": "Trader Joe's - Nashua, NH"  
+      }
+    ]
+  }
+  
