@@ -1,13 +1,13 @@
-$(function () {
-  var myModal = document.getElementById('myModal')
-  var myInput = document.getElementById('myInput')
+$(document).ready(function() {
+  var myModal = document.getElementById('myModal');
+  var myInput = document.getElementById('myInput');
 
   myModal.addEventListener('shown.bs.modal', function () {
-  myInput.focus()
-  })
-  
-  $( "#btn1" ).click(function () {
-      let popup = `<div class="modal" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    myInput.focus();
+  });
+
+  $("#btn1").click(function () {
+    let popup = `<div class="modal" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
 <div class="modal-dialog modal-dialog-centered">
   <div class="modal-content">
     <div class="modal-header">
@@ -39,6 +39,8 @@ $(function () {
   </div>
 </div>
 </div>`;
-  $("#Popup").append(popup);
+    $("#Popup").append(popup);
   });
+
+
 });

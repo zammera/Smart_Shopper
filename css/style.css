@@ -109,6 +109,7 @@ body {
     font-size: 18px; 
     margin-left: 40px; 
     padding: 5px 5px 5px 55px; /* Add left padding for the icon */
+    margin-bottom: -10px;
 }
 
 /* Change area search bar placeholder text */
@@ -122,8 +123,31 @@ body {
     color: #000000;
     position: absolute; 
     left: 70px; 
-    top: 5%; 
+    top: 8px; 
     margin-right: 10px;
+}
+
+#save-address-btn {
+    background-color: #A1FDB1; 
+    border: 0.5px solid #000000; 
+    border-radius: 10px; 
+    font-size: 16px; 
+    width: 100%; 
+    margin-top: 150px;
+    padding: 5px 15px 5px 15px; 
+    margin-left: 165px; /* Push the button to the right */
+    width: auto; 
+    max-width: 200px; /* Optional: Set a maximum width */
+    display: inline-block; /* Use inline-block for better text wrapping */
+    position: relative; /* Required for absolute positioning of icons */
+    white-space: normal; /* Allow text to wrap */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add floating shadow */
+    transition: box-shadow 0.3s ease; /* Smooth transition for hover effect */
+}
+
+/* Add hover effect to the button */
+#save-address-btn:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Increase shadow on hover */
 }
 
 .manual-address-btn {
@@ -133,9 +157,9 @@ body {
     border-radius: 10px; 
     font-size: 16px; 
     width: 100%; 
-    margin-top: 20px;
+    margin-top: 10px;
     padding: 5px 15px 5px 15px; 
-    margin-left: 85px; /* Push the button to the right */
+    margin-left: 100px; /* Push the button to the right */
     margin-right: 20px; /* Add some space from the right edge */
     width: auto; 
     max-width: 200px; /* Optional: Set a maximum width */
@@ -144,6 +168,7 @@ body {
     white-space: normal; /* Allow text to wrap */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add floating shadow */
     transition: box-shadow 0.3s ease; /* Smooth transition for hover effect */
+    margin-bottom: 20px;
 }
 
 /* Add hover effect to the button */
@@ -223,3 +248,37 @@ body {
 
 
 /*              End of Change Area CSS                 */
+
+.autocomplete-items {
+    position: absolute;
+    z-index: 99;
+    top: 100%; /* Position below the input field */
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    max-height: 100px;
+    overflow-y: auto;
+    margin-bottom: 100px;
+  }
+  
+  .autocomplete-items div {
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .autocomplete-items div:hover {
+    background-color: #f1f1f1;
+  }
+
+    /* Style for error messages */
+  .error-message {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 5px;
+    display: none; /* Hidden by default */
+  }
+
+    
+  .invalid {
+    border: 1px solid red;
+  }
