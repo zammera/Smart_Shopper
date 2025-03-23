@@ -246,6 +246,42 @@ body {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Increase shadow on hover */
 }
 
+
+.autocomplete-items {
+    position: absolute;
+    z-index: 99;
+    top: 100%; /* Position below the input field */
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    max-height: 100px;
+    overflow-y: auto;
+    margin-bottom: 100px;
+  }
+  
+  .autocomplete-items div {
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .autocomplete-items div:hover {
+    background-color: #f1f1f1;
+  }
+
+    /* Style for error messages */
+  .error-message {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 5px;
+    display: none; /* Hidden by default */
+  }
+
+    
+  .invalid {
+    border: 1px solid red;
+  }
+
+
 /*              End of Change Area CSS                  */
 
 
@@ -382,39 +418,3 @@ body {
 }
 
 /*              End of History CSS                      */
-=======
-/*              End of Change Area CSS                 */
-
-.autocomplete-items {
-    position: absolute;
-    z-index: 99;
-    top: 100%; /* Position below the input field */
-    left: 0;
-    right: 0;
-    background-color: #fff;
-    max-height: 100px;
-    overflow-y: auto;
-    margin-bottom: 100px;
-  }
-  
-  .autocomplete-items div {
-    padding: 10px;
-    cursor: pointer;
-  }
-  
-  .autocomplete-items div:hover {
-    background-color: #f1f1f1;
-  }
-
-    /* Style for error messages */
-  .error-message {
-    color: red;
-    font-size: 0.9em;
-    margin-top: 5px;
-    display: none; /* Hidden by default */
-  }
-
-    
-  .invalid {
-    border: 1px solid red;
-  }
