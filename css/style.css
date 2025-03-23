@@ -151,59 +151,93 @@ body {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Increase shadow on hover */
 }
 
-.manual-address-btn {
-    background-color: #ffffff; 
-    color: #000000; 
-    border: 0.5px solid #000000; 
-    border-radius: 10px; 
-    font-size: 16px; 
-    width: 100%; 
-    margin-top: 10px;
-    padding: 5px 15px 5px 15px; 
-    margin-left: 100px; /* Push the button to the right */
-    margin-right: 20px; /* Add some space from the right edge */
-    width: auto; 
-    max-width: 200px; /* Optional: Set a maximum width */
-    display: inline-block; /* Use inline-block for better text wrapping */
-    position: relative; /* Required for absolute positioning of icons */
-    white-space: normal; /* Allow text to wrap */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add floating shadow */
-    transition: box-shadow 0.3s ease; /* Smooth transition for hover effect */
-    margin-bottom: 20px;
-}
-
 /* Add hover effect to the button */
 .manual-address-btn:hover {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Increase shadow on hover */
 }
 
+/* Style the manual address button */
+.manual-address-btn {
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Center items vertically */
+    justify-content: space-between; /* Space out items horizontally */
+    padding: 8px 16px; /* Add padding for better spacing */
+    font-size: 16px; /* Set font size */
+    background-color: #ffffff; /* Button background color */
+    border: 1px solid #000000; 
+    color: rgb(0, 0, 0); /* Button text color */
+    border-radius: 15px; /* Add rounded corners */
+    cursor: pointer; /* Change cursor to pointer */
+    position: relative; /* Ensure the button is a positioning context */
+    width: 100%; /* Make the button full width */
+    max-width: 220px; /* Set a max width for better appearance */
+    margin: 10px auto; /* Center the button */
+}
 
 /* Style the icons */
 .manual-address-btn i {
-    font-size: 25px; 
-    margin: 0 5px; 
-    position: absolute; 
-    
+    font-size: 25px; /* Set icon size */
+    margin: 0 5px; /* Add margin between icons and text */
 }
 
-/* Move the + icon */
+/* Style the plus icon */
 .manual-address-btn .bi-plus {
-    top: 10px; /* Move the plus icon up */
-    left: 10px; /* Move the plus icon left */
+    order: 1; /* Place the plus icon first */
 }
 
-/* Move the right arrow icon */
+/* Style the arrow icon */
 .manual-address-btn .bi-arrow-right {
-    top: 10px; /* Move the arrow icon down */
-    right: 10px; /* Move the arrow icon right */
+    order: 3; /* Place the arrow icon last */
 }
+
+/* Style the text */
+.manual-address-btn span {
+    order: 2; /* Place the text in the middle */
+    flex-grow: 1; /* Allow the text to take up remaining space */
+    text-align: center; /* Center the text */
+}
+
+
+
+
+.autocomplete-items {
+    position: absolute;
+    z-index: 99;
+    top: 100%; /* Position below the input field */
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    max-height: 100px;
+    overflow-y: auto;
+    margin-bottom: 100px;
+  }
+  
+  .autocomplete-items div {
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .autocomplete-items div:hover {
+    background-color: #f1f1f1;
+  }
+
+    /* Style for error messages */
+  .error-message {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 5px;
+    display: none; /* Hidden by default */
+  }
+    
+  .invalid {
+    border: 1px solid red;
+  }
 
 /*              End of Change Area CSS                 */
 
 
 
-/*              Start of Enter Address manually CSS                 */
-
+/*              Start of Enter Address popup manually CSS                 */
 .continue-address-btn {
     background-color: #A1FDB1; 
     color: #000000; 
@@ -214,8 +248,8 @@ body {
     margin-top: 20px;
     padding: 5px 30px 5px 30px; 
  
-    position: relative; /* Required for absolute positioning of icons */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add floating shadow */
+    position: relative; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
     transition: box-shadow 0.3s ease; /* Smooth transition for hover effect */
 }
 
@@ -231,9 +265,9 @@ body {
     padding: 5px 30px 5px 30px; 
     margin-left: 30px; /* Push the button to the right */
 
-    position: relative; /* Required for absolute positioning of icons */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add floating shadow */
-    transition: box-shadow 0.3s ease; /* Smooth transition for hover effect */
+    position: relative; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    transition: box-shadow 0.3s ease; 
 
 }
 
@@ -248,7 +282,8 @@ body {
 }
 
 
-/*              End of Change Area CSS                 */
+/*              End of Enter address Manually popup CSS                 */
+
 
 /*              Start of History CSS                    */
 
@@ -385,37 +420,3 @@ body {
 }
 
 /*              End of History CSS                      */
-
-.autocomplete-items {
-    position: absolute;
-    z-index: 99;
-    top: 100%; /* Position below the input field */
-    left: 0;
-    right: 0;
-    background-color: #fff;
-    max-height: 100px;
-    overflow-y: auto;
-    margin-bottom: 100px;
-  }
-  
-  .autocomplete-items div {
-    padding: 10px;
-    cursor: pointer;
-  }
-  
-  .autocomplete-items div:hover {
-    background-color: #f1f1f1;
-  }
-
-    /* Style for error messages */
-  .error-message {
-    color: red;
-    font-size: 0.9em;
-    margin-top: 5px;
-    display: none; /* Hidden by default */
-  }
-
-    
-  .invalid {
-    border: 1px solid red;
-  }
