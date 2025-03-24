@@ -128,7 +128,7 @@ body {
 
 /* change area pop up body */
 .modal-body {
-    display:flex;
+    position: relative;
     margin-top: 20px;
     padding-top: 0; /* Remove padding at the top of the body */
     flex-direction: column; 
@@ -188,7 +188,7 @@ body {
     border-radius: 10px; 
     font-size: 16px; 
     width: 100%; 
-    margin-top: 10px;
+    margin-bottom: 20px;
     padding: 5px 15px 5px 15px; 
     margin-left: 165px; /* Push the button to the right */
     width: auto; 
@@ -250,32 +250,27 @@ body {
     text-align: center; /* Center the text */
 }
 
-
-.autocomplete-items {
-    background-color: #fff;
-    max-height: 200px;
-    overflow-y: auto;
-    margin-top: 30px;
-    margin-bottom: -10px;
-    margin-left: 40px;
+/* autocomplete address dropdown styling*/
+.pac-container {
+    position: absolute;
+    z-index: 1150;
     width: 100%;
+    max-width: 320px;
+    max-height: 200px; /* Limit the height to avoid long dropdowns spilling out */
+    overflow-y: auto; /* Make dropdown scrollable if too many suggestions */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Slight shadow for dropdown */
+    background-color: white; /* White background to match modal */
+    border: none;
+    padding: 5px 0; /* Add some spacing around the items */
+    box-sizing: border-box; /* Ensure padding and border are included in width/height */
+    margin-top: 10px;
+}
 
-
-  }
-
-  /* Styling for in btwn each suggestion */
-  .autocomplete-items div {
-    padding: 10px;
+/* Styling inside the dropdown */
+.pac-item {
+    padding: 8px 16px;
     cursor: pointer;
-    border: 0.5px solid #000000; 
-    border-radius: 5px; 
-
-
-  }
-  
-  .autocomplete-items div:hover {
-    background-color: #f1f1f1;
-  }
+}
 
     /* Style for error messages */
   .error-message {
