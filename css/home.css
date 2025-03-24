@@ -1,0 +1,57 @@
+/* Background Image Container - Fixed Position */
+.bg-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-image: url(../images/market-background.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    filter: blur(0px) brightness(70%);
+    z-index: -1;
+    animation: moveBackground 10s infinite alternate ease-in-out;
+}
+
+/* Background Animation */
+@keyframes moveBackground {
+    0% {
+        transform: scale(1.1) translateY(-10px) translateX(-10px);
+    }
+    100% {
+        transform: scale(1.1) translateY(10px) translateX(10px);
+    }
+}
+
+/* Scrollable Content */
+.content {
+    position: relative;
+    z-index: 1;
+    color: white;
+    text-align: left;   
+    padding: 100px 15px;
+}
+
+/* Sections for Scrollable Content */
+.section {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Custom Green Button */
+.btn-custom {
+    background-color: #28a745; /* Green */
+    border-color: #28a745;
+    color: white;
+    transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+}
+
+/* Dark Green on Hover */
+.btn-custom:hover {
+    background-color: #1e7e34; /* Dark Green */
+    border-color: #1e7e34;
+    color: white;
+}
