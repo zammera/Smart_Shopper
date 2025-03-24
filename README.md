@@ -5,7 +5,7 @@ A web app service that optimizes grocery shopping and provides the most cost eff
 
 - Ayoub Darkaoui
 - Allen Zammer
-- Nika Ashtar
+- Nika Ashtari
 - Sebastian Gyger
 - Wu Li
 
