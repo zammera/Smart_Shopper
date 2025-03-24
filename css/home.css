@@ -55,3 +55,12 @@
     border-color: #1e7e34;
     color: white;
 }
+
+h2 {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+p {
+    font-size: 20px;
+}
