@@ -88,12 +88,13 @@ $(function () {
       $("#hotDealsGrid").html(dealsHTML);
       
       // Add event listeners for "Add to Shopping List" buttons
+      // All functions below are to be implemented later on the project
       $(".add-to-list").click(function() {
           const item = $(this).data("item");
           const price = $(this).data("price");
           const store = $(this).data("store");
           
-          // Add item to shopping list (to be implemented based on your shopping list functionality)
+          // Add item to shopping list (to be implemented later)
           addToShoppingList(item, price, store);
           
           // Show toast notification
