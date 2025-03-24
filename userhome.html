@@ -83,6 +83,8 @@
           .then(response => response.text())
           .then(data => {
             document.body.insertAdjacentHTML('beforeend', data);
+
+            changeAreaFunction();
           })
           .catch(error => console.error('Error loading modals:', error));
       </script>
