@@ -264,5 +264,12 @@
       "item_name": "Cookies",
       "sale_price": 2.50,
       "url": ""
+    },
+    {
+        "store": "GroceryPlus",
+        "price": 2.50,
+        "item_name": "Whole Milk",
+        "sale_price": 1.75,
+        "url": ""
     }
 ]

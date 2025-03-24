@@ -12,12 +12,19 @@ const getItemsData = async () => {
 }
 
 const generateDiscountedItems = async () => {
-    console.log('hey');
     const items = await getItemsData();
-    console.log(items.length);
+    const itemsArray = [];
+    const itemsPointer = [];
     for (let i = 0; i < items.length; i++) {
         if (items[i].sale_price != null) {
-            console.log('hey');
+
+            const index = itemsArray.lastIndexOf(items[i].item_name);
+            if (index != -1) {
+                if (items[i].sale_price >= items[itemsPointer[index]].sale_price)
+                    continue;
+            }
+            itemsArray.push(items[i].item_name);
+            itemsPointer.push(i);
             const item = document.createElement('div');
             item.className = 'item';
             /*const itemName = document.createElement('div');
@@ -36,13 +43,12 @@ const generateDiscountedItems = async () => {
             addItem.className = 'addItem';
             const addItemOtherList = document.createElement('div');
             addItemOtherList.className = 'addItemOtherList';*/
-            console.log(items[i].item_name);
             item.innerHTML ='<div class="itemName">' + items[i].item_name + '</div>'
                 + '<div class="itemImageContainer">'
                     + '<img src="' + items[i].url + '" class ="itemImage">'
                 + '</div>'
                 + '<div class="itemInfoContainer">'
-                    + '<div class="itemPrice"><s>$'+ items[i].price + '</s> $' + items[i].sale_price + '</div>'
+                    + '<div class="itemPrice"><s>$'+ items[i].price.toFixed(2) + '</s> $' + items[i].sale_price.toFixed(2) + '</div>'
                     + '<div class="itemStore">' + items[i].store + '</div>'
                 + '</div>'
                 + '<div class="addItemContainer">'
@@ -69,5 +75,30 @@ const generateDiscountedItems = async () => {
         }
     }
 }
+// https://www.freecodecamp.org/news/javascript-array-of-objects-tutorial-how-to-create-update-and-loop-through-objects-using-js-array-methods/
+// helpful
+
+// Create an array of all the items in the lists and record their frequency, recency, and sales
+const itemsArray = []
+const generateItems = async () => {
+    const items = await getItemsData();
+    for (let i = 0; i < items.length; i++) {
+        const item = itemsArray.find(item => item.name === items[i].item_name);
+        if (item === undefined) {
+            itemsArray.push({"name": items[i].item_name, "price" : items[i].price, "sale_price" : items[i].sale_price, "frequency" : 1, "recency": i});
+        }
+        else {
+            if (items[i].sale_price === null )
+            item.frequency += 1;
+            item.recency = i;
+            if (items[i].sale_price < item.sale_price || items[i].price < item.price) {
+
+            }
+        }
+    }
+
+}
 
 generateDiscountedItems();
+generateItems();
+console.log(itemsArray);
