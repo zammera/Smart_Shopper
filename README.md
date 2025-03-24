@@ -1,5 +1,5 @@
 # SmartShopper Project
-A web app service that optimize grocery shopping and provide the most cost effective options to do your grocery in store.
+A web app service that optimizes grocery shopping and provides the most cost effective options to do your grocery in store.
 
 ## Participants:
 
