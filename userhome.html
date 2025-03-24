@@ -77,6 +77,34 @@
         </nav>
     </div>
 
+    <!-- Hot Deals Container -->
+    <div class="container mt-5 pt-5">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="mb-4 text-center">Hot Deals Near You</h2>
+                <h3 class="mb-4 text-center">Can't miss these fresh deals!</h3>
+                <div class="hot-deals-container">
+                    <div class="row" id="hotDealsGrid">
+                        <!-- Hot deals will be populated here by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast for adding items to shopping list -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="addToListToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto">Smart Shopper</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                Item added to your shopping list!
+            </div>
+        </div>
+    </div>
+
       <script>
         // load modals from modals.html dynamically
         fetch('modals.html')
