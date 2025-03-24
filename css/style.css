@@ -56,6 +56,54 @@ body {
     font-size: 50%
 }
 
+
+/* Add styles to Hot Deals Page */
+
+.hot-deals-container {
+    max-height: 700px;
+    overflow-y: auto;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+    backdrop-filter: blur(5px); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card {
+    transition: transform 0.2s ease;
+    border: 1px solid #dee2e6;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    font-weight: bold;
+}
+
+.btnso {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.btnso:hover {
+    background-color: #c82333;
+}
+
+/* For mobile screens */
+@media (max-width: 768px) {
+    .hot-deals-container {
+        max-height: 500px;
+    }
+}
+
 /*              Start of Change Area CSS                 */
 
 /* Change area pop up */
@@ -80,7 +128,7 @@ body {
 
 /* change area pop up body */
 .modal-body {
-    display:flex;
+    position: relative;
     margin-top: 20px;
     padding-top: 0; /* Remove padding at the top of the body */
     flex-direction: column; 
@@ -101,6 +149,12 @@ body {
     height: 200px; 
 }
 
+.search-bar-container {
+    position: relative; /* Ensures the dropdown is positioned relative to this container */
+    width: 100%; /* Make the container full width */
+    max-width: 300px; /* Set a maximum width for the search bar */
+  }
+
 #addressSearch {
     background-color: #A1FDB1; 
     color: #333; 
@@ -108,7 +162,7 @@ body {
     border-radius: 10px; 
     padding: 10px; 
     font-size: 18px; 
-    margin-left: 40px; 
+    margin-left: 38px; 
     padding: 5px 5px 5px 55px; /* Add left padding for the icon */
     margin-bottom: -10px;
 }
@@ -123,7 +177,7 @@ body {
 .search-icon {
     color: #000000;
     position: absolute; 
-    left: 70px; 
+    left: 60px; 
     top: 8px; 
     margin-right: 10px;
 }
@@ -134,14 +188,12 @@ body {
     border-radius: 10px; 
     font-size: 16px; 
     width: 100%; 
-    margin-top: 150px;
+    margin-bottom: 20px;
     padding: 5px 15px 5px 15px; 
     margin-left: 165px; /* Push the button to the right */
     width: auto; 
     max-width: 200px; /* Optional: Set a maximum width */
-    display: inline-block; /* Use inline-block for better text wrapping */
     position: relative; /* Required for absolute positioning of icons */
-    white-space: normal; /* Allow text to wrap */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add floating shadow */
     transition: box-shadow 0.3s ease; /* Smooth transition for hover effect */
 }
@@ -151,71 +203,102 @@ body {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Increase shadow on hover */
 }
 
-.manual-address-btn {
-    background-color: #ffffff; 
-    color: #000000; 
-    border: 0.5px solid #000000; 
-    border-radius: 10px; 
-    font-size: 16px; 
-    width: 100%; 
-    margin-top: 10px;
-    padding: 5px 15px 5px 15px; 
-    margin-left: 100px; /* Push the button to the right */
-    margin-right: 20px; /* Add some space from the right edge */
-    width: auto; 
-    max-width: 200px; /* Optional: Set a maximum width */
-    display: inline-block; /* Use inline-block for better text wrapping */
-    position: relative; /* Required for absolute positioning of icons */
-    white-space: normal; /* Allow text to wrap */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add floating shadow */
-    transition: box-shadow 0.3s ease; /* Smooth transition for hover effect */
-    margin-bottom: 20px;
-}
-
 /* Add hover effect to the button */
 .manual-address-btn:hover {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Increase shadow on hover */
 }
 
+/* Style the manual address button */
+.manual-address-btn {
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Center items vertically */
+    justify-content: space-between; /* Space out items horizontally */
+    padding: 8px 16px; /* Add padding for better spacing */
+    font-size: 16px; /* Set font size */
+    background-color: #ffffff; /* Button background color */
+    border: 1px solid #000000; 
+    color: rgb(0, 0, 0); /* Button text color */
+    border-radius: 15px; /* Add rounded corners */
+    cursor: pointer; /* Change cursor to pointer */
+    position: relative; /* Ensure the button is a positioning context */
+    width: 100%; /* Make the button full width */
+    max-width: 220px; /* Set a max width for better appearance */
+    margin: 10px auto; /* Center the button */
+    margin-top: -10px;
+}
 
 /* Style the icons */
 .manual-address-btn i {
-    font-size: 25px; 
-    margin: 0 5px; 
-    position: absolute; 
-    
+    font-size: 25px; /* Set icon size */
+    margin: 0 5px; /* Add margin between icons and text */
 }
 
-/* Move the + icon */
+/* Style the plus icon */
 .manual-address-btn .bi-plus {
-    top: 10px; /* Move the plus icon up */
-    left: 10px; /* Move the plus icon left */
+    order: 1; /* Place the plus icon first */
 }
 
-/* Move the right arrow icon */
+/* Style the arrow icon */
 .manual-address-btn .bi-arrow-right {
-    top: 10px; /* Move the arrow icon down */
-    right: 10px; /* Move the arrow icon right */
+    order: 3; /* Place the arrow icon last */
 }
+
+/* Style the text */
+.manual-address-btn span {
+    order: 2; /* Place the text in the middle */
+    flex-grow: 1; /* Allow the text to take up remaining space */
+    text-align: center; /* Center the text */
+}
+
+/* autocomplete address dropdown styling*/
+.pac-container {
+    position: absolute;
+    z-index: 1150;
+    width: 100%;
+    max-width: 320px;
+    max-height: 200px; /* Limit the height to avoid long dropdowns spilling out */
+    overflow-y: auto; /* Make dropdown scrollable if too many suggestions */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Slight shadow for dropdown */
+    background-color: white; /* White background to match modal */
+    border: none;
+    padding: 5px 0; /* Add some spacing around the items */
+    box-sizing: border-box; /* Ensure padding and border are included in width/height */
+    margin-top: 10px;
+}
+
+/* Styling inside the dropdown */
+.pac-item {
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+    /* Style for error messages */
+  .error-message {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 5px;
+    display: none; /* Hidden by default */
+  }
+    
+  .invalid {
+    border: 1px solid red;
+  }
 
 /*              End of Change Area CSS                 */
 
 
 
-/*              Start of Enter Address manually CSS                 */
-
+/*              Start of Enter Address popup manually CSS                 */
 .continue-address-btn {
     background-color: #A1FDB1; 
     color: #000000; 
     border: 0.5px solid #000000; 
     border-radius: 10px; 
     font-size: 16px; 
-    
     margin-top: 20px;
     padding: 5px 30px 5px 30px; 
- 
-    position: relative; /* Required for absolute positioning of icons */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add floating shadow */
+    position: relative; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
     transition: box-shadow 0.3s ease; /* Smooth transition for hover effect */
 }
 
@@ -231,9 +314,9 @@ body {
     padding: 5px 30px 5px 30px; 
     margin-left: 30px; /* Push the button to the right */
 
-    position: relative; /* Required for absolute positioning of icons */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add floating shadow */
-    transition: box-shadow 0.3s ease; /* Smooth transition for hover effect */
+    position: relative; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    transition: box-shadow 0.3s ease; 
 
 }
 
@@ -248,7 +331,8 @@ body {
 }
 
 
-/*              End of Change Area CSS                 */
+/*              End of Enter address Manually popup CSS                 */
+
 
 /*              Start of History CSS                    */
 
@@ -386,36 +470,3 @@ body {
 
 /*              End of History CSS                      */
 
-.autocomplete-items {
-    position: absolute;
-    z-index: 99;
-    top: 100%; /* Position below the input field */
-    left: 0;
-    right: 0;
-    background-color: #fff;
-    max-height: 100px;
-    overflow-y: auto;
-    margin-bottom: 100px;
-  }
-  
-  .autocomplete-items div {
-    padding: 10px;
-    cursor: pointer;
-  }
-  
-  .autocomplete-items div:hover {
-    background-color: #f1f1f1;
-  }
-
-    /* Style for error messages */
-  .error-message {
-    color: red;
-    font-size: 0.9em;
-    margin-top: 5px;
-    display: none; /* Hidden by default */
-  }
-
-    
-  .invalid {
-    border: 1px solid red;
-  }

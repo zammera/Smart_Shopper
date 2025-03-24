@@ -1,14 +1,16 @@
-$(document).ready(function () {
+async function changeAreaFunction() {
+    let selectedAddress = null;
+
+    // input validation function for manual address entries
     function validAddress(street, city, zip) {
         let isValid = true;
 
-        // Regular expressions for validation
-        const streetRegex = /^[a-zA-Z0-9\s,'-]*$/; // Allows letters, numbers, spaces, commas, apostrophes, and hyphens
-        const cityRegex = /^[a-zA-Z\s]*$/; // Allows only letters and spaces
-        const zipRegex = /^\d{5}$/; // Exactly 5 digits
+        // basic regex for input validation 
+        const streetRegex = /^[a-zA-Z0-9\s,'-]*$/;
+        const cityRegex = /^[a-zA-Z\s]*$/;
+        const zipRegex = /^\d{5}$/; // 5 number zip code
 
-        // Validate street name
-        if (!street ||!streetRegex.test(street)) {
+        if (!street || !streetRegex.test(street)) {
             document.getElementById("streetError").style.display = "block";
             document.getElementById("street").classList.add("invalid");
             isValid = false;
@@ -17,7 +19,6 @@ $(document).ready(function () {
             document.getElementById("street").classList.remove("invalid");
         }
 
-        // Validate city name
         if (!city || !cityRegex.test(city)) {
             document.getElementById("cityError").style.display = "block";
             document.getElementById("city").classList.add("invalid");
@@ -27,7 +28,6 @@ $(document).ready(function () {
             document.getElementById("city").classList.remove("invalid");
         }
 
-        // Validate ZIP code
         if (!zip || !zipRegex.test(zip)) {
             document.getElementById("zipError").style.display = "block";
             document.getElementById("zip").classList.add("invalid");
@@ -36,92 +36,76 @@ $(document).ready(function () {
             document.getElementById("zipError").style.display = "none";
             document.getElementById("zip").classList.remove("invalid");
         }
-
         return isValid;
     }
 
+    $('#changeAreaModal').on('shown.bs.modal', async function () {
+        const userAddressInput = document.getElementById("addressSearch");
+        const autocompleteList = document.getElementById("autocomplete-list");
+        selectedAddress = null;
+        if (autocompleteList) autocompleteList.innerHTML = '';
 
-    const userAddressInput = document.getElementById("addressSearch");
-    const autocompleteList = document.getElementById("autocomplete-list");
-    const manualAddressButton = document.getElementById("continue-address-btn");
-    const streetInput = document.getElementById("street");
-    const cityInput = document.getElementById("city");
-    const zipInput = document.getElementById("zip");
-    var flag = false;
-
-    // Create a new button element
-    const saveButton = document.createElement('button');
-    saveButton.id = 'save-address-btn';
-    saveButton.textContent = 'Save';
-
-  
-    if (userAddressInput && autocompleteList) {
-      userAddressInput.addEventListener('input', async function (event) {
-        const query = event.target.value.trim();
-
-        // Append the save button to the container
-        document.getElementById("saveButtonContainer").appendChild(saveButton);
-  
-        // Clear previous results
-        autocompleteList.innerHTML = '';
-  
-        if (query.length > 2) {
-          try {
-            // Fetch data from the Nominatim API
-            const response = await fetch(
-              `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&countrycodes=us`
-            );
-            const data = await response.json();
-            console.log("API response:", data); 
-
-            // Display suggestions
-            data.forEach((place) => {
-                const item = document.createElement("div");
-                item.textContent = place.display_name;
-                item.addEventListener("click", function () {
-                userAddressInput.value = place.display_name; // Populate the input field
-                autocompleteList.innerHTML = ''; // Clear the dropdown
-                flag = true;
-                
-              });
-              autocompleteList.appendChild(item);
+        // Google autocomplete using Places API
+        if (userAddressInput) {
+            const { Autocomplete } = await google.maps.importLibrary("places");
+            const autocomplete = new Autocomplete(userAddressInput, {
+                types: ['geocode'],
+                fields: ['place_id', 'formatted_address'],
+                componentRestrictions: { country: "US" } // Optional, restrict to US addresses
             });
-          } catch (error) {
-            console.error("Error fetching address suggestions:", error);
-          }
-        }
-      });
 
-        // Close the dropdown when clicking outside
-        saveButton.addEventListener('click', function (e) {
-        if (e.target == saveButton && flag == true) {
-            window.location.href = '/userhome.html';
-            // save user's address to database
+            const autocompleteContainer = document.querySelector('.pac-container');
+            if (autocompleteContainer) {
+                document.querySelector('.modal-body').appendChild(autocompleteContainer);
+            }
 
+            autocomplete.addListener("place_changed", () => {
+                const place = autocomplete.getPlace();
+                if (place && place.formatted_address) {
+                    userAddressInput.value = place.formatted_address;
+                    selectedAddress = place.formatted_address;
+                    
+                    const saveButtonContainer = document.getElementById("saveButtonContainer");
+                    if (!document.getElementById("save-address-btn")) {
+                        const saveButton = document.createElement('button');
+                        saveButton.id = 'save-address-btn';
+                        saveButton.textContent = 'Save';
+                        saveButtonContainer.appendChild(saveButton);
+                    }
+                }
+            });
+
+        } else {
+            console.error("Required elements not found!");
         }
     });
 
-    manualAddressButton.addEventListener('click', function () {
-        const street = streetInput.value.trim();
-        const city = cityInput.value.trim();
-        const zip = zipInput.value.trim();
+    $('#changeAreaModal').on('hidden.bs.modal hide.bs.modal', function () {
+        const saveButton = document.getElementById("save-address-btn");
+        if (saveButton) saveButton.remove();
+    });
 
-        // Validate the address
+    $(document).on('click', '#save-address-btn', function () {
+        if (selectedAddress) {
+            // this is where the user's address would be saved in database, placeholder alerts for now
+            alert("Address saved: " + selectedAddress);
+            window.location.href = '/userhome.html';
+        } else {
+            alert('Please select a valid address from the suggestions.');
+        }
+    });
+
+    $('#continue-address-btn').on('click', function () {
+        const street = document.getElementById("street").value.trim();
+        const city = document.getElementById("city").value.trim();
+        const zip = document.getElementById("zip").value.trim();
+        const state = document.getElementById("state").value;
+        
         if (validAddress(street, city, zip)) {
+            // this is where the user's address would be saved in database, placeholder alerts for now
+            alert("Address saved: " + street + " " + city + " " + state + ", " + zip);
             window.location.href = '/userhome.html';
-            // Save user's address to the database
-        } 
-    });
-
-
-      // Close the dropdown when clicking outside
-      document.addEventListener('click', function (e) {
-        if (e.target !== userAddressInput) {
-          autocompleteList.innerHTML = '';
         }
-      });
-    
-    } else {
-      console.error("Required elements not found!");
-    }
-  });
+    });
+}
+window.changeAreaFunction = changeAreaFunction;
