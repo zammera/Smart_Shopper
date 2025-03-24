@@ -224,7 +224,7 @@ body {
     width: 100%; /* Make the button full width */
     max-width: 220px; /* Set a max width for better appearance */
     margin: 10px auto; /* Center the button */
-    margin-top: 10px;
+    margin-top: -10px;
 }
 
 /* Style the icons */
