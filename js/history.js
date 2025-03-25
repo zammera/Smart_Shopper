@@ -51,12 +51,7 @@ function postItem(item, containerName) {
             + '<div class="itemStore">' + item.store + '</div>'
         + '</div>'
         + '<div class="addItemContainer">'
-            + '<div class="addItem">Add to List</div>'
-            + '<div class="addItemOtherList">'
-                + '<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">'
-                    + '<path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>'
-                + '</svg>'
-            + '</div>'
+            + '<button class="btn btn-primary w-100 addItem">Add to Shopping List</button>'
         + '</div>';
     document.getElementById(containerName).appendChild(itemDiv);
 }
@@ -69,16 +64,14 @@ function postItemWithSale(item, containerName) {
             + '<img src="' + item.url + '" class ="itemImage">'
         + '</div>'
         + '<div class="itemInfoContainer">'
-            + '<div class="itemPrice"><s>$'+ item.price.toFixed(2) + '</s> $' + item.sale_price.toFixed(2) + '</div>'
+            + '<div class="itemPrice">'
+                + '<s>$'+ item.price.toFixed(2) + '</s><br>'
+                + '<span class="salePrice"> $' + item.sale_price.toFixed(2) + '</span>'
+            + '</div>'
             + '<div class="itemStore">' + item.store + '</div>'
         + '</div>'
         + '<div class="addItemContainer">'
-            + '<div class="addItem">Add to List</div>'
-            + '<div class="addItemOtherList">'
-                + '<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">'
-                    + '<path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>'
-                + '</svg>'
-            + '</div>'
+            + '<button class="btn btn-primary w-100 addItem">Add to Shopping List</button>'
         + '</div>';
     document.getElementById(containerName).appendChild(itemDiv);
 }
