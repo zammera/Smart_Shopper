@@ -7,8 +7,8 @@
         <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css">
         <link rel="stylesheet" href="css/style.css">
     </head>
-<body>
-
+<body id="makeList">
+<div class="container-fluid" >
     <div class="top-bit row">
         <nav class="navbar bg-body-tertiary sticky-top navbar-custom">
             <div class="container-fluid">
@@ -48,33 +48,40 @@
             </div>
         </nav>
     </div>
-    <div class="row justify-content-evenly">
-        <div class="createNew col col-5">
-            <div class="card mx-auto" style="width: 18rem;">
+</div>
+<div class="container-fluid d-flex justify-content-center align-items-center">
+        <div class="createNew row col-md-6">
+            <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">Create A New List</h5>
-                  <p class="card-text">Please enter the apporpriate information to create a New list</p>
-                  <a href="#" class="btn btn-custom-color">Create</a>
-                </div>
-              </div>
-        </div>
-        <div class="editOld col-5">
-            <div class="card mx-auto" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Edit A Old List </h5>
-                    <p class="card-text">Here is a list of previously saved lists</p>
-                    <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
-                        <button type="button" class="btn btn-custom-color">Old List 1</button>
-                        <button type="button" class="btn btn-custom-color">Old List 2</button>
-                        <button type="button" class="btn btn-custom-color">Old List 3</button>
-                        <button type="button" class="btn btn-custom-color">Old List 4</button>
+                    <h5 class="card-title">Create A New List</h5>
+                    <p class="card-text">Please enter the apporpriate information to create a New list</p>
+                    <div class="row mb-3">
+                        <label for="name" class="col-sm-2 col-form-label">List Name:</label>
+                        <div class="col-sm-10">
+                            <input type="name" id="name" class="form-control">
+                        </div>
                     </div>
+                    <button class="btn btn-custom-color" type="submit" onclick="createNewList()">Create</button>
                 </div>
-              </div>
+            </div>
         </div>
-    </div>
+</div>
+<div class="container-fluid test">
+        <div class="editOld row col-md-11" id="listContainer">
+            <h1>Edit  lists</h1>
+            <!-- <div class="card oldList" style="width: 15rem;" id="testOne">
+                <div class="card-body">
+                    <h5 class="card-title">List Name Here</h5>
+                    <input class="btn btn-custom-color list-btn" type="submit" value="Edit">
+                <input class="btn btn-danger list-btn" type="reset" value="Delete" onclick="deleteList('testOne')">
+                </div>
+            </div> -->
+        </div>
+</div>
     
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script> 
+<script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 <script src="js/script.js"></script>
 </html>
