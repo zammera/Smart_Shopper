@@ -271,5 +271,19 @@
         "item_name": "Whole Milk",
         "sale_price": 1.75,
         "url": ""
+    },
+    {
+      "store": "FreshFoods",
+      "price": 4.00,
+      "item_name": "Grapes",
+      "sale_price": null,
+      "url": ""
+    },
+    {
+      "store": "FreshFoods",
+      "price": 4.80,
+      "item_name": "Mango",
+      "sale_price": null,
+      "url": ""
     }
 ]
