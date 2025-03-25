@@ -1,47 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartShopper</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-    <!-- Home CSS-->
-    <link rel="stylesheet" href="css/home.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SmartShopper</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Home CSS -->
+  <link rel="stylesheet" href="css/home.css" />
 </head>
 <body>
 
-    <!-- Fixed Background -->
-    <div class="bg-image"></div>
+  <!-- Fixed Background -->
+  <div class="bg-image"></div>
 
-    <!-- Scrollable Content -->
-    <div class="content">
-        <section class="section">
-            <div class="container">
-                <h1 class="display-4 fw-bold">Welcome to SmartShopper</h1>
-                <p class="lead">Your go-to platform for smart grocery shopping.</p>
-                <a href="userhome.html"> <button class="btn btn-custom btn-lg">Get Started</button> </a>
+  <!-- Scrollable Content -->
+  <div class="content">
+    <section class="section">
+      <div class="container">
+        <h1 class="display-4 fw-bold">Welcome to SmartShopper</h1>
+        <p class="lead">Your go-to platform for smart grocery shopping.</p>
+        <!-- Updated Button to Trigger Login Modal -->
+        <button class="btn btn-custom btn-lg" data-bs-toggle="modal" data-bs-target="#loginModal">
+          Get Started
+        </button>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>About Us</h2>
+        <p>SmartShopper is the best place to shop smartly! We help you find the best deals, discounts, and offers to save you time and money.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>Our Services</h2>
+        <p>We provide a seamless shopping experience by comparing prices, offering exclusive deals, and much more.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- Login Modal -->
+  <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+      
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="loginModalLabel">Login to SmartShopper</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        
+        <div class="modal-body">
+          <form id="loginForm">
+            <div class="mb-3">
+              <label for="emailInput" class="form-label">Email Address</label>
+              <input type="email" class="form-control" id="emailInput" required />
             </div>
-        </section>
-
-        <section class="section">
-            <div class="container">
-                <h2>About Us</h2>
-                <p>SmartShopper is the best place to shop smartly! We help you find the best deals, discounts, and offers to save you time and money.</p>
+            <div class="mb-3">
+              <label for="passwordInput" class="form-label">Password</label>
+              <input type="password" class="form-control" id="passwordInput" required />
             </div>
-        </section>
+            <button type="submit" class="btn btn-primary w-100">Login</button>
+          </form>
+          <div class="mt-3 text-center">
+            <p>Don't have an account? 
+              <a href="#" data-bs-toggle="modal" data-bs-target="#signupModal" data-bs-dismiss="modal">Sign up</a>
+            </p>
+          </div>
+        </div>
 
-        <section class="section">
-            <div class="container">
-                <h2>Our Services</h2>
-                <p>We provide a seamless shopping experience by comparing prices, offering exclusive deals, and much more.</p>
-            </div>
-        </section>
-
+      </div>
     </div>
+  </div>
 
-    <!--- Bootstrap JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Sign-Up Modal -->
+<div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+  
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="signupModalLabel">Create an Account</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+  
+        <div class="modal-body">
+          <form id="signupForm">
+            <div class="mb-3">
+              <label for="signupName" class="form-label">Full Name</label>
+              <input type="text" class="form-control" id="signupName" required />
+            </div>
+            <div class="mb-3">
+              <label for="signupEmail" class="form-label">Email Address</label>
+              <input type="email" class="form-control" id="signupEmail" required />
+            </div>
+            <div class="mb-3">
+              <label for="signupPassword" class="form-label">Password</label>
+              <input type="password" class="form-control" id="signupPassword" required />
+            </div>
+            <div class="mb-3">
+              <label for="confirmPassword" class="form-label">Confirm Password</label>
+              <input type="password" class="form-control" id="confirmPassword" required />
+            </div>
+            <button type="submit" class="btn btn-success w-100">Sign Up</button>
+          </form>
+          <div class="mt-3 text-center">
+            <p>Already have an account? 
+              <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">Log in</a>
+            </p>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  </div>  
+
+  <!-- Bootstrap Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-auth-compat.js"></script>
+
+  <script src="js/index.js"></script>
 
 </body>
 </html>
