@@ -68,19 +68,14 @@ body {
     height: 55vh;
 }
 
-/* .oldList {
-    margin: 10px;
-    height: fit-content;
-}  */
-
 #listContainer {
     display: flex;
-    flex-wrap: wrap; /* Allow cards to wrap */
-    justify-content: space-evenly; /* Align cards to the left */
+    flex-wrap: wrap; 
+    justify-content: flex-start; 
     align-items: flex-start; /* Align cards to the top */
-    gap: 20px; /* Optional: Space between cards */
-   
-    padding: 20px; /* Optional: Add padding to the container */
+    gap: 50px; 
+    padding: 20px; 
+    overflow-y: scroll;
 }
 
 /* Optional: Styling for individual cards inside the list container */
@@ -96,6 +91,10 @@ body {
     justify-content: space-between;
 }
 
+.editOld h1 {
+    background-color: white;
+}
+
 /* Center the entire listContainer within the parent container */
 .test {
     display: flex;
@@ -105,9 +104,47 @@ body {
 }
 body {
 overflow-x: hidden;
+height:100vh;
+
 }
 
 .offcanvas {
     max-width: 100vw !important ;
     overflow-x: hidden;
 }
+#searchBar {
+    background-color: white;
+    padding: 20px;
+}
+
+#search, #list{
+    border-radius: 20px;
+    /*padding: 10px;*/
+    background-color: white;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    overflow-y: scroll;
+
+    
+}
+
+.list-group-item h5 {
+    justify-content: center;
+    margin-right: 20px;
+}
+
+#list {
+    background-color: white;
+}
+#content{
+    height: 89%;
+}
+.middle{
+    width: 50px;
+}
+
+
+/* #editList{
+   
+    overflow-y:hidden;
+} */

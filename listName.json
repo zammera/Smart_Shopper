@@ -1,4 +1,21 @@
-"lists" : [
-    {"listName" : "Taco Tuesday", "user":"default"},
-    {"listName" : "Pizza Party", "user":"default"}
-]
+{
+    "listNames" : 
+    [
+        {
+            "listName" : "Taco Tuesday", 
+            "user":"default"
+        },
+        {
+            "listName" : "Pizza Party", 
+            "user":"default"
+        }
+    ],
+    "name": "Taco Tuesday",
+    "items": 
+    {
+        "item" : "milk",
+        "amount" : "1",
+        "store" : "price"
+    }
+
+}
