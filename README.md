@@ -10,17 +10,17 @@ A web app service that optimizes grocery shopping and provides the most cost eff
 - Wu Li
 
 ## Stages:
-| # | Stage|
-------------
-| 1 | Proposal|
-| 2 | Prototype|
-| 3 | Heuristic Evaluation |
-| 4 | Alpha Release|
-| 5 | Beta Release|
-| 6 | Testing and usability|
-| 7 | Final improvements|
-| 8 | Final Release|
---------------------
+| # | Stage                 |
+| --------------------------| 
+| 1 | Proposal              |
+| 2 | Prototype             |
+| 3 | Heuristic Evaluation  |
+| 4 | Alpha Release         |
+| 5 | Beta Release          |
+| 6 | Testing and usability |
+| 7 | Final improvements    |
+| 8 | Final Release         |
+
 
 ## Links:
 
