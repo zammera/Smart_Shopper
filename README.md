@@ -11,7 +11,7 @@ A web app service that optimizes grocery shopping and provides the most cost eff
 
 ## Stages:
 | # | Stage                 |
-| --------------------------| 
+| - | --------------------- | 
 | 1 | Proposal              |
 | 2 | Prototype             |
 | 3 | Heuristic Evaluation  |
