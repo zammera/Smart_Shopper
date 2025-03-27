@@ -1,27 +1,26 @@
 <!DOCTYPE html>
 <html>
 <body>
-
-<!-- Change Area Modal -->
-<div class="modal fade" id="changeAreaModal" tabindex="-1" aria-labelledby="changeAreaModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="changeAreaModalLabel">Address</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form id="changeAreaForm">
-            <div class="mb-3">
-              <!-- Search bar for autocomplete using an API -->
-              <div class="search-bar-container">
-                <i class="bi bi-search search-icon"></i>
-                <input type="text" class="form-control" id="addressSearch" placeholder="Search for an address">
-                <div id="autocomplete-list" class="autocomplete-items"></div>
+  <!-- Change Area Modal -->
+  <div class="modal fade" id="changeAreaModal" tabindex="-1" aria-labelledby="changeAreaModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="changeAreaModalLabel">Address</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="changeAreaForm">
+              <div class="mb-3">
+                <!-- Search bar for autocomplete using an API -->
+                <div class="search-bar-container">
+                  <i class="bi bi-search search-icon"></i>
+                  <input type="text" class="form-control" id="addressSearch" placeholder="Search for an address">
+                  <div id="autocomplete-list" class="autocomplete-items"></div>
+                </div>
               </div>
-            </div>
-          </form>
-        </div>
+            </form>
+          </div>
   
           <div id="saveButtonContainer" class="saveButtonClass"></div>
   
