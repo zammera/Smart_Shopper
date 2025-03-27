@@ -1,3 +1,26 @@
+// Function to save the user's address to Firestore
+async function saveUserAddress(address) {
+    const auth = firebase.auth(); // Get auth from Firebase
+    const db = firebase.firestore(); // Get Firestore from Firebase
+
+    firebase.auth().onAuthStateChanged(async (user) => {
+        if (user) {
+            try {
+                // Reference to the user's document in Firestore database
+                const userRef = db.collection("users").doc(user.uid);
+                await userRef.set({ address: address }, { merge: true }); 
+                console.log("Address saved successfully!");
+                alert("Your address has been saved.");
+            } catch (error) {
+                console.error("Error saving address:", error);
+                alert("Failed to save address.");
+            }
+        } else {
+            alert("No user is signed in.");
+        }
+    });
+}
+
 // function for Google Maps API initialization
 (function(g) {
     var h, a, k, p="The Google Maps JavaScript API", c="google", l="importLibrary", q="__ib__", m=document, b=window;
@@ -22,11 +45,14 @@
     libraries: "places"
 });
 
+// function change location feature
 async function changeAreaFunction() {
     let selectedAddress = null;
 
     function validAddress(street, city, zip) {
         let isValid = true;
+
+        // basic regex for input validation 
         const streetRegex = /^[a-zA-Z0-9\s,'-]*$/;
         const cityRegex = /^[a-zA-Z\s]*$/;
         const zipRegex = /^\d{5}$/;
@@ -107,9 +133,8 @@ async function changeAreaFunction() {
     $(document).on('click', '#save-address-btn', function () {
         if (selectedAddress) {
             alert("Address saved: " + selectedAddress);
-
-            // add code to save address in database
-
+            // code to save address in database
+            saveUserAddress(selectedAddress);
             location.reload(); // reload user's current page
         } else {
             alert('Please select a valid address from the suggestions.');
@@ -123,9 +148,10 @@ async function changeAreaFunction() {
         const state = document.getElementById("state").value;
 
         if (validAddress(street, city, zip)) {
-            alert("Address saved: " + street + " " + city + " " + state + ", " + zip);
-            // add code to save address in database
-            
+            let manualAddress = `${street},${city}, ${state}, ${zip}`
+            alert("Address saved:" + manualAddress);
+            // code to save address in database
+            saveUserAddress(manualAddress);
             location.reload(); // reload user's current page
         }
     });
