@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Smart Shopper</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+<body id="editList">
+<div class="container-fluid " >
+    <div class="top-bit row">
+        <nav class="navbar bg-body-tertiary sticky-top navbar-custom">
+            <div class="container-fluid">
+                <img src="images/smart_shopper.jpg" alt="Logo" height="50" width="65" class="me-5 rounded">
+                <h1 class="navbar-brand">Smart Shopper</h1>
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Smart Shopper</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                            <li class="nav-item">
+                                <a class="nav-link" href="userhome.html">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Change Location</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="makelist.html">Create/Manage A New List</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">List History</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="offcanvas-end text-center">
+                        <a href="landing.html"><button class="btnso">Sign Out</button></a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+<div class="d-flex flex-row" id="content">
+    <div class="col-md-7" id="search">
+        <form class="d-flex sticky-top" role="search" id="searchBar">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-custom-color" type="submit">Search</button>
+        </form>
+        <div class="d-flex">
+        <div class="col-md-6">
+            <ul class="list-group list-group-flush" id="result1">
+                <!-- <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <h5 class="text-center flex-grow-1">Grocery Name</h5>
+                    <button class="btn btn-custom-color">Add to List</button>
+                </li> -->
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <ul class="list-group list-group-flush" id="result2">
+            </ul>
+        </div>
+        </div>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-4" id="list">
+        <ul class="list-group list-group-flush" id="myList">
+<!--             <li class="list-group-item d-flex justify-content-between align-items-center">
+                <button class="btn btn-close btn-danger"></button>
+                <h5 class="text-center flex-grow-1">Grocery Name</h5>
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-danger" disabled>-</button>
+                    <input type="text" class="form-control middle text-center" value="1">
+                    <button type="button" class="btn btn-success">+</button>
+                </div>
+            </li> -->
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+    
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script> 
+<script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script src="js/lists.js"></script>
+</html>
