@@ -81,7 +81,7 @@ function deleteList(name) {
 }
 
 function editList(name) {
-    window.location.href = 'dogpark.html?name=' + encodeURIComponent(name);
+    window.location.href = 'editlist.html?name=' + encodeURIComponent(name);
 }
 
 function populateGrocery() {
