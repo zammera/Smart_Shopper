@@ -15,6 +15,41 @@
   <!-- Fixed Background -->
   <div class="bg-image"></div>
 
+<!-- Transparent Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top bg-transparent px-4">
+  <div class="container-fluid">
+    
+    <!-- Left: Logo + Brand Name -->
+    <a class="navbar-brand d-flex align-items-center" href="index.html">
+      <img src="images/smart-shopper.png" alt="Logo" width="40" height="40" class="me-2" />
+      <span class="fw-bold text-white">SmartShopper</span>
+    </a>   
+
+    <!-- Toggle button for mobile nav -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Right: Nav Links -->
+    <div class="collapse navbar-collapse justify-content-end" id="navbarContent">
+      <ul class="navbar-nav align-items-center">
+        <li class="nav-item">
+          <a class="nav-link text-white" href="about.html">About Us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="services.html">Our Services</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/zammera/Smart_Shopper" target="_blank">
+            <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons/icons/github.svg" alt="GitHub" width="24" height="24" />
+          </a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
   <!-- Scrollable Content -->
   <div class="content">
     <section class="section">
@@ -25,20 +60,6 @@
         <button class="btn btn-custom btn-lg" data-bs-toggle="modal" data-bs-target="#loginModal">
           Get Started
         </button>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-        <h2>About Us</h2>
-        <p>SmartShopper is the best place to shop smartly! We help you find the best deals, discounts, and offers to save you time and money.</p>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-        <h2>Our Services</h2>
-        <p>We provide a seamless shopping experience by comparing prices, offering exclusive deals, and much more.</p>
       </div>
     </section>
   </div>
