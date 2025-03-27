@@ -107,7 +107,10 @@ async function changeAreaFunction() {
     $(document).on('click', '#save-address-btn', function () {
         if (selectedAddress) {
             alert("Address saved: " + selectedAddress);
-            window.location.href = '/userhome.html';
+
+            // add code to save address in database
+
+            location.reload(); // reload user's current page
         } else {
             alert('Please select a valid address from the suggestions.');
         }
@@ -121,7 +124,9 @@ async function changeAreaFunction() {
 
         if (validAddress(street, city, zip)) {
             alert("Address saved: " + street + " " + city + " " + state + ", " + zip);
-            window.location.href = '/userhome.html';
+            // add code to save address in database
+            
+            location.reload(); // reload user's current page
         }
     });
 }
