@@ -390,7 +390,8 @@ body {
 
 .itemName {
     display: block;
-    height: 78px;
+    height: 48px;
+    margin-top: 10px;
     font-size: 26px;
     white-space: wrap;
     word-break: normal;
@@ -403,18 +404,11 @@ body {
     border-radius: 5px;
 }
 
-.itemImageContainer {
-    display: inline-block;
-    width: 90px;
-    height: 90px;
-    vertical-align: top;
-}
-
 .itemInfoContainer {
     display: inline-block;
-    width: 110px;
+    width: 180px;
     height: 90px;
-    margin-left: 10px;
+    margin-top: 5px;
     border: 1px solid black;
     border-radius: 5px;
     font-size: 22px;
@@ -425,7 +419,7 @@ body {
 .itemPrice {
     display: block;
     width: 105px;
-    height: 60px;
+    height: 40px;
     margin-left: auto;
     margin-right: auto;
     font-size: 18px;
@@ -453,6 +447,7 @@ body {
 .addItem {
     width: 150px;
     height: 40px;
+    margin-top: 10px;
     border-radius: 10px;
     font-size: 18px;
     vertical-align: top;
@@ -463,6 +458,14 @@ body {
 }
 
 /*
+
+.itemImageContainer {
+    display: inline-block;
+    width: 90px;
+    height: 90px;
+    vertical-align: top;
+}
+
 .addItemContainer {
     width: 216px;
     height: 40px;

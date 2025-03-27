@@ -43,9 +43,6 @@ function postItem(item, containerName) {
     const itemDiv = document.createElement('div');
     itemDiv.className = 'item';
     itemDiv.innerHTML ='<div class="itemName">' + item.item_name + '</div>'
-        + '<div class="itemImageContainer">'
-            + '<img src="' + item.url + '" class ="itemImage">'
-        + '</div>'
         + '<div class="itemInfoContainer">'
             + '<div class="itemPrice">$'+ item.price.toFixed(2) + '</div>'
             + '<div class="itemStore">' + item.store + '</div>'
@@ -60,12 +57,9 @@ function postItemWithSale(item, containerName) {
     const itemDiv = document.createElement('div');
     itemDiv.className = 'item';
     itemDiv.innerHTML ='<div class="itemName">' + item.item_name + '</div>'
-        + '<div class="itemImageContainer">'
-            + '<img src="' + item.url + '" class ="itemImage">'
-        + '</div>'
         + '<div class="itemInfoContainer">'
             + '<div class="itemPrice">'
-                + '<s>$'+ item.price.toFixed(2) + '</s><br>'
+                + '<s>$'+ item.price.toFixed(2) + '</s>'
                 + '<span class="salePrice"> $' + item.sale_price.toFixed(2) + '</span>'
             + '</div>'
             + '<div class="itemStore">' + item.store + '</div>'
@@ -75,6 +69,12 @@ function postItemWithSale(item, containerName) {
         + '</div>';
     document.getElementById(containerName).appendChild(itemDiv);
 }
+
+/*
++ '<div class="itemImageContainer">'
+            + '<img src="' + item.url + '" class ="itemImage">'
+        + '</div>'
+*/
 
 // post all the items with discounts
 // maybe in the future set some sort of limit on this
@@ -114,5 +114,21 @@ function getRecentItems(itemsArray) {
         }
     }
 }
+
+$(document).ready(function () {
+    $(document).on('click', '.addItem', function() {
+        console.log('buttonclicked');
+        const item = $(this).data("item");
+        const price = $(this).data("price");
+        const store = $(this).data("store");
+        
+        // Add item to shopping list (to be implemented later)
+        //addToShoppingList(item, price, store);
+        
+        // Show toast notification
+        const toast = new bootstrap.Toast(document.getElementById('addToListToast'));
+        toast.show();
+    });
+});
 
 generateItems();
