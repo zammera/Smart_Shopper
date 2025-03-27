@@ -67,6 +67,10 @@ p {
     color: white;
 }
 
+.signUpLogInText {
+    color: black;
+}
+
 /* Make navbar truly transparent over background image */
 .navbar {
     background-color: rgba(0, 0, 0, 0.3) !important;
