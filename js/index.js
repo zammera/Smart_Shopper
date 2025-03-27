@@ -8,10 +8,16 @@ document.addEventListener('DOMContentLoaded', () => {
         messagingSenderId: "676320767038",
         appId: "1:676320767038:web:2c258f25407c75f4b9b56f",
       };
+
   
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
+    // Initialize Firebase and make available globally
+    if (!window.firebaseApp) {
+      window.firebaseApp = firebase.initializeApp(firebaseConfig);
+      window.firebaseAuth = firebase.auth();
+      window.firebaseDb = firebase.firestore();
+  }
+
+    const auth = firebase.auth(); // Get auth from Firebase
   
     const signupForm = document.getElementById('signupForm');
     const loginForm = document.getElementById('loginForm');

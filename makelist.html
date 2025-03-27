@@ -8,6 +8,27 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
         <link rel="stylesheet" href="css/lists.css">
         <link rel="stylesheet" href="css/style.css">
+
+        <script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-auth-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-firestore-compat.js"></script>
+        <script>
+            // Check if Firebase is already initialized
+            if (!window.firebaseApp) {
+                // Initialize with same config as index.js
+                const firebaseConfig = {
+                    apiKey: "AIzaSyBkk-f7ov5KB_FWgiyyJFCp1tNV_nBpKjg",
+                    authDomain: "smart-shopper-10261.firebaseapp.com",
+                    projectId: "smart-shopper-10261",
+                    storageBucket: "smart-shopper-10261.firebasestorage.app",
+                    messagingSenderId: "676320767038",
+                    appId: "1:676320767038:web:2c258f25407c75f4b9b56f"
+                };
+                window.firebaseApp = firebase.initializeApp(firebaseConfig);
+                window.firebaseAuth = firebase.auth();
+                window.firebaseDb = firebase.firestore();
+            }
+            </script>
     </head>
 <body id="makeList">
 <div class="container-fluid" >
