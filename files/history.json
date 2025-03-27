@@ -1,289 +1,236 @@
 [
     {
-      "store": "SuperMart",
-      "price": 3.99,
-      "item_name": "Organic Bananas",
-      "sale_price": null,
-      "url": ""
+      "item": "Organic Bananas",
+      "original_price": 3.99,
+      "discount_price": null,
+      "store": "Market Basket - Billerica, MA"
     },
     {
-      "store": "SuperMart Lowell, MA",
-      "price": 2.50,
-      "item_name": "Whole Milk",
-      "sale_price": 2.00,
-      "url": ""
-    },
-      {
-      "store": "FreshFoods",
-      "price": 5.99,
-      "item_name": "Salmon Fillet",
-      "sale_price": null,
-      "url": ""
+      "item": "Whole Milk",
+      "original_price": 2.50,
+      "discount_price": 2.00,
+      "store": "Hannaford Supermarket - Lowell, MA"
     },
     {
-      "store": "SuperMart",
-      "price": 1.25,
-      "item_name": "Loaf of Bread",
-      "sale_price": null,
-      "url": ""
+      "item": "Salmon Fillet",
+      "original_price": 5.99,
+      "discount_price": null,
+      "store": "FreshFoods"
     },
     {
-      "store": "FreshFoods",
-      "price": 4.50,
-      "item_name": "Strawberries",
-      "sale_price": 3.99,
-      "url": ""
+      "item": "Loaf of Bread",
+      "original_price": 1.25,
+      "discount_price": null,
+      "store": "Stop & Shop - Chelmsford, MA"
     },
     {
-      "store": "GroceryPlus",
-      "price": 6.75,
-      "item_name": "Ground Beef",
-      "sale_price": null,
-      "url": ""
+      "item": "Strawberries",
+      "original_price": 4.50,
+      "discount_price": 3.99,
+      "store": "Shaw's - Nashua, NH"
     },
     {
-      "store": "GroceryPlus",
-      "price": 2.99,
-      "item_name": "Canned Tomatoes",
-      "sale_price": null,
-      "url": ""
+      "item": "Ground Beef",
+      "original_price": 6.75,
+      "discount_price": null,
+      "store": "Whole Foods Market - Andover, MA"
     },
     {
-      "store": "SuperMart",
-      "price": 3.99,
-      "item_name": "Organic Bananas",
-      "sale_price": null,
-      "url": ""
+      "item": "Canned Tomatoes",
+      "original_price": 2.99,
+      "discount_price": null,
+      "store": "Market Basket - Billerica, MA"
     },
     {
-      "store": "FreshFoods",
-      "price": 8.50,
-      "item_name": "Chicken Breast",
-      "sale_price": 7.99,
-      "url": ""
+      "item": "Organic Bananas",
+      "original_price": 3.99,
+      "discount_price": null,
+      "store": "Hannaford Supermarket - Lowell, MA"
     },
     {
-      "store": "GroceryPlus",
-      "price": 1.75,
-      "item_name": "Pasta",
-      "sale_price": null,
-      "url": ""
-    },
-      {
-      "store": "SuperMart",
-      "price": 4.25,
-      "item_name": "Eggs (dozen)",
-      "sale_price": null,
-      "url": ""
+      "item": "Chicken Breast",
+      "original_price": 8.50,
+      "discount_price": 7.99,
+      "store": "FreshFoods"
     },
     {
-      "store": "FreshFoods",
-      "price": 2.75,
-      "item_name": "Apples",
-      "sale_price": 2.25,
-      "url": ""
+      "item": "Pasta",
+      "original_price": 1.75,
+      "discount_price": null,
+      "store": "Stop & Shop - Chelmsford, MA"
     },
     {
-      "store": "GroceryPlus",
-      "price": 9.99,
-      "item_name": "Olive Oil",
-      "sale_price": null,
-      "url": ""
+      "item": "Eggs (dozen)",
+      "original_price": 4.25,
+      "discount_price": null,
+      "store": "Shaw's - Nashua, NH"
     },
     {
-      "store": "SuperMart",
-      "price": 2.50,
-      "item_name": "Whole Milk",
-      "sale_price": 2.00,
-      "url": ""
+      "item": "Apples",
+      "original_price": 2.75,
+      "discount_price": 2.25,
+      "store": "Whole Foods Market - Andover, MA"
     },
     {
-      "store": "FreshFoods",
-      "price": 5.50,
-      "item_name": "Blueberries",
-      "sale_price": null,
-      "url": ""
-    },
-      {
-      "store": "GroceryPlus",
-      "price": 3.50,
-      "item_name": "Rice",
-      "sale_price": null,
-      "url": ""
+      "item": "Olive Oil",
+      "original_price": 9.99,
+      "discount_price": null,
+      "store": "Market Basket - Billerica, MA"
     },
     {
-      "store": "SuperMart",
-      "price": 1.50,
-      "item_name": "Cereal",
-      "sale_price": 1.25,
-      "url": ""
+      "item": "Whole Milk",
+      "original_price": 2.50,
+      "discount_price": 2.00,
+      "store": "Hannaford Supermarket - Lowell, MA"
     },
     {
-      "store": "FreshFoods",
-      "price": 6.25,
-      "item_name": "Avocado",
-      "sale_price": null,
-      "url": ""
+      "item": "Blueberries",
+      "original_price": 5.50,
+      "discount_price": null,
+      "store": "FreshFoods"
     },
     {
-      "store": "GroceryPlus",
-      "price": 7.50,
-      "item_name": "Cheese",
-      "sale_price": null,
-      "url": ""
+      "item": "Rice",
+      "original_price": 3.50,
+      "discount_price": null,
+      "store": "Stop & Shop - Chelmsford, MA"
     },
     {
-      "store": "SuperMart",
-      "price": 4.75,
-      "item_name": "Yogurt",
-      "sale_price": null,
-      "url": ""
-    },
-      {
-      "store": "FreshFoods",
-      "price": 3.25,
-      "item_name": "Oranges",
-      "sale_price": 2.99,
-      "url": ""
+      "item": "Cereal",
+      "original_price": 1.50,
+      "discount_price": 1.25,
+      "store": "Shaw's - Nashua, NH"
     },
     {
-      "store": "GroceryPlus",
-      "price": 2.25,
-      "item_name": "Beans",
-      "sale_price": null,
-      "url": ""
+      "item": "Avocado",
+      "original_price": 6.25,
+      "discount_price": null,
+      "store": "Whole Foods Market - Andover, MA"
     },
     {
-      "store": "SuperMart",
-      "price": 1.99,
-      "item_name": "Chips",
-      "sale_price": null,
-      "url": ""
+      "item": "Cheese",
+      "original_price": 7.50,
+      "discount_price": null,
+      "store": "Market Basket - Billerica, MA"
     },
     {
-      "store": "FreshFoods",
-      "price": 7.00,
-      "item_name": "Delicious Jumbo Shrimp 2lbs",
-      "sale_price": 6.50,
-      "url": ""
-    },
-      {
-      "store": "GroceryPlus",
-      "price": 8.00,
-      "item_name": "Coffee",
-      "sale_price": null,
-      "url": ""
+      "item": "Yogurt",
+      "original_price": 4.75,
+      "discount_price": null,
+      "store": "Hannaford Supermarket - Lowell, MA"
     },
     {
-      "store": "SuperMart",
-      "price": 3.99,
-      "item_name": "Organic Bananas",
-      "sale_price": null,
-      "url": ""
+      "item": "Oranges",
+      "original_price": 3.25,
+      "discount_price": 2.99,
+      "store": "FreshFoods"
     },
     {
-      "store": "FreshFoods",
-      "price": 4.00,
-      "item_name": "Grapes",
-      "sale_price": null,
-      "url": ""
+      "item": "Beans",
+      "original_price": 2.25,
+      "discount_price": null,
+      "store": "Stop & Shop - Chelmsford, MA"
     },
     {
-      "store": "GroceryPlus",
-      "price": 5.00,
-      "item_name": "Butter",
-      "sale_price": 4.50,
-      "url": ""
+      "item": "Chips",
+      "original_price": 1.99,
+      "discount_price": null,
+      "store": "Shaw's - Nashua, NH"
     },
     {
-      "store": "SuperMart",
-      "price": 2.50,
-      "item_name": "Whole Milk",
-      "sale_price": 2.00,
-      "url": ""
+      "item": "Delicious Jumbo Shrimp 2lbs",
+      "original_price": 7.00,
+      "discount_price": 6.50,
+      "store": "Whole Foods Market - Andover, MA"
     },
     {
-      "store": "FreshFoods",
-      "price": 9.00,
-      "item_name": "Lobster tail",
-      "sale_price": null,
-      "url": ""
+      "item": "Coffee",
+      "original_price": 8.00,
+      "discount_price": null,
+      "store": "Market Basket - Billerica, MA"
     },
     {
-      "store": "GroceryPlus",
-      "price": 6.00,
-      "item_name": "Tea",
-      "sale_price": null,
-      "url": ""
+      "item": "Organic Bananas",
+      "original_price": 3.99,
+      "discount_price": null,
+      "store": "Hannaford Supermarket - Lowell, MA"
     },
     {
-      "store": "SuperMart",
-      "price": 2.00,
-      "item_name": "Soda",
-      "sale_price": null,
-      "url": ""
+      "item": "Grapes",
+      "original_price": 4.00,
+      "discount_price": null,
+      "store": "FreshFoods"
     },
     {
-      "store": "FreshFoods",
-      "price": 3.00,
-      "item_name": "Kiwi",
-      "sale_price": 2.50,
-      "url": ""
+      "item": "Butter",
+      "original_price": 5.00,
+      "discount_price": 4.50,
+      "store": "Stop & Shop - Chelmsford, MA"
     },
     {
-      "store": "GroceryPlus",
-      "price": 10.00,
-      "item_name": "Honey",
-      "sale_price": null,
-      "url": ""
-    },
-      {
-      "store": "SuperMart",
-      "price": 3.75,
-      "item_name": "Ice cream",
-      "sale_price": null,
-      "url": ""
+      "item": "Whole Milk",
+      "original_price": 2.50,
+      "discount_price": 2.00,
+      "store": "Shaw's - Nashua, NH"
     },
     {
-      "store": "FreshFoods",
-      "price": 4.80,
-      "item_name": "Mango",
-      "sale_price": null,
-      "url": ""
+      "item": "Lobster tail",
+      "original_price": 9.00,
+      "discount_price": null,
+      "store": "Whole Foods Market - Andover, MA"
     },
     {
-      "store": "GroceryPlus",
-      "price": 1.80,
-      "item_name": "Salt",
-      "sale_price": null,
-      "url": ""
+      "item": "Tea",
+      "original_price": 6.00,
+      "discount_price": null,
+      "store": "Market Basket - Billerica, MA"
     },
     {
-      "store": "SuperMart",
-      "price": 2.80,
-      "item_name": "Cookies",
-      "sale_price": 2.50,
-      "url": ""
+      "item": "Soda",
+      "original_price": 2.00,
+      "discount_price": null,
+      "store": "Hannaford Supermarket - Lowell, MA"
     },
     {
-        "store": "GroceryPlus",
-        "price": 2.50,
-        "item_name": "Whole Milk",
-        "sale_price": 1.75,
-        "url": ""
+      "item": "Kiwi",
+      "original_price": 3.00,
+      "discount_price": 2.50,
+      "store": "FreshFoods"
     },
     {
-      "store": "FreshFoods",
-      "price": 4.00,
-      "item_name": "Grapes",
-      "sale_price": null,
-      "url": ""
+      "item": "Honey",
+      "original_price": 10.00,
+      "discount_price": null,
+      "store": "Stop & Shop - Chelmsford, MA"
     },
     {
-      "store": "FreshFoods",
-      "price": 4.80,
-      "item_name": "Mango",
-      "sale_price": null,
-      "url": ""
+      "item": "Ice cream",
+      "original_price": 3.75,
+      "discount_price": null,
+      "store": "Shaw's - Nashua, NH"
+    },
+    {
+      "item": "Mango",
+      "original_price": 4.80,
+      "discount_price": null,
+      "store": "Whole Foods Market - Andover, MA"
+    },
+    {
+      "item": "Salt",
+      "original_price": 1.80,
+      "discount_price": null,
+      "store": "Market Basket - Billerica, MA"
+    },
+    {
+      "item": "Cookies",
+      "original_price": 2.80,
+      "discount_price": 2.50,
+      "store": "Hannaford Supermarket - Lowell, MA"
+    },
+    {
+      "item": "Whole Milk",
+      "original_price": 2.50,
+      "discount_price": 1.75,
+      "store": "Stop & Shop - Chelmsford, MA"
     }
 ]

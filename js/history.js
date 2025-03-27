@@ -17,17 +17,17 @@ const generateItems = async () => {
     const itemsArray = [];
     const items = await getItemsData();
     for (let i = 0; i < items.length; i++) {
-        const item = itemsArray.find(item => item.item_name === items[i].item_name);
+        const item = itemsArray.find(item => item.item === items[i].item);
         if (item === undefined) {
-            itemsArray.push(    {"item_name": items[i].item_name, "price" : items[i].price, "sale_price" : items[i].sale_price,
+            itemsArray.push(    {"item": items[i].item, "original_price" : items[i].original_price, "discount_price" : items[i].discount_price,
                                 "store" : items[i].store, "frequency" : 1, "recency": i});
         }
         else {
-            // if (items[i].sale_price === null )
+            // if (items[i].discount_price === null )
             item.frequency += 1;
             item.recency = i;
             // put code to overwrite store if the lowest price of this item is lower than the lowest price of the item in the array
-            if (items[i].sale_price < item.sale_price || items[i].price < item.price) {
+            if (items[i].discount_price < item.discount_price || items[i].original_price < item.original_price) {
 
             }
         }
@@ -42,9 +42,9 @@ const generateItems = async () => {
 function postItem(item, containerName) {
     const itemDiv = document.createElement('div');
     itemDiv.className = 'item';
-    itemDiv.innerHTML ='<div class="itemName">' + item.item_name + '</div>'
+    itemDiv.innerHTML ='<div class="itemName">' + item.item + '</div>'
         + '<div class="itemInfoContainer">'
-            + '<div class="itemPrice">$'+ item.price.toFixed(2) + '</div>'
+            + '<div class="itemPrice">$'+ item.original_price.toFixed(2) + '</div>'
             + '<div class="itemStore">' + item.store + '</div>'
         + '</div>'
         + '<div class="addItemContainer">'
@@ -56,11 +56,11 @@ function postItem(item, containerName) {
 function postItemWithSale(item, containerName) {
     const itemDiv = document.createElement('div');
     itemDiv.className = 'item';
-    itemDiv.innerHTML ='<div class="itemName">' + item.item_name + '</div>'
+    itemDiv.innerHTML ='<div class="itemName">' + item.item + '</div>'
         + '<div class="itemInfoContainer">'
             + '<div class="itemPrice">'
-                + '<s>$'+ item.price.toFixed(2) + '</s>'
-                + '<span class="salePrice"> $' + item.sale_price.toFixed(2) + '</span>'
+                + '<s>$'+ item.original_price.toFixed(2) + '</s>'
+                + '<span class="salePrice"> $' + item.discount_price.toFixed(2) + '</span>'
             + '</div>'
             + '<div class="itemStore">' + item.store + '</div>'
         + '</div>'
@@ -80,7 +80,7 @@ function postItemWithSale(item, containerName) {
 // maybe in the future set some sort of limit on this
 function getDiscountedItems(items) {
     for (let i = 0; i < items.length; i++) {
-        if (items[i].sale_price != null) {
+        if (items[i].discount_price != null) {
             postItemWithSale(items[i], 'discountedItemsContainer');
         }
     }
@@ -92,7 +92,7 @@ function getFrequentItems(itemsArray) {
     const limit = items.length < 10 ? items.length : 10;
     for (let i = 0; i < limit; i++) {
         if (items[i].frequency > 1) {
-            if (items[i].sale_price != null) {
+            if (items[i].discount_price != null) {
                 postItemWithSale(items[i], 'frequentItemsContainer');
             } else {
                 postItem(items[i], 'frequentItemsContainer');
@@ -107,7 +107,7 @@ function getRecentItems(itemsArray) {
     console.log(items);
     const limit = items.length < 10 ? items.length : 10;
     for (let i = 0; i < limit; i++) {
-        if (items[i].sale_price != null) {
+        if (items[i].discount_price != null) {
             postItemWithSale(items[i], 'recentItemsContainer');
         } else {
             postItem(items[i], 'recentItemsContainer');
