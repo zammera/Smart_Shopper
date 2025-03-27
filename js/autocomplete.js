@@ -1,26 +1,30 @@
-// Function to save the user's address to Firestore
-async function saveUserAddress(address) {
-    const auth = firebase.auth(); // Get auth from Firebase
-    const db = firebase.firestore(); // Get Firestore from Firebase
-
-    firebase.auth().onAuthStateChanged(async (user) => {
-        if (user) {
-            try {
-                // Reference to the user's document in Firestore database
-                const userRef = db.collection("users").doc(user.uid);
-                await userRef.set({ address: address }, { merge: true }); 
-                console.log("Address saved successfully!");
-                alert("Your address has been saved.");
-            } catch (error) {
-                console.error("Error saving address:", error);
-                alert("Failed to save address.");
-            }
-        } else {
-            alert("No user is signed in.");
-        }
-    });
+if (!window.firebaseDb) {
+    console.error("Firebase not initialized!");
+    // You might want to redirect to index.html or show an error
 }
 
+// Function to save the user's address to Firestore
+async function saveUserAddress(address) {
+    try {
+        const user = window.firebaseAuth.currentUser;
+        
+        if (!user) {
+            alert("No user is signed in.");
+            return false;
+        }
+
+        await window.firebaseDb.collection("users").doc(user.uid).set({
+            address: address,
+            lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
+        }, { merge: true });
+        
+        console.log("Address saved successfully!");
+        return true;
+    } catch (error) {
+        console.error("Error saving address:", error);
+        throw error;
+    }
+}
 // function for Google Maps API initialization
 (function(g) {
     var h, a, k, p="The Google Maps JavaScript API", c="google", l="importLibrary", q="__ib__", m=document, b=window;
@@ -130,18 +134,20 @@ async function changeAreaFunction() {
         if (saveButton) saveButton.remove();
     });
 
-    $(document).on('click', '#save-address-btn', function () {
+    $(document).on('click', '#save-address-btn', async function () {
+        console.log("Selected Address before saving:", selectedAddress);
         if (selectedAddress) {
+            console.log("Calling saveUserAddress with:", selectedAddress);
             alert("Address saved: " + selectedAddress);
             // code to save address in database
-            saveUserAddress(selectedAddress);
+            await saveUserAddress(selectedAddress);
             location.reload(); // reload user's current page
         } else {
             alert('Please select a valid address from the suggestions.');
         }
     });
 
-    $('#continue-address-btn').on('click', function () {
+    $('#continue-address-btn').on('click', async function () {
         const street = document.getElementById("street").value.trim();
         const city = document.getElementById("city").value.trim();
         const zip = document.getElementById("zip").value.trim();
@@ -151,7 +157,7 @@ async function changeAreaFunction() {
             let manualAddress = `${street},${city}, ${state}, ${zip}`
             alert("Address saved:" + manualAddress);
             // code to save address in database
-            saveUserAddress(manualAddress);
+            await saveUserAddress(manualAddress);
             location.reload(); // reload user's current page
         }
     });
