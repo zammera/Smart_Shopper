@@ -131,7 +131,7 @@ function addToList(item) {
     let list = JSON.parse(localStorage.getItem(name)) || {};
 
     if(list.hasOwnProperty(item)) {
-        if(document.getElementById(item)) {
+        if(document.getElementById(_item.id)) {
             console.log(item + " is in list and in HTML")
             let value = document.querySelector(valueFinder);
             value.value++;
@@ -140,7 +140,7 @@ function addToList(item) {
         } else {
             console.log(item + " is in list and not in HTML");
             let html = `<li class="list-group-item d-flex justify-content-between align-items-center" id="${ _item.id }">
-                    <button class="btn btn-close btn-danger" onclick="removeItem('${ name }','${ item }')"></button>
+                    <button class="btn btn-close btn-danger" onclick="removeItem('${ name }','${ _item.id }')"></button>
                     <h5 class="text-center flex-grow-1">${ item }</h5>
                     <div class="btn-group" role="group" aria-label="Basic example">
                         <button type="button" class="btn btn-danger decrement" onclick="decrement('${ _item.id }')" disabled>-</button>
@@ -158,7 +158,7 @@ function addToList(item) {
     } else {
         console.log(item + " is not in list and not in HTML ");
         let html = `<li class="list-group-item d-flex justify-content-between align-items-center" id="${ _item.id }">
-                    <button class="btn btn-close btn-danger" onclick="removeItem('${ name }','${ item }')"></button>
+                    <button class="btn btn-close btn-danger" onclick="removeItem('${ name }','${ _item.id }')"></button>
                     <h5 class="text-center flex-grow-1">${ item }</h5>
                     <div class="btn-group" role="group" aria-label="Basic example">
                         <button type="button" class="btn btn-danger decrement" onclick="decrement('${ _item.id }')" disabled>-</button>
