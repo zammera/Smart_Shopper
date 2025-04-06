@@ -65,7 +65,7 @@ function postItemWithSale(item, containerName) {
             + '<div class="itemStore">' + item.store + '</div>'
         + '</div>'
         + '<div class="addItemContainer">'
-            + '<button class="btn btn-primary w-100 addItem">Add to Shopping List</button>'
+            + '<button class="btn btn-primary w-100 addItem" data-item="' + item.item + '">Add to Shopping List</button>'
         + '</div>';
     document.getElementById(containerName).appendChild(itemDiv);
 }
@@ -115,15 +115,28 @@ function getRecentItems(itemsArray) {
     }
 }
 
+
+function addItemToList(listKey, itemName, quantity) {
+    let list = JSON.parse(localStorage.getItem(listKey)) || {};
+    list[itemName] = (list[itemName] || 0) + quantity;
+    localStorage.setItem(listKey, JSON.stringify(list));
+}
+
 $(document).ready(function () {
+    let selectedList = JSON.parse(localStorage.getItem('selectedList')) || [];
+
     $(document).on('click', '.addItem', function() {
-        console.log('buttonclicked');
+        if (selectedList == []) {
+            console.log('No list was selected');
+            exit;
+        }
+
         const item = $(this).data("item");
-        const price = $(this).data("price");
-        const store = $(this).data("store");
         
         // Add item to shopping list (to be implemented later)
-        //addToShoppingList(item, price, store);
+        // Need to check if item is in list already later
+        console.log(item);
+        addItemToList(selectedList, item, 1);
         
         // Show toast notification
         const toast = new bootstrap.Toast(document.getElementById('addToListToast'));

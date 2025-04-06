@@ -75,6 +75,7 @@ function createListCard(listName) {
     var addNewList = `<div class="card oldList" style="width: 15rem;" id="${ listName }">
         <div class="card-body">
             <h5 class="card-title"> ${ listName } </h5>
+            <input class="btn btn-primary list-btn" type="reset" value="Select" onclick="selectList('${ listName }')">
             <input class="btn btn-custom-color list-btn" type="submit" value="Edit" onclick="editList('${ listName }')">
             <input class="btn btn-danger list-btn" type="reset" value="Delete" onclick="deleteList('${ listName }')">
         </div>
@@ -100,6 +101,10 @@ function deleteList(name) {
 
 function editList(name) {
     window.location.href = 'editlist.html?name=' + encodeURIComponent(name);
+}
+
+function selectList(name) {
+    localStorage.setItem("selectedList", JSON.stringify(name));
 }
 
 function populateGrocery() {
