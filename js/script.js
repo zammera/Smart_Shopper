@@ -77,7 +77,7 @@ $(function () {
                       <p class="card-text"><small class="text-muted">${deal.store}</small></p>
                   </div>
                   <div class="card-footer">
-                      <button class="btn btn-primary w-100 add-to-list" data-item="${deal.item}" data-price="${deal.discount_price}" data-store="${deal.store}">
+                      <button class="btn btn-primary w-100 addItem" data-item="${deal.item}" data-price="${deal.discount_price}" data-store="${deal.store}">
                           Add to Shopping List
                       </button>
                   </div>
@@ -86,39 +86,6 @@ $(function () {
       });
       
       $("#hotDealsGrid").html(dealsHTML);
-      
-      // Add event listeners for "Add to Shopping List" buttons
-      // All functions below are to be implemented later on the project
-      $(".add-to-list").click(function() {
-          const item = $(this).data("item");
-          const price = $(this).data("price");
-          const store = $(this).data("store");
-          
-          // Add item to shopping list (to be implemented later)
-          addToShoppingList(item, price, store);
-          
-          // Show toast notification
-          const toast = new bootstrap.Toast(document.getElementById('addToListToast'));
-          toast.show();
-      });
-  }
-  
-  // Function to add item to shopping list
-  function addToShoppingList(item, price, store) {
-      // Check if shopping list exists in localStorage
-      let shoppingList = JSON.parse(localStorage.getItem('shoppingList')) || [];
-      
-      // Add new item to the list
-      shoppingList.push({
-          item: item,
-          price: price,
-          store: store,
-          added: new Date().toISOString()
-      });
-      
-      // Save updated list to localStorage
-      localStorage.setItem('shoppingList', JSON.stringify(shoppingList));
-      
-      console.log(`Added to shopping list: ${item} - $${price} at ${store}`);
+    
   }
 });

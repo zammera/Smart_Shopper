@@ -115,33 +115,4 @@ function getRecentItems(itemsArray) {
     }
 }
 
-
-function addItemToList(listKey, itemName, quantity) {
-    let list = JSON.parse(localStorage.getItem(listKey)) || {};
-    list[itemName] = (list[itemName] || 0) + quantity;
-    localStorage.setItem(listKey, JSON.stringify(list));
-}
-
-$(document).ready(function () {
-    let selectedList = JSON.parse(localStorage.getItem('selectedList')) || [];
-
-    $(document).on('click', '.addItem', function() {
-        if (selectedList == []) {
-            console.log('No list was selected');
-            exit;
-        }
-
-        const item = $(this).data("item");
-        
-        // Add item to shopping list (to be implemented later)
-        // Need to check if item is in list already later
-        console.log(item);
-        addItemToList(selectedList, item, 1);
-        
-        // Show toast notification
-        const toast = new bootstrap.Toast(document.getElementById('addToListToast'));
-        toast.show();
-    });
-});
-
 generateItems();
