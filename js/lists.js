@@ -6,6 +6,18 @@ if (!localStorage.getItem("listNames")) {
     localStorage.setItem("listNames", JSON.stringify(listNames));
 }
 
+class Item {
+    constructor(name){
+        this.name = name;
+        let id = name.split(" ");
+        if (id === 1) {
+            this.id = id[0];
+        } else {
+            this.id = id.join("_");
+        }
+    }
+}
+
 const groceries = [
     {"item": "Organic Bananas", "price": "", "store": ""},
     {"item": "Whole Milk", "price": "", "store": ""},
@@ -63,6 +75,7 @@ function createListCard(listName) {
     var addNewList = `<div class="card oldList" style="width: 15rem;" id="${ listName }">
         <div class="card-body">
             <h5 class="card-title"> ${ listName } </h5>
+            <input class="btn btn-primary list-btn" type="reset" value="Select" onclick="selectList('${ listName }')">
             <input class="btn btn-custom-color list-btn" type="submit" value="Edit" onclick="editList('${ listName }')">
             <input class="btn btn-danger list-btn" type="reset" value="Delete" onclick="deleteList('${ listName }')">
         </div>
@@ -90,12 +103,17 @@ function editList(name) {
     window.location.href = 'editlist.html?name=' + encodeURIComponent(name);
 }
 
+function selectList(name) {
+    localStorage.setItem("selectedList", JSON.stringify(name));
+}
+
 function populateGrocery() {
     var LorR = false;
     groceries.forEach(item => {
-        let grocery = `<li class="list-group-item d-flex justify-content-between align-items-center" id='${item.item}Result'>
-            <h5 class="text-center flex-grow-1">${ item.item }</h5>
-            <button class="btn btn-custom-color" onclick="addToList('${ item.item }')">Add to List</button>
+        let _item = new Item(item.item);
+        let grocery = `<li class="list-group-item d-flex justify-content-between align-items-center" id='${_item.id}Result'>
+            <h5 class="text-center flex-grow-1">${ _item.name }</h5>
+            <button class="btn btn-custom-color" onclick="addToList('${ _item.name }')">Add to List</button>
         </li>`;
         var element;
         if(!LorR) {
@@ -110,14 +128,15 @@ function populateGrocery() {
 }
 
 function addToList(item) {
+    let _item = new Item(item);
     let name = document.getElementById("listName");
-    var btnFinder = "#" + item + " .decrement";
-    var valueFinder = "#" + item + " input";
+    var btnFinder = "#" + _item.id + " .decrement";
+    var valueFinder = "#" + _item.id + " input";
     name = name.textContent;
     let list = JSON.parse(localStorage.getItem(name)) || {};
 
     if(list.hasOwnProperty(item)) {
-        if(document.getElementById(item)) {
+        if(document.getElementById(_item.id)) {
             console.log(item + " is in list and in HTML")
             let value = document.querySelector(valueFinder);
             value.value++;
@@ -125,13 +144,13 @@ function addToList(item) {
             updateItemQuantity(name, item, value.value);
         } else {
             console.log(item + " is in list and not in HTML");
-            let html = `<li class="list-group-item d-flex justify-content-between align-items-center" id="${ item }">
-                    <button class="btn btn-close btn-danger" onclick="removeItem('${ name }','${ item }')"></button>
+            let html = `<li class="list-group-item d-flex justify-content-between align-items-center" id="${ _item.id }">
+                    <button class="btn btn-close btn-danger" onclick="removeItem('${ name }','${ _item.id }')"></button>
                     <h5 class="text-center flex-grow-1">${ item }</h5>
                     <div class="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-danger decrement" onclick="decrement('${ item }')" disabled>-</button>
+                        <button type="button" class="btn btn-danger decrement" onclick="decrement('${ _item.id }')" disabled>-</button>
                         <input type="text" class="form-control middle text-center" value="${list[item]}" disabled>
-                        <button type="button" class="btn btn-success" onclick="increment('${ item }')">+</button>
+                        <button type="button" class="btn btn-success" onclick="increment('${ _item.id }')">+</button>
                     </div>
                 </li>`;
             let element = document.getElementById("myList");
@@ -143,13 +162,13 @@ function addToList(item) {
         }
     } else {
         console.log(item + " is not in list and not in HTML ");
-        let html = `<li class="list-group-item d-flex justify-content-between align-items-center" id="${ item }">
-                    <button class="btn btn-close btn-danger" onclick="removeItem('${ name }','${ item }')"></button>
+        let html = `<li class="list-group-item d-flex justify-content-between align-items-center" id="${ _item.id }">
+                    <button class="btn btn-close btn-danger" onclick="removeItem('${ name }','${ _item.id }')"></button>
                     <h5 class="text-center flex-grow-1">${ item }</h5>
                     <div class="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-danger decrement" onclick="decrement('${ item }')" disabled>-</button>
+                        <button type="button" class="btn btn-danger decrement" onclick="decrement('${ _item.id }')" disabled>-</button>
                         <input type="text" class="form-control middle text-center" value="1" disabled>
-                        <button type="button" class="btn btn-success" onclick="increment('${ item }')">+</button>
+                        <button type="button" class="btn btn-success" onclick="increment('${ _item.id }')">+</button>
                     </div>
                 </li>`;
         let element = document.getElementById("myList");
