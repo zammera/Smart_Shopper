@@ -14,7 +14,8 @@ async function saveUserAddress(address) {
         }
 
         await window.firebaseDb.collection("users").doc(user.uid).set({
-            address: address,
+            address: {formatted: address.formatted, lat: address.lat, lng: address.lng},
+
             lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
         }, { merge: true });
         
@@ -60,7 +61,8 @@ async function changeAreaFunction() {
         const streetRegex = /^[a-zA-Z0-9\s,'-]*$/;
         const cityRegex = /^[a-zA-Z\s]*$/;
         const zipRegex = /^\d{5}$/;
-
+         
+        // throw error if input is not valid based on above regex
         if (!street || !streetRegex.test(street)) {
             document.getElementById("streetError").style.display = "block";
             document.getElementById("street").classList.add("invalid");
@@ -100,7 +102,7 @@ async function changeAreaFunction() {
             const { Autocomplete } = await google.maps.importLibrary("places");
             const autocomplete = new Autocomplete(userAddressInput, {
                 types: ['geocode'],
-                fields: ['place_id', 'formatted_address'],
+                fields: ['place_id', 'formatted_address', 'geometry'],
                 componentRestrictions: { country: "US" }
             });
 
@@ -111,10 +113,17 @@ async function changeAreaFunction() {
 
             autocomplete.addListener("place_changed", () => {
                 const place = autocomplete.getPlace();
-                if (place && place.formatted_address) {
+                if (place && place.formatted_address && place.geometry) {
                     userAddressInput.value = place.formatted_address;
-                    selectedAddress = place.formatted_address;
 
+                    // selectedAddress as an object to get and use the address both as a string and its latitude and longitude 
+                    selectedAddress = {
+                        formatted: place.formatted_address,
+                        lat: place.geometry.location.lat(),
+                        lng: place.geometry.location.lng(),
+                    }
+
+                    // save button will appear once the user selects an address autocomplete suggestion 
                     const saveButtonContainer = document.getElementById("saveButtonContainer");
                     if (!document.getElementById("save-address-btn")) {
                         const saveButton = document.createElement('button');
@@ -134,13 +143,15 @@ async function changeAreaFunction() {
         if (saveButton) saveButton.remove();
     });
 
+    // listener for save button
     $(document).on('click', '#save-address-btn', async function () {
-        console.log("Selected Address before saving:", selectedAddress);
-        if (selectedAddress) {
-            console.log("Calling saveUserAddress with:", selectedAddress);
-            alert("Address saved: " + selectedAddress);
+        console.log("Selected Address before saving:", selectedAddress.formatted);
+        if (selectedAddress.formatted) {
+            console.log("Calling saveUserAddress with:", selectedAddress.formatted);
+            alert("Address saved: " + selectedAddress.formatted);
+
             // code to save address in database
-            await saveUserAddress(selectedAddress);
+            await saveUserAddress(selectedAddress.formatted);
             location.reload(); // reload user's current page
         } else {
             alert('Please select a valid address from the suggestions.');
