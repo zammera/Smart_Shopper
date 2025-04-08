@@ -47,7 +47,7 @@ $(document).ready(function () {
             console.log('No list was selected');
             exit;
         }
-
+        // console.log(selectedList);
         const item = $(this).data("item");
         
         // Add item to shopping list (to be implemented later)

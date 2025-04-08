@@ -48,7 +48,7 @@ function postItem(item, containerName) {
             + '<div class="itemStore">' + item.store + '</div>'
         + '</div>'
         + '<div class="addItemContainer">'
-            + '<button class="btn btn-primary w-100 addItem">Add to Shopping List</button>'
+            + '<button class="btn btn-primary w-100 addItem" data-item="' + item.item + '">Add to Shopping List</button>'
         + '</div>';
     document.getElementById(containerName).appendChild(itemDiv);
 }
