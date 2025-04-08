@@ -9,12 +9,7 @@ if (!localStorage.getItem("listNames")) {
 class Item {
     constructor(name){
         this.name = name;
-        let id = name.split(" ");
-        if (id === 1) {
-            this.id = id[0];
-        } else {
-            this.id = id.join("_");
-        }
+        this.id = name.replace(/ /g, "_").replace(/[\(\)]/g, ""); // Replace spaces and parentheses with underscores (or remove parentheses)
     }
 }
 
