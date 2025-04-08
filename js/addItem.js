@@ -6,16 +6,6 @@ function addItemToList(listKey, itemName, quantity) {
     localStorage.setItem(listKey, JSON.stringify(list));
 }
 
-function updateItemQuantity(listKey, itemName, newQuantity) {
-    let list = JSON.parse(localStorage.getItem(listKey)) || {};
-    if (newQuantity > 0) {
-        list[itemName] = newQuantity;
-    } else {
-        delete list[itemName];
-    }
-    localStorage.setItem(listKey, JSON.stringify(list));
-}
-
 /*
 Not currently usable
 
@@ -47,17 +37,14 @@ $(document).ready(function () {
             console.log('No list was selected');
             exit;
         }
-        // console.log(selectedList);
+        console.log(selectedList);
         const item = $(this).data("item");
         
         // Add item to shopping list (to be implemented later)
         // Need to check if item is in list already later
         console.log(item);
-        if (selectedList.hasOwnProperty(item)) {
-            updateItemQuantity(selectedList, item, selectedList[item])
-        } else {
-            addItemToList(selectedList, item, 1);
-        }
+
+        addItemToList(selectedList, item, 1);
         
         // Show toast notification
         const toast = new bootstrap.Toast(document.getElementById('addToListToast'));
