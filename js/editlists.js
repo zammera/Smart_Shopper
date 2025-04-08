@@ -79,7 +79,7 @@ function addToList(item) {
                     + '<h5 class="text-center flex-grow-1">' + item + '</h5>'
                     + '<div class="btn-group" role="group" aria-label="Basic example">'
                         + '<button type="button" class="btn btn-danger decrementItem" data-item="' + item + '">-</button>'
-                        + '<input type="text" class="form-control middle text-center" value="' + list[item]++ + '" disabled>'
+                        + '<input type="text" class="form-control middle text-center" data-itemValue ="' + item + 'Value" value="' + list[item]++ + '" disabled>'
                         + '<button type="button" class="btn btn-success incrementItem" data-item="' + item + '">+</button>'
                     + '</div>'
                 + '</li>';
@@ -95,7 +95,7 @@ function addToList(item) {
                     + '<h5 class="text-center flex-grow-1">' + item + '</h5>'
                     + '<div class="btn-group" role="group" aria-label="Basic example">'
                         + '<button type="button" class="btn btn-danger decrementItem" data-item="' + item + '">-</button>'
-                        + '<input type="text" class="form-control middle text-center" value="1" disabled>'
+                        + '<input type="text" class="form-control middle text-center" data-itemValue ="' + item + 'Value" value="1" disabled>'
                         + '<button type="button" class="btn btn-success incrementItem" data-item="' + item + '">+</button>'
                     + '</div>'
                 + '</li>';
@@ -117,6 +117,7 @@ function updateItemQuantity(listKey, itemName, newQuantity) {
     let list = JSON.parse(localStorage.getItem(listKey)) || {};
     if (newQuantity > 0) {
         list[itemName] = newQuantity;
+        $(document).find('[data-itemValue = "' + itemName + 'Value"')[0].value = newQuantity;
     } else {
         delete list[itemName];
     }
@@ -163,11 +164,11 @@ $(document).ready(function () {
 
     $(document).on('click', '.addToList', function() {
         const item = $(this).data("item");
-
         addToList(item);
     });
 
     $(document).on('click', '.removeItem', function() {
+        const list = JSON.parse(localStorage.getItem(listName)) || {};
         const item = $(this).data("item");
         if (list[item]) {
             delete list[item]; 
@@ -177,7 +178,15 @@ $(document).ready(function () {
         element.remove();
     });
 
+    
+    $(document).on('click', '.incrementItem', function() {
+        const list = JSON.parse(localStorage.getItem(listName)) || {};
+        const item = $(this).data("item");
+        updateItemQuantity(listName, item, list[item] + 1);
+    });
+
     $(document).on('click', '.decrementItem', function() {
+        const list = JSON.parse(localStorage.getItem(listName)) || {};
         const item = $(this).data("item");
         if (list[item] == 1) {
             if (list[item]) {
@@ -190,10 +199,5 @@ $(document).ready(function () {
         else {
             updateItemQuantity(listName, item, list[item] - 1);
         }
-    });
-
-    $(document).on('click', '.incrementItem', function() {
-        const item = $(this).data("item");
-        updateItemQuantity(listName, item, list[item] + 1);
     });
 });
