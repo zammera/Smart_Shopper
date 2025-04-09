@@ -3,6 +3,13 @@ if (!window.firebaseDb) {
     // You might want to redirect to index.html or show an error
 }
 
+function updateLocationDisplay(address) {
+    const locationElement = document.getElementById('currentLocation');
+    if (locationElement) {
+      locationElement.textContent = address || "Set your location";
+    }
+  }
+
 // Function to save the user's address to Firestore
 async function saveUserAddress(address) {
     try {
@@ -18,6 +25,9 @@ async function saveUserAddress(address) {
 
             lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
         }, { merge: true });
+
+        // Update display - just add this one line
+        updateLocationDisplay(extractStreetAddress(address.formatted));
         
         console.log("Address saved successfully!");
         return true;
@@ -26,6 +36,13 @@ async function saveUserAddress(address) {
         throw error;
     }
 }
+
+function extractStreetAddress(fullAddress) {
+    if (!fullAddress) return "Set your location";
+    // Extract everything before the first comma
+    return fullAddress.split(',')[0].trim();
+  }
+
 // function for Google Maps API initialization
 (function(g) {
     var h, a, k, p="The Google Maps JavaScript API", c="google", l="importLibrary", q="__ib__", m=document, b=window;
@@ -179,6 +196,7 @@ async function changeAreaFunction() {
     });
 }
 
+
 // Load modal content dynamically into the page
 fetch('modals.html')
     .then(response => response.text())
@@ -190,3 +208,35 @@ fetch('modals.html')
 
 // Export the function if needed by other modules
 window.changeAreaFunction = changeAreaFunction;
+
+
+// Replace your current initialization with this:
+document.addEventListener('DOMContentLoaded', () => {
+    // Set default text immediately
+    updateLocationDisplay("Location loading...");
+    
+    // Wait for Firebase to be ready
+    const checkFirebase = setInterval(() => {
+        if (window.firebaseAuth) {
+            clearInterval(checkFirebase);
+            
+            // Check for auth state changes
+            window.firebaseAuth.onAuthStateChanged((user) => {
+                if (user) {
+                    // User is signed in, load their address
+                    window.firebaseDb.collection("users").doc(user.uid).get()
+                        .then(doc => {
+                            if (doc.exists && doc.data().address) {
+                                updateLocationDisplay(extractStreetAddress(doc.data().address.formatted));
+                            } else {
+                                updateLocationDisplay("Set your location");
+                            }
+                        });
+                } else {
+                    // No user signed in
+                    updateLocationDisplay("Sign in to set location");
+                }
+            });
+        }
+    }, 100);
+});
