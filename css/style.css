@@ -30,6 +30,53 @@ body {
     width: 150px;
 }
 
+/* Location Bubble Styles */
+.location-bubble {
+    display: inline-flex;
+    align-items: center;
+    background-color: #f8f9fa;
+    border-radius: 20px;
+    padding: 5px 15px;
+    margin-left: 15px;
+    border: 1px solid #dee2e6;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    max-width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-left: 1000px;
+}
+
+.location-bubble:hover {
+    background-color: #e9ecef;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.location-icon {
+    color: #000000; /* Black pin color */
+    margin-right: 8px;
+    font-size: 1rem;
+}
+
+#currentLocation {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #495057;
+}
+
+/* For smaller screens */
+@media (max-width: 768px) {
+    .location-bubble {
+        max-width: 200px;
+        padding: 4px 10px;
+    }
+    
+    #currentLocation {
+        font-size: 0.8rem;
+    }
+}
+
 /*End of NavBar CSS*/
 
 #start {
