@@ -151,7 +151,7 @@ async function changeAreaFunction() {
             alert("Address saved: " + selectedAddress.formatted);
 
             // code to save address in database
-            await saveUserAddress(selectedAddress.formatted);
+            await saveUserAddress(selectedAddress);
             location.reload(); // reload user's current page
         } else {
             alert('Please select a valid address from the suggestions.');
@@ -165,7 +165,12 @@ async function changeAreaFunction() {
         const state = document.getElementById("state").value;
 
         if (validAddress(street, city, zip)) {
-            let manualAddress = `${street},${city}, ${state}, ${zip}`
+            const manualAddress = {
+                formatted: `${street}, ${city}, ${state}, ${zip}`,
+                lat: null,
+                lng: null
+            };
+            
             alert("Address saved:" + manualAddress);
             // code to save address in database
             await saveUserAddress(manualAddress);
