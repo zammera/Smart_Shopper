@@ -3,6 +3,7 @@ if (!window.firebaseDb) {
     // You might want to redirect to index.html or show an error
 }
 
+// dispays user's address in top nav bar where 'currentLocation' id element is. 
 function updateLocationDisplay(address) {
     const locationElement = document.getElementById('currentLocation');
     if (locationElement) {
@@ -37,6 +38,7 @@ async function saveUserAddress(address) {
     }
 }
 
+// helper function to just extract user's streen number and name to be displayed
 function extractStreetAddress(fullAddress) {
     if (!fullAddress) return "Set your location";
     // Extract everything before the first comma
