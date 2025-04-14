@@ -1,41 +1,41 @@
 $(function () {
+  // Store user location globally
+  let userLocation = null;
 
-  // Function to retrieve user's lat and lng
-async function getUserLocation() {
-  const user = window.firebaseAuth.currentUser;
-  if (!user) {
-      console.error("No user is signed in.");
-      return;
-  }
-
-  try {
-      const userDoc = await window.firebaseDb.collection("users").doc(user.uid).get();
-      if (userDoc.exists && userDoc.data().address) {
-          const userAddress = userDoc.data().address;
-          const userLat = userAddress.lat;
-          const userLng = userAddress.lng;
-
-          console.log("User's Latitude:", userLat);
-          console.log("User's Longitude:", userLng);
-
-          return { userLat, userLng };
-      } else {
-          console.log("No address found for the user.");
-          return null;
+  // Wait for auth state before getting location
+  firebase.auth().onAuthStateChanged(async function(user) {
+    if (user) {
+      userLocation = await getUserLocation(user);
+      if (userLocation) {
+        console.log(`User's Latitude: ${userLocation.userLat}, Longitude: ${userLocation.userLng}`);
+        // Load deals only after we have location
+        loadHotDeals();
       }
-  } catch (error) {
-      console.error("Error retrieving user location:", error);
-  }
-}
+    } else {
+      console.error("No user is signed in.");
+      // Optional: You might want to load deals anyway without location
+      loadHotDeals();
+    }
+  });
 
-// DEBUG: checking if user lat and lng retrived correctly
-getUserLocation().then(location => {
-  if (location) {
-      const { userLat, userLng } = location;
-      // You can now use userLat and userLng
-      console.log(`User's Latitude: ${userLat}, Longitude: ${userLng}`);
+  async function getUserLocation(user) {
+    try {
+      const userDoc = await firebase.firestore().collection("users").doc(user.uid).get();
+      if (userDoc.exists && userDoc.data().address) {
+        const userAddress = userDoc.data().address;
+        return {
+          userLat: userAddress.lat,
+          userLng: userAddress.lng
+        };
+      } else {
+        console.log("No address found for the user.");
+        return null;
+      }
+    } catch (error) {
+      console.error("Error retrieving user location:", error);
+      return null;
+    }
   }
-});
 
 
   
@@ -100,12 +100,18 @@ getUserLocation().then(location => {
 
   // Function to find nearby locations for our target chains
   async function findNearbyLocations(deals) {
+
+    if (!userLocation) {
+      console.log("No user location available - skipping nearby locations");
+      return;
+  }
+
     try {
       const { PlacesService } = await google.maps.importLibrary("places");
       const { LatLng } = await google.maps.importLibrary("core");
   
       const service = new PlacesService(document.createElement('div'));
-      const location = new LatLng(userLat, userLng);
+      const location = new LatLng(userLocation.userLat, userLocation.userLng);
   
       const chainLocations = new Map();
   
@@ -119,17 +125,17 @@ getUserLocation().then(location => {
           }, (results, status) => resolve({ results, status }));
         });
   
-    // Inside the findNearbyLocations function, replace the address parsing part with this:
+
     if (response.status === 'OK' && response.results.length > 0) {
       const closest = response.results.reduce((prev, current) => {
-        const prevDist = calculateDistance(userLat, userLng, prev.geometry.location.lat(), prev.geometry.location.lng());
-        const currDist = calculateDistance(userLat, userLng, current.geometry.location.lat(), current.geometry.location.lng());
+        const prevDist = calculateDistance(userLocation.userLat, userLocation.userLng, prev.geometry.location.lat(), prev.geometry.location.lng());
+        const currDist = calculateDistance(userLocation.userLat, userLocation.userLng, current.geometry.location.lat(), current.geometry.location.lng());
         return currDist < prevDist ? current : prev;
       });
 
-      const dist = calculateDistance(userLat, userLng, closest.geometry.location.lat(), closest.geometry.location.lng());
+      const dist = calculateDistance(userLocation.userLat, userLocation.userLng, closest.geometry.location.lat(), closest.geometry.location.lng());
 
-      // Extract city and state from formatted_address
+      // Extract city from formatted_address
       const formatted = closest.formatted_address || closest.vicinity || '';
 
       console.log('Raw address:', formatted); // Debug logging
