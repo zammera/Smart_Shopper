@@ -100,64 +100,84 @@ $(function () {
 
   // Function to find nearby locations for our target chains
   async function findNearbyLocations(deals) {
-
     if (!userLocation) {
-      console.log("No user location available - skipping nearby locations");
-      return;
-  }
+        console.log("No user location available - skipping nearby locations");
+        return;
+    }
 
     try {
-      const { PlacesService } = await google.maps.importLibrary("places");
-      const { LatLng } = await google.maps.importLibrary("core");
-  
-      const service = new PlacesService(document.createElement('div'));
-      const location = new LatLng(userLocation.userLat, userLocation.userLng);
-  
-      const chainLocations = new Map();
-  
-      for (const chain of targetChains) {
-        const response = await new Promise(resolve => {
-          service.nearbySearch({
-            location: location,
-            radius: 32186.9, // 20 mile radius
-            keyword: chain.searchName,
-            type: 'grocery_or_supermarket'
-          }, (results, status) => resolve({ results, status }));
+        // Load libraries all at once
+        const [{ PlacesService }, { LatLng }] = await Promise.all([
+            google.maps.importLibrary("places"),
+            google.maps.importLibrary("core")
+        ]);
+
+        const service = new PlacesService(document.createElement('div'));
+        const location = new LatLng(userLocation.userLat, userLocation.userLng);
+        const chainLocations = new Map();
+
+        // Process chains
+        const locationPromises = targetChains.map(async chain => {
+            try {
+                const response = await new Promise(resolve => {
+                    service.nearbySearch({
+                        location: location,
+                        radius: 16093.4, // 10 mile radius
+                        keyword: chain.searchName,
+                        type: 'grocery_or_supermarket'
+                    }, (results, status) => resolve({ results, status }));
+                });
+
+                if (response.status === 'OK' && response.results.length > 0) {
+                    // Find closest location
+                    let closest = response.results[0];
+                    let minDist = calculateDistance(userLocation.userLat, userLocation.userLng, 
+                                                 closest.geometry.location.lat(), 
+                                                 closest.geometry.location.lng());
+
+                    for (let i = 1; i < response.results.length; i++) {
+                        const current = response.results[i];
+                        const currDist = calculateDistance(userLocation.userLat, userLocation.userLng,
+                                                         current.geometry.location.lat(),
+                                                         current.geometry.location.lng());
+                        if (currDist < minDist) {
+                            closest = current;
+                            minDist = currDist;
+                        }
+                    }
+
+                    const formatted = closest.formatted_address || closest.vicinity || '';
+                    const city = formatted.split(',')[1]?.trim() || '';
+
+                    return {
+                        chain: chain.displayName,
+                        data: {
+                            distance: minDist,
+                            address: `- ${city} (${minDist.toFixed(1)} miles)`,
+                            fullAddress: formatted
+                        }
+                    };
+                }
+            } catch (error) {
+                console.error(`Error processing ${chain.displayName}:`, error);
+                return null;
+            }
         });
-  
 
-    if (response.status === 'OK' && response.results.length > 0) {
-      const closest = response.results.reduce((prev, current) => {
-        const prevDist = calculateDistance(userLocation.userLat, userLocation.userLng, prev.geometry.location.lat(), prev.geometry.location.lng());
-        const currDist = calculateDistance(userLocation.userLat, userLocation.userLng, current.geometry.location.lat(), current.geometry.location.lng());
-        return currDist < prevDist ? current : prev;
-      });
+        // Wait for all promises to complete
+        const results = await Promise.all(locationPromises);
+        
+        // Store valid results
+        results.forEach(result => {
+            if (result) chainLocations.set(result.chain, result.data);
+        });
 
-      const dist = calculateDistance(userLocation.userLat, userLocation.userLng, closest.geometry.location.lat(), closest.geometry.location.lng());
-
-      // Extract city from formatted_address
-      const formatted = closest.formatted_address || closest.vicinity || '';
-
-      console.log('Raw address:', formatted); // Debug logging
-
-      const parts = formatted.split(',');
-      let city = '';
-      
-      city = parts[1].trim(); // Fallback if only state is available
-
-      chainLocations.set(chain.displayName, {
-        distance: dist,
-        address: `- ${city} (${dist.toFixed(1)} miles)`,
-        fullAddress: formatted
-      });
-    }
-}
-    updateDealsWithLocations(deals, chainLocations);
+        updateDealsWithLocations(deals, chainLocations);
 
     } catch (error) {
-      console.error('Error finding nearby locations:', error);
+        console.error('Error in findNearbyLocations:', error);
     }
-  }
+}
   
 
   // Update deals with location information
