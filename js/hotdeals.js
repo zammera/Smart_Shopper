@@ -13,11 +13,12 @@ $(function () {
       }
     } else {
       console.error("No user is signed in.");
-      // Optional: You might want to load deals anyway without location
+      // load deals anyway without location
       loadHotDeals();
     }
   });
 
+  // using user's lat and lng to get nearby grocery store locations
   async function getUserLocation(user) {
     try {
       const userDoc = await firebase.firestore().collection("users").doc(user.uid).get();
@@ -37,7 +38,6 @@ $(function () {
     }
   }
 
-
   
   // Our target chains (with possible variations in naming)
   const targetChains = [
@@ -52,7 +52,7 @@ $(function () {
     
   ];
 
-  // Load hot deals from JSON file
+  // Load hot deals from JSON file in order to update
   loadHotDeals();
 
   // Function to load hot deals
@@ -188,6 +188,4 @@ $(function () {
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
     return R * c;
   }
-
-
 });
