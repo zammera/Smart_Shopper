@@ -1,3 +1,14 @@
+if (!window.firebaseDb) {
+    console.error("Firebase not initialized")
+}
+
+$(function () {
+    const user = window.firebaseAuth.currentUser;
+    if (!user) {
+        alert("No user is signed in.");
+    }
+});
+
 const listNames = [
     {"name":"Taco Tuesday"}
 ]
@@ -45,7 +56,7 @@ const groceries = [
 
 //aim to change this but wanted to get this functional and pretty
 
-function createNewList() {
+async function createNewList() {
     let listName = document.getElementById('name').value;
     let storedLists = JSON.parse(localStorage.getItem("listNames")) || [];
 
@@ -53,6 +64,11 @@ function createNewList() {
         console.log("empty list cannot be created")
     } else {
         createListCard(listName);
+        await window.firebaseDb.collection("users").doc(user.uid).set({
+            lists: {Listname: listName},
+            lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
+        }, { merge: true });
+
         storedLists.push({ name: listName });
         localStorage.setItem("listNames", JSON.stringify(storedLists));
         document.getElementById('name').value = ""; 
