@@ -1,6 +1,5 @@
 if (!window.firebaseDb) {
     console.error("Firebase not initialized!");
-    // You might want to redirect to index.html or show an error
 }
 
 // dispays user's address in top nav bar where 'currentLocation' id element is. 
@@ -27,7 +26,7 @@ async function saveUserAddress(address) {
             lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
         }, { merge: true });
 
-        // Update display - just add this one line
+        // Update display
         updateLocationDisplay(extractStreetAddress(address.formatted));
         
         console.log("Address saved successfully!");
@@ -68,6 +67,8 @@ function extractStreetAddress(fullAddress) {
     v: "weekly",
     libraries: "places"
 });
+
+
 
 // function change location feature
 async function changeAreaFunction() {
