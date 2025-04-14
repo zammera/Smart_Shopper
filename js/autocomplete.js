@@ -170,7 +170,7 @@ async function changeAreaFunction() {
             console.log("Calling saveUserAddress with:", selectedAddress.formatted);
             alert("Address saved: " + selectedAddress.formatted);
 
-            // code to save address in database
+            // save address in database
             await saveUserAddress(selectedAddress);
             location.reload(); // reload user's current page
         } else {
@@ -192,7 +192,7 @@ async function changeAreaFunction() {
             };
             
             alert("Address saved:" + manualAddress);
-            // code to save address in database
+            // save address in database
             await saveUserAddress(manualAddress);
             location.reload(); // reload user's current page
         }
@@ -213,7 +213,7 @@ fetch('modals.html')
 window.changeAreaFunction = changeAreaFunction;
 
 
-// Replace your current initialization with this:
+// Firebase initialization:
 document.addEventListener('DOMContentLoaded', () => {
     // Set default text immediately
     updateLocationDisplay("Location loading...");
@@ -230,13 +230,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     window.firebaseDb.collection("users").doc(user.uid).get()
                         .then(doc => {
                             if (doc.exists && doc.data().address) {
-                                updateLocationDisplay(extractStreetAddress(doc.data().address.formatted));
+                                updateLocationDisplay(extractStreetAddress(doc.data().address.formatted)); // sets navbar text to the user's current address 
                             } else {
                                 updateLocationDisplay("Set your location");
                             }
                         });
                 } else {
-                    // No user signed in
+                    // No user signed in, prompt them
                     updateLocationDisplay("Sign in to set location");
                 }
             });
