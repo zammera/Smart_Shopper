@@ -52,7 +52,7 @@ $(function () {
     
   ];
 
-  // Load hot deals from JSON file in order to update
+  // Load basic hot deals info from JSON file
   loadHotDeals();
 
   // Function to load hot deals
@@ -119,7 +119,7 @@ $(function () {
         const response = await new Promise(resolve => {
           service.nearbySearch({
             location: location,
-            radius: 32186.9,
+            radius: 32186.9, // 20 mile radius
             keyword: chain.searchName,
             type: 'grocery_or_supermarket'
           }, (results, status) => resolve({ results, status }));
@@ -141,13 +141,13 @@ $(function () {
       console.log('Raw address:', formatted); // Debug logging
 
       const parts = formatted.split(',');
-      let cityState = '';
+      let city = '';
       
-      cityState = parts[1].trim(); // Fallback if only state is available
+      city = parts[1].trim(); // Fallback if only state is available
 
       chainLocations.set(chain.displayName, {
         distance: dist,
-        address: `- ${cityState} (${dist.toFixed(1)} miles)`,
+        address: `- ${city} (${dist.toFixed(1)} miles)`,
         fullAddress: formatted
       });
     }
