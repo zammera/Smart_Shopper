@@ -31,48 +31,41 @@
             </script>
     </head>
 <body id="editList">
-<div class="container-fluid " >
-    <div class="top-bit row">
-        <nav class="navbar bg-body-tertiary sticky-top navbar-custom">
-            <div class="container-fluid">
-                <img src="images/smart_shopper.jpg" alt="Logo" height="50" width="65" class="me-5 rounded">
-                <h1 class="navbar-brand">SmartShopper</h1>
-                <div class="location-bubble" id="locationDisplay" data-bs-toggle="modal" data-bs-target="#changeAreaModal">
-                    <i class="bi bi-geo-alt-fill location-icon"></i>
-                    <span id="currentLocation">Location loading... </span>
-                </div>
-                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-                    <div class="offcanvas-header">
-                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">SmartShopper</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                    </div>
-                    <div class="offcanvas-body">
-                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                            <li class="nav-item">
-                                <a class="nav-link" href="userhome.html">Home</a>
-                            </li>
-                             <li class="nav-item">
-                                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#changeAreaModal" >Change Location</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="makelist.html">Create/Manage A New List</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="history.html">List History</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="offcanvas-end text-center">
-                        <a href="index.html"><button class="btnso">Sign Out</button></a>
-                    </div>
-                </div>
-            </div>
-        </nav>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top bg-transparent px-4">
+    <div class="container-fluid">
+      
+      <!-- Left: Logo + Brand Name -->
+      <a class="navbar-brand d-flex align-items-center" href="userhome.html">
+        <img src="images/smart-shopper.png" alt="Logo" width="40" height="40" class="me-2" />
+        <span class="fw-bold text-white">SmartShopper</span>
+      </a>   
+  
+      <!-- Toggle button for mobile nav -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <!-- Right: Nav Links -->
+      <div class="collapse navbar-collapse justify-content-end" id="navbarContent">
+        <ul class="navbar-nav align-items-center">
+            <li class="nav-item">
+                <a class="nav-link location-bubble" href="#" id="locationDisplay" data-bs-toggle="modal" data-bs-target="#changeAreaModal">
+                  <i class="bi bi-geo-alt-fill location-icon"></i>
+                  <span id="currentLocation">Location loading...</span>
+                </a>
+              </li>             
+          <li class="nav-item">
+            <a class="nav-link text-white" href="makelist.html">Manage Lists</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="history.html">List History</a>
+          </li>
+        </ul>
+      </div>
+  
     </div>
-</div>
+  </nav>
 <div class="d-flex flex-row" id="content">
     <div class="col-md-7" id="search">
         <form class="d-flex sticky-top" role="search" id="searchBar">

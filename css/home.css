@@ -71,43 +71,10 @@ p {
     color: black;
 }
 
-/* Make navbar truly transparent over background image */
-.navbar {
-    background-color: rgba(0, 0, 0, 0.3) !important;
-    backdrop-filter: blur(4px);
-    z-index: 1000;
-  }
-  
-  /* Optional: ensure text color stays white */
-  .navbar-brand span,
-  .navbar span {
-    color: white !important;
-  }
-  
-  /* Optional hover for logo text */
-  .navbar-brand span:hover {
-    text-decoration: underline;
-  }
-  
-  /* Push content down since navbar is fixed */
-  .content {
-    padding-top: 80px;
-  }
-
-  .navbar-nav .nav-item {
-    margin-left: 20px;
-  }
-  
-  .navbar-nav .nav-link {
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  .blur-card {
-    background: rgba(255, 255, 255, 0.15); /* semi-transparent white */
-    backdrop-filter: blur(10px);           /* frosted glass blur */
-    -webkit-backdrop-filter: blur(10px);   /* for Safari */
-    border: 1px solid rgba(255, 255, 255, 0.25); /* optional border for depth */
-    color: white; /* change as needed */
-  }
-  
+.blur-card {
+  background: rgba(255, 255, 255, 0.15); /* semi-transparent white */
+  backdrop-filter: blur(10px);           /* frosted glass blur */
+  -webkit-backdrop-filter: blur(10px);   /* for Safari */
+  border: 1px solid rgba(255, 255, 255, 0.25); /* optional border for depth */
+  color: white; /* change as needed */
+}
