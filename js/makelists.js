@@ -2,12 +2,7 @@ if (!window.firebaseDb) {
     console.error("Firebase not initialized")
 }
 
-$(function () {
-    const user = window.firebaseAuth.currentUser;
-    if (!user) {
-        alert("No user is signed in.");
-    }
-});
+const user = window.firebaseAuth.currentUser;
 
 const listNames = [
     {"name":"Taco Tuesday"}
