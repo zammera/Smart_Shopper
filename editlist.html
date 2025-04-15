@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/lists.css">
+        <link rel="stylesheet" href="css/nav.css">
 
         <script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-app-compat.js"></script>
         <script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-auth-compat.js"></script>
@@ -29,8 +30,16 @@
                 window.firebaseDb = firebase.firestore();
             }
             </script>
+
+        <style>
+            body {
+            padding-top: 64px; /* Adjust based on your navbar's height */
+            overflow-x: hidden; /* Optional: prevents horizontal scroll */
+            }
+        </style>
     </head>
 <body id="editList">
+
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-transparent px-4">
     <div class="container-fluid">
@@ -61,11 +70,17 @@
           <li class="nav-item">
             <a class="nav-link text-white" href="history.html">List History</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link text-white signout-button" href="index.html">
+                Sign Out
+            </a>              
+          </li>
         </ul>
       </div>
   
     </div>
   </nav>
+
 <div class="d-flex flex-row" id="content">
     <div class="col-md-7" id="search">
         <form class="d-flex sticky-top" role="search" id="searchBar">
