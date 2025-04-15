@@ -64,8 +64,13 @@ async function createNewList() {
         console.log("empty list cannot be created")
     } else {
         createListCard(listName);
-        await window.firebaseDb.collection("users").doc(user.uid).set({
-            lists: {Listname: listName},
+        listdata = {
+            name: listName,
+            items: []
+        };
+        await window.firebaseDb.collection("users").doc(user.uid).collection("groceryLists").set({
+            name: listName,
+            items: [],
             lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
         }, { merge: true });
 
