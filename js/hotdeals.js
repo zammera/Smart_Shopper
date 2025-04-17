@@ -117,7 +117,7 @@ $(function () {
                             data-item="${deal.item}" 
                             data-price="${deal.discount_price}" 
                             data-store="${deal.chain}">
-                        Add to Shopping List
+                        Add to Cart
                     </button>
                 </div>
             </div>
@@ -254,7 +254,7 @@ $(function () {
     updateShoppingCart();
 
     // Show a toast notification
-    const toast = new bootstrap.Toast($("#addToListToast"));
+    const toast = new bootstrap.Toast($("#addToCartToast"));
     toast.show();
   });
 
