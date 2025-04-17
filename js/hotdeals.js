@@ -41,15 +41,26 @@ $(function () {
   
   // Our target chains (with possible variations in naming)
   const targetChains = [
-    { searchName: "Market Basket", displayName: "Market Basket" },
-    { searchName: "Walmart Supercenter", displayName: "Walmart Supercenter" },
-    { searchName: "Hannaford", displayName: "Hannaford Supermarket" },
-    { searchName: "Whole Foods", displayName: "Whole Foods Market" },
-    { searchName: "Stop & Shop", displayName: "Stop & Shop" },
-    { searchName: "Shaw's", displayName: "Shaw's" },
-    { searchName: "ALDI", displayName: "ALDI" },
-    { searchName: "Trader Joe's", displayName: "Trader Joe's" }
-    
+    { 
+        searchName: "Walmart Supercenter", 
+        displayName: "Walmart Supercenter",
+        isNationwide: true
+    },
+    { 
+        searchName: "Whole Foods", 
+        displayName: "Whole Foods Market",
+        isNationwide: true
+    },
+    { 
+        searchName: "ALDI", 
+        displayName: "ALDI",
+        isNationwide: true
+    },
+    { 
+        searchName: "Trader Joe's", 
+        displayName: "Trader Joe's",
+        isNationwide: true
+    }
   ];
 
   // Load basic hot deals info from JSON file
@@ -58,12 +69,20 @@ $(function () {
   // Function to load hot deals
   function loadHotDeals() {
     $.getJSON("hotdeals.json", function(data) {
-      displayHotDeals(data.hotdeals);
-      // After displaying deals, find nearby locations for our target chains
-      findNearbyLocations(data.hotdeals);
+        // Filter deals to only show nationwide stores
+        const nationwideChains = targetChains
+            .filter(chain => chain.isNationwide)
+            .map(chain => chain.displayName);
+            
+        const nationwideDeals = data.hotdeals.filter(deal => 
+            nationwideChains.includes(deal.chain)
+        );
+
+        displayHotDeals(nationwideDeals);
+        findNearbyLocations(nationwideDeals);
     }).fail(function() {
-      console.error("Error loading hot deals data");
-      $("#hotDealsGrid").html("<div class='col-12'><p class='alert alert-danger'>Error loading hot deals. Please try again later.</p></div>");
+        console.error("Error loading hot deals data");
+        $("#hotDealsGrid").html("<div class='col-12'><p class='alert alert-danger'>Error loading hot deals. Please try again later.</p></div>");
     });
   }
 
@@ -72,30 +91,38 @@ $(function () {
     let dealsHTML = "";
     
     deals.forEach(function(deal, index) {
-      dealsHTML += `
-      <div class="col-md-6 col-lg-4 mb-4">
-          <div class="card h-100">
-              <div class="card-header bg-success text-white">
-                  <span class="badge bg-warning text-dark">${deal.discount}</span> SAVE $${deal.savings.toFixed(2)}
-              </div>
-              <div class="card-body">
-                  <h5 class="card-title">${deal.item}</h5>
-                  <p class="card-text">
-                      <span class="text-decoration-line-through">$${deal.original_price.toFixed(2)}</span>
-                      <span class="text-success fw-bold">$${deal.discount_price.toFixed(2)}</span>
-                  </p>
-                  <p class="card-text"><small class="text-muted store-info" id="store-${index}">${deal.chain}</small></p>
-              </div>
-              <div class="card-footer">
-                  <button class="btn btn-primary w-100 addItem" data-item="${deal.item}" data-price="${deal.discount_price}" data-store="${deal.chain}">
-                      Add to Shopping List
-                  </button>
-              </div>
-          </div>
-      </div>`;
+        dealsHTML += `
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100">
+                <div class="card-header bg-success text-white">
+                    <span class="badge bg-warning text-dark">${deal.discount}</span> 
+                    <span class="badge bg-info float-end">Nationwide</span>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">${deal.item}</h5>
+                    <p class="card-text">
+                        <span class="text-decoration-line-through">$${deal.original_price.toFixed(2)}</span>
+                        <span class="text-success fw-bold">$${deal.discount_price.toFixed(2)}</span>
+                    </p>
+                    <p class="card-text">
+                        <small class="text-muted store-info" id="store-${index}">
+                            ${deal.chain}
+                        </small>
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary w-100 addItem" 
+                            data-item="${deal.item}" 
+                            data-price="${deal.discount_price}" 
+                            data-store="${deal.chain}">
+                        Add to Shopping List
+                    </button>
+                </div>
+            </div>
+        </div>`;
     });
     
-    $("#hotDealsGrid").html(dealsHTML);
+    $("#hotDealsGrid").html(dealsHTML || "<div class='col-12'><p class='alert alert-info'>No nationwide deals available at this time.</p></div>");
   }
 
   // Function to find nearby locations for our target chains
