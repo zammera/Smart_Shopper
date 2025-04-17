@@ -75,13 +75,26 @@
 
     <!-- Hot Deals Container -->
     <div class="container mt-5 pt-5">
+        <h2 class="mb-4 text-center">Hot Deals Near You</h2>
+        <h3 class="mb-4 text-center">Can't miss these fresh deals!</h3>
         <div class="row">
-            <div class="col-12">
-                <h2 class="mb-4 text-center">Hot Deals Near You</h2>
-                <h3 class="mb-4 text-center">Can't miss these fresh deals!</h3>
+            <!-- Main Content -->
+            <div class="col-md-9">
                 <div class="hot-deals-container">
                     <div class="row" id="hotDealsGrid">
                         <!-- Hot deals will be populated here by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Shopping Cart Sidebar -->
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">Shopping Cart</h5>
+                    </div>
+                    <div class="card-body" id="shoppingCartContainer">
+                        <p class="text-muted">Your shopping cart is empty.</p>
                     </div>
                 </div>
             </div>
