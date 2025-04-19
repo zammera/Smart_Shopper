@@ -1,8 +1,28 @@
+import {db, auth } from "./firebaseInit.js";
+import { setDoc, doc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+
+async function createGroceryList(listName) {
+    const user = auth.currentUser;
+    if (!user) {
+      console.error("User not logged in");
+      return;
+    }
+  
+    const ref = doc(db, `users/${user.uid}/groceryLists/${listName}`);
+    await setDoc(ref, {
+      name: listName,
+      items: [],
+      createdAt: new Date()
+    });
+  
+    console.log("List created!");
+  }
+
 if (!window.firebaseDb) {
     console.error("Firebase not initialized")
 }
 
-const user = window.firebaseAuth.currentUser;
 
 const listNames = [
     {"name":"Taco Tuesday"}
@@ -50,8 +70,7 @@ const groceries = [
 ]
 
 //aim to change this but wanted to get this functional and pretty
-
-async function createNewList() {
+function createNewList() {
     let listName = document.getElementById('name').value;
     let storedLists = JSON.parse(localStorage.getItem("listNames")) || [];
 
@@ -59,16 +78,7 @@ async function createNewList() {
         console.log("empty list cannot be created")
     } else {
         createListCard(listName);
-        listdata = {
-            name: listName,
-            items: []
-        };
-        await window.firebaseDb.collection("users").doc(user.uid).collection("groceryLists").set({
-            name: listName,
-            items: [],
-            lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
-        }, { merge: true });
-
+        createGroceryList(listName);
         storedLists.push({ name: listName });
         localStorage.setItem("listNames", JSON.stringify(storedLists));
         document.getElementById('name').value = ""; 
@@ -85,7 +95,7 @@ function createListCard(listName) {
             <input class="btn btn-danger list-btn" type="reset" value="Delete" onclick="deleteList('${ listName }')">
         </div>
     </div>`;
-    Container = document.getElementById('listContainer');  
+    let Container = document.getElementById('listContainer');  
     console.log("List: " + listName + " added to the list container")
     Container.innerHTML += addNewList; 
 }
@@ -146,3 +156,8 @@ $(function() {
     }
    
 });
+
+window.createNewList = createNewList;
+window.editList = editList;
+window.deleteList = deleteList;
+window.selectList = selectList;
