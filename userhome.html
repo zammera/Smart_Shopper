@@ -6,6 +6,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css">
         <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/nav.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
         <script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-app-compat.js"></script>
@@ -30,80 +31,70 @@
             </script>
       </head>
 <body>
-        <!-- <nav class="navbar navbar-expand-lg h-dark navbar-custom">
-            <div class="container-fluid">
-                <div class="navbar-brand d-flex align-items-center">
-                    <img src="images/smart_shopper.jpg" alt="Logo" height="50" width="65" class="me-5 rounded">
-                    <h1>Smart Shopper</h1>
-                </div>
-            </div>
-        </nav> -->
-    <div class="top-bit">
-        <nav class="navbar bg-body-tertiary fixed-top navbar-custom">
-            <div class="container-fluid">
-                <img src="images/smart_shopper.jpg" alt="Logo" height="50" width="65" class="me-5 rounded">
-                <h1 class="navbar-brand">SmartShopper</h1>
-                <div class="location-bubble" id="locationDisplay" data-bs-toggle="modal" data-bs-target="#changeAreaModal">
-                    <i class="bi bi-geo-alt-fill location-icon"></i>
-                    <span id="currentLocation">Location loading... </span>
-                </div>
-                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-                    <div class="offcanvas-header">
-                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">SmartShopper</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                    </div>
-                    <div class="offcanvas-body">
-                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="userhome.html">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#changeAreaModal" >Change Location</a>
-                      
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="makelist.html">Create/Manage A New List</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="history.html" >List History</a>
-                            </li>
-                            <!-- <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Dropdown
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                </ul>
-                            </li> -->
-                        </ul>
-                    <!--<form class="d-flex mt-3" role="search">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit">Search</button>
-                        </form> -->
-                    </div>
-                    <div class="offcanvas-end text-center">
-                        <a href="index.html"><button class="btnso">Sign Out</button></a>
-                    </div>
-                </div>
-            </div>
-        </nav>
+    
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top bg-transparent px-4">
+    <div class="container-fluid">
+      
+      <!-- Left: Logo + Brand Name -->
+      <a class="navbar-brand d-flex align-items-center" href="userhome.html">
+        <img src="images/smart-shopper.png" alt="Logo" width="40" height="40" class="me-2" />
+        <span class="fw-bold text-white">SmartShopper</span>
+      </a>   
+  
+      <!-- Toggle button for mobile nav -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <!-- Right: Nav Links -->
+      <div class="collapse navbar-collapse justify-content-end" id="navbarContent">
+        <ul class="navbar-nav align-items-center">
+            <li class="nav-item">
+                <a class="nav-link location-bubble" href="#" id="locationDisplay" data-bs-toggle="modal" data-bs-target="#changeAreaModal">
+                  <i class="bi bi-geo-alt-fill location-icon"></i>
+                  <span id="currentLocation">Location loading...</span>
+                </a>
+              </li>             
+          <li class="nav-item">
+            <a class="nav-link text-white" href="makelist.html">Manage Lists</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="history.html">List History</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white signout-button" href="index.html">
+                Sign Out
+            </a>              
+          </li>
+        </ul>
+      </div>
+  
     </div>
+  </nav>
 
     <!-- Hot Deals Container -->
     <div class="container mt-5 pt-5">
+        <h2 class="mb-4 text-center">Hot Deals Near You</h2>
+        <h3 class="mb-4 text-center">Can't miss these fresh deals!</h3>
         <div class="row">
-            <div class="col-12">
-                <h2 class="mb-4 text-center">Hot Deals Near You</h2>
-                <h3 class="mb-4 text-center">Can't miss these fresh deals!</h3>
+            <!-- Main Content -->
+            <div class="col-md-9">
                 <div class="hot-deals-container">
                     <div class="row" id="hotDealsGrid">
                         <!-- Hot deals will be populated here by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Shopping Cart Sidebar -->
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">Shopping Cart</h5>
+                    </div>
+                    <div class="card-body" id="shoppingCartContainer">
+                        <p class="text-muted">Your shopping cart is empty.</p>
                     </div>
                 </div>
             </div>
@@ -119,6 +110,19 @@
             </div>
             <div class="toast-body">
                 Item added to your shopping list!
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast for adding items to cart -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="addToCartToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto">Smart Shopper</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                Item added to your cart!
             </div>
         </div>
     </div>

@@ -2,6 +2,9 @@ $(function () {
   // Store user location globally
   let userLocation = null;
 
+  // Initialize shopping cart
+  let shoppingCart = [];
+
   // Wait for auth state before getting location
   firebase.auth().onAuthStateChanged(async function(user) {
     if (user) {
@@ -41,15 +44,26 @@ $(function () {
   
   // Our target chains (with possible variations in naming)
   const targetChains = [
-    { searchName: "Market Basket", displayName: "Market Basket" },
-    { searchName: "Walmart Supercenter", displayName: "Walmart Supercenter" },
-    { searchName: "Hannaford", displayName: "Hannaford Supermarket" },
-    { searchName: "Whole Foods", displayName: "Whole Foods Market" },
-    { searchName: "Stop & Shop", displayName: "Stop & Shop" },
-    { searchName: "Shaw's", displayName: "Shaw's" },
-    { searchName: "ALDI", displayName: "ALDI" },
-    { searchName: "Trader Joe's", displayName: "Trader Joe's" }
-    
+    { 
+        searchName: "Walmart Supercenter", 
+        displayName: "Walmart Supercenter",
+        isNationwide: true
+    },
+    { 
+        searchName: "Whole Foods", 
+        displayName: "Whole Foods Market",
+        isNationwide: true
+    },
+    { 
+        searchName: "ALDI", 
+        displayName: "ALDI",
+        isNationwide: true
+    },
+    { 
+        searchName: "Trader Joe's", 
+        displayName: "Trader Joe's",
+        isNationwide: true
+    }
   ];
 
   // Load basic hot deals info from JSON file
@@ -58,43 +72,62 @@ $(function () {
   // Function to load hot deals
   function loadHotDeals() {
     $.getJSON("hotdeals.json", function(data) {
-      displayHotDeals(data.hotdeals);
-      // After displaying deals, find nearby locations for our target chains
-      findNearbyLocations(data.hotdeals);
+        // Filter deals to only show nationwide stores
+        const nationwideChains = targetChains
+            .filter(chain => chain.isNationwide)
+            .map(chain => chain.displayName);
+            
+        const nationwideDeals = data.hotdeals.filter(deal => 
+            nationwideChains.includes(deal.chain)
+        );
+
+        displayHotDeals(nationwideDeals);
+        findNearbyLocations(nationwideDeals);
     }).fail(function() {
-      console.error("Error loading hot deals data");
-      $("#hotDealsGrid").html("<div class='col-12'><p class='alert alert-danger'>Error loading hot deals. Please try again later.</p></div>");
+        console.error("Error loading hot deals data");
+        $("#hotDealsGrid").html("<div class='col-12'><p class='alert alert-danger'>Error loading hot deals. Please try again later.</p></div>");
     });
   }
 
   // Function to display hot deals in grid
   function displayHotDeals(deals) {
     let dealsHTML = "";
-    
-    deals.forEach(function(deal, index) {
-      dealsHTML += `
-      <div class="col-md-6 col-lg-4 mb-4">
-          <div class="card h-100">
-              <div class="card-header bg-success text-white">
-                  <span class="badge bg-warning text-dark">${deal.discount}</span> SAVE $${deal.savings.toFixed(2)}
-              </div>
-              <div class="card-body">
-                  <h5 class="card-title">${deal.item}</h5>
-                  <p class="card-text">
-                      <span class="text-decoration-line-through">$${deal.original_price.toFixed(2)}</span>
-                      <span class="text-success fw-bold">$${deal.discount_price.toFixed(2)}</span>
-                  </p>
-                  <p class="card-text"><small class="text-muted store-info" id="store-${index}">${deal.chain}</small></p>
-              </div>
-              <div class="card-footer">
-                  <button class="btn btn-primary w-100 addItem" data-item="${deal.item}" data-price="${deal.discount_price}" data-store="${deal.chain}">
-                      Add to Shopping List
-                  </button>
-              </div>
-          </div>
-      </div>`;
+
+    deals.forEach(function (deal, index) {
+        dealsHTML += `
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100">
+                <div class="card-header bg-success text-white">
+                    <span class="badge bg-warning text-dark">${deal.discount}</span>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">${deal.item}</h5>
+                    <p class="card-text">
+                        <span class="text-decoration-line-through">$${deal.original_price.toFixed(2)}</span>
+                        <span class="text-success fw-bold">$${deal.discount_price.toFixed(2)}</span>
+                    </p>
+                    <p class="card-text">
+                        <small class="text-muted store-info" id="store-${index}">
+                            ${deal.chain}
+                        </small>
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary w-100 addItem" 
+                            data-item="${deal.item}" 
+                            data-price="${deal.discount_price}" 
+                            data-store="${deal.chain}">
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+        </div>`;
     });
-    
+
+    if (deals.length === 0) {
+        dealsHTML = "<div class='col-12'><p class='alert alert-info'>No deals available within 10 miles of your location.</p></div>";
+    }
+
     $("#hotDealsGrid").html(dealsHTML);
   }
 
@@ -208,4 +241,55 @@ $(function () {
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
     return R * c;
   }
+
+  $(document).on("click", ".addItem", function () {
+    const item = $(this).data("item");
+    const price = $(this).data("price");
+    const store = $(this).data("store");
+
+    // Add the item to the shopping cart
+    shoppingCart.push({ item, price, store });
+
+    // Update the shopping cart display
+    updateShoppingCart();
+
+    // Show a toast notification
+    const toast = new bootstrap.Toast($("#addToCartToast"));
+    toast.show();
+  });
+
+  $(document).on("click", ".removeItem", function () {
+    const index = $(this).data("index");
+
+    // Remove the item from the shopping cart
+    shoppingCart.splice(index, 1);
+
+    // Update the shopping cart display
+    updateShoppingCart();
+});
+
+  function updateShoppingCart() {
+    const cartContainer = $("#shoppingCartContainer");
+    cartContainer.html(""); // Clear the cart container
+
+    if (shoppingCart.length === 0) {
+        cartContainer.html("<p class='text-muted'>Your shopping cart is empty.</p>");
+        return;
+    }
+
+    shoppingCart.forEach((cartItem, index) => {
+        cartContainer.append(`
+            <div class="cart-item d-flex justify-content-between align-items-center mb-2">
+                <div>
+                    <strong>${cartItem.item}</strong><br>
+                    <small>${cartItem.store}</small>
+                </div>
+                <div>
+                    $${cartItem.price.toFixed(2)}
+                    <button class="btn btn-sm btn-danger removeItem" data-index="${index}">Remove</button>
+                </div>
+            </div>
+        `);
+    });
+}
 });
