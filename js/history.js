@@ -15,7 +15,8 @@ const getItemsData = async () => {
 // Create an array of all the items in the lists and record their frequency, recency, and sales
 const generateItems = async () => {
     const itemsArray = [];
-    const items = await getItemsData();
+    const allItems = await getItemsData();
+    const items = await getCheapestItems(allItems);
     for (let i = 0; i < items.length; i++) {
         const item = itemsArray.find(item => item.item === items[i].item);
         if (item === undefined) {
@@ -113,6 +114,43 @@ function getRecentItems(itemsArray) {
             postItem(items[i], 'recentItemsContainer');
         }
     }
+}
+
+// find the cheapest store for a given item
+const getCheapestItems = async(itemList) => {
+
+    const cheapestItems = [];
+
+    // go through every item and compare the original_price (or sale_price if available) to the lowest price so far
+    // if that is lower, track that store data
+    // at the end push the winning store into the cheapestItems array
+    for (const itemName in itemList) {
+        let lowestPrice = Infinity;
+        let cheapestStore = null;
+        let originalPrice = null;
+        let discountPrice = null;
+
+        const stores = itemList[itemName];
+
+        for (const store in stores) {
+            const priceInfo = stores[store];
+            if ((priceInfo.discount_price != null && lowestPrice > priceInfo.discount_price)
+                || (priceInfo.original_price != null && lowestPrice > priceInfo.original_price)) {
+                lowestPrice = priceInfo.discount_price || priceInfo.original_price
+                cheapestStore = store;
+                originalPrice = priceInfo.original_price;
+                discountPrice = priceInfo.discount_price;
+            }
+        }
+        cheapestItems.push({
+            item: itemName,
+            store: cheapestStore,
+            original_price: originalPrice,
+            discount_price: discountPrice
+        })
+    }
+
+    return cheapestItems;
 }
 
 generateItems();

@@ -1,236 +1,212 @@
-[
-    {
-      "item": "Organic Bananas",
-      "original_price": 3.99,
-      "discount_price": null,
-      "store": "Market Basket - Billerica, MA"
+{
+    "Banana": {
+      "Market Basket": { "original_price": 0.60, "discount_price": null },
+      "Walmart Supercenter": { "original_price": 0.28, "discount_price": 0.20 },
+      "Hannaford Supermarket": { "original_price": 0.34, "discount_price": null },
+      "Whole Foods Market": { "original_price": null, "discount_price": null },
+      "Stop & Shop": { "original_price": 0.34, "discount_price": null },
+      "Shaw's": { "original_price": 0.22, "discount_price": 0.18 },
+      "ALDI": { "original_price": 0.16, "discount_price": null },
+      "Trader Joe's": { "original_price": 0.23, "discount_price": null }
     },
-    {
-      "item": "Whole Milk",
-      "original_price": 2.50,
-      "discount_price": 2.00,
-      "store": "Hannaford Supermarket - Lowell, MA"
+    "Apple": {
+      "Market Basket": { "original_price": 1.85, "discount_price": null },
+      "Walmart Supercenter": { "original_price": 1.56, "discount_price": null },
+      "Hannaford Supermarket": { "original_price": 1.75, "discount_price": null },
+      "Whole Foods Market": { "original_price": 1.55, "discount_price": null },
+      "Stop & Shop": { "original_price": 1.74, "discount_price": 1.16 },
+      "Shaw's": { "original_price": 1.79, "discount_price": null },
+      "ALDI": { "original_price": 1.68, "discount_price": null },
+      "Trader Joe's": { "original_price": 1.72, "discount_price": null }
     },
-    {
-      "item": "Salmon Fillet",
-      "original_price": 5.99,
-      "discount_price": null,
-      "store": "FreshFoods"
+    "Orange": {
+      "Market Basket": { "original_price": 4.12, "discount_price": null },
+      "Walmart Supercenter": { "original_price": 4.41, "discount_price": null },
+      "Hannaford Supermarket": { "original_price": 5.23, "discount_price": null },
+      "Whole Foods Market": { "original_price": 5.00, "discount_price": null },
+      "Stop & Shop": { "original_price": 4.61, "discount_price": null },
+      "Shaw's": { "original_price": 5.11, "discount_price": null },
+      "ALDI": { "original_price": 4.12, "discount_price": 3.50 },
+      "Trader Joe's": { "original_price": 4.28, "discount_price": null }
     },
-    {
-      "item": "Loaf of Bread",
-      "original_price": 1.25,
-      "discount_price": null,
-      "store": "Stop & Shop - Chelmsford, MA"
+    "Grapes": {
+      "Market Basket": { "original_price": 8.07, "discount_price": null },
+      "Walmart Supercenter": { "original_price": 7.73, "discount_price": null },
+      "Hannaford Supermarket": { "original_price": 7.82, "discount_price": null },
+      "Whole Foods Market": { "original_price": null, "discount_price": null },
+      "Stop & Shop": { "original_price": 8.67, "discount_price": null },
+      "Shaw's": { "original_price": 8.75, "discount_price": null },
+      "ALDI": { "original_price": 8.77, "discount_price": null },
+      "Trader Joe's": { "original_price": 7.35, "discount_price": 6.99 }
     },
-    {
-      "item": "Strawberries",
-      "original_price": 4.50,
-      "discount_price": 3.99,
-      "store": "Shaw's - Nashua, NH"
+    "Blueberries": {
+      "Market Basket": { "original_price": 3.36, "discount_price": null },
+      "Walmart Supercenter": { "original_price": 3.37, "discount_price": null },
+      "Hannaford Supermarket": { "original_price": 3.40, "discount_price": null },
+      "Whole Foods Market": { "original_price": 3.14, "discount_price": null },
+      "Stop & Shop": { "original_price": 3.35, "discount_price": null },
+      "Shaw's": { "original_price": 3.50, "discount_price": null },
+      "ALDI": { "original_price": 3.43, "discount_price": null },
+      "Trader Joe's": { "original_price": 3.18, "discount_price": null }
     },
-    {
-      "item": "Ground Beef",
-      "original_price": 6.75,
-      "discount_price": null,
-      "store": "Whole Foods Market - Andover, MA"
+    "Strawberries": {
+      "Market Basket": { "original_price": 6.75, "discount_price": null },
+      "Walmart Supercenter": { "original_price": 7.91, "discount_price": null },
+      "Hannaford Supermarket": { "original_price": 6.79, "discount_price": null },
+      "Whole Foods Market": { "original_price": 8.09, "discount_price": null },
+      "Stop & Shop": { "original_price": null, "discount_price": null },
+      "Shaw's": { "original_price": 6.45, "discount_price": null },
+      "ALDI": { "original_price": 6.65, "discount_price": null },
+      "Trader Joe's": { "original_price": 8.37, "discount_price": null }
     },
-    {
-      "item": "Canned Tomatoes",
-      "original_price": 2.99,
-      "discount_price": null,
-      "store": "Market Basket - Billerica, MA"
+    "Lettuce": {
+      "Market Basket": { "original_price": 3.45, "discount_price": null },
+      "Walmart Supercenter": { "original_price": 3.33, "discount_price": null },
+      "Hannaford Supermarket": { "original_price": 3.75, "discount_price": null },
+      "Whole Foods Market": { "original_price": 3.55, "discount_price": null },
+      "Stop & Shop": { "original_price": 3.42, "discount_price": null },
+      "Shaw's": { "original_price": 3.66, "discount_price": null },
+      "ALDI": { "original_price": 3.57, "discount_price": null },
+      "Trader Joe's": { "original_price": 3.56, "discount_price": null }
     },
-    {
-      "item": "Organic Bananas",
-      "original_price": 3.99,
-      "discount_price": null,
-      "store": "Hannaford Supermarket - Lowell, MA"
+    "Spinach": {
+      "Market Basket": { "original_price": 2.71, "discount_price": null },
+      "Walmart Supercenter": { "original_price": 2.57, "discount_price": null },
+      "Hannaford Supermarket": { "original_price": 2.43, "discount_price": null },
+      "Whole Foods Market": { "original_price": 2.27, "discount_price": null },
+      "Stop & Shop": { "original_price": 2.37, "discount_price": null },
+      "Shaw's": { "original_price": 2.38, "discount_price": null },
+      "ALDI": { "original_price": 2.67, "discount_price": null },
+      "Trader Joe's": { "original_price": 2.13, "discount_price": 1.99 }
     },
-    {
-      "item": "Chicken Breast",
-      "original_price": 8.50,
-      "discount_price": 7.99,
-      "store": "FreshFoods"
+    "Carrots": {
+      "Market Basket": { "original_price": 7.98, "discount_price": null },
+      "Walmart Supercenter": { "original_price": 7.43, "discount_price": null },
+      "Hannaford Supermarket": { "original_price": 8.43, "discount_price": null },
+      "Whole Foods Market": { "original_price": 7.02, "discount_price": null },
+      "Stop & Shop": { "original_price": 7.47, "discount_price": null },
+      "Shaw's": { "original_price": 7.93, "discount_price": null },
+      "ALDI": { "original_price": 7.23, "discount_price": null },
+      "Trader Joe's": { "original_price": null, "discount_price": null }
     },
-    {
-      "item": "Pasta",
-      "original_price": 1.75,
-      "discount_price": null,
-      "store": "Stop & Shop - Chelmsford, MA"
+    "Broccoli": {
+      "Market Basket": { "original_price": 5.15, "discount_price": null },
+      "Walmart Supercenter": { "original_price": 4.44, "discount_price": null },
+      "Hannaford Supermarket": { "original_price": 5.52, "discount_price": null },
+      "Whole Foods Market": { "original_price": 4.29, "discount_price": null },
+      "Stop & Shop": { "original_price": 5.54, "discount_price": null },
+      "Shaw's": { "original_price": 5.28, "discount_price": null },
+      "ALDI": { "original_price": 4.47, "discount_price": 3.99 },
+      "Trader Joe's": { "original_price": 4.73, "discount_price": null }
     },
-    {
-      "item": "Eggs (dozen)",
-      "original_price": 4.25,
-      "discount_price": null,
-      "store": "Shaw's - Nashua, NH"
+    "Milk": {
+      "Market Basket": { "original_price": 5.62, "discount_price": null },
+      "Walmart Supercenter": { "original_price": 6.61, "discount_price": null },
+      "Hannaford Supermarket": { "original_price": 7.16, "discount_price": null },
+      "Whole Foods Market": { "original_price": 5.75, "discount_price": null },
+      "Stop & Shop": { "original_price": 7.24, "discount_price": null },
+      "Shaw's": { "original_price": 5.75, "discount_price": null },
+      "ALDI": { "original_price": 6.60, "discount_price": null },
+      "Trader Joe's": { "original_price": 5.78, "discount_price": null }
     },
-    {
-      "item": "Apples",
-      "original_price": 2.75,
-      "discount_price": 2.25,
-      "store": "Whole Foods Market - Andover, MA"
+    "Eggs (12ct)": {
+      "Market Basket": { "original_price": 4.75, "discount_price": null },
+      "Walmart Supercenter": { "original_price": 5.50, "discount_price": null },
+      "Hannaford Supermarket": { "original_price": 5.42, "discount_price": null },
+      "Whole Foods Market": { "original_price": 4.67, "discount_price": null },
+      "Stop & Shop": { "original_price": null, "discount_price": null },
+      "Shaw's": { "original_price": 4.78, "discount_price": null },
+      "ALDI": { "original_price": 4.93, "discount_price": null },
+      "Trader Joe's": { "original_price": 4.34, "discount_price": null }
     },
-    {
-      "item": "Olive Oil",
-      "original_price": 9.99,
-      "discount_price": null,
-      "store": "Market Basket - Billerica, MA"
+    "Cheddar Cheese": {
+      "Market Basket": { "original_price": 8.18, "discount_price": null },
+      "Walmart Supercenter": { "original_price": 8.98, "discount_price": null },
+      "Hannaford Supermarket": { "original_price": 8.73, "discount_price": null },
+      "Whole Foods Market": { "original_price": 9.55, "discount_price": null },
+      "Stop & Shop": { "original_price": 9.41, "discount_price": null },
+      "Shaw's": { "original_price": 8.90, "discount_price": null },
+      "ALDI": { "original_price": 8.90, "discount_price": null },
+      "Trader Joe's": { "original_price": 8.20, "discount_price": null }
     },
-    {
-      "item": "Whole Milk",
-      "original_price": 2.50,
-      "discount_price": 2.00,
-      "store": "Hannaford Supermarket - Lowell, MA"
+    "Yogurt": {
+      "Market Basket": { "original_price": 4.78, "discount_price": null },
+      "Walmart Supercenter": { "original_price": 4.56, "discount_price": null },
+      "Hannaford Supermarket": { "original_price": 4.86, "discount_price": null },
+      "Whole Foods Market": { "original_price": 4.49, "discount_price": null },
+      "Stop & Shop": { "original_price": 5.09, "discount_price": null },
+      "Shaw's": { "original_price": 5.34, "discount_price": null },
+      "ALDI": { "original_price": 5.10, "discount_price": null },
+      "Trader Joe's": { "original_price": 4.42, "discount_price": 3.99 }
     },
-    {
-      "item": "Blueberries",
-      "original_price": 5.50,
-      "discount_price": null,
-      "store": "FreshFoods"
+    "Butter": {
+      "Market Basket": { "original_price": 5.16, "discount_price": null },
+      "Walmart Supercenter": { "original_price": 4.84, "discount_price": null },
+      "Hannaford Supermarket": { "original_price": 4.93, "discount_price": null },
+      "Whole Foods Market": { "original_price": 4.40, "discount_price": null },
+      "Stop & Shop": { "original_price": 4.71, "discount_price": null },
+      "Shaw's": { "original_price": 5.34, "discount_price": null },
+      "ALDI": { "original_price": 4.57, "discount_price": null },
+      "Trader Joe's": { "original_price": 4.12, "discount_price": null }
     },
-    {
-      "item": "Rice",
-      "original_price": 3.50,
-      "discount_price": null,
-      "store": "Stop & Shop - Chelmsford, MA"
+    "Chicken Breast": {
+      "Market Basket": { "original_price": 2.88, "discount_price": null },
+      "Walmart Supercenter": { "original_price": 2.94, "discount_price": null },
+      "Hannaford Supermarket": { "original_price": 2.53, "discount_price": null },
+      "Whole Foods Market": { "original_price": 2.40, "discount_price": null },
+      "Stop & Shop": { "original_price": 3.10, "discount_price": null },
+      "Shaw's": { "original_price": null, "discount_price": null },
+      "ALDI": { "original_price": 2.80, "discount_price": null },
+      "Trader Joe's": { "original_price": 2.81, "discount_price": null }
     },
-    {
-      "item": "Cereal",
-      "original_price": 1.50,
-      "discount_price": 1.25,
-      "store": "Shaw's - Nashua, NH"
+    "Ground Beef": {
+      "Market Basket": { "original_price": 3.51, "discount_price": null },
+      "Walmart Supercenter": { "original_price": 4.18, "discount_price": null },
+      "Hannaford Supermarket": { "original_price": 3.33, "discount_price": null },
+      "Whole Foods Market": { "original_price": 4.33, "discount_price": null },
+      "Stop & Shop": { "original_price": 3.79, "discount_price": null },
+      "Shaw's": { "original_price": 4.33, "discount_price": null },
+      "ALDI": { "original_price": 4.23, "discount_price": null },
+      "Trader Joe's": { "original_price": 3.50, "discount_price": null }
     },
-    {
-      "item": "Avocado",
-      "original_price": 6.25,
-      "discount_price": null,
-      "store": "Whole Foods Market - Andover, MA"
+    "Bacon": {
+      "Market Basket": { "original_price": null, "discount_price": null },
+      "Walmart Supercenter": { "original_price": 2.82, "discount_price": null },
+      "Hannaford Supermarket": { "original_price": 2.80, "discount_price": null },
+      "Whole Foods Market": { "original_price": 2.49, "discount_price": null },
+      "Stop & Shop": { "original_price": 2.31, "discount_price": null },
+      "Shaw's": { "original_price": 2.28, "discount_price": 1.99 },
+      "ALDI": { "original_price": 2.49, "discount_price": null },
+      "Trader Joe's": { "original_price": 2.66, "discount_price": null }
     },
-    {
-      "item": "Cheese",
-      "original_price": 7.50,
-      "discount_price": null,
-      "store": "Market Basket - Billerica, MA"
+    "Pork Chops": {
+      "Market Basket": { "original_price": 7.04, "discount_price": null },
+      "Walmart Supercenter": { "original_price": 7.71, "discount_price": null },
+      "Hannaford Supermarket": { "original_price": 6.89, "discount_price": null },
+      "Whole Foods Market": { "original_price": 8.62, "discount_price": null },
+      "Stop & Shop": { "original_price": 7.17, "discount_price": null },
+      "Shaw's": { "original_price": 6.57, "discount_price": null },
+      "ALDI": { "original_price": 7.07, "discount_price": null },
+      "Trader Joe's": { "original_price": 7.16, "discount_price": null }
     },
-    {
-      "item": "Yogurt",
-      "original_price": 4.75,
-      "discount_price": null,
-      "store": "Hannaford Supermarket - Lowell, MA"
+    "Salmon Fillet": {
+      "Market Basket": { "original_price": 3.78, "discount_price": null },
+      "Walmart Supercenter": { "original_price": 4.33, "discount_price": null },
+      "Hannaford Supermarket": { "original_price": 4.27, "discount_price": null },
+      "Whole Foods Market": { "original_price": 3.91, "discount_price": null },
+      "Stop & Shop": { "original_price": 4.33, "discount_price": null },
+      "Shaw's": { "original_price": 4.43, "discount_price": null },
+      "ALDI": { "original_price": 3.75, "discount_price": null },
+      "Trader Joe's": { "original_price": 4.61, "discount_price": null }
     },
-    {
-      "item": "Oranges",
-      "original_price": 3.25,
-      "discount_price": 2.99,
-      "store": "FreshFoods"
-    },
-    {
-      "item": "Beans",
-      "original_price": 2.25,
-      "discount_price": null,
-      "store": "Stop & Shop - Chelmsford, MA"
-    },
-    {
-      "item": "Chips",
-      "original_price": 1.99,
-      "discount_price": null,
-      "store": "Shaw's - Nashua, NH"
-    },
-    {
-      "item": "Delicious Jumbo Shrimp 2lbs",
-      "original_price": 7.00,
-      "discount_price": 6.50,
-      "store": "Whole Foods Market - Andover, MA"
-    },
-    {
-      "item": "Coffee",
-      "original_price": 8.00,
-      "discount_price": null,
-      "store": "Market Basket - Billerica, MA"
-    },
-    {
-      "item": "Organic Bananas",
-      "original_price": 3.99,
-      "discount_price": null,
-      "store": "Hannaford Supermarket - Lowell, MA"
-    },
-    {
-      "item": "Grapes",
-      "original_price": 4.00,
-      "discount_price": null,
-      "store": "FreshFoods"
-    },
-    {
-      "item": "Butter",
-      "original_price": 5.00,
-      "discount_price": 4.50,
-      "store": "Stop & Shop - Chelmsford, MA"
-    },
-    {
-      "item": "Whole Milk",
-      "original_price": 2.50,
-      "discount_price": 2.00,
-      "store": "Shaw's - Nashua, NH"
-    },
-    {
-      "item": "Lobster tail",
-      "original_price": 9.00,
-      "discount_price": null,
-      "store": "Whole Foods Market - Andover, MA"
-    },
-    {
-      "item": "Tea",
-      "original_price": 6.00,
-      "discount_price": null,
-      "store": "Market Basket - Billerica, MA"
-    },
-    {
-      "item": "Soda",
-      "original_price": 2.00,
-      "discount_price": null,
-      "store": "Hannaford Supermarket - Lowell, MA"
-    },
-    {
-      "item": "Kiwi",
-      "original_price": 3.00,
-      "discount_price": 2.50,
-      "store": "FreshFoods"
-    },
-    {
-      "item": "Honey",
-      "original_price": 10.00,
-      "discount_price": null,
-      "store": "Stop & Shop - Chelmsford, MA"
-    },
-    {
-      "item": "Ice cream",
-      "original_price": 3.75,
-      "discount_price": null,
-      "store": "Shaw's - Nashua, NH"
-    },
-    {
-      "item": "Mango",
-      "original_price": 4.80,
-      "discount_price": null,
-      "store": "Whole Foods Market - Andover, MA"
-    },
-    {
-      "item": "Salt",
-      "original_price": 1.80,
-      "discount_price": null,
-      "store": "Market Basket - Billerica, MA"
-    },
-    {
-      "item": "Cookies",
-      "original_price": 2.80,
-      "discount_price": 2.50,
-      "store": "Hannaford Supermarket - Lowell, MA"
-    },
-    {
-      "item": "Whole Milk",
-      "original_price": 2.50,
-      "discount_price": 1.75,
-      "store": "Stop & Shop - Chelmsford, MA"
+    "White Bread": {
+      "Market Basket": { "original_price": 3.11, "discount_price": null },
+      "Walmart Supercenter": { "original_price": 3.20, "discount_price": null },
+      "Hannaford Supermarket": { "original_price": 3.09, "discount_price": null },
+      "Whole Foods Market": { "original_price": 2.94, "discount_price": null },
+      "Stop & Shop": { "original_price": 2.97, "discount_price": null },
+      "Shaw's": { "original_price": 3.35, "discount_price": null },
+      "ALDI": { "original_price": 2.99, "discount_price": null },
+      "Trader Joe's": { "original_price": 2.56, "discount_price": null }
     }
-]
+}
