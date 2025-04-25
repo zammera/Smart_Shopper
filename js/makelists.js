@@ -1,8 +1,12 @@
+import {db, auth } from "./firebaseInit.js";
+import { setDoc, getDocs, deleteDoc, collection, doc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+
+
 if (!window.firebaseDb) {
     console.error("Firebase not initialized")
 }
 
-const user = window.firebaseAuth.currentUser;
 
 const listNames = [
     {"name":"Taco Tuesday"}
@@ -50,8 +54,7 @@ const groceries = [
 ]
 
 //aim to change this but wanted to get this functional and pretty
-
-async function createNewList() {
+function createNewList() {
     let listName = document.getElementById('name').value;
     let storedLists = JSON.parse(localStorage.getItem("listNames")) || [];
 
@@ -59,16 +62,7 @@ async function createNewList() {
         console.log("empty list cannot be created")
     } else {
         createListCard(listName);
-        listdata = {
-            name: listName,
-            items: []
-        };
-        await window.firebaseDb.collection("users").doc(user.uid).collection("groceryLists").set({
-            name: listName,
-            items: [],
-            lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
-        }, { merge: true });
-
+        createGroceryListDB(listName);
         storedLists.push({ name: listName });
         localStorage.setItem("listNames", JSON.stringify(storedLists));
         document.getElementById('name').value = ""; 
@@ -77,28 +71,45 @@ async function createNewList() {
 };
 
 function createListCard(listName) {
-    var addNewList = `<div class="card oldList" style="width: 15rem;" id="${ listName }">
-        <div class="card-body">
-            <h5 class="card-title"> ${ listName } </h5>
-            <input class="btn btn-primary list-btn" type="reset" value="Select" onclick="selectList('${ listName }')">
-            <input class="btn btn-custom-color list-btn" type="submit" value="Edit" onclick="editList('${ listName }')">
-            <input class="btn btn-danger list-btn" type="reset" value="Delete" onclick="deleteList('${ listName }')">
-        </div>
-    </div>`;
-    Container = document.getElementById('listContainer');  
+    let selectedList = JSON.parse(localStorage.getItem('selectedList')) || [];
+    if (listName == selectedList){
+        var addNewList = `<div class="card oldList" style="width: 15rem;" id="${ listName }">
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <h5 class="card-title mb-0">${ listName }</h5>
+                    <input type="radio" class="form-check-input" name="listSelector" value="${ listName }" onchange="selectList('${ listName }')" checked/>
+                </div>
+                <input class="btn btn-custom-color list-btn" type="submit" value="Edit" onclick="editList('${ listName }')">
+                <input class="btn btn-danger list-btn" type="reset" value="Delete" onclick="deleteList('${ listName }')">
+            </div>
+        </div>`;
+    } else {
+        var addNewList = `<div class="card oldList" style="width: 15rem;" id="${ listName }">
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <h5 class="card-title mb-0">${ listName }</h5>
+                    <input type="radio" class="form-check-input" name="listSelector" value="${ listName }" onchange="selectList('${ listName }')" />
+                </div>
+                <input class="btn btn-custom-color list-btn" type="submit" value="Edit" onclick="editList('${ listName }')">
+                <input class="btn btn-danger list-btn" type="reset" value="Delete" onclick="deleteList('${ listName }')">
+            </div>
+        </div>`;
+    }
+    let Container = document.getElementById('listContainer');  
     console.log("List: " + listName + " added to the list container")
     Container.innerHTML += addNewList; 
 }
 
 function deleteList(name) {
     let element = document.getElementById(name);
-    let storedLists = JSON.parse(localStorage.getItem("listNames")) || [];
+    //let storedLists = JSON.parse(localStorage.getItem("listNames")) || [];
     //let list = JSON.parse(localStorage.getItem(listKey)) || {};
     if (element) {
         element.remove();
-        storedLists = storedLists.filter(list => list.name !== name);
-        localStorage.setItem("listNames", JSON.stringify(storedLists));
-        localStorage.removeItem(name);
+        deleteDBList(name);
+        //storedLists = storedLists.filter(list => list.name !== name);
+        //localStorage.setItem("listNames", JSON.stringify(storedLists));
+        //localStorage.removeItem(name);
     } else {
         console.error("Element with ID " + name + " not found.");
     }
@@ -114,14 +125,23 @@ function selectList(name) {
 
 
 
-$(function() {
+$( function() {
     if ($('body').is('#makeList')) {
-        const storedLists = JSON.parse(localStorage.getItem("listNames")) || [];
+        (async () => {
+            console.log("im in the async function");
+            try {
+                const lists = await getAllCurrentLists();
+                console.log("Fetched lists from Firestore:", lists);
 
-        storedLists.forEach(list => {
-            console.log(list.name);
-            createListCard(list.name);
-        });
+                lists.forEach(list => {
+                    createListCard(list.name);
+                });
+
+            } catch (err) {
+                console.error("Error getting lists:", err);
+            }
+        })();
+        
     }
     if ($('body').is('#editList')) {
         const urlParams = new URLSearchParams(window.location.search);
@@ -146,3 +166,81 @@ $(function() {
     }
    
 });
+
+//Database Functions:
+//These Functions are for accessing/editing the DB
+
+//Creates a New Grocery List as  new entry attached to the user
+async function createGroceryListDB(listName) {
+    const user = auth.currentUser;
+    if (!user) {
+      console.error("User not logged in");
+      return;
+    }
+  
+    const ref = doc(db, `users/${user.uid}/groceryLists/${listName}`);
+    await setDoc(ref, {
+      name: listName,
+      items: [],
+      createdAt: new Date()
+    });
+  
+    console.log("List created!");
+  }
+
+async function getAllCurrentLists() {
+    /* const user = auth.currentUser;
+    if (!user) {
+      console.error("User not logged in");
+      return;
+    }
+
+    const DBRef = collection(db, `user/${ user.uid }/groceryLists`);
+    const snapshot = await getDocs(DBRef);
+
+    const lists = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+    }));
+    return lists; */
+    return new Promise((resolve, reject) => {
+        onAuthStateChanged(auth, async (user) => {
+          if (!user) {
+            console.error("User not logged in");
+            return reject("User not logged in");
+          }
+    
+          try {
+            const ref = collection(db, `users/${user.uid}/groceryLists`);
+            const snapshot = await getDocs(ref);
+    
+            const lists = snapshot.docs.map(doc => ({
+              id: doc.id,
+              ...doc.data()
+            }));
+    
+            resolve(lists);
+          } catch (err) {
+            console.error("Error fetching lists:", err);
+            reject(err);
+          }
+        });
+      });
+}
+
+async function deleteDBList(listName){
+    const user = auth.currentUser;
+    if (!user) {
+      console.error("User not logged in");
+      return;
+    }
+
+    const ref = doc(db, `users/${ user.uid }/groceryLists/${listName}`);
+    await deleteDoc(ref);
+}
+
+
+window.createNewList = createNewList;
+window.editList = editList;
+window.deleteList = deleteList;
+window.selectList = selectList;
