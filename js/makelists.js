@@ -71,14 +71,30 @@ function createNewList() {
 };
 
 function createListCard(listName) {
-    var addNewList = `<div class="card oldList" style="width: 15rem;" id="${ listName }">
-        <div class="card-body">
-            <h5 class="card-title"> ${ listName } </h5>
-            <input class="btn btn-primary list-btn" type="reset" value="Select" onclick="selectList('${ listName }')">
-            <input class="btn btn-custom-color list-btn" type="submit" value="Edit" onclick="editList('${ listName }')">
-            <input class="btn btn-danger list-btn" type="reset" value="Delete" onclick="deleteList('${ listName }')">
-        </div>
-    </div>`;
+    let selectedList = JSON.parse(localStorage.getItem('selectedList')) || [];
+    if (listName == selectedList){
+        var addNewList = `<div class="card oldList" style="width: 15rem;" id="${ listName }">
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <h5 class="card-title mb-0">${ listName }</h5>
+                    <input type="radio" class="form-check-input" name="listSelector" value="${ listName }" onchange="selectList('${ listName }')" checked/>
+                </div>
+                <input class="btn btn-custom-color list-btn" type="submit" value="Edit" onclick="editList('${ listName }')">
+                <input class="btn btn-danger list-btn" type="reset" value="Delete" onclick="deleteList('${ listName }')">
+            </div>
+        </div>`;
+    } else {
+        var addNewList = `<div class="card oldList" style="width: 15rem;" id="${ listName }">
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <h5 class="card-title mb-0">${ listName }</h5>
+                    <input type="radio" class="form-check-input" name="listSelector" value="${ listName }" onchange="selectList('${ listName }')" />
+                </div>
+                <input class="btn btn-custom-color list-btn" type="submit" value="Edit" onclick="editList('${ listName }')">
+                <input class="btn btn-danger list-btn" type="reset" value="Delete" onclick="deleteList('${ listName }')">
+            </div>
+        </div>`;
+    }
     let Container = document.getElementById('listContainer');  
     console.log("List: " + listName + " added to the list container")
     Container.innerHTML += addNewList; 
