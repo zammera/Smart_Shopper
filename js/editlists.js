@@ -6,62 +6,51 @@ const listNames = [
     {"name":"Taco Tuesday"}
 ]
 
-const groceries = [
-    {"item": "Organic Bananas", "price": "", "store": ""},
-    {"item": "Whole Milk", "price": "", "store": ""},
-    {"item": "Salmon Fillet", "price": "", "store": ""},
-    {"item": "Loaf of Bread", "price": "", "store": ""},
-    {"item": "Strawberries", "price": "", "store": ""},
-    {"item": "Ground Beef", "price": "", "store": ""},
-    {"item": "Canned Tomatoes", "price": "", "store": ""},
-    {"item": "Chicken Breast", "price": "", "store": ""},
-    {"item": "Pasta", "price": "", "store": ""},
-    {"item": "Eggs (dozen)", "price": "", "store": ""},
-    {"item": "Apples", "price": "", "store": ""},
-    {"item": "Olive Oil", "price": "", "store": ""},
-    {"item": "Blueberries", "price": "", "store": ""},
-    {"item": "Rice", "price": "", "store": ""},
-    {"item": "Cereal", "price": "", "store": ""},
-    {"item": "Avocado", "price": "", "store": ""},
-    {"item": "Cheese", "price": "", "store": ""},
-    {"item": "Yogurt", "price": "", "store": ""},
-    {"item": "Oranges", "price": "", "store": ""},
-    {"item": "Beans", "price": "", "store": ""},
-    {"item": "Chips", "price": "", "store": ""},
-    {"item": "Jumbo shrimp", "price": "", "store": ""},
-    {"item": "Coffee", "price": "", "store": ""},
-    {"item": "Grapes", "price": "", "store": ""},
-    {"item": "Butter", "price": "", "store": ""},
-    {"item": "Lobster tail", "price": "", "store": ""},
-    {"item": "Tea", "price": "", "store": ""},
-    {"item": "Soda", "price": "", "store": ""},
-    {"item": "Kiwi", "price": "", "store": ""},
-    {"item": "Honey", "price": "", "store": ""},
-    {"item": "Ice cream", "price": "", "store": ""},
-    {"item": "Mango", "price": "", "store": ""},
-    {"item": "Salt", "price": "", "store": ""},
-    {"item": "Cookies", "price": "", "store": ""}
-]
+let groceries = {};
 
+// grocery items loaded from the json
+async function loadGroceries() {
+    try {
+        const response = await fetch('grocery.json'); 
+        groceries = await response.json();
+        populateGrocery(); // After loading, call populate
+    } catch (error) {
+        console.error("Error loading groceries.json:", error);
+    }
+}
+// items in json is all lowercase to make it easier to add items. Title case to display
+function toTitleCase(str) {
+    const lowerWords = ['lb', 'oz', 'ct', 'pack', 'each', 'g', 'mg', 'kg', 'l', 'ml', 'bunch'];
+    
+    return str.split(' ').map(word => {
+        const cleanWord = word.replace(/[^a-zA-Z]/g, '').toLowerCase();
+        
+        if (lowerWords.includes(cleanWord)) {
+            return word.toLowerCase(); 
+        } else {
+            return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+        }
+    }).join(' ');
+}
 
 
 function populateGrocery() {
     var LorR = false;
-    groceries.forEach(item => {
-        let grocery = '<li class="list-group-item d-flex justify-content-between align-items-center" id="' + item.item + 'Result">'
-            + '<h5 class="text-center flex-grow-1">' + item.item + '</h5>'
-            + '<button class="btn btn-custom-color addToList" data-item="' + item.item + '">Add to List</button></li>';
-        var element;
-        if(!LorR) {
-            element = document.getElementById("result1");
-            LorR = !LorR;
-        } else {
-            element = document.getElementById("result2");
-            LorR = !LorR;
-        }
+    for (const itemName in groceries) {
+        const safeId = itemName.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '') + '-result';
+        const grocery = `
+            <li class="list-group-item d-flex justify-content-between align-items-center" id="${safeId}">
+                <h5 class="text-center flex-grow-1">${toTitleCase(itemName)}</h5>
+                <button class="btn btn-custom-color addToList" data-item="${itemName}">Add to List</button>
+            </li>
+        `;
+
+        const element = LorR ? document.getElementById("result2") : document.getElementById("result1");
+        LorR = !LorR;
         element.innerHTML += grocery;
-    });
+    }
 }
+
 
 async function addToList(item) {
     let name = document.getElementById("listName").textContent;
@@ -127,30 +116,23 @@ async function updateItemQuantity(listKey, itemName, newQuantity) {
     //localStorage.setItem(listKey, JSON.stringify(list));
 }
 
-$(function() {
-    if ($('body').is('#makeList')) {
-        const storedLists = JSON.parse(localStorage.getItem("listNames")) || [];
-
-        storedLists.forEach(list => {
-            createListCard(list.name);
-        });
-    }
-    if ($('body').is('#editList')) {
+if ($('body').is('#editList')) {
+    (async () => {
         const urlParams = new URLSearchParams(window.location.search);
         const name = urlParams.get('name');
-        populateGrocery();
+        await loadGroceries();  // <-- now allowed because it's inside an async IIFE!
+
         let header = '<h1 class="text-center" id="listName">'+ name + '</h1>';
         $("#list").prepend(header);
     
         onAuthStateChanged(auth, async (user) => {
             if (user) {
                 console.log("User logged in:", user.uid);
-    
-    
+
                 const currentList = await getItemsDB(name);
-    
+
                 console.log("Loading items into HTML:", currentList);
-    
+
                 for (const [key, value] of Object.entries(currentList)) {
                     console.log(`Item: ${key}, Quantity: ${value}`);
                     addToList(key);
@@ -159,18 +141,40 @@ $(function() {
                 console.warn("User not logged in.");
             }
         });
-    }
-   
-});
+    })(); // iife 
+}
 
 $(document).ready(function () {
     onAuthStateChanged(auth, async (user) => {
         if (user) {
             console.log("User logged in:", user.uid);
-            init(); // call the async logic from a normal function
+            init();
         }
     });
+
+    // search bar logic for edit list page
+    $("#searchBar").on("input", function () {
+        const query = $(this).val().toLowerCase();
+        let matchCount = 0;
+    
+        for (const itemName in groceries) {
+            const safeId = itemName.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '') + '-result';
+            const $element = $(`#${safeId}`);
+    
+            if (itemName.toLowerCase().includes(query)) {
+                $element.removeClass("hidden-result");
+                matchCount++;
+            } else {
+                $element.addClass("hidden-result");
+            }
+        }
+    
+        console.log(`Search for "${query}" matched ${matchCount} item(s).`);
+    });
+    
+    
 });
+
 
 async function init() {
     const listName = document.getElementById("listName").textContent;
