@@ -65,7 +65,7 @@ async function addToList(item) {
             console.log(item + " is in list and not in HTML", list[item]);
             let html = '<li class="list-group-item d-flex justify-content-between align-items-center" id="' + item + '">'
                     + '<button class="btn btn-close btn-danger  removeItem" data-item="' + item + '"></button>'
-                    + '<h5 class="text-center flex-grow-1">' + item + '</h5>'
+                    + '<h5 class="text-center flex-grow-1">' + toTitleCase(item) + '</h5>'
                     + '<div class="btn-group" role="group" aria-label="Basic example">'
                         + '<button type="button" class="btn btn-danger decrementItem" data-item="' + item + '">-</button>'
                         + '<button type="button" class="form-control middle text-center" data-itemValue ="' + item + 'Value" value="' + list[item] + '" disabled>'+ list[item] +'</button>'
@@ -81,7 +81,7 @@ async function addToList(item) {
         console.log(item + " is not in list and not in HTML ");
         let html = '<li class="list-group-item d-flex justify-content-between align-items-center" id="' + item + '">'
                     + '<button class="btn btn-close btn-danger  removeItem" data-item="' + item + '"></button>'
-                    + '<h5 class="text-center flex-grow-1">' + item + '</h5>'
+                    + '<h5 class="text-center flex-grow-1">' + toTitleCase(item) + '</h5>'
                     + '<div class="btn-group" role="group" aria-label="Basic example">'
                         + '<button type="button" class="btn btn-danger decrementItem" data-item="' + item + '">-</button>'
                         + '<button type="button" class="form-control middle text-center" data-itemValue ="' + item + 'Value" value="1" disabled>1</button>'
