@@ -57,6 +57,7 @@ body {
 
 .btn-custom-color {
     background-color: rgb(161, 253, 177);
+    margin-bottom: 5px;
 }
 
 .createNew, .editOld {
