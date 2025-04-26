@@ -164,7 +164,12 @@ $(function() {
 });
 
 $(document).ready(function () {
-    init(); // call the async logic from a normal function
+    onAuthStateChanged(auth, async (user) => {
+        if (user) {
+            console.log("User logged in:", user.uid);
+            init(); // call the async logic from a normal function
+        }
+    });
 });
 
 async function init() {
