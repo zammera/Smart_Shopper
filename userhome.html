@@ -78,23 +78,23 @@
         <h2 class="mb-4 text-center">Hot Deals Near You</h2>
         <h3 class="mb-4 text-center">Can't miss these fresh deals!</h3>
         <div class="row">
-            <!-- Main Content -->
-            <div class="col-md-9">
+            <!-- Hot Deals Section -->
+            <div class="col-md-8">
                 <div class="hot-deals-container">
                     <div class="row" id="hotDealsGrid">
                         <!-- Hot deals will be populated here by JavaScript -->
                     </div>
                 </div>
             </div>
-
-            <!-- Shopping Cart Sidebar -->
-            <div class="col-md-3">
+            
+            <!-- Shopping Lists Section -->
+            <div class="col-md-4">
                 <div class="card">
                     <div class="card-header bg-primary text-white">
-                        <h5 class="mb-0">Shopping Cart</h5>
+                        <h5 class="mb-0">Your Shopping Lists</h5>
                     </div>
-                    <div class="card-body" id="shoppingCartContainer">
-                        <p class="text-muted">Your shopping cart is empty.</p>
+                    <div class="card-body" id="shoppingListsContainer">
+                        <!-- Shopping lists will be populated here -->
                     </div>
                 </div>
             </div>
@@ -109,23 +109,41 @@
                 <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
             <div class="toast-body">
-                Item added to your shopping list!
+                Item successfully added to list!
             </div>
         </div>
     </div>
 
-    <!-- Toast for adding items to cart -->
-    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-        <div id="addToCartToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header">
-                <strong class="me-auto">Smart Shopper</strong>
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    <!-- Add List Modal -->
+<div class="modal fade" id="addToListModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Item to List</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <div class="toast-body">
-                Item added to your cart!
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="existingLists" class="form-label">Select Existing List</label>
+                    <select class="form-select mb-3" id="existingLists">
+                        <option value="" selected disabled>Choose a list...</option>
+                    </select>
+                    
+                    <div class="- or -divider text-center mb-3">
+                        <span class="bg-light px-2">OR</span>
+                    </div>
+                    
+                    <label for="newListName" class="form-label">Create New List</label>
+                    <input type="text" class="form-control" id="newListName" placeholder="Enter new list name">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="confirmAddToList">Add to List</button>
             </div>
         </div>
     </div>
+</div>
 
 </body>
 

@@ -1,172 +1,3612 @@
 {
-  "hotdeals": [
-    {
-      "item": "Organic Bananas (1 lb)",
-      "discount": "25%",
-      "original_price": 0.99,
-      "discount_price": 0.74,
-      "savings": 0.25,
-      "chain": "Hannaford Supermarket"
+  "Honeycrisp Apples (per Lb)": {
+    "Market Basket": {
+      "original_price": 2.49,
+      "discount_price": 1.43
     },
-    {
-      "item": "Eggland’s Best Large Eggs (12 ct)",
-      "discount": "BOGO",
-      "original_price": 4.49,
-      "discount_price": 2.25,
-      "savings": 2.24,
-      "chain": "Market Basket"
+    "Walmart Supercenter": {
+      "original_price": 2.38,
+      "discount_price": 1.65
     },
-    {
-      "item": "Kraft Shredded Cheese (8 oz)",
-      "discount": "33%",
-      "original_price": 3.99,
-      "discount_price": 2.67,
-      "savings": 1.32,
-      "chain": "Stop & Shop"
+    "Hannaford Supermarket": {
+      "original_price": 2.69,
+      "discount_price": 2.09
     },
-    {
-      "item": "Tide Laundry Detergent (92 oz)",
-      "discount": "BOGO",
-      "original_price": 12.99,
-      "discount_price": 6.50,
-      "savings": 6.49,
-      "chain": "Walmart Supercenter"
+    "Whole Foods Market": {
+      "original_price": 2.99,
+      "discount_price": 1.67
     },
-    {
-      "item": "Strawberries (1 lb)",
-      "discount": "40%",
-      "original_price": 3.99,
-      "discount_price": 2.39,
-      "savings": 1.60,
-      "chain": "Whole Foods Market"
+    "Stop & Shop": {
+      "original_price": 2.79,
+      "discount_price": 1.98
     },
-    {
-      "item": "Pepsi 12-pack cans",
-      "discount": "BOGO",
-      "original_price": 7.99,
-      "discount_price": 4.00,
-      "savings": 3.99,
-      "chain": "Shaw's"
+    "Shaw's": {
+      "original_price": 2.89,
+      "discount_price": 1.9
     },
-    {
-      "item": "Barilla Pasta (16 oz)",
-      "discount": "50%",
-      "original_price": 1.99,
-      "discount_price": 1.00,
-      "savings": 0.99,
-      "chain": "Trader Joe's"
+    "ALDI": {
+      "original_price": 2.29,
+      "discount_price": 1.62
     },
-    {
-      "item": "Hass Avocados (each)",
-      "discount": "30%",
-      "original_price": 1.50,
-      "discount_price": 1.05,
-      "savings": 0.45,
-      "chain": "ALDI"
-    },
-    {
-      "item": "Chicken Breast (Boneless, Skinless, per lb)",
-      "discount": "20%",
-      "original_price": 4.99,
-      "discount_price": 3.99,
-      "savings": 1.00,
-      "chain": "Market Basket"
-    },
-    {
-      "item": "Quaker Oats (42 oz)",
-      "discount": "BOGO",
-      "original_price": 5.99,
-      "discount_price": 3.00,
-      "savings": 2.99,
-      "chain": "Hannaford Supermarket"
-    },
-    {
-      "item": "Chobani Greek Yogurt (5.3 oz)",
-      "discount": "10 for $10",
-      "original_price": 1.39,
-      "discount_price": 1.00,
-      "savings": 0.39,
-      "chain": "Stop & Shop"
-    },
-    {
-      "item": "Lettuce (Romaine Hearts, 3 ct)",
-      "discount": "25%",
-      "original_price": 3.99,
-      "discount_price": 2.99,
-      "savings": 1.00,
-      "chain": "Shaw's"
-    },
-    {
-      "item": "Oscar Mayer Deli Fresh Turkey (9 oz)",
-      "discount": "BOGO",
-      "original_price": 5.49,
-      "discount_price": 2.75,
-      "savings": 2.74,
-      "chain": "Market Basket"
-    },
-    {
-      "item": "Gala Apples (per lb)",
-      "discount": "30%",
-      "original_price": 1.69,
-      "discount_price": 1.18,
-      "savings": 0.51,
-      "chain": "Whole Foods Market"
-    },
-    {
-      "item": "Hellmann’s Mayonnaise (30 oz)",
-      "discount": "BOGO",
-      "original_price": 6.99,
-      "discount_price": 3.50,
-      "savings": 3.49,
-      "chain": "Stop & Shop"
-    },
-    {
-      "item": "Stonyfield Organic Yogurt (32 oz)",
-      "discount": "20%",
-      "original_price": 5.49,
-      "discount_price": 4.39,
-      "savings": 1.10,
-      "chain": "Hannaford Supermarket"
-    },
-    {
-      "item": "Breyers Ice Cream (48 oz)",
-      "discount": "BOGO",
-      "original_price": 6.29,
-      "discount_price": 3.15,
-      "savings": 3.14,
-      "chain": "Market Basket"
-    },
-    {
-      "item": "Green Bell Peppers (each)",
-      "discount": "33%",
-      "original_price": 1.50,
-      "discount_price": 1.00,
-      "savings": 0.50,
-      "chain": "Shaw's"
-    },
-    {
-      "item": "Folgers Classic Roast Coffee (30.5 oz)",
-      "discount": "25%",
-      "original_price": 10.99,
-      "discount_price": 8.24,
-      "savings": 2.75,
-      "chain": "Stop & Shop"
-    },
-    {
-      "item": "Charmin Ultra Soft Toilet Paper (12 Mega Rolls)",
-      "discount": "BOGO",
-      "original_price": 14.99,
-      "discount_price": 7.50,
-      "savings": 7.49,
-      "chain": "Walmart Supercenter"
-    },
-    {
-      "item": "Nature Valley Granola Bars (12 ct)",
-      "discount": "50%",
-      "original_price": 4.99,
-      "discount_price": 2.50,
-      "savings": 2.49,
-      "chain": "Trader Joe's"
+    "Trader Joe's": {
+      "original_price": 2.69,
+      "discount_price": 1.74
     }
-  ]
+  },
+  "Navel Oranges (per Lb)": {
+    "Market Basket": {
+      "original_price": 1.29,
+      "discount_price": null
+    },
+    "Walmart Supercenter": {
+      "original_price": 1.18,
+      "discount_price": null
+    },
+    "Hannaford Supermarket": {
+      "original_price": 1.39,
+      "discount_price": 0.88
+    },
+    "Whole Foods Market": {
+      "original_price": 1.49,
+      "discount_price": null
+    },
+    "Stop & Shop": {
+      "original_price": 1.39,
+      "discount_price": 0.76
+    },
+    "Shaw's": {
+      "original_price": 1.59,
+      "discount_price": null
+    },
+    "ALDI": {
+      "original_price": 1.25,
+      "discount_price": 0.68
+    },
+    "Trader Joe's": {
+      "original_price": 1.49,
+      "discount_price": null
+    }
+  },
+  "Large Brown Eggs (dozen)": {
+    "Market Basket": {
+      "original_price": 3.99,
+      "discount_price": null
+    },
+    "Walmart Supercenter": {
+      "original_price": 3.58,
+      "discount_price": null
+    },
+    "Hannaford Supermarket": {
+      "original_price": 4.19,
+      "discount_price": 3.34
+    },
+    "Whole Foods Market": {
+      "original_price": 4.29,
+      "discount_price": 2.29
+    },
+    "Stop & Shop": {
+      "original_price": 3.99,
+      "discount_price": 2.07
+    },
+    "Shaw's": {
+      "original_price": 4.09,
+      "discount_price": 2.74
+    },
+    "ALDI": {
+      "original_price": 3.79,
+      "discount_price": 2.14
+    },
+    "Trader Joe's": {
+      "original_price": 3.99,
+      "discount_price": 2.16
+    }
+  },
+  "Whole Milk 1 Gallon": {
+    "Market Basket": {
+      "original_price": 3.49,
+      "discount_price": 1.96
+    },
+    "Walmart Supercenter": {
+      "original_price": 3.24,
+      "discount_price": 2.12
+    },
+    "Hannaford Supermarket": {
+      "original_price": 3.69,
+      "discount_price": 1.98
+    },
+    "Whole Foods Market": {
+      "original_price": 4.19,
+      "discount_price": 2.23
+    },
+    "Stop & Shop": {
+      "original_price": 3.79,
+      "discount_price": null
+    },
+    "Shaw's": {
+      "original_price": 3.89,
+      "discount_price": 2.0
+    },
+    "ALDI": {
+      "original_price": 3.29,
+      "discount_price": 2.07
+    },
+    "Trader Joe's": {
+      "original_price": 3.59,
+      "discount_price": null
+    }
+  },
+  "Boneless Skinless Chicken Breast (per Lb)": {
+    "Market Basket": {
+      "original_price": 2.49,
+      "discount_price": 1.51
+    },
+    "Walmart Supercenter": {
+      "original_price": 2.27,
+      "discount_price": 1.32
+    },
+    "Hannaford Supermarket": {
+      "original_price": 2.79,
+      "discount_price": null
+    },
+    "Whole Foods Market": {
+      "original_price": 3.29,
+      "discount_price": null
+    },
+    "Stop & Shop": {
+      "original_price": 2.99,
+      "discount_price": null
+    },
+    "Shaw's": {
+      "original_price": 3.19,
+      "discount_price": null
+    },
+    "ALDI": {
+      "original_price": 2.19,
+      "discount_price": 1.41
+    },
+    "Trader Joe's": {
+      "original_price": 2.89,
+      "discount_price": 2.02
+    }
+  },
+  "Russet Potatoes 5 Lb Bag": {
+    "Market Basket": {
+      "original_price": 3.99,
+      "discount_price": null
+    },
+    "Walmart Supercenter": {
+      "original_price": 3.48,
+      "discount_price": null
+    },
+    "Hannaford Supermarket": {
+      "original_price": 4.29,
+      "discount_price": null
+    },
+    "Whole Foods Market": {
+      "original_price": 4.99,
+      "discount_price": null
+    },
+    "Stop & Shop": {
+      "original_price": 4.49,
+      "discount_price": null
+    },
+    "Shaw's": {
+      "original_price": 4.69,
+      "discount_price": null
+    },
+    "ALDI": {
+      "original_price": 3.29,
+      "discount_price": 2.02
+    },
+    "Trader Joe's": {
+      "original_price": 3.89,
+      "discount_price": 2.97
+    }
+  },
+  "Strawberries 1 Lb Container": {
+    "Market Basket": {
+      "original_price": 3.49,
+      "discount_price": 1.8
+    },
+    "Walmart Supercenter": {
+      "original_price": 3.24,
+      "discount_price": 2.26
+    },
+    "Hannaford Supermarket": {
+      "original_price": 3.69,
+      "discount_price": 1.87
+    },
+    "Whole Foods Market": {
+      "original_price": 3.99,
+      "discount_price": 2.23
+    },
+    "Stop & Shop": {
+      "original_price": 3.79,
+      "discount_price": 2.52
+    },
+    "Shaw's": {
+      "original_price": 4.29,
+      "discount_price": null
+    },
+    "ALDI": {
+      "original_price": 3.29,
+      "discount_price": null
+    },
+    "Trader Joe's": {
+      "original_price": 3.79,
+      "discount_price": 2.87
+    }
+  },
+  "Baby Carrots 1 Lb Bag": {
+    "Market Basket": {
+      "original_price": 1.29,
+      "discount_price": null
+    },
+    "Walmart Supercenter": {
+      "original_price": 1.18,
+      "discount_price": 0.81
+    },
+    "Hannaford Supermarket": {
+      "original_price": 1.49,
+      "discount_price": 1.15
+    },
+    "Whole Foods Market": {
+      "original_price": 1.59,
+      "discount_price": null
+    },
+    "Stop & Shop": {
+      "original_price": 1.39,
+      "discount_price": 0.82
+    },
+    "Shaw's": {
+      "original_price": 1.59,
+      "discount_price": 0.99
+    },
+    "ALDI": {
+      "original_price": 0.99,
+      "discount_price": 0.6
+    },
+    "Trader Joe's": {
+      "original_price": 1.29,
+      "discount_price": null
+    }
+  },
+  "Broccoli Crowns (per Lb)": {
+    "Market Basket": {
+      "original_price": 1.89,
+      "discount_price": 1.15
+    },
+    "Walmart Supercenter": {
+      "original_price": 1.68,
+      "discount_price": 1.25
+    },
+    "Hannaford Supermarket": {
+      "original_price": 1.99,
+      "discount_price": 1.58
+    },
+    "Whole Foods Market": {
+      "original_price": 2.49,
+      "discount_price": 1.71
+    },
+    "Stop & Shop": {
+      "original_price": 2.19,
+      "discount_price": 1.75
+    },
+    "Shaw's": {
+      "original_price": 2.29,
+      "discount_price": null
+    },
+    "ALDI": {
+      "original_price": 1.59,
+      "discount_price": 1.12
+    },
+    "Trader Joe's": {
+      "original_price": 2.19,
+      "discount_price": 1.47
+    }
+  },
+  "Cheddar Cheese Block 8 Oz": {
+    "Market Basket": {
+      "original_price": 2.49,
+      "discount_price": 1.6
+    },
+    "Walmart Supercenter": {
+      "original_price": 2.18,
+      "discount_price": 1.33
+    },
+    "Hannaford Supermarket": {
+      "original_price": 2.69,
+      "discount_price": null
+    },
+    "Whole Foods Market": {
+      "original_price": 2.99,
+      "discount_price": null
+    },
+    "Stop & Shop": {
+      "original_price": 2.79,
+      "discount_price": null
+    },
+    "Shaw's": {
+      "original_price": 2.89,
+      "discount_price": null
+    },
+    "ALDI": {
+      "original_price": 1.99,
+      "discount_price": null
+    },
+    "Trader Joe's": {
+      "original_price": 2.59,
+      "discount_price": null
+    }
+  },
+  "Organic Spinach 5 Oz Container": {
+    "Market Basket": {
+      "original_price": 3.49,
+      "discount_price": 2.09
+    },
+    "Walmart Supercenter": {
+      "original_price": 3.24,
+      "discount_price": 1.67
+    },
+    "Hannaford Supermarket": {
+      "original_price": 3.69,
+      "discount_price": 2.75
+    },
+    "Whole Foods Market": {
+      "original_price": 3.99,
+      "discount_price": 2.07
+    },
+    "Stop & Shop": {
+      "original_price": 3.79,
+      "discount_price": null
+    },
+    "Shaw's": {
+      "original_price": 3.89,
+      "discount_price": 3.08
+    },
+    "ALDI": {
+      "original_price": 2.99,
+      "discount_price": 2.28
+    },
+    "Trader Joe's": {
+      "original_price": 3.49,
+      "discount_price": 2.56
+    }
+  },
+  "Plain Greek Yogurt 32 Oz": {
+    "Market Basket": {
+      "original_price": 4.99,
+      "discount_price": 3.57
+    },
+    "Walmart Supercenter": {
+      "original_price": 4.68,
+      "discount_price": 3.0
+    },
+    "Hannaford Supermarket": {
+      "original_price": 5.29,
+      "discount_price": 3.04
+    },
+    "Whole Foods Market": {
+      "original_price": 5.99,
+      "discount_price": null
+    },
+    "Stop & Shop": {
+      "original_price": 5.49,
+      "discount_price": null
+    },
+    "Shaw's": {
+      "original_price": 5.79,
+      "discount_price": 4.36
+    },
+    "ALDI": {
+      "original_price": 3.89,
+      "discount_price": 2.57
+    },
+    "Trader Joe's": {
+      "original_price": 4.49,
+      "discount_price": 3.55
+    }
+  },
+  "Organic Bananas (per Lb)": {
+    "Market Basket": {
+      "original_price": 0.79,
+      "discount_price": null
+    },
+    "Walmart Supercenter": {
+      "original_price": 0.68,
+      "discount_price": 0.53
+    },
+    "Hannaford Supermarket": {
+      "original_price": 0.89,
+      "discount_price": 0.51
+    },
+    "Whole Foods Market": {
+      "original_price": 0.99,
+      "discount_price": 0.7
+    },
+    "Stop & Shop": {
+      "original_price": 0.89,
+      "discount_price": 0.68
+    },
+    "Shaw's": {
+      "original_price": 0.99,
+      "discount_price": 0.52
+    },
+    "ALDI": {
+      "original_price": 0.69,
+      "discount_price": 0.37
+    },
+    "Trader Joe's": {
+      "original_price": 0.79,
+      "discount_price": 0.53
+    }
+  },
+  "Ground Beef 80% Lean (per Lb)": {
+    "Market Basket": {
+      "original_price": 4.49,
+      "discount_price": 3.15
+    },
+    "Walmart Supercenter": {
+      "original_price": 4.18,
+      "discount_price": null
+    },
+    "Hannaford Supermarket": {
+      "original_price": 4.79,
+      "discount_price": 3.31
+    },
+    "Whole Foods Market": {
+      "original_price": 5.49,
+      "discount_price": 3.89
+    },
+    "Stop & Shop": {
+      "original_price": 4.89,
+      "discount_price": null
+    },
+    "Shaw's": {
+      "original_price": 5.19,
+      "discount_price": null
+    },
+    "ALDI": {
+      "original_price": 3.89,
+      "discount_price": 2.87
+    },
+    "Trader Joe's": {
+      "original_price": 4.39,
+      "discount_price": 2.96
+    }
+  },
+  "White Sandwich Bread 20 Oz Loaf": {
+    "Market Basket": {
+      "original_price": 1.99,
+      "discount_price": 1.19
+    },
+    "Walmart Supercenter": {
+      "original_price": 1.68,
+      "discount_price": 0.98
+    },
+    "Hannaford Supermarket": {
+      "original_price": 2.19,
+      "discount_price": 1.68
+    },
+    "Whole Foods Market": {
+      "original_price": 2.99,
+      "discount_price": 2.25
+    },
+    "Stop & Shop": {
+      "original_price": 2.49,
+      "discount_price": null
+    },
+    "Shaw's": {
+      "original_price": 2.59,
+      "discount_price": null
+    },
+    "ALDI": {
+      "original_price": 1.29,
+      "discount_price": null
+    },
+    "Trader Joe's": {
+      "original_price": 2.19,
+      "discount_price": null
+    }
+  },
+  "Organic Baby Spring Mix 5 Oz": {
+    "Market Basket": {
+      "original_price": 4.49,
+      "discount_price": 3.04
+    },
+    "Walmart Supercenter": {
+      "original_price": 4.28,
+      "discount_price": null
+    },
+    "Hannaford Supermarket": {
+      "original_price": 4.99,
+      "discount_price": 2.84
+    },
+    "Whole Foods Market": {
+      "original_price": 5.99,
+      "discount_price": 4.16
+    },
+    "Stop & Shop": {
+      "original_price": 5.49,
+      "discount_price": null
+    },
+    "Shaw's": {
+      "original_price": 5.79,
+      "discount_price": 4.01
+    },
+    "ALDI": {
+      "original_price": 3.79,
+      "discount_price": 2.13
+    },
+    "Trader Joe's": {
+      "original_price": 4.79,
+      "discount_price": 3.62
+    }
+  },
+  "Roma Tomatoes (per Lb)": {
+    "Market Basket": {
+      "original_price": 1.49,
+      "discount_price": null
+    },
+    "Walmart Supercenter": {
+      "original_price": 1.28,
+      "discount_price": 0.98
+    },
+    "Hannaford Supermarket": {
+      "original_price": 1.59,
+      "discount_price": 0.97
+    },
+    "Whole Foods Market": {
+      "original_price": 1.99,
+      "discount_price": 1.49
+    },
+    "Stop & Shop": {
+      "original_price": 1.69,
+      "discount_price": 1.2
+    },
+    "Shaw's": {
+      "original_price": 1.89,
+      "discount_price": 1.0
+    },
+    "ALDI": {
+      "original_price": 1.19,
+      "discount_price": null
+    },
+    "Trader Joe's": {
+      "original_price": 1.59,
+      "discount_price": 1.23
+    }
+  },
+  "Yellow Onions 3 Lb Bag": {
+    "Market Basket": {
+      "original_price": 2.99,
+      "discount_price": null
+    },
+    "Walmart Supercenter": {
+      "original_price": 2.48,
+      "discount_price": 1.26
+    },
+    "Hannaford Supermarket": {
+      "original_price": 3.19,
+      "discount_price": null
+    },
+    "Whole Foods Market": {
+      "original_price": 3.49,
+      "discount_price": 2.51
+    },
+    "Stop & Shop": {
+      "original_price": 3.29,
+      "discount_price": null
+    },
+    "Shaw's": {
+      "original_price": 3.49,
+      "discount_price": 1.98
+    },
+    "ALDI": {
+      "original_price": 2.29,
+      "discount_price": 1.71
+    },
+    "Trader Joe's": {
+      "original_price": 2.79,
+      "discount_price": 2.0
+    }
+  },
+  "Frozen Green Beans 12 Oz Bag": {
+    "Market Basket": {
+      "original_price": 1.49,
+      "discount_price": 0.99
+    },
+    "Walmart Supercenter": {
+      "original_price": 1.18,
+      "discount_price": null
+    },
+    "Hannaford Supermarket": {
+      "original_price": 1.69,
+      "discount_price": null
+    },
+    "Whole Foods Market": {
+      "original_price": 1.99,
+      "discount_price": null
+    },
+    "Stop & Shop": {
+      "original_price": 1.79,
+      "discount_price": 1.31
+    },
+    "Shaw's": {
+      "original_price": 1.89,
+      "discount_price": null
+    },
+    "ALDI": {
+      "original_price": 0.99,
+      "discount_price": null
+    },
+    "Trader Joe's": {
+      "original_price": 1.59,
+      "discount_price": 1.03
+    }
+  },
+  "Canned Black Beans 15 Oz": {
+    "Market Basket": {
+      "original_price": 1.09,
+      "discount_price": 0.57
+    },
+    "Walmart Supercenter": {
+      "original_price": 0.88,
+      "discount_price": 0.66
+    },
+    "Hannaford Supermarket": {
+      "original_price": 1.29,
+      "discount_price": 0.88
+    },
+    "Whole Foods Market": {
+      "original_price": 1.49,
+      "discount_price": 0.83
+    },
+    "Stop & Shop": {
+      "original_price": 1.19,
+      "discount_price": 0.73
+    },
+    "Shaw's": {
+      "original_price": 1.39,
+      "discount_price": 0.99
+    },
+    "ALDI": {
+      "original_price": 0.79,
+      "discount_price": 0.4
+    },
+    "Trader Joe's": {
+      "original_price": 1.19,
+      "discount_price": null
+    }
+  },
+  "Hass Avocados Each": {
+    "Market Basket": {
+      "original_price": 1.29,
+      "discount_price": null
+    },
+    "Walmart Supercenter": {
+      "original_price": 0.98,
+      "discount_price": 0.55
+    },
+    "Hannaford Supermarket": {
+      "original_price": 1.49,
+      "discount_price": 0.85
+    },
+    "Whole Foods Market": {
+      "original_price": 1.79,
+      "discount_price": null
+    },
+    "Stop & Shop": {
+      "original_price": 1.39,
+      "discount_price": 1.06
+    },
+    "Shaw's": {
+      "original_price": 1.59,
+      "discount_price": 1.13
+    },
+    "ALDI": {
+      "original_price": 0.88,
+      "discount_price": 0.63
+    },
+    "Trader Joe's": {
+      "original_price": 1.29,
+      "discount_price": 0.98
+    }
+  },
+  "Sweet Potatoes Per Lb": {
+    "Market Basket": {
+      "original_price": 0.99,
+      "discount_price": 0.68
+    },
+    "Walmart Supercenter": {
+      "original_price": 0.88,
+      "discount_price": 0.55
+    },
+    "Hannaford Supermarket": {
+      "original_price": 1.19,
+      "discount_price": null
+    },
+    "Whole Foods Market": {
+      "original_price": 1.49,
+      "discount_price": 1.07
+    },
+    "Stop & Shop": {
+      "original_price": 1.29,
+      "discount_price": 1.0
+    },
+    "Shaw's": {
+      "original_price": 1.39,
+      "discount_price": 1.03
+    },
+    "ALDI": {
+      "original_price": 0.79,
+      "discount_price": null
+    },
+    "Trader Joe's": {
+      "original_price": 0.99,
+      "discount_price": null
+    }
+  },
+  "Wonder Classic White Bread 20 Oz": {
+    "Market Basket": {
+      "original_price": 2.49,
+      "discount_price": 1.64
+    },
+    "Walmart Supercenter": {
+      "original_price": 2.24,
+      "discount_price": 1.24
+    },
+    "Hannaford Supermarket": {
+      "original_price": 2.69,
+      "discount_price": 2.09
+    },
+    "Whole Foods Market": {
+      "original_price": 3.29,
+      "discount_price": 1.98
+    },
+    "Stop & Shop": {
+      "original_price": 2.99,
+      "discount_price": null
+    },
+    "Shaw's": {
+      "original_price": 3.09,
+      "discount_price": null
+    },
+    "ALDI": {
+      "original_price": 1.89,
+      "discount_price": 1.14
+    },
+    "Trader Joe's": {
+      "original_price": 2.59,
+      "discount_price": null
+    }
+  },
+  "Jif Creamy Peanut Butter 16 Oz": {
+    "Market Basket": {
+      "original_price": 2.79,
+      "discount_price": 1.7
+    },
+    "Walmart Supercenter": {
+      "original_price": 2.48,
+      "discount_price": 1.62
+    },
+    "Hannaford Supermarket": {
+      "original_price": 2.99,
+      "discount_price": 2.36
+    },
+    "Whole Foods Market": {
+      "original_price": 3.49,
+      "discount_price": null
+    },
+    "Stop & Shop": {
+      "original_price": 3.19,
+      "discount_price": 2.12
+    },
+    "Shaw's": {
+      "original_price": 3.29,
+      "discount_price": 2.39
+    },
+    "ALDI": {
+      "original_price": 1.99,
+      "discount_price": null
+    },
+    "Trader Joe's": {
+      "original_price": 2.69,
+      "discount_price": null
+    }
+  },
+  "Cheerios Cereal 18 Oz Box": {
+    "Market Basket": {
+      "original_price": 4.99,
+      "discount_price": 3.39
+    },
+    "Walmart Supercenter": {
+      "original_price": 4.49,
+      "discount_price": 2.74
+    },
+    "Hannaford Supermarket": {
+      "original_price": 5.19,
+      "discount_price": 4.13
+    },
+    "Whole Foods Market": {
+      "original_price": 5.99,
+      "discount_price": 3.11
+    },
+    "Stop & Shop": {
+      "original_price": 5.49,
+      "discount_price": null
+    },
+    "Shaw's": {
+      "original_price": 5.59,
+      "discount_price": 3.71
+    },
+    "ALDI": {
+      "original_price": 3.29,
+      "discount_price": 2.16
+    },
+    "Trader Joe's": {
+      "original_price": 4.89,
+      "discount_price": 3.22
+    }
+  },
+  "Kellogg's Frosted Flakes 19 Oz Box": {
+    "Market Basket": {
+      "original_price": 5.29,
+      "discount_price": 3.31
+    },
+    "Walmart Supercenter": {
+      "original_price": 4.78,
+      "discount_price": 3.73
+    },
+    "Hannaford Supermarket": {
+      "original_price": 5.49,
+      "discount_price": null
+    },
+    "Whole Foods Market": {
+      "original_price": 6.19,
+      "discount_price": null
+    },
+    "Stop & Shop": {
+      "original_price": 5.79,
+      "discount_price": 3.31
+    },
+    "Shaw's": {
+      "original_price": 5.99,
+      "discount_price": 4.55
+    },
+    "ALDI": {
+      "original_price": 3.79,
+      "discount_price": null
+    },
+    "Trader Joe's": {
+      "original_price": 4.99,
+      "discount_price": 2.67
+    }
+  },
+  "Dole Chopped Romaine 9 Oz Bag": {
+    "Market Basket": {
+      "original_price": 2.99,
+      "discount_price": null
+    },
+    "Walmart Supercenter": {
+      "original_price": 2.48,
+      "discount_price": null
+    },
+    "Hannaford Supermarket": {
+      "original_price": 2.99,
+      "discount_price": null
+    },
+    "Whole Foods Market": {
+      "original_price": 3.29,
+      "discount_price": 1.93
+    },
+    "Stop & Shop": {
+      "original_price": 3.19,
+      "discount_price": null
+    },
+    "Shaw's": {
+      "original_price": 3.39,
+      "discount_price": 1.87
+    },
+    "ALDI": {
+      "original_price": 2.29,
+      "discount_price": null
+    },
+    "Trader Joe's": {
+      "original_price": 2.79,
+      "discount_price": 2.0
+    }
+  },
+  "Dannon Light And Fit Yogurt 5.3 Oz": {
+    "Market Basket": {
+      "original_price": 1.29,
+      "discount_price": null
+    },
+    "Walmart Supercenter": {
+      "original_price": 1.09,
+      "discount_price": 0.78
+    },
+    "Hannaford Supermarket": {
+      "original_price": 1.39,
+      "discount_price": null
+    },
+    "Whole Foods Market": {
+      "original_price": 1.59,
+      "discount_price": 1.25
+    },
+    "Stop & Shop": {
+      "original_price": 1.49,
+      "discount_price": 0.76
+    },
+    "Shaw's": {
+      "original_price": 1.59,
+      "discount_price": 1.25
+    },
+    "ALDI": {
+      "original_price": 0.79,
+      "discount_price": null
+    },
+    "Trader Joe's": {
+      "original_price": 1.19,
+      "discount_price": null
+    }
+  },
+  "Frozen Broccoli Florets 12 Oz Bag": {
+    "Market Basket": {
+      "original_price": 1.49,
+      "discount_price": null
+    },
+    "Walmart Supercenter": {
+      "original_price": 1.18,
+      "discount_price": 0.92
+    },
+    "Hannaford Supermarket": {
+      "original_price": 1.69,
+      "discount_price": 0.91
+    },
+    "Whole Foods Market": {
+      "original_price": 1.99,
+      "discount_price": 1.31
+    },
+    "Stop & Shop": {
+      "original_price": 1.79,
+      "discount_price": null
+    },
+    "Shaw's": {
+      "original_price": 1.89,
+      "discount_price": 1.03
+    },
+    "ALDI": {
+      "original_price": 0.99,
+      "discount_price": null
+    },
+    "Trader Joe's": {
+      "original_price": 1.49,
+      "discount_price": null
+    }
+  },
+  "Campbell's Chicken Noodle Soup 10.5 Oz Can": {
+    "Market Basket": {
+      "original_price": 1.79,
+      "discount_price": null
+    },
+    "Walmart Supercenter": {
+      "original_price": 1.28,
+      "discount_price": 1.0
+    },
+    "Hannaford Supermarket": {
+      "original_price": 1.89,
+      "discount_price": 1.11
+    },
+    "Whole Foods Market": {
+      "original_price": 2.19,
+      "discount_price": 1.12
+    },
+    "Stop & Shop": {
+      "original_price": 1.99,
+      "discount_price": null
+    },
+    "Shaw's": {
+      "original_price": 2.09,
+      "discount_price": 1.11
+    },
+    "ALDI": {
+      "original_price": 0.89,
+      "discount_price": 0.66
+    },
+    "Trader Joe's": {
+      "original_price": 1.69,
+      "discount_price": null
+    }
+  },
+  "Organic Baby Carrots 1 Lb Bag": {
+    "Market Basket": {
+      "original_price": 1.99,
+      "discount_price": 1.35
+    },
+    "Walmart Supercenter": {
+      "original_price": 1.78,
+      "discount_price": 1.41
+    },
+    "Hannaford Supermarket": {
+      "original_price": 2.29,
+      "discount_price": 1.22
+    },
+    "Whole Foods Market": {
+      "original_price": 2.49,
+      "discount_price": 1.56
+    },
+    "Stop & Shop": {
+      "original_price": 2.19,
+      "discount_price": null
+    },
+    "Shaw's": {
+      "original_price": 2.39,
+      "discount_price": 1.22
+    },
+    "ALDI": {
+      "original_price": 1.39,
+      "discount_price": null
+    },
+    "Trader Joe's": {
+      "original_price": 1.79,
+      "discount_price": 1.08
+    }
+  },
+  "Organic Gala Apples (per Lb)": {
+    "Market Basket": {
+      "original_price": 2.29,
+      "discount_price": 1.46
+    },
+    "Walmart Supercenter": {
+      "original_price": 1.98,
+      "discount_price": 1.16
+    },
+    "Hannaford Supermarket": {
+      "original_price": 2.59,
+      "discount_price": null
+    },
+    "Whole Foods Market": {
+      "original_price": 2.79,
+      "discount_price": 1.95
+    },
+    "Stop & Shop": {
+      "original_price": 2.69,
+      "discount_price": 1.71
+    },
+    "Shaw's": {
+      "original_price": 2.89,
+      "discount_price": null
+    },
+    "ALDI": {
+      "original_price": 1.99,
+      "discount_price": null
+    },
+    "Trader Joe's": {
+      "original_price": 2.49,
+      "discount_price": 1.59
+    }
+  },
+  "Green Seedless Grapes (per Lb)": {
+    "Market Basket": {
+      "original_price": 2.99,
+      "discount_price": null
+    },
+    "Walmart Supercenter": {
+      "original_price": 2.48,
+      "discount_price": null
+    },
+    "Hannaford Supermarket": {
+      "original_price": 2.79,
+      "discount_price": 1.61
+    },
+    "Whole Foods Market": {
+      "original_price": 3.49,
+      "discount_price": 1.83
+    },
+    "Stop & Shop": {
+      "original_price": 3.19,
+      "discount_price": null
+    },
+    "Shaw's": {
+      "original_price": 3.29,
+      "discount_price": null
+    },
+    "ALDI": {
+      "original_price": 2.29,
+      "discount_price": null
+    },
+    "Trader Joe's": {
+      "original_price": 2.89,
+      "discount_price": null
+    }
+  },
+  "Sara Lee Honey Wheat Bread 20 Oz": {
+    "Market Basket": {
+      "original_price": 3.49,
+      "discount_price": 1.95
+    },
+    "Walmart Supercenter": {
+      "original_price": 3.24,
+      "discount_price": 1.98
+    },
+    "Hannaford Supermarket": {
+      "original_price": 3.79,
+      "discount_price": 2.27
+    },
+    "Whole Foods Market": {
+      "original_price": 4.29,
+      "discount_price": 2.81
+    },
+    "Stop & Shop": {
+      "original_price": 3.89,
+      "discount_price": null
+    },
+    "Shaw's": {
+      "original_price": 4.09,
+      "discount_price": 2.78
+    },
+    "ALDI": {
+      "original_price": 2.49,
+      "discount_price": 1.62
+    },
+    "Trader Joe's": {
+      "original_price": 3.39,
+      "discount_price": 1.75
+    }
+  },
+  "Mission Flour Tortillas 10 Count": {
+    "Market Basket": {
+      "original_price": 2.99,
+      "discount_price": null
+    },
+    "Walmart Supercenter": {
+      "original_price": 2.48,
+      "discount_price": null
+    },
+    "Hannaford Supermarket": {
+      "original_price": 3.29,
+      "discount_price": 2.11
+    },
+    "Whole Foods Market": {
+      "original_price": 3.49,
+      "discount_price": null
+    },
+    "Stop & Shop": {
+      "original_price": 3.19,
+      "discount_price": 1.71
+    },
+    "Shaw's": {
+      "original_price": 3.39,
+      "discount_price": 2.05
+    },
+    "ALDI": {
+      "original_price": 1.99,
+      "discount_price": null
+    },
+    "Trader Joe's": {
+      "original_price": 2.79,
+      "discount_price": 1.48
+    }
+  },
+  "Campbell's Tomato Soup 10.75 Oz Can": {
+    "Market Basket": {
+      "original_price": 1.59,
+      "discount_price": null
+    },
+    "Walmart Supercenter": {
+      "original_price": 1.18,
+      "discount_price": 0.61
+    },
+    "Hannaford Supermarket": {
+      "original_price": 1.69,
+      "discount_price": null
+    },
+    "Whole Foods Market": {
+      "original_price": 2.09,
+      "discount_price": 1.52
+    },
+    "Stop & Shop": {
+      "original_price": 1.79,
+      "discount_price": 1.41
+    },
+    "Shaw's": {
+      "original_price": 1.89,
+      "discount_price": 1.14
+    },
+    "ALDI": {
+      "original_price": 0.79,
+      "discount_price": null
+    },
+    "Trader Joe's": {
+      "original_price": 1.49,
+      "discount_price": null
+    }
+  },
+  "Del Monte Canned Green Beans 14.5 Oz": {
+    "Market Basket": {
+      "original_price": 1.49,
+      "discount_price": null
+    },
+    "Walmart Supercenter": {
+      "original_price": 1.28,
+      "discount_price": 0.7
+    },
+    "Hannaford Supermarket": {
+      "original_price": 1.69,
+      "discount_price": 1.19
+    },
+    "Whole Foods Market": {
+      "original_price": 1.99,
+      "discount_price": 1.29
+    },
+    "Stop & Shop": {
+      "original_price": 1.79,
+      "discount_price": null
+    },
+    "Shaw's": {
+      "original_price": 1.89,
+      "discount_price": 0.95
+    },
+    "ALDI": {
+      "original_price": 0.79,
+      "discount_price": 0.51
+    },
+    "Trader Joe's": {
+      "original_price": 1.39,
+      "discount_price": null
+    }
+  },
+  "Frozen Strawberries 16 Oz Bag": {
+    "Market Basket": {
+      "original_price": 3.49,
+      "discount_price": null
+    },
+    "Walmart Supercenter": {
+      "original_price": 3.24,
+      "discount_price": null
+    },
+    "Hannaford Supermarket": {
+      "original_price": 3.69,
+      "discount_price": null
+    },
+    "Whole Foods Market": {
+      "original_price": 4.19,
+      "discount_price": null
+    },
+    "Stop & Shop": {
+      "original_price": 3.89,
+      "discount_price": null
+    },
+    "Shaw's": {
+      "original_price": 4.09,
+      "discount_price": 2.41
+    },
+    "ALDI": {
+      "original_price": 2.99,
+      "discount_price": null
+    },
+    "Trader Joe's": {
+      "original_price": 3.79,
+      "discount_price": null
+    }
+  },
+  "Daisy Sour Cream 16 Oz": {
+    "Market Basket": {
+      "original_price": 2.99,
+      "discount_price": null
+    },
+    "Walmart Supercenter": {
+      "original_price": 2.48,
+      "discount_price": 1.46
+    },
+    "Hannaford Supermarket": {
+      "original_price": 2.79,
+      "discount_price": null
+    },
+    "Whole Foods Market": {
+      "original_price": 3.49,
+      "discount_price": 2.73
+    },
+    "Stop & Shop": {
+      "original_price": 2.99,
+      "discount_price": null
+    },
+    "Shaw's": {
+      "original_price": 3.19,
+      "discount_price": 2.39
+    },
+    "ALDI": {
+      "original_price": 1.99,
+      "discount_price": null
+    },
+    "Trader Joe's": {
+      "original_price": 2.79,
+      "discount_price": 1.72
+    }
+  },
+  "Kraft Shredded Mozzarella Cheese 8 Oz": {
+    "Market Basket": {
+      "original_price": 3.49,
+      "discount_price": null
+    },
+    "Walmart Supercenter": {
+      "original_price": 3.18,
+      "discount_price": 1.67
+    },
+    "Hannaford Supermarket": {
+      "original_price": 3.69,
+      "discount_price": 1.93
+    },
+    "Whole Foods Market": {
+      "original_price": 4.19,
+      "discount_price": 2.99
+    },
+    "Stop & Shop": {
+      "original_price": 3.89,
+      "discount_price": null
+    },
+    "Shaw's": {
+      "original_price": 3.99,
+      "discount_price": null
+    },
+    "ALDI": {
+      "original_price": 2.89,
+      "discount_price": 2.01
+    },
+    "Trader Joe's": {
+      "original_price": 3.49,
+      "discount_price": 2.28
+    }
+  },
+  "Yoplait Original Yogurt 6 Oz Cup": {
+    "Market Basket": {
+      "original_price": 0.79,
+      "discount_price": 0.54
+    },
+    "Walmart Supercenter": {
+      "original_price": 0.68,
+      "discount_price": 0.46
+    },
+    "Hannaford Supermarket": {
+      "original_price": 0.89,
+      "discount_price": null
+    },
+    "Whole Foods Market": {
+      "original_price": 1.09,
+      "discount_price": null
+    },
+    "Stop & Shop": {
+      "original_price": 0.99,
+      "discount_price": null
+    },
+    "Shaw's": {
+      "original_price": 1.09,
+      "discount_price": null
+    },
+    "ALDI": {
+      "original_price": 0.59,
+      "discount_price": 0.44
+    },
+    "Trader Joe's": {
+      "original_price": 0.79,
+      "discount_price": 0.46
+    }
+  },
+  "Nature's Own Whole Wheat Bread 20 Oz": {
+    "Market Basket": {
+      "original_price": 3.29,
+      "discount_price": 2.51
+    },
+    "Walmart Supercenter": {
+      "original_price": 2.88,
+      "discount_price": null
+    },
+    "Hannaford Supermarket": {
+      "original_price": 3.59,
+      "discount_price": null
+    },
+    "Whole Foods Market": {
+      "original_price": 3.89,
+      "discount_price": 2.72
+    },
+    "Stop & Shop": {
+      "original_price": 3.49,
+      "discount_price": 2.13
+    },
+    "Shaw's": {
+      "original_price": 3.79,
+      "discount_price": 2.3
+    },
+    "ALDI": {
+      "original_price": 2.29,
+      "discount_price": 1.35
+    },
+    "Trader Joe's": {
+      "original_price": 3.09,
+      "discount_price": null
+    }
+  },
+  "Great Value Black Beans 15 Oz": {
+    "Market Basket": {
+      "original_price": 0.99,
+      "discount_price": null
+    },
+    "Walmart Supercenter": {
+      "original_price": 0.72,
+      "discount_price": 0.45
+    },
+    "Hannaford Supermarket": {
+      "original_price": 1.09,
+      "discount_price": null
+    },
+    "Whole Foods Market": {
+      "original_price": 1.49,
+      "discount_price": 0.75
+    },
+    "Stop & Shop": {
+      "original_price": 1.19,
+      "discount_price": 0.73
+    },
+    "Shaw's": {
+      "original_price": 1.39,
+      "discount_price": 0.95
+    },
+    "ALDI": {
+      "original_price": 0.69,
+      "discount_price": null
+    },
+    "Trader Joe's": {
+      "original_price": 1.19,
+      "discount_price": 0.64
+    }
+  },
+  "Organic Blueberries 6 Oz Container": {
+    "Market Basket": {
+      "original_price": 3.99,
+      "discount_price": 2.27
+    },
+    "Walmart Supercenter": {
+      "original_price": 3.68,
+      "discount_price": 2.9
+    },
+    "Hannaford Supermarket": {
+      "original_price": 4.49,
+      "discount_price": null
+    },
+    "Whole Foods Market": {
+      "original_price": 4.99,
+      "discount_price": null
+    },
+    "Stop & Shop": {
+      "original_price": 4.79,
+      "discount_price": null
+    },
+    "Shaw's": {
+      "original_price": 4.89,
+      "discount_price": null
+    },
+    "ALDI": {
+      "original_price": 3.29,
+      "discount_price": null
+    },
+    "Trader Joe's": {
+      "original_price": 3.99,
+      "discount_price": null
+    }
+  },
+  "Angel Hair Pasta 16 Oz Box": {
+    "Market Basket": {
+      "original_price": 1.49,
+      "discount_price": 1.07
+    },
+    "Walmart Supercenter": {
+      "original_price": 1.18,
+      "discount_price": 0.62
+    },
+    "Hannaford Supermarket": {
+      "original_price": 1.69,
+      "discount_price": 1.35
+    },
+    "Whole Foods Market": {
+      "original_price": 2.09,
+      "discount_price": null
+    },
+    "Stop & Shop": {
+      "original_price": 1.79,
+      "discount_price": null
+    },
+    "Shaw's": {
+      "original_price": 1.99,
+      "discount_price": 1.02
+    },
+    "ALDI": {
+      "original_price": 0.89,
+      "discount_price": null
+    },
+    "Trader Joe's": {
+      "original_price": 1.39,
+      "discount_price": null
+    }
+  },
+  "Organic Romaine Hearts 3 Ct Bag": {
+    "Market Basket": {
+      "original_price": 4.29,
+      "discount_price": 3.2
+    },
+    "Walmart Supercenter": {
+      "original_price": 3.78,
+      "discount_price": null
+    },
+    "Hannaford Supermarket": {
+      "original_price": 4.49,
+      "discount_price": 3.17
+    },
+    "Whole Foods Market": {
+      "original_price": 5.29,
+      "discount_price": 2.7
+    },
+    "Stop & Shop": {
+      "original_price": 4.99,
+      "discount_price": 3.42
+    },
+    "Shaw's": {
+      "original_price": 5.19,
+      "discount_price": null
+    },
+    "ALDI": {
+      "original_price": 3.29,
+      "discount_price": 2.14
+    },
+    "Trader Joe's": {
+      "original_price": 4.49,
+      "discount_price": null
+    }
+  },
+  "Organic Strawberries 1 Lb Container": {
+    "Market Basket": {
+      "original_price": 5.99,
+      "discount_price": 3.67
+    },
+    "Walmart Supercenter": {
+      "original_price": 5.28,
+      "discount_price": 3.8
+    },
+    "Hannaford Supermarket": {
+      "original_price": 5.79,
+      "discount_price": null
+    },
+    "Whole Foods Market": {
+      "original_price": 6.49,
+      "discount_price": null
+    },
+    "Stop & Shop": {
+      "original_price": 5.99,
+      "discount_price": null
+    },
+    "Shaw's": {
+      "original_price": 6.29,
+      "discount_price": 4.9
+    },
+    "ALDI": {
+      "original_price": 4.49,
+      "discount_price": null
+    },
+    "Trader Joe's": {
+      "original_price": 5.49,
+      "discount_price": null
+    }
+  },
+  "Nature Valley Crunchy Granola Bars 12 Ct": {
+    "Market Basket": {
+      "original_price": 3.49,
+      "discount_price": 2.76
+    },
+    "Walmart Supercenter": {
+      "original_price": 2.98,
+      "discount_price": 2.11
+    },
+    "Hannaford Supermarket": {
+      "original_price": 3.69,
+      "discount_price": 2.33
+    },
+    "Whole Foods Market": {
+      "original_price": 4.19,
+      "discount_price": 3.27
+    },
+    "Stop & Shop": {
+      "original_price": 3.99,
+      "discount_price": 2.48
+    },
+    "Shaw's": {
+      "original_price": 4.29,
+      "discount_price": null
+    },
+    "ALDI": {
+      "original_price": 2.49,
+      "discount_price": 1.79
+    },
+    "Trader Joe's": {
+      "original_price": 3.49,
+      "discount_price": null
+    }
+  },
+  "Chobani Greek Yogurt 5.3 Oz Cup": {
+    "Market Basket": {
+      "original_price": 1.29,
+      "discount_price": null
+    },
+    "Walmart Supercenter": {
+      "original_price": 1.18,
+      "discount_price": 0.82
+    },
+    "Hannaford Supermarket": {
+      "original_price": 1.39,
+      "discount_price": 1.05
+    },
+    "Whole Foods Market": {
+      "original_price": 1.79,
+      "discount_price": null
+    },
+    "Stop & Shop": {
+      "original_price": 1.49,
+      "discount_price": 0.84
+    },
+    "Shaw's": {
+      "original_price": 1.69,
+      "discount_price": null
+    },
+    "ALDI": {
+      "original_price": 0.89,
+      "discount_price": 0.55
+    },
+    "Trader Joe's": {
+      "original_price": 1.29,
+      "discount_price": 0.92
+    }
+  },
+  "Kraft American Cheese Singles 16 Slices": {
+    "Market Basket": {
+      "original_price": 3.79,
+      "discount_price": 2.43
+    },
+    "Walmart Supercenter": {
+      "original_price": 3.24,
+      "discount_price": 2.39
+    },
+    "Hannaford Supermarket": {
+      "original_price": 3.99,
+      "discount_price": 2.04
+    },
+    "Whole Foods Market": {
+      "original_price": 4.59,
+      "discount_price": null
+    },
+    "Stop & Shop": {
+      "original_price": 4.29,
+      "discount_price": 3.05
+    },
+    "Shaw's": {
+      "original_price": 4.49,
+      "discount_price": 2.36
+    },
+    "ALDI": {
+      "original_price": 2.99,
+      "discount_price": 1.52
+    },
+    "Trader Joe's": {
+      "original_price": 3.49,
+      "discount_price": null
+    }
+  },
+  "Smithfield Bacon 16 Oz": {
+    "Market Basket": {
+      "original_price": 5.99,
+      "discount_price": 3.7
+    },
+    "Walmart Supercenter": {
+      "original_price": 4.98,
+      "discount_price": 2.9
+    },
+    "Hannaford Supermarket": {
+      "original_price": 6.49,
+      "discount_price": 3.89
+    },
+    "Whole Foods Market": {
+      "original_price": 7.19,
+      "discount_price": 4.5
+    },
+    "Stop & Shop": {
+      "original_price": 6.79,
+      "discount_price": null
+    },
+    "Shaw's": {
+      "original_price": 7.29,
+      "discount_price": null
+    },
+    "ALDI": {
+      "original_price": 4.49,
+      "discount_price": 3.18
+    },
+    "Trader Joe's": {
+      "original_price": 5.79,
+      "discount_price": 3.22
+    }
+  },
+  "Gala Apples 3 Lb Bag": {
+    "Market Basket": {
+      "original_price": 4.99,
+      "discount_price": 3.46
+    },
+    "Walmart Supercenter": {
+      "original_price": 4.28,
+      "discount_price": 3.06
+    },
+    "Hannaford Supermarket": {
+      "original_price": 5.49,
+      "discount_price": 2.78
+    },
+    "Whole Foods Market": {
+      "original_price": 5.99,
+      "discount_price": 4.03
+    },
+    "Stop & Shop": {
+      "original_price": 5.79,
+      "discount_price": 3.52
+    },
+    "Shaw's": {
+      "original_price": 5.89,
+      "discount_price": 4.41
+    },
+    "ALDI": {
+      "original_price": 3.99,
+      "discount_price": 2.1
+    },
+    "Trader Joe's": {
+      "original_price": 4.49,
+      "discount_price": 2.58
+    }
+  },
+  "Stonyfield Organic Yogurt 6 Oz Cup": {
+    "Market Basket": {
+      "original_price": 1.49,
+      "discount_price": 0.75
+    },
+    "Walmart Supercenter": {
+      "original_price": 1.38,
+      "discount_price": 0.74
+    },
+    "Hannaford Supermarket": {
+      "original_price": 1.69,
+      "discount_price": 0.9
+    },
+    "Whole Foods Market": {
+      "original_price": 1.99,
+      "discount_price": 1.54
+    },
+    "Stop & Shop": {
+      "original_price": 1.79,
+      "discount_price": 1.02
+    },
+    "Shaw's": {
+      "original_price": 1.89,
+      "discount_price": 1.23
+    },
+    "ALDI": {
+      "original_price": 1.19,
+      "discount_price": 0.61
+    },
+    "Trader Joe's": {
+      "original_price": 1.59,
+      "discount_price": null
+    }
+  },
+  "Organic Zucchini (per Lb)": {
+    "Market Basket": {
+      "original_price": 2.29,
+      "discount_price": null
+    },
+    "Walmart Supercenter": {
+      "original_price": 2.18,
+      "discount_price": 1.43
+    },
+    "Hannaford Supermarket": {
+      "original_price": 2.49,
+      "discount_price": null
+    },
+    "Whole Foods Market": {
+      "original_price": 2.99,
+      "discount_price": null
+    },
+    "Stop & Shop": {
+      "original_price": 2.79,
+      "discount_price": 1.92
+    },
+    "Shaw's": {
+      "original_price": 2.89,
+      "discount_price": 1.83
+    },
+    "ALDI": {
+      "original_price": 1.99,
+      "discount_price": null
+    },
+    "Trader Joe's": {
+      "original_price": 2.49,
+      "discount_price": 1.72
+    }
+  },
+  "Organic Celery Hearts 1 Ct": {
+    "Market Basket": {
+      "original_price": 3.99,
+      "discount_price": 2.05
+    },
+    "Walmart Supercenter": {
+      "original_price": 3.28,
+      "discount_price": null
+    },
+    "Hannaford Supermarket": {
+      "original_price": 4.29,
+      "discount_price": 2.73
+    },
+    "Whole Foods Market": {
+      "original_price": 4.79,
+      "discount_price": 2.95
+    },
+    "Stop & Shop": {
+      "original_price": 4.49,
+      "discount_price": null
+    },
+    "Shaw's": {
+      "original_price": 4.59,
+      "discount_price": null
+    },
+    "ALDI": {
+      "original_price": 2.99,
+      "discount_price": null
+    },
+    "Trader Joe's": {
+      "original_price": 3.79,
+      "discount_price": null
+    }
+  },
+  "Mission Yellow Corn Tortillas 30 Ct": {
+    "Market Basket": {
+      "original_price": 2.99,
+      "discount_price": 2.24
+    },
+    "Walmart Supercenter": {
+      "original_price": 2.48,
+      "discount_price": null
+    },
+    "Hannaford Supermarket": {
+      "original_price": 2.99,
+      "discount_price": null
+    },
+    "Whole Foods Market": {
+      "original_price": 3.49,
+      "discount_price": 2.52
+    },
+    "Stop & Shop": {
+      "original_price": 3.29,
+      "discount_price": 2.5
+    },
+    "Shaw's": {
+      "original_price": 3.39,
+      "discount_price": 2.51
+    },
+    "ALDI": {
+      "original_price": 1.89,
+      "discount_price": 1.46
+    },
+    "Trader Joe's": {
+      "original_price": 2.79,
+      "discount_price": null
+    }
+  },
+  "Organic Cucumber Each": {
+    "Market Basket": {
+      "original_price": 1.29,
+      "discount_price": 0.77
+    },
+    "Walmart Supercenter": {
+      "original_price": 1.18,
+      "discount_price": 0.63
+    },
+    "Hannaford Supermarket": {
+      "original_price": 1.49,
+      "discount_price": null
+    },
+    "Whole Foods Market": {
+      "original_price": 1.79,
+      "discount_price": 1.43
+    },
+    "Stop & Shop": {
+      "original_price": 1.59,
+      "discount_price": 1.13
+    },
+    "Shaw's": {
+      "original_price": 1.69,
+      "discount_price": 1.04
+    },
+    "ALDI": {
+      "original_price": 0.89,
+      "discount_price": 0.65
+    },
+    "Trader Joe's": {
+      "original_price": 1.29,
+      "discount_price": 0.92
+    }
+  },
+  "Whole Wheat Spaghetti 16 Oz": {
+    "Market Basket": {
+      "original_price": 1.79,
+      "discount_price": null
+    },
+    "Walmart Supercenter": {
+      "original_price": 1.48,
+      "discount_price": 0.79
+    },
+    "Hannaford Supermarket": {
+      "original_price": 1.99,
+      "discount_price": null
+    },
+    "Whole Foods Market": {
+      "original_price": 2.29,
+      "discount_price": null
+    },
+    "Stop & Shop": {
+      "original_price": 2.19,
+      "discount_price": 1.55
+    },
+    "Shaw's": {
+      "original_price": 2.39,
+      "discount_price": null
+    },
+    "ALDI": {
+      "original_price": 1.09,
+      "discount_price": null
+    },
+    "Trader Joe's": {
+      "original_price": 1.79,
+      "discount_price": 1.42
+    }
+  },
+  "Organic Green Bell Pepper Each": {
+    "Market Basket": {
+      "original_price": 1.49,
+      "discount_price": null
+    },
+    "Walmart Supercenter": {
+      "original_price": 1.38,
+      "discount_price": 0.76
+    },
+    "Hannaford Supermarket": {
+      "original_price": 1.69,
+      "discount_price": 1.05
+    },
+    "Whole Foods Market": {
+      "original_price": 1.89,
+      "discount_price": 1.37
+    },
+    "Stop & Shop": {
+      "original_price": 1.79,
+      "discount_price": 1.19
+    },
+    "Shaw's": {
+      "original_price": 1.99,
+      "discount_price": null
+    },
+    "ALDI": {
+      "original_price": 0.99,
+      "discount_price": 0.73
+    },
+    "Trader Joe's": {
+      "original_price": 1.49,
+      "discount_price": null
+    }
+  },
+  "Organic Whole White Mushrooms 8 Oz": {
+    "Market Basket": {
+      "original_price": 3.49,
+      "discount_price": 2.52
+    },
+    "Walmart Supercenter": {
+      "original_price": 3.18,
+      "discount_price": null
+    },
+    "Hannaford Supermarket": {
+      "original_price": 3.79,
+      "discount_price": 3.02
+    },
+    "Whole Foods Market": {
+      "original_price": 4.29,
+      "discount_price": 3.24
+    },
+    "Stop & Shop": {
+      "original_price": 3.99,
+      "discount_price": null
+    },
+    "Shaw's": {
+      "original_price": 4.09,
+      "discount_price": null
+    },
+    "ALDI": {
+      "original_price": 2.89,
+      "discount_price": null
+    },
+    "Trader Joe's": {
+      "original_price": 3.49,
+      "discount_price": null
+    }
+  },
+  "Frozen Peas 12 Oz Bag": {
+    "Market Basket": {
+      "original_price": 1.49,
+      "discount_price": 1.17
+    },
+    "Walmart Supercenter": {
+      "original_price": 1.18,
+      "discount_price": 0.79
+    },
+    "Hannaford Supermarket": {
+      "original_price": 1.69,
+      "discount_price": 0.91
+    },
+    "Whole Foods Market": {
+      "original_price": 1.99,
+      "discount_price": 1.58
+    },
+    "Stop & Shop": {
+      "original_price": 1.79,
+      "discount_price": 1.23
+    },
+    "Shaw's": {
+      "original_price": 1.89,
+      "discount_price": null
+    },
+    "ALDI": {
+      "original_price": 0.99,
+      "discount_price": 0.52
+    },
+    "Trader Joe's": {
+      "original_price": 1.39,
+      "discount_price": null
+    }
+  },
+  "Nature's Path Organic Oatmeal 8 Ct Box": {
+    "Market Basket": {
+      "original_price": 4.99,
+      "discount_price": 2.66
+    },
+    "Walmart Supercenter": {
+      "original_price": 4.68,
+      "discount_price": null
+    },
+    "Hannaford Supermarket": {
+      "original_price": 5.29,
+      "discount_price": null
+    },
+    "Whole Foods Market": {
+      "original_price": 5.99,
+      "discount_price": null
+    },
+    "Stop & Shop": {
+      "original_price": 5.79,
+      "discount_price": 4.53
+    },
+    "Shaw's": {
+      "original_price": 5.99,
+      "discount_price": null
+    },
+    "ALDI": {
+      "original_price": 3.89,
+      "discount_price": 2.52
+    },
+    "Trader Joe's": {
+      "original_price": 4.79,
+      "discount_price": null
+    }
+  },
+  "Progresso Minestrone Soup 19 Oz Can": {
+    "Market Basket": {
+      "original_price": 2.79,
+      "discount_price": 1.45
+    },
+    "Walmart Supercenter": {
+      "original_price": 2.28,
+      "discount_price": 1.47
+    },
+    "Hannaford Supermarket": {
+      "original_price": 2.99,
+      "discount_price": 1.76
+    },
+    "Whole Foods Market": {
+      "original_price": 3.49,
+      "discount_price": 2.4
+    },
+    "Stop & Shop": {
+      "original_price": 3.19,
+      "discount_price": 2.36
+    },
+    "Shaw's": {
+      "original_price": 3.39,
+      "discount_price": 1.72
+    },
+    "ALDI": {
+      "original_price": 1.79,
+      "discount_price": 1.36
+    },
+    "Trader Joe's": {
+      "original_price": 2.69,
+      "discount_price": 1.41
+    }
+  },
+  "Organic Baby Bella Mushrooms 8 Oz": {
+    "Market Basket": {
+      "original_price": 3.79,
+      "discount_price": null
+    },
+    "Walmart Supercenter": {
+      "original_price": 3.38,
+      "discount_price": null
+    },
+    "Hannaford Supermarket": {
+      "original_price": 3.99,
+      "discount_price": 3.06
+    },
+    "Whole Foods Market": {
+      "original_price": 4.49,
+      "discount_price": null
+    },
+    "Stop & Shop": {
+      "original_price": 4.19,
+      "discount_price": 2.53
+    },
+    "Shaw's": {
+      "original_price": 4.39,
+      "discount_price": 3.4
+    },
+    "ALDI": {
+      "original_price": 2.99,
+      "discount_price": 2.01
+    },
+    "Trader Joe's": {
+      "original_price": 3.79,
+      "discount_price": 2.89
+    }
+  },
+  "Organic Fuji Apples (per Lb)": {
+    "Market Basket": {
+      "original_price": 2.59,
+      "discount_price": null
+    },
+    "Walmart Supercenter": {
+      "original_price": 2.38,
+      "discount_price": 1.74
+    },
+    "Hannaford Supermarket": {
+      "original_price": 2.79,
+      "discount_price": null
+    },
+    "Whole Foods Market": {
+      "original_price": 2.99,
+      "discount_price": 2.16
+    },
+    "Stop & Shop": {
+      "original_price": 2.89,
+      "discount_price": 1.99
+    },
+    "Shaw's": {
+      "original_price": 2.99,
+      "discount_price": 1.73
+    },
+    "ALDI": {
+      "original_price": 2.19,
+      "discount_price": null
+    },
+    "Trader Joe's": {
+      "original_price": 2.69,
+      "discount_price": 2.03
+    }
+  },
+  "Red Seedless Grapes (per Lb)": {
+    "Market Basket": {
+      "original_price": 2.79,
+      "discount_price": 2.17
+    },
+    "Walmart Supercenter": {
+      "original_price": 2.58,
+      "discount_price": null
+    },
+    "Hannaford Supermarket": {
+      "original_price": 2.89,
+      "discount_price": null
+    },
+    "Whole Foods Market": {
+      "original_price": 3.29,
+      "discount_price": 2.45
+    },
+    "Stop & Shop": {
+      "original_price": 3.09,
+      "discount_price": 1.64
+    },
+    "Shaw's": {
+      "original_price": 3.19,
+      "discount_price": 1.93
+    },
+    "ALDI": {
+      "original_price": 2.29,
+      "discount_price": 1.65
+    },
+    "Trader Joe's": {
+      "original_price": 2.79,
+      "discount_price": 1.42
+    }
+  },
+  "Organic Baby Spinach 5 Oz Container": {
+    "Market Basket": {
+      "original_price": 3.79,
+      "discount_price": 2.48
+    },
+    "Walmart Supercenter": {
+      "original_price": 3.58,
+      "discount_price": 2.06
+    },
+    "Hannaford Supermarket": {
+      "original_price": 3.99,
+      "discount_price": 2.68
+    },
+    "Whole Foods Market": {
+      "original_price": 4.49,
+      "discount_price": null
+    },
+    "Stop & Shop": {
+      "original_price": 4.19,
+      "discount_price": 2.94
+    },
+    "Shaw's": {
+      "original_price": 4.39,
+      "discount_price": 2.6
+    },
+    "ALDI": {
+      "original_price": 3.29,
+      "discount_price": null
+    },
+    "Trader Joe's": {
+      "original_price": 3.89,
+      "discount_price": null
+    }
+  },
+  "Idaho Russet Potatoes 10 Lb Bag": {
+    "Market Basket": {
+      "original_price": 5.99,
+      "discount_price": 3.85
+    },
+    "Walmart Supercenter": {
+      "original_price": 4.98,
+      "discount_price": 2.69
+    },
+    "Hannaford Supermarket": {
+      "original_price": 6.49,
+      "discount_price": null
+    },
+    "Whole Foods Market": {
+      "original_price": 7.29,
+      "discount_price": 3.7
+    },
+    "Stop & Shop": {
+      "original_price": 6.99,
+      "discount_price": 4.0
+    },
+    "Shaw's": {
+      "original_price": 7.19,
+      "discount_price": 5.71
+    },
+    "ALDI": {
+      "original_price": 4.79,
+      "discount_price": null
+    },
+    "Trader Joe's": {
+      "original_price": 5.49,
+      "discount_price": 3.34
+    }
+  },
+  "Perdue Fresh Chicken Drumsticks (per Lb)": {
+    "Market Basket": {
+      "original_price": 1.49,
+      "discount_price": 1.03
+    },
+    "Walmart Supercenter": {
+      "original_price": 1.28,
+      "discount_price": null
+    },
+    "Hannaford Supermarket": {
+      "original_price": 1.79,
+      "discount_price": 1.42
+    },
+    "Whole Foods Market": {
+      "original_price": 2.29,
+      "discount_price": null
+    },
+    "Stop & Shop": {
+      "original_price": 1.89,
+      "discount_price": null
+    },
+    "Shaw's": {
+      "original_price": 1.99,
+      "discount_price": 1.17
+    },
+    "ALDI": {
+      "original_price": 1.19,
+      "discount_price": 0.78
+    },
+    "Trader Joe's": {
+      "original_price": 1.69,
+      "discount_price": 1.31
+    }
+  },
+  "Oscar Mayer Turkey Bacon 12 Oz": {
+    "Market Basket": {
+      "original_price": 3.79,
+      "discount_price": null
+    },
+    "Walmart Supercenter": {
+      "original_price": 3.24,
+      "discount_price": 1.84
+    },
+    "Hannaford Supermarket": {
+      "original_price": 3.89,
+      "discount_price": 2.96
+    },
+    "Whole Foods Market": {
+      "original_price": 4.49,
+      "discount_price": 3.04
+    },
+    "Stop & Shop": {
+      "original_price": 4.09,
+      "discount_price": 2.2
+    },
+    "Shaw's": {
+      "original_price": 4.29,
+      "discount_price": 2.72
+    },
+    "ALDI": {
+      "original_price": 2.89,
+      "discount_price": 1.99
+    },
+    "Trader Joe's": {
+      "original_price": 3.49,
+      "discount_price": 2.06
+    }
+  },
+  "Organic Strawberries 16 Oz Container": {
+    "Market Basket": {
+      "original_price": 6.49,
+      "discount_price": null
+    },
+    "Walmart Supercenter": {
+      "original_price": 5.98,
+      "discount_price": 4.12
+    },
+    "Hannaford Supermarket": {
+      "original_price": 6.79,
+      "discount_price": 4.98
+    },
+    "Whole Foods Market": {
+      "original_price": 7.29,
+      "discount_price": 3.77
+    },
+    "Stop & Shop": {
+      "original_price": 6.99,
+      "discount_price": null
+    },
+    "Shaw's": {
+      "original_price": 7.19,
+      "discount_price": 4.09
+    },
+    "ALDI": {
+      "original_price": 5.49,
+      "discount_price": null
+    },
+    "Trader Joe's": {
+      "original_price": 6.29,
+      "discount_price": 3.71
+    }
+  },
+  "Great Value 2% Milk 1 Gallon": {
+    "Market Basket": {
+      "original_price": 3.19,
+      "discount_price": 2.27
+    },
+    "Walmart Supercenter": {
+      "original_price": 2.98,
+      "discount_price": 2.19
+    },
+    "Hannaford Supermarket": {
+      "original_price": 3.39,
+      "discount_price": null
+    },
+    "Whole Foods Market": {
+      "original_price": 4.09,
+      "discount_price": 2.26
+    },
+    "Stop & Shop": {
+      "original_price": 3.59,
+      "discount_price": 2.27
+    },
+    "Shaw's": {
+      "original_price": 3.69,
+      "discount_price": 2.49
+    },
+    "ALDI": {
+      "original_price": 2.79,
+      "discount_price": 2.22
+    },
+    "Trader Joe's": {
+      "original_price": 3.29,
+      "discount_price": 1.89
+    }
+  },
+  "Armour Chili With Beans 15 Oz Can": {
+    "Market Basket": {
+      "original_price": 1.99,
+      "discount_price": 1.34
+    },
+    "Walmart Supercenter": {
+      "original_price": 1.58,
+      "discount_price": 1.0
+    },
+    "Hannaford Supermarket": {
+      "original_price": 2.19,
+      "discount_price": null
+    },
+    "Whole Foods Market": {
+      "original_price": 2.79,
+      "discount_price": 2.03
+    },
+    "Stop & Shop": {
+      "original_price": 2.29,
+      "discount_price": null
+    },
+    "Shaw's": {
+      "original_price": 2.39,
+      "discount_price": null
+    },
+    "ALDI": {
+      "original_price": 1.19,
+      "discount_price": null
+    },
+    "Trader Joe's": {
+      "original_price": 1.89,
+      "discount_price": null
+    }
+  },
+  "Best Yet Canned Corn 15.25 Oz": {
+    "Market Basket": {
+      "original_price": 1.19,
+      "discount_price": 0.87
+    },
+    "Walmart Supercenter": {
+      "original_price": 0.88,
+      "discount_price": 0.46
+    },
+    "Hannaford Supermarket": {
+      "original_price": 1.29,
+      "discount_price": 0.68
+    },
+    "Whole Foods Market": {
+      "original_price": 1.49,
+      "discount_price": null
+    },
+    "Stop & Shop": {
+      "original_price": 1.19,
+      "discount_price": 0.85
+    },
+    "Shaw's": {
+      "original_price": 1.29,
+      "discount_price": null
+    },
+    "ALDI": {
+      "original_price": 0.79,
+      "discount_price": 0.55
+    },
+    "Trader Joe's": {
+      "original_price": 1.09,
+      "discount_price": null
+    }
+  },
+  "Organic Roma Tomatoes (per Lb)": {
+    "Market Basket": {
+      "original_price": 2.29,
+      "discount_price": null
+    },
+    "Walmart Supercenter": {
+      "original_price": 2.18,
+      "discount_price": 1.09
+    },
+    "Hannaford Supermarket": {
+      "original_price": 2.49,
+      "discount_price": 1.6
+    },
+    "Whole Foods Market": {
+      "original_price": 2.79,
+      "discount_price": 1.86
+    },
+    "Stop & Shop": {
+      "original_price": 2.69,
+      "discount_price": 1.53
+    },
+    "Shaw's": {
+      "original_price": 2.79,
+      "discount_price": 1.96
+    },
+    "ALDI": {
+      "original_price": 1.99,
+      "discount_price": 1.46
+    },
+    "Trader Joe's": {
+      "original_price": 2.39,
+      "discount_price": 1.72
+    }
+  },
+  "Earthbound Farm Organic Spring Mix 16 Oz": {
+    "Market Basket": {
+      "original_price": 7.99,
+      "discount_price": 4.94
+    },
+    "Walmart Supercenter": {
+      "original_price": 7.28,
+      "discount_price": null
+    },
+    "Hannaford Supermarket": {
+      "original_price": 7.99,
+      "discount_price": null
+    },
+    "Whole Foods Market": {
+      "original_price": 8.99,
+      "discount_price": 5.88
+    },
+    "Stop & Shop": {
+      "original_price": 8.29,
+      "discount_price": null
+    },
+    "Shaw's": {
+      "original_price": 8.49,
+      "discount_price": 6.47
+    },
+    "ALDI": {
+      "original_price": 5.99,
+      "discount_price": 4.73
+    },
+    "Trader Joe's": {
+      "original_price": 7.49,
+      "discount_price": null
+    }
+  },
+  "Chobani Greek Yogurt Multi-pack 4 Ct": {
+    "Market Basket": {
+      "original_price": 4.49,
+      "discount_price": 2.27
+    },
+    "Walmart Supercenter": {
+      "original_price": 3.98,
+      "discount_price": 2.51
+    },
+    "Hannaford Supermarket": {
+      "original_price": 4.79,
+      "discount_price": null
+    },
+    "Whole Foods Market": {
+      "original_price": 5.49,
+      "discount_price": 4.13
+    },
+    "Stop & Shop": {
+      "original_price": 4.99,
+      "discount_price": 3.26
+    },
+    "Shaw's": {
+      "original_price": 5.19,
+      "discount_price": null
+    },
+    "ALDI": {
+      "original_price": 3.49,
+      "discount_price": 2.22
+    },
+    "Trader Joe's": {
+      "original_price": 4.19,
+      "discount_price": 2.95
+    }
+  },
+  "Dole Mixed Greens 5 Oz Bag": {
+    "Market Basket": {
+      "original_price": 2.99,
+      "discount_price": null
+    },
+    "Walmart Supercenter": {
+      "original_price": 2.68,
+      "discount_price": 1.94
+    },
+    "Hannaford Supermarket": {
+      "original_price": 2.99,
+      "discount_price": 2.23
+    },
+    "Whole Foods Market": {
+      "original_price": 3.29,
+      "discount_price": 2.17
+    },
+    "Stop & Shop": {
+      "original_price": 3.19,
+      "discount_price": 1.62
+    },
+    "Shaw's": {
+      "original_price": 3.39,
+      "discount_price": 2.6
+    },
+    "ALDI": {
+      "original_price": 2.29,
+      "discount_price": null
+    },
+    "Trader Joe's": {
+      "original_price": 2.79,
+      "discount_price": null
+    }
+  },
+  "Organic Celery Stalks (per Bunch)": {
+    "Market Basket": {
+      "original_price": 2.99,
+      "discount_price": 1.5
+    },
+    "Walmart Supercenter": {
+      "original_price": 2.48,
+      "discount_price": 1.79
+    },
+    "Hannaford Supermarket": {
+      "original_price": 2.99,
+      "discount_price": 1.7
+    },
+    "Whole Foods Market": {
+      "original_price": 3.49,
+      "discount_price": 2.53
+    },
+    "Stop & Shop": {
+      "original_price": 3.29,
+      "discount_price": null
+    },
+    "Shaw's": {
+      "original_price": 3.39,
+      "discount_price": null
+    },
+    "ALDI": {
+      "original_price": 2.29,
+      "discount_price": 1.76
+    },
+    "Trader Joe's": {
+      "original_price": 2.99,
+      "discount_price": 1.87
+    }
+  },
+  "Best Yet Elbow Macaroni 16 Oz": {
+    "Market Basket": {
+      "original_price": 1.29,
+      "discount_price": 1.0
+    },
+    "Walmart Supercenter": {
+      "original_price": 1.09,
+      "discount_price": 0.64
+    },
+    "Hannaford Supermarket": {
+      "original_price": 1.49,
+      "discount_price": null
+    },
+    "Whole Foods Market": {
+      "original_price": 1.89,
+      "discount_price": null
+    },
+    "Stop & Shop": {
+      "original_price": 1.59,
+      "discount_price": 1.04
+    },
+    "Shaw's": {
+      "original_price": 1.69,
+      "discount_price": null
+    },
+    "ALDI": {
+      "original_price": 0.89,
+      "discount_price": null
+    },
+    "Trader Joe's": {
+      "original_price": 1.29,
+      "discount_price": 0.69
+    }
+  },
+  "Clover Valley Vegetable Oil 48 Oz": {
+    "Market Basket": {
+      "original_price": 4.49,
+      "discount_price": 2.82
+    },
+    "Walmart Supercenter": {
+      "original_price": 3.98,
+      "discount_price": 2.89
+    },
+    "Hannaford Supermarket": {
+      "original_price": 4.79,
+      "discount_price": null
+    },
+    "Whole Foods Market": {
+      "original_price": 5.49,
+      "discount_price": null
+    },
+    "Stop & Shop": {
+      "original_price": 4.99,
+      "discount_price": null
+    },
+    "Shaw's": {
+      "original_price": 5.19,
+      "discount_price": 3.89
+    },
+    "ALDI": {
+      "original_price": 3.29,
+      "discount_price": 2.09
+    },
+    "Trader Joe's": {
+      "original_price": 4.19,
+      "discount_price": 2.34
+    }
+  },
+  "Green Giant Canned Peas 15 Oz": {
+    "Market Basket": {
+      "original_price": 1.39,
+      "discount_price": null
+    },
+    "Walmart Supercenter": {
+      "original_price": 1.18,
+      "discount_price": 0.66
+    },
+    "Hannaford Supermarket": {
+      "original_price": 1.59,
+      "discount_price": 1.13
+    },
+    "Whole Foods Market": {
+      "original_price": 1.99,
+      "discount_price": 1.24
+    },
+    "Stop & Shop": {
+      "original_price": 1.79,
+      "discount_price": 1.31
+    },
+    "Shaw's": {
+      "original_price": 1.89,
+      "discount_price": null
+    },
+    "ALDI": {
+      "original_price": 0.99,
+      "discount_price": 0.68
+    },
+    "Trader Joe's": {
+      "original_price": 1.49,
+      "discount_price": 0.98
+    }
+  },
+  "Organic Russet Potatoes 5 Lb Bag": {
+    "Market Basket": {
+      "original_price": 4.99,
+      "discount_price": null
+    },
+    "Walmart Supercenter": {
+      "original_price": 4.48,
+      "discount_price": 2.85
+    },
+    "Hannaford Supermarket": {
+      "original_price": 5.29,
+      "discount_price": null
+    },
+    "Whole Foods Market": {
+      "original_price": 5.99,
+      "discount_price": 3.36
+    },
+    "Stop & Shop": {
+      "original_price": 5.49,
+      "discount_price": 4.24
+    },
+    "Shaw's": {
+      "original_price": 5.69,
+      "discount_price": 4.17
+    },
+    "ALDI": {
+      "original_price": 3.79,
+      "discount_price": 2.69
+    },
+    "Trader Joe's": {
+      "original_price": 4.49,
+      "discount_price": null
+    }
+  },
+  "La Croix Sparkling Water 12 Pack": {
+    "Market Basket": {
+      "original_price": 5.99,
+      "discount_price": 3.76
+    },
+    "Walmart Supercenter": {
+      "original_price": 5.28,
+      "discount_price": 3.27
+    },
+    "Hannaford Supermarket": {
+      "original_price": 5.79,
+      "discount_price": null
+    },
+    "Whole Foods Market": {
+      "original_price": 6.49,
+      "discount_price": 4.11
+    },
+    "Stop & Shop": {
+      "original_price": 5.99,
+      "discount_price": 3.28
+    },
+    "Shaw's": {
+      "original_price": 6.29,
+      "discount_price": 4.19
+    },
+    "ALDI": {
+      "original_price": 4.49,
+      "discount_price": 2.59
+    },
+    "Trader Joe's": {
+      "original_price": 5.49,
+      "discount_price": null
+    }
+  },
+  "Great Value Whole Kernel Corn 15 Oz": {
+    "Walmart Supercenter": {
+      "original_price": 0.58,
+      "discount_price": 0.35
+    }
+  },
+  "Barilla Spaghetti 16 Oz": {
+    "Market Basket": {
+      "original_price": 1.49,
+      "discount_price": 0.86
+    },
+    "Walmart Supercenter": {
+      "original_price": 1.28,
+      "discount_price": 0.87
+    },
+    "Hannaford Supermarket": {
+      "original_price": 1.59,
+      "discount_price": 0.98
+    },
+    "Whole Foods Market": {
+      "original_price": 2.29,
+      "discount_price": 1.24
+    },
+    "Stop & Shop": {
+      "original_price": 1.69,
+      "discount_price": 1.24
+    },
+    "Shaw's": {
+      "original_price": 1.79,
+      "discount_price": 1.07
+    },
+    "ALDI": {
+      "original_price": 0.98,
+      "discount_price": 0.64
+    },
+    "Trader Joe's": {
+      "original_price": 1.39,
+      "discount_price": null
+    }
+  },
+  "Skippy Creamy Peanut Butter 16 Oz": {
+    "Market Basket": {
+      "original_price": 2.79,
+      "discount_price": 1.52
+    },
+    "Walmart Supercenter": {
+      "original_price": 2.48,
+      "discount_price": 1.91
+    },
+    "Hannaford Supermarket": {
+      "original_price": 2.99,
+      "discount_price": 2.04
+    },
+    "Whole Foods Market": {
+      "original_price": 3.59,
+      "discount_price": null
+    },
+    "Stop & Shop": {
+      "original_price": 3.19,
+      "discount_price": null
+    },
+    "Shaw's": {
+      "original_price": 3.29,
+      "discount_price": null
+    },
+    "ALDI": {
+      "original_price": 1.89,
+      "discount_price": 1.07
+    },
+    "Trader Joe's": {
+      "original_price": 2.69,
+      "discount_price": 2.13
+    }
+  },
+  "Dole Pineapple Chunks 20 Oz Can": {
+    "Market Basket": {
+      "original_price": 1.89,
+      "discount_price": 1.11
+    },
+    "Walmart Supercenter": {
+      "original_price": 1.58,
+      "discount_price": null
+    },
+    "Hannaford Supermarket": {
+      "original_price": 1.99,
+      "discount_price": 1.15
+    },
+    "Whole Foods Market": {
+      "original_price": 2.19,
+      "discount_price": null
+    },
+    "Stop & Shop": {
+      "original_price": 1.89,
+      "discount_price": 1.13
+    },
+    "Shaw's": {
+      "original_price": 2.09,
+      "discount_price": null
+    },
+    "ALDI": {
+      "original_price": 1.09,
+      "discount_price": 0.59
+    },
+    "Trader Joe's": {
+      "original_price": 1.89,
+      "discount_price": 1.02
+    }
+  },
+  "Quaker Instant Oatmeal 10 Ct": {
+    "Market Basket": {
+      "original_price": 4.49,
+      "discount_price": 2.68
+    },
+    "Walmart Supercenter": {
+      "original_price": 3.98,
+      "discount_price": 2.87
+    },
+    "Hannaford Supermarket": {
+      "original_price": 4.79,
+      "discount_price": 3.74
+    },
+    "Whole Foods Market": {
+      "original_price": 5.49,
+      "discount_price": 3.43
+    },
+    "Stop & Shop": {
+      "original_price": 4.99,
+      "discount_price": null
+    },
+    "Shaw's": {
+      "original_price": 5.19,
+      "discount_price": 3.39
+    },
+    "ALDI": {
+      "original_price": 3.29,
+      "discount_price": 1.65
+    },
+    "Trader Joe's": {
+      "original_price": 4.49,
+      "discount_price": 3.08
+    }
+  },
+  "Oreo Original Cookies 14.3 Oz": {
+    "Market Basket": {
+      "original_price": 4.29,
+      "discount_price": null
+    },
+    "Walmart Supercenter": {
+      "original_price": 3.98,
+      "discount_price": 2.11
+    },
+    "Hannaford Supermarket": {
+      "original_price": 4.49,
+      "discount_price": null
+    },
+    "Whole Foods Market": {
+      "original_price": 5.29,
+      "discount_price": null
+    },
+    "Stop & Shop": {
+      "original_price": 4.79,
+      "discount_price": null
+    },
+    "Shaw's": {
+      "original_price": 4.99,
+      "discount_price": 3.62
+    },
+    "ALDI": {
+      "original_price": 3.29,
+      "discount_price": 2.53
+    },
+    "Trader Joe's": {
+      "original_price": 4.19,
+      "discount_price": 2.9
+    }
+  },
+  "Pepsi 12 Pack Cans": {
+    "Market Basket": {
+      "original_price": 7.49,
+      "discount_price": 5.15
+    },
+    "Walmart Supercenter": {
+      "original_price": 6.98,
+      "discount_price": null
+    },
+    "Hannaford Supermarket": {
+      "original_price": 7.79,
+      "discount_price": 5.38
+    },
+    "Whole Foods Market": {
+      "original_price": 8.49,
+      "discount_price": 5.6
+    },
+    "Stop & Shop": {
+      "original_price": 7.99,
+      "discount_price": 5.71
+    },
+    "Shaw's": {
+      "original_price": 8.29,
+      "discount_price": null
+    },
+    "ALDI": {
+      "original_price": 6.29,
+      "discount_price": null
+    },
+    "Trader Joe's": {
+      "original_price": 7.49,
+      "discount_price": 4.0
+    }
+  },
+  "Lays Classic Potato Chips 8 Oz": {
+    "Market Basket": {
+      "original_price": 4.49,
+      "discount_price": 3.55
+    },
+    "Walmart Supercenter": {
+      "original_price": 3.98,
+      "discount_price": 3.18
+    },
+    "Hannaford Supermarket": {
+      "original_price": 4.79,
+      "discount_price": 3.26
+    },
+    "Whole Foods Market": {
+      "original_price": 5.49,
+      "discount_price": 3.04
+    },
+    "Stop & Shop": {
+      "original_price": 4.99,
+      "discount_price": null
+    },
+    "Shaw's": {
+      "original_price": 5.19,
+      "discount_price": 3.74
+    },
+    "ALDI": {
+      "original_price": 2.99,
+      "discount_price": 1.81
+    },
+    "Trader Joe's": {
+      "original_price": 3.89,
+      "discount_price": null
+    }
+  },
+  "Campbell's Cream Of Mushroom Soup 10.5 Oz": {
+    "Market Basket": {
+      "original_price": 1.89,
+      "discount_price": null
+    },
+    "Walmart Supercenter": {
+      "original_price": 1.28,
+      "discount_price": null
+    },
+    "Hannaford Supermarket": {
+      "original_price": 1.99,
+      "discount_price": 1.39
+    },
+    "Whole Foods Market": {
+      "original_price": 2.19,
+      "discount_price": null
+    },
+    "Stop & Shop": {
+      "original_price": 1.99,
+      "discount_price": 1.37
+    },
+    "Shaw's": {
+      "original_price": 2.09,
+      "discount_price": 1.62
+    },
+    "ALDI": {
+      "original_price": 0.89,
+      "discount_price": null
+    },
+    "Trader Joe's": {
+      "original_price": 1.79,
+      "discount_price": 1.4
+    }
+  },
+  "Smucker's Strawberry Jam 20 Oz": {
+    "Market Basket": {
+      "original_price": 3.79,
+      "discount_price": null
+    },
+    "Walmart Supercenter": {
+      "original_price": 3.28,
+      "discount_price": 2.62
+    },
+    "Hannaford Supermarket": {
+      "original_price": 3.99,
+      "discount_price": null
+    },
+    "Whole Foods Market": {
+      "original_price": 4.59,
+      "discount_price": 3.28
+    },
+    "Stop & Shop": {
+      "original_price": 4.29,
+      "discount_price": 2.25
+    },
+    "Shaw's": {
+      "original_price": 4.39,
+      "discount_price": 3.48
+    },
+    "ALDI": {
+      "original_price": 2.99,
+      "discount_price": 1.73
+    },
+    "Trader Joe's": {
+      "original_price": 3.79,
+      "discount_price": null
+    }
+  },
+  "Hunts Tomato Sauce 15 Oz Can": {
+    "Market Basket": {
+      "original_price": 1.09,
+      "discount_price": 0.68
+    },
+    "Walmart Supercenter": {
+      "original_price": 0.88,
+      "discount_price": null
+    },
+    "Hannaford Supermarket": {
+      "original_price": 1.19,
+      "discount_price": 0.71
+    },
+    "Whole Foods Market": {
+      "original_price": 1.49,
+      "discount_price": null
+    },
+    "Stop & Shop": {
+      "original_price": 1.09,
+      "discount_price": 0.56
+    },
+    "Shaw's": {
+      "original_price": 1.19,
+      "discount_price": 0.86
+    },
+    "ALDI": {
+      "original_price": 0.79,
+      "discount_price": null
+    },
+    "Trader Joe's": {
+      "original_price": 1.09,
+      "discount_price": 0.85
+    }
+  },
+  "Ronzoni Penne Rigate 16 Oz": {
+    "Market Basket": {
+      "original_price": 1.69,
+      "discount_price": 1.33
+    },
+    "Walmart Supercenter": {
+      "original_price": 1.48,
+      "discount_price": null
+    },
+    "Hannaford Supermarket": {
+      "original_price": 1.89,
+      "discount_price": null
+    },
+    "Whole Foods Market": {
+      "original_price": 2.19,
+      "discount_price": null
+    },
+    "Stop & Shop": {
+      "original_price": 1.79,
+      "discount_price": 1.37
+    },
+    "Shaw's": {
+      "original_price": 1.99,
+      "discount_price": 1.35
+    },
+    "ALDI": {
+      "original_price": 0.98,
+      "discount_price": 0.66
+    },
+    "Trader Joe's": {
+      "original_price": 1.49,
+      "discount_price": 1.0
+    }
+  },
+  "Tropicana Orange Juice 52 Oz": {
+    "Market Basket": {
+      "original_price": 4.99,
+      "discount_price": null
+    },
+    "Walmart Supercenter": {
+      "original_price": 4.48,
+      "discount_price": null
+    },
+    "Hannaford Supermarket": {
+      "original_price": 5.29,
+      "discount_price": 3.65
+    },
+    "Whole Foods Market": {
+      "original_price": 5.99,
+      "discount_price": 3.6
+    },
+    "Stop & Shop": {
+      "original_price": 5.49,
+      "discount_price": null
+    },
+    "Shaw's": {
+      "original_price": 5.79,
+      "discount_price": 3.26
+    },
+    "ALDI": {
+      "original_price": 3.99,
+      "discount_price": 2.37
+    },
+    "Trader Joe's": {
+      "original_price": 4.79,
+      "discount_price": 3.49
+    }
+  },
+  "Carnation Evaporated Milk 12 Oz": {
+    "Market Basket": {
+      "original_price": 1.89,
+      "discount_price": 1.25
+    },
+    "Walmart Supercenter": {
+      "original_price": 1.38,
+      "discount_price": 1.01
+    },
+    "Hannaford Supermarket": {
+      "original_price": 1.99,
+      "discount_price": null
+    },
+    "Whole Foods Market": {
+      "original_price": 2.29,
+      "discount_price": 1.62
+    },
+    "Stop & Shop": {
+      "original_price": 1.89,
+      "discount_price": null
+    },
+    "Shaw's": {
+      "original_price": 1.99,
+      "discount_price": null
+    },
+    "ALDI": {
+      "original_price": 0.89,
+      "discount_price": null
+    },
+    "Trader Joe's": {
+      "original_price": 1.59,
+      "discount_price": 0.84
+    }
+  },
+  "Heinz Tomato Ketchup 32 Oz": {
+    "Market Basket": {
+      "original_price": 4.49,
+      "discount_price": 2.4
+    },
+    "Walmart Supercenter": {
+      "original_price": 3.98,
+      "discount_price": 2.31
+    },
+    "Hannaford Supermarket": {
+      "original_price": 4.79,
+      "discount_price": 3.19
+    },
+    "Whole Foods Market": {
+      "original_price": 5.29,
+      "discount_price": null
+    },
+    "Stop & Shop": {
+      "original_price": 4.99,
+      "discount_price": 3.88
+    },
+    "Shaw's": {
+      "original_price": 5.19,
+      "discount_price": null
+    },
+    "ALDI": {
+      "original_price": 2.99,
+      "discount_price": null
+    },
+    "Trader Joe's": {
+      "original_price": 4.39,
+      "discount_price": 2.56
+    }
+  },
+  "Planters Roasted Peanuts 16 Oz": {
+    "Market Basket": {
+      "original_price": 3.49,
+      "discount_price": null
+    },
+    "Walmart Supercenter": {
+      "original_price": 3.18,
+      "discount_price": 2.27
+    },
+    "Hannaford Supermarket": {
+      "original_price": 3.69,
+      "discount_price": 2.81
+    },
+    "Whole Foods Market": {
+      "original_price": 4.29,
+      "discount_price": null
+    },
+    "Stop & Shop": {
+      "original_price": 3.99,
+      "discount_price": 2.29
+    },
+    "Shaw's": {
+      "original_price": 4.19,
+      "discount_price": 2.28
+    },
+    "ALDI": {
+      "original_price": 2.89,
+      "discount_price": 1.64
+    },
+    "Trader Joe's": {
+      "original_price": 3.29,
+      "discount_price": null
+    }
+  },
+  "Prego Traditional Pasta Sauce 24 Oz": {
+    "Market Basket": {
+      "original_price": 3.79,
+      "discount_price": 2.96
+    },
+    "Walmart Supercenter": {
+      "original_price": 3.28,
+      "discount_price": 2.09
+    },
+    "Hannaford Supermarket": {
+      "original_price": 3.99,
+      "discount_price": 2.83
+    },
+    "Whole Foods Market": {
+      "original_price": 4.79,
+      "discount_price": 2.68
+    },
+    "Stop & Shop": {
+      "original_price": 4.19,
+      "discount_price": null
+    },
+    "Shaw's": {
+      "original_price": 4.39,
+      "discount_price": null
+    },
+    "ALDI": {
+      "original_price": 2.69,
+      "discount_price": 1.79
+    },
+    "Trader Joe's": {
+      "original_price": 3.79,
+      "discount_price": 2.66
+    }
+  },
+  "Arnold Whole Grains Oatnut Bread 24 Oz": {
+    "Market Basket": {
+      "original_price": 4.99,
+      "discount_price": 2.72
+    },
+    "Walmart Supercenter": {
+      "original_price": 4.28,
+      "discount_price": 3.18
+    },
+    "Hannaford Supermarket": {
+      "original_price": 5.29,
+      "discount_price": 3.73
+    },
+    "Whole Foods Market": {
+      "original_price": 5.99,
+      "discount_price": null
+    },
+    "Stop & Shop": {
+      "original_price": 5.49,
+      "discount_price": 4.24
+    },
+    "Shaw's": {
+      "original_price": 5.79,
+      "discount_price": null
+    },
+    "ALDI": {
+      "original_price": 3.49,
+      "discount_price": 2.48
+    },
+    "Trader Joe's": {
+      "original_price": 4.49,
+      "discount_price": 2.45
+    }
+  },
+  "Fresh Express Iceberg Garden Salad 12 Oz": {
+    "Market Basket": {
+      "original_price": 2.99,
+      "discount_price": 1.98
+    },
+    "Walmart Supercenter": {
+      "original_price": 2.48,
+      "discount_price": null
+    },
+    "Hannaford Supermarket": {
+      "original_price": 2.99,
+      "discount_price": null
+    },
+    "Whole Foods Market": {
+      "original_price": 3.29,
+      "discount_price": 2.2
+    },
+    "Stop & Shop": {
+      "original_price": 3.19,
+      "discount_price": 2.3
+    },
+    "Shaw's": {
+      "original_price": 3.39,
+      "discount_price": null
+    },
+    "ALDI": {
+      "original_price": 2.29,
+      "discount_price": null
+    },
+    "Trader Joe's": {
+      "original_price": 2.79,
+      "discount_price": 2.11
+    }
+  },
+  "Banquet Brown N Serve Sausages 6.4 Oz": {
+    "Market Basket": {
+      "original_price": 1.49,
+      "discount_price": null
+    },
+    "Walmart Supercenter": {
+      "original_price": 1.18,
+      "discount_price": 0.8
+    },
+    "Hannaford Supermarket": {
+      "original_price": 1.69,
+      "discount_price": 0.93
+    },
+    "Whole Foods Market": {
+      "original_price": 1.99,
+      "discount_price": 1.03
+    },
+    "Stop & Shop": {
+      "original_price": 1.79,
+      "discount_price": 1.11
+    },
+    "Shaw's": {
+      "original_price": 1.89,
+      "discount_price": 1.38
+    },
+    "ALDI": {
+      "original_price": 0.99,
+      "discount_price": null
+    },
+    "Trader Joe's": {
+      "original_price": 1.49,
+      "discount_price": 0.98
+    }
+  },
+  "Pillsbury Crescent Rolls 8 Oz": {
+    "Market Basket": {
+      "original_price": 3.49,
+      "discount_price": 1.82
+    },
+    "Walmart Supercenter": {
+      "original_price": 3.18,
+      "discount_price": null
+    },
+    "Hannaford Supermarket": {
+      "original_price": 3.69,
+      "discount_price": 1.9
+    },
+    "Whole Foods Market": {
+      "original_price": 4.29,
+      "discount_price": null
+    },
+    "Stop & Shop": {
+      "original_price": 3.99,
+      "discount_price": 2.37
+    },
+    "Shaw's": {
+      "original_price": 4.19,
+      "discount_price": 2.27
+    },
+    "ALDI": {
+      "original_price": 2.49,
+      "discount_price": null
+    },
+    "Trader Joe's": {
+      "original_price": 3.49,
+      "discount_price": 1.75
+    }
+  },
+  "Aunt Jemima Original Pancake Mix 32 Oz": {
+    "Market Basket": {
+      "original_price": 3.49,
+      "discount_price": 1.91
+    },
+    "Walmart Supercenter": {
+      "original_price": 3.18,
+      "discount_price": null
+    },
+    "Hannaford Supermarket": {
+      "original_price": 3.69,
+      "discount_price": 2.74
+    },
+    "Whole Foods Market": {
+      "original_price": 4.29,
+      "discount_price": 2.47
+    },
+    "Stop & Shop": {
+      "original_price": 3.99,
+      "discount_price": 2.93
+    },
+    "Shaw's": {
+      "original_price": 4.19,
+      "discount_price": null
+    },
+    "ALDI": {
+      "original_price": 2.89,
+      "discount_price": 2.27
+    },
+    "Trader Joe's": {
+      "original_price": 3.49,
+      "discount_price": null
+    }
+  },
+  "Aunt Jemima Original Syrup 24 Oz": {
+    "Market Basket": {
+      "original_price": 3.99,
+      "discount_price": 2.17
+    },
+    "Walmart Supercenter": {
+      "original_price": 3.48,
+      "discount_price": 2.17
+    },
+    "Hannaford Supermarket": {
+      "original_price": 4.19,
+      "discount_price": 2.6
+    },
+    "Whole Foods Market": {
+      "original_price": 4.79,
+      "discount_price": 3.51
+    },
+    "Stop & Shop": {
+      "original_price": 4.29,
+      "discount_price": null
+    },
+    "Shaw's": {
+      "original_price": 4.49,
+      "discount_price": null
+    },
+    "ALDI": {
+      "original_price": 3.29,
+      "discount_price": 1.97
+    },
+    "Trader Joe's": {
+      "original_price": 3.89,
+      "discount_price": 2.39
+    }
+  }
 }
