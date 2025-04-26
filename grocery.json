@@ -1,0 +1,1078 @@
+{
+    "honeycrisp apples (per lb)": {
+      "market basket": 2.49,
+      "walmart supercenter": 2.38,
+      "hannaford supermarket": 2.69,
+      "whole foods market": 2.99,
+      "stop & shop": 2.79,
+      "shaw's": 2.89,
+      "aldi": 2.29,
+      "trader joe's": 2.69
+    },
+    "navel oranges (per lb)": {
+      "market basket": 1.29,
+      "walmart supercenter": 1.18,
+      "hannaford supermarket": 1.39,
+      "whole foods market": 1.49,
+      "stop & shop": 1.39,
+      "shaw's": 1.59,
+      "aldi": 1.25,
+      "trader joe's": 1.49
+    },
+    "large brown eggs (dozen)": {
+      "market basket": 3.99,
+      "walmart supercenter": 3.58,
+      "hannaford supermarket": 4.19,
+      "whole foods market": 4.29,
+      "stop & shop": 3.99,
+      "shaw's": 4.09,
+      "aldi": 3.79,
+      "trader joe's": 3.99
+    },
+    "whole milk 1 gallon": {
+      "market basket": 3.49,
+      "walmart supercenter": 3.24,
+      "hannaford supermarket": 3.69,
+      "whole foods market": 4.19,
+      "stop & shop": 3.79,
+      "shaw's": 3.89,
+      "aldi": 3.29,
+      "trader joe's": 3.59
+    },
+    "boneless skinless chicken breast (per lb)": {
+      "market basket": 2.49,
+      "walmart supercenter": 2.27,
+      "hannaford supermarket": 2.79,
+      "whole foods market": 3.29,
+      "stop & shop": 2.99,
+      "shaw's": 3.19,
+      "aldi": 2.19,
+      "trader joe's": 2.89
+    },
+    "russet potatoes 5 lb bag": {
+      "market basket": 3.99,
+      "walmart supercenter": 3.48,
+      "hannaford supermarket": 4.29,
+      "whole foods market": 4.99,
+      "stop & shop": 4.49,
+      "shaw's": 4.69,
+      "aldi": 3.29,
+      "trader joe's": 3.89
+    },
+    "strawberries 1 lb container": {
+      "market basket": 3.49,
+      "walmart supercenter": 3.24,
+      "hannaford supermarket": 3.69,
+      "whole foods market": 3.99,
+      "stop & shop": 3.79,
+      "shaw's": 4.29,
+      "aldi": 3.29,
+      "trader joe's": 3.79
+    },
+    "baby carrots 1 lb bag": {
+      "market basket": 1.29,
+      "walmart supercenter": 1.18,
+      "hannaford supermarket": 1.49,
+      "whole foods market": 1.59,
+      "stop & shop": 1.39,
+      "shaw's": 1.59,
+      "aldi": 0.99,
+      "trader joe's": 1.29
+    },
+    "broccoli crowns (per lb)": {
+      "market basket": 1.89,
+      "walmart supercenter": 1.68,
+      "hannaford supermarket": 1.99,
+      "whole foods market": 2.49,
+      "stop & shop": 2.19,
+      "shaw's": 2.29,
+      "aldi": 1.59,
+      "trader joe's": 2.19
+    },
+    "cheddar cheese block 8 oz": {
+      "market basket": 2.49,
+      "walmart supercenter": 2.18,
+      "hannaford supermarket": 2.69,
+      "whole foods market": 2.99,
+      "stop & shop": 2.79,
+      "shaw's": 2.89,
+      "aldi": 1.99,
+      "trader joe's": 2.59
+    },
+    "organic spinach 5 oz container": {
+      "market basket": 3.49,
+      "walmart supercenter": 3.24,
+      "hannaford supermarket": 3.69,
+      "whole foods market": 3.99,
+      "stop & shop": 3.79,
+      "shaw's": 3.89,
+      "aldi": 2.99,
+      "trader joe's": 3.49
+    },
+    "plain greek yogurt 32 oz": {
+      "market basket": 4.99,
+      "walmart supercenter": 4.68,
+      "hannaford supermarket": 5.29,
+      "whole foods market": 5.99,
+      "stop & shop": 5.49,
+      "shaw's": 5.79,
+      "aldi": 3.89,
+      "trader joe's": 4.49
+    },
+    "organic bananas (per lb)": {
+      "market basket": 0.79,
+      "walmart supercenter": 0.68,
+      "hannaford supermarket": 0.89,
+      "whole foods market": 0.99,
+      "stop & shop": 0.89,
+      "shaw's": 0.99,
+      "aldi": 0.69,
+      "trader joe's": 0.79
+    },
+    "ground beef 80% lean (per lb)": {
+      "market basket": 4.49,
+      "walmart supercenter": 4.18,
+      "hannaford supermarket": 4.79,
+      "whole foods market": 5.49,
+      "stop & shop": 4.89,
+      "shaw's": 5.19,
+      "aldi": 3.89,
+      "trader joe's": 4.39
+    },
+    "white sandwich bread 20 oz loaf": {
+      "market basket": 1.99,
+      "walmart supercenter": 1.68,
+      "hannaford supermarket": 2.19,
+      "whole foods market": 2.99,
+      "stop & shop": 2.49,
+      "shaw's": 2.59,
+      "aldi": 1.29,
+      "trader joe's": 2.19
+    },
+    "organic baby spring mix 5 oz": {
+      "market basket": 4.49,
+      "walmart supercenter": 4.28,
+      "hannaford supermarket": 4.99,
+      "whole foods market": 5.99,
+      "stop & shop": 5.49,
+      "shaw's": 5.79,
+      "aldi": 3.79,
+      "trader joe's": 4.79
+    },
+    "roma tomatoes (per lb)": {
+      "market basket": 1.49,
+      "walmart supercenter": 1.28,
+      "hannaford supermarket": 1.59,
+      "whole foods market": 1.99,
+      "stop & shop": 1.69,
+      "shaw's": 1.89,
+      "aldi": 1.19,
+      "trader joe's": 1.59
+    },
+    "yellow onions 3 lb bag": {
+      "market basket": 2.99,
+      "walmart supercenter": 2.48,
+      "hannaford supermarket": 3.19,
+      "whole foods market": 3.49,
+      "stop & shop": 3.29,
+      "shaw's": 3.49,
+      "aldi": 2.29,
+      "trader joe's": 2.79
+    },
+    "frozen green beans 12 oz bag": {
+      "market basket": 1.49,
+      "walmart supercenter": 1.18,
+      "hannaford supermarket": 1.69,
+      "whole foods market": 1.99,
+      "stop & shop": 1.79,
+      "shaw's": 1.89,
+      "aldi": 0.99,
+      "trader joe's": 1.59
+    },
+    "canned black beans 15 oz": {
+      "market basket": 1.09,
+      "walmart supercenter": 0.88,
+      "hannaford supermarket": 1.29,
+      "whole foods market": 1.49,
+      "stop & shop": 1.19,
+      "shaw's": 1.39,
+      "aldi": 0.79,
+      "trader joe's": 1.19
+    },
+    "hass avocados each": {
+        "market basket": 1.29,
+        "walmart supercenter": 0.98,
+        "hannaford supermarket": 1.49,
+        "whole foods market": 1.79,
+        "stop & shop": 1.39,
+        "shaw's": 1.59,
+        "aldi": 0.88,
+        "trader joe's": 1.29
+    },
+    "sweet potatoes per lb": {
+        "market basket": 0.99,
+        "walmart supercenter": 0.88,
+        "hannaford supermarket": 1.19,
+        "whole foods market": 1.49,
+        "stop & shop": 1.29,
+        "shaw's": 1.39,
+        "aldi": 0.79,
+        "trader joe's": 0.99
+    },
+    "wonder classic white bread 20 oz": {
+        "market basket": 2.49,
+        "walmart supercenter": 2.24,
+        "hannaford supermarket": 2.69,
+        "whole foods market": 3.29,
+        "stop & shop": 2.99,
+        "shaw's": 3.09,
+        "aldi": 1.89,
+        "trader joe's": 2.59
+    },
+    "jif creamy peanut butter 16 oz": {
+        "market basket": 2.79,
+        "walmart supercenter": 2.48,
+        "hannaford supermarket": 2.99,
+        "whole foods market": 3.49,
+        "stop & shop": 3.19,
+        "shaw's": 3.29,
+        "aldi": 1.99,
+        "trader joe's": 2.69
+    },
+    "cheerios cereal 18 oz box": {
+        "market basket": 4.99,
+        "walmart supercenter": 4.49,
+        "hannaford supermarket": 5.19,
+        "whole foods market": 5.99,
+        "stop & shop": 5.49,
+        "shaw's": 5.59,
+        "aldi": 3.29,
+        "trader joe's": 4.89
+    },
+    "kellogg's frosted flakes 19 oz box": {
+        "market basket": 5.29,
+        "walmart supercenter": 4.78,
+        "hannaford supermarket": 5.49,
+        "whole foods market": 6.19,
+        "stop & shop": 5.79,
+        "shaw's": 5.99,
+        "aldi": 3.79,
+        "trader joe's": 4.99
+    },
+    "dole chopped romaine 9 oz bag": {
+        "market basket": 2.99,
+        "walmart supercenter": 2.48,
+        "hannaford supermarket": 2.99,
+        "whole foods market": 3.29,
+        "stop & shop": 3.19,
+        "shaw's": 3.39,
+        "aldi": 2.29,
+        "trader joe's": 2.79
+    },
+    "dannon light and fit yogurt 5.3 oz": {
+        "market basket": 1.29,
+        "walmart supercenter": 1.09,
+        "hannaford supermarket": 1.39,
+        "whole foods market": 1.59,
+        "stop & shop": 1.49,
+        "shaw's": 1.59,
+        "aldi": 0.79,
+        "trader joe's": 1.19
+    },
+    "frozen broccoli florets 12 oz bag": {
+        "market basket": 1.49,
+        "walmart supercenter": 1.18,
+        "hannaford supermarket": 1.69,
+        "whole foods market": 1.99,
+        "stop & shop": 1.79,
+        "shaw's": 1.89,
+        "aldi": 0.99,
+        "trader joe's": 1.49
+    },
+    "campbell's chicken noodle soup 10.5 oz can": {
+        "market basket": 1.79,
+        "walmart supercenter": 1.28,
+        "hannaford supermarket": 1.89,
+        "whole foods market": 2.19,
+        "stop & shop": 1.99,
+        "shaw's": 2.09,
+        "aldi": 0.89,
+        "trader joe's": 1.69
+    },
+    "organic baby carrots 1 lb bag": {
+        "market basket": 1.99,
+        "walmart supercenter": 1.78,
+        "hannaford supermarket": 2.29,
+        "whole foods market": 2.49,
+        "stop & shop": 2.19,
+        "shaw's": 2.39,
+        "aldi": 1.39,
+        "trader joe's": 1.79
+    },
+    "organic gala apples (per lb)": {
+        "market basket": 2.29,
+        "walmart supercenter": 1.98,
+        "hannaford supermarket": 2.59,
+        "whole foods market": 2.79,
+        "stop & shop": 2.69,
+        "shaw's": 2.89,
+        "aldi": 1.99,
+        "trader joe's": 2.49
+    },
+    "green seedless grapes (per lb)": {
+        "market basket": 2.99,
+        "walmart supercenter": 2.48,
+        "hannaford supermarket": 2.79,
+        "whole foods market": 3.49,
+        "stop & shop": 3.19,
+        "shaw's": 3.29,
+        "aldi": 2.29,
+        "trader joe's": 2.89
+    },
+    "sara lee honey wheat bread 20 oz": {
+        "market basket": 3.49,
+        "walmart supercenter": 3.24,
+        "hannaford supermarket": 3.79,
+        "whole foods market": 4.29,
+        "stop & shop": 3.89,
+        "shaw's": 4.09,
+        "aldi": 2.49,
+        "trader joe's": 3.39
+    },
+    "mission flour tortillas 10 count": {
+        "market basket": 2.99,
+        "walmart supercenter": 2.48,
+        "hannaford supermarket": 3.29,
+        "whole foods market": 3.49,
+        "stop & shop": 3.19,
+        "shaw's": 3.39,
+        "aldi": 1.99,
+        "trader joe's": 2.79
+    },
+    "campbell's tomato soup 10.75 oz can": {
+        "market basket": 1.59,
+        "walmart supercenter": 1.18,
+        "hannaford supermarket": 1.69,
+        "whole foods market": 2.09,
+        "stop & shop": 1.79,
+        "shaw's": 1.89,
+        "aldi": 0.79,
+        "trader joe's": 1.49
+    },
+    "del monte canned green beans 14.5 oz": {
+        "market basket": 1.49,
+        "walmart supercenter": 1.28,
+        "hannaford supermarket": 1.69,
+        "whole foods market": 1.99,
+        "stop & shop": 1.79,
+        "shaw's": 1.89,
+        "aldi": 0.79,
+        "trader joe's": 1.39
+    },
+    "frozen strawberries 16 oz bag": {
+        "market basket": 3.49,
+        "walmart supercenter": 3.24,
+        "hannaford supermarket": 3.69,
+        "whole foods market": 4.19,
+        "stop & shop": 3.89,
+        "shaw's": 4.09,
+        "aldi": 2.99,
+        "trader joe's": 3.79
+    },
+    "daisy sour cream 16 oz": {
+        "market basket": 2.99,
+        "walmart supercenter": 2.48,
+        "hannaford supermarket": 2.79,
+        "whole foods market": 3.49,
+        "stop & shop": 2.99,
+        "shaw's": 3.19,
+        "aldi": 1.99,
+        "trader joe's": 2.79
+    },
+    "kraft shredded mozzarella cheese 8 oz": {
+        "market basket": 3.49,
+        "walmart supercenter": 3.18,
+        "hannaford supermarket": 3.69,
+        "whole foods market": 4.19,
+        "stop & shop": 3.89,
+        "shaw's": 3.99,
+        "aldi": 2.89,
+        "trader joe's": 3.49
+    },
+    "yoplait original yogurt 6 oz cup": {
+        "market basket": 0.79,
+        "walmart supercenter": 0.68,
+        "hannaford supermarket": 0.89,
+        "whole foods market": 1.09,
+        "stop & shop": 0.99,
+        "shaw's": 1.09,
+        "aldi": 0.59,
+        "trader joe's": 0.79
+    },
+    "nature's own whole wheat bread 20 oz": {
+        "market basket": 3.29,
+        "walmart supercenter": 2.88,
+        "hannaford supermarket": 3.59,
+        "whole foods market": 3.89,
+        "stop & shop": 3.49,
+        "shaw's": 3.79,
+        "aldi": 2.29,
+        "trader joe's": 3.09
+    },
+    "great value black beans 15 oz": {
+        "market basket": 0.99,
+        "walmart supercenter": 0.72,
+        "hannaford supermarket": 1.09,
+        "whole foods market": 1.49,
+        "stop & shop": 1.19,
+        "shaw's": 1.39,
+        "aldi": 0.69,
+        "trader joe's": 1.19
+    },
+    "organic blueberries 6 oz container": {
+        "market basket": 3.99,
+        "walmart supercenter": 3.68,
+        "hannaford supermarket": 4.49,
+        "whole foods market": 4.99,
+        "stop & shop": 4.79,
+        "shaw's": 4.89,
+        "aldi": 3.29,
+        "trader joe's": 3.99
+    },
+    "angel hair pasta 16 oz box": {
+        "market basket": 1.49,
+        "walmart supercenter": 1.18,
+        "hannaford supermarket": 1.69,
+        "whole foods market": 2.09,
+        "stop & shop": 1.79,
+        "shaw's": 1.99,
+        "aldi": 0.89,
+        "trader joe's": 1.39
+    },
+    "organic romaine hearts 3 ct bag": {
+        "market basket": 4.29,
+        "walmart supercenter": 3.78,
+        "hannaford supermarket": 4.49,
+        "whole foods market": 5.29,
+        "stop & shop": 4.99,
+        "shaw's": 5.19,
+        "aldi": 3.29,
+        "trader joe's": 4.49
+    },
+    "organic strawberries 1 lb container": {
+        "market basket": 5.99,
+        "walmart supercenter": 5.28,
+        "hannaford supermarket": 5.79,
+        "whole foods market": 6.49,
+        "stop & shop": 5.99,
+        "shaw's": 6.29,
+        "aldi": 4.49,
+        "trader joe's": 5.49
+    },
+    "nature valley crunchy granola bars 12 ct": {
+        "market basket": 3.49,
+        "walmart supercenter": 2.98,
+        "hannaford supermarket": 3.69,
+        "whole foods market": 4.19,
+        "stop & shop": 3.99,
+        "shaw's": 4.29,
+        "aldi": 2.49,
+        "trader joe's": 3.49
+    },
+    "chobani greek yogurt 5.3 oz cup": {
+        "market basket": 1.29,
+        "walmart supercenter": 1.18,
+        "hannaford supermarket": 1.39,
+        "whole foods market": 1.79,
+        "stop & shop": 1.49,
+        "shaw's": 1.69,
+        "aldi": 0.89,
+        "trader joe's": 1.29
+    },
+    "kraft american cheese singles 16 slices": {
+        "market basket": 3.79,
+        "walmart supercenter": 3.24,
+        "hannaford supermarket": 3.99,
+        "whole foods market": 4.59,
+        "stop & shop": 4.29,
+        "shaw's": 4.49,
+        "aldi": 2.99,
+        "trader joe's": 3.49
+    },
+    "smithfield bacon 16 oz": {
+        "market basket": 5.99,
+        "walmart supercenter": 4.98,
+        "hannaford supermarket": 6.49,
+        "whole foods market": 7.19,
+        "stop & shop": 6.79,
+        "shaw's": 7.29,
+        "aldi": 4.49,
+        "trader joe's": 5.79
+    },
+    "gala apples 3 lb bag": {
+        "market basket": 4.99,
+        "walmart supercenter": 4.28,
+        "hannaford supermarket": 5.49,
+        "whole foods market": 5.99,
+        "stop & shop": 5.79,
+        "shaw's": 5.89,
+        "aldi": 3.99,
+        "trader joe's": 4.49
+    },
+    "stonyfield organic yogurt 6 oz cup": {
+        "market basket": 1.49,
+        "walmart supercenter": 1.38,
+        "hannaford supermarket": 1.69,
+        "whole foods market": 1.99,
+        "stop & shop": 1.79,
+        "shaw's": 1.89,
+        "aldi": 1.19,
+        "trader joe's": 1.59
+    },
+    "organic zucchini (per lb)": {
+        "market basket": 2.29,
+        "walmart supercenter": 2.18,
+        "hannaford supermarket": 2.49,
+        "whole foods market": 2.99,
+        "stop & shop": 2.79,
+        "shaw's": 2.89,
+        "aldi": 1.99,
+        "trader joe's": 2.49
+    },
+    "organic celery hearts 1 ct": {
+        "market basket": 3.99,
+        "walmart supercenter": 3.28,
+        "hannaford supermarket": 4.29,
+        "whole foods market": 4.79,
+        "stop & shop": 4.49,
+        "shaw's": 4.59,
+        "aldi": 2.99,
+        "trader joe's": 3.79
+    },
+    "mission yellow corn tortillas 30 ct": {
+        "market basket": 2.99,
+        "walmart supercenter": 2.48,
+        "hannaford supermarket": 2.99,
+        "whole foods market": 3.49,
+        "stop & shop": 3.29,
+        "shaw's": 3.39,
+        "aldi": 1.89,
+        "trader joe's": 2.79
+    },
+    "organic cucumber each": {
+        "market basket": 1.29,
+        "walmart supercenter": 1.18,
+        "hannaford supermarket": 1.49,
+        "whole foods market": 1.79,
+        "stop & shop": 1.59,
+        "shaw's": 1.69,
+        "aldi": 0.89,
+        "trader joe's": 1.29
+    },
+    "whole wheat spaghetti 16 oz": {
+        "market basket": 1.79,
+        "walmart supercenter": 1.48,
+        "hannaford supermarket": 1.99,
+        "whole foods market": 2.29,
+        "stop & shop": 2.19,
+        "shaw's": 2.39,
+        "aldi": 1.09,
+        "trader joe's": 1.79
+    },
+    "organic green bell pepper each": {
+        "market basket": 1.49,
+        "walmart supercenter": 1.38,
+        "hannaford supermarket": 1.69,
+        "whole foods market": 1.89,
+        "stop & shop": 1.79,
+        "shaw's": 1.99,
+        "aldi": 0.99,
+        "trader joe's": 1.49
+    },
+    "organic whole white mushrooms 8 oz": {
+        "market basket": 3.49,
+        "walmart supercenter": 3.18,
+        "hannaford supermarket": 3.79,
+        "whole foods market": 4.29,
+        "stop & shop": 3.99,
+        "shaw's": 4.09,
+        "aldi": 2.89,
+        "trader joe's": 3.49
+    },
+    "frozen peas 12 oz bag": {
+        "market basket": 1.49,
+        "walmart supercenter": 1.18,
+        "hannaford supermarket": 1.69,
+        "whole foods market": 1.99,
+        "stop & shop": 1.79,
+        "shaw's": 1.89,
+        "aldi": 0.99,
+        "trader joe's": 1.39
+    },
+    "nature's path organic oatmeal 8 ct box": {
+        "market basket": 4.99,
+        "walmart supercenter": 4.68,
+        "hannaford supermarket": 5.29,
+        "whole foods market": 5.99,
+        "stop & shop": 5.79,
+        "shaw's": 5.99,
+        "aldi": 3.89,
+        "trader joe's": 4.79
+    },
+    "progresso minestrone soup 19 oz can": {
+        "market basket": 2.79,
+        "walmart supercenter": 2.28,
+        "hannaford supermarket": 2.99,
+        "whole foods market": 3.49,
+        "stop & shop": 3.19,
+        "shaw's": 3.39,
+        "aldi": 1.79,
+        "trader joe's": 2.69
+    },
+    "organic baby bella mushrooms 8 oz": {
+        "market basket": 3.79,
+        "walmart supercenter": 3.38,
+        "hannaford supermarket": 3.99,
+        "whole foods market": 4.49,
+        "stop & shop": 4.19,
+        "shaw's": 4.39,
+        "aldi": 2.99,
+        "trader joe's": 3.79
+    },
+    "organic fuji apples (per lb)": {
+        "market basket": 2.59,
+        "walmart supercenter": 2.38,
+        "hannaford supermarket": 2.79,
+        "whole foods market": 2.99,
+        "stop & shop": 2.89,
+        "shaw's": 2.99,
+        "aldi": 2.19,
+        "trader joe's": 2.69
+    },
+    "red seedless grapes (per lb)": {
+        "market basket": 2.79,
+        "walmart supercenter": 2.58,
+        "hannaford supermarket": 2.89,
+        "whole foods market": 3.29,
+        "stop & shop": 3.09,
+        "shaw's": 3.19,
+        "aldi": 2.29,
+        "trader joe's": 2.79
+    },
+    "organic baby spinach 5 oz container": {
+        "market basket": 3.79,
+        "walmart supercenter": 3.58,
+        "hannaford supermarket": 3.99,
+        "whole foods market": 4.49,
+        "stop & shop": 4.19,
+        "shaw's": 4.39,
+        "aldi": 3.29,
+        "trader joe's": 3.89
+    },
+    "idaho russet potatoes 10 lb bag": {
+        "market basket": 5.99,
+        "walmart supercenter": 4.98,
+        "hannaford supermarket": 6.49,
+        "whole foods market": 7.29,
+        "stop & shop": 6.99,
+        "shaw's": 7.19,
+        "aldi": 4.79,
+        "trader joe's": 5.49
+    },
+    "perdue fresh chicken drumsticks (per lb)": {
+        "market basket": 1.49,
+        "walmart supercenter": 1.28,
+        "hannaford supermarket": 1.79,
+        "whole foods market": 2.29,
+        "stop & shop": 1.89,
+        "shaw's": 1.99,
+        "aldi": 1.19,
+        "trader joe's": 1.69
+    },
+    "oscar mayer turkey bacon 12 oz": {
+        "market basket": 3.79,
+        "walmart supercenter": 3.24,
+        "hannaford supermarket": 3.89,
+        "whole foods market": 4.49,
+        "stop & shop": 4.09,
+        "shaw's": 4.29,
+        "aldi": 2.89,
+        "trader joe's": 3.49
+    },
+    "organic strawberries 16 oz container": {
+        "market basket": 6.49,
+        "walmart supercenter": 5.98,
+        "hannaford supermarket": 6.79,
+        "whole foods market": 7.29,
+        "stop & shop": 6.99,
+        "shaw's": 7.19,
+        "aldi": 5.49,
+        "trader joe's": 6.29
+    },
+    "great value 2% milk 1 gallon": {
+        "market basket": 3.19,
+        "walmart supercenter": 2.98,
+        "hannaford supermarket": 3.39,
+        "whole foods market": 4.09,
+        "stop & shop": 3.59,
+        "shaw's": 3.69,
+        "aldi": 2.79,
+        "trader joe's": 3.29
+    },
+    "armour chili with beans 15 oz can": {
+        "market basket": 1.99,
+        "walmart supercenter": 1.58,
+        "hannaford supermarket": 2.19,
+        "whole foods market": 2.79,
+        "stop & shop": 2.29,
+        "shaw's": 2.39,
+        "aldi": 1.19,
+        "trader joe's": 1.89
+    },
+    "best yet canned corn 15.25 oz": {
+        "market basket": 1.19,
+        "walmart supercenter": 0.88,
+        "hannaford supermarket": 1.29,
+        "whole foods market": 1.49,
+        "stop & shop": 1.19,
+        "shaw's": 1.29,
+        "aldi": 0.79,
+        "trader joe's": 1.09
+    },
+    "organic roma tomatoes (per lb)": {
+        "market basket": 2.29,
+        "walmart supercenter": 2.18,
+        "hannaford supermarket": 2.49,
+        "whole foods market": 2.79,
+        "stop & shop": 2.69,
+        "shaw's": 2.79,
+        "aldi": 1.99,
+        "trader joe's": 2.39
+    },
+    "earthbound farm organic spring mix 16 oz": {
+        "market basket": 7.99,
+        "walmart supercenter": 7.28,
+        "hannaford supermarket": 7.99,
+        "whole foods market": 8.99,
+        "stop & shop": 8.29,
+        "shaw's": 8.49,
+        "aldi": 5.99,
+        "trader joe's": 7.49
+    },
+    "chobani greek yogurt multi-pack 4 ct": {
+        "market basket": 4.49,
+        "walmart supercenter": 3.98,
+        "hannaford supermarket": 4.79,
+        "whole foods market": 5.49,
+        "stop & shop": 4.99,
+        "shaw's": 5.19,
+        "aldi": 3.49,
+        "trader joe's": 4.19
+    },
+    "dole mixed greens 5 oz bag": {
+        "market basket": 2.99,
+        "walmart supercenter": 2.68,
+        "hannaford supermarket": 2.99,
+        "whole foods market": 3.29,
+        "stop & shop": 3.19,
+        "shaw's": 3.39,
+        "aldi": 2.29,
+        "trader joe's": 2.79
+    },
+    "organic celery stalks (per bunch)": {
+        "market basket": 2.99,
+        "walmart supercenter": 2.48,
+        "hannaford supermarket": 2.99,
+        "whole foods market": 3.49,
+        "stop & shop": 3.29,
+        "shaw's": 3.39,
+        "aldi": 2.29,
+        "trader joe's": 2.99
+    },
+    "best yet elbow macaroni 16 oz": {
+        "market basket": 1.29,
+        "walmart supercenter": 1.09,
+        "hannaford supermarket": 1.49,
+        "whole foods market": 1.89,
+        "stop & shop": 1.59,
+        "shaw's": 1.69,
+        "aldi": 0.89,
+        "trader joe's": 1.29
+    },
+    "clover valley vegetable oil 48 oz": {
+        "market basket": 4.49,
+        "walmart supercenter": 3.98,
+        "hannaford supermarket": 4.79,
+        "whole foods market": 5.49,
+        "stop & shop": 4.99,
+        "shaw's": 5.19,
+        "aldi": 3.29,
+        "trader joe's": 4.19
+    },
+    "green giant canned peas 15 oz": {
+        "market basket": 1.39,
+        "walmart supercenter": 1.18,
+        "hannaford supermarket": 1.59,
+        "whole foods market": 1.99,
+        "stop & shop": 1.79,
+        "shaw's": 1.89,
+        "aldi": 0.99,
+        "trader joe's": 1.49
+    },
+    "organic russet potatoes 5 lb bag": {
+        "market basket": 4.99,
+        "walmart supercenter": 4.48,
+        "hannaford supermarket": 5.29,
+        "whole foods market": 5.99,
+        "stop & shop": 5.49,
+        "shaw's": 5.69,
+        "aldi": 3.79,
+        "trader joe's": 4.49
+    },
+    "la croix sparkling water 12 pack": {
+        "market basket": 5.99,
+        "walmart supercenter": 5.28,
+        "hannaford supermarket": 5.79,
+        "whole foods market": 6.49,
+        "stop & shop": 5.99,
+        "shaw's": 6.29,
+        "aldi": 4.49,
+        "trader joe's": 5.49
+    },
+    "great value whole kernel corn 15 oz": {
+        "market basket": null,
+        "walmart supercenter": 0.58,
+        "hannaford supermarket": null,
+        "whole foods market": null,
+        "stop & shop": null,
+        "shaw's": null,
+        "aldi": null,
+        "trader joe's": null
+    },
+    "barilla spaghetti 16 oz": {
+        "market basket": 1.49,
+        "walmart supercenter": 1.28,
+        "hannaford supermarket": 1.59,
+        "whole foods market": 2.29,
+        "stop & shop": 1.69,
+        "shaw's": 1.79,
+        "aldi": 0.98,
+        "trader joe's": 1.39
+    },
+    "skippy creamy peanut butter 16 oz": {
+        "market basket": 2.79,
+        "walmart supercenter": 2.48,
+        "hannaford supermarket": 2.99,
+        "whole foods market": 3.59,
+        "stop & shop": 3.19,
+        "shaw's": 3.29,
+        "aldi": 1.89,
+        "trader joe's": 2.69
+    },
+    "dole pineapple chunks 20 oz can": {
+        "market basket": 1.89,
+        "walmart supercenter": 1.58,
+        "hannaford supermarket": 1.99,
+        "whole foods market": 2.19,
+        "stop & shop": 1.89,
+        "shaw's": 2.09,
+        "aldi": 1.09,
+        "trader joe's": 1.89
+    },
+    "quaker instant oatmeal 10 ct": {
+        "market basket": 4.49,
+        "walmart supercenter": 3.98,
+        "hannaford supermarket": 4.79,
+        "whole foods market": 5.49,
+        "stop & shop": 4.99,
+        "shaw's": 5.19,
+        "aldi": 3.29,
+        "trader joe's": 4.49
+    },
+    "oreo original cookies 14.3 oz": {
+        "market basket": 4.29,
+        "walmart supercenter": 3.98,
+        "hannaford supermarket": 4.49,
+        "whole foods market": 5.29,
+        "stop & shop": 4.79,
+        "shaw's": 4.99,
+        "aldi": 3.29,
+        "trader joe's": 4.19
+    },
+    "pepsi 12 pack cans": {
+        "market basket": 7.49,
+        "walmart supercenter": 6.98,
+        "hannaford supermarket": 7.79,
+        "whole foods market": 8.49,
+        "stop & shop": 7.99,
+        "shaw's": 8.29,
+        "aldi": 6.29,
+        "trader joe's": 7.49
+    },
+    "lays classic potato chips 8 oz": {
+        "market basket": 4.49,
+        "walmart supercenter": 3.98,
+        "hannaford supermarket": 4.79,
+        "whole foods market": 5.49,
+        "stop & shop": 4.99,
+        "shaw's": 5.19,
+        "aldi": 2.99,
+        "trader joe's": 3.89
+    },
+    "campbell's cream of mushroom soup 10.5 oz": {
+        "market basket": 1.89,
+        "walmart supercenter": 1.28,
+        "hannaford supermarket": 1.99,
+        "whole foods market": 2.19,
+        "stop & shop": 1.99,
+        "shaw's": 2.09,
+        "aldi": 0.89,
+        "trader joe's": 1.79
+    },
+    "smucker's strawberry jam 20 oz": {
+        "market basket": 3.79,
+        "walmart supercenter": 3.28,
+        "hannaford supermarket": 3.99,
+        "whole foods market": 4.59,
+        "stop & shop": 4.29,
+        "shaw's": 4.39,
+        "aldi": 2.99,
+        "trader joe's": 3.79
+    },
+    "hunts tomato sauce 15 oz can": {
+        "market basket": 1.09,
+        "walmart supercenter": 0.88,
+        "hannaford supermarket": 1.19,
+        "whole foods market": 1.49,
+        "stop & shop": 1.09,
+        "shaw's": 1.19,
+        "aldi": 0.79,
+        "trader joe's": 1.09
+    },
+    "ronzoni penne rigate 16 oz": {
+        "market basket": 1.69,
+        "walmart supercenter": 1.48,
+        "hannaford supermarket": 1.89,
+        "whole foods market": 2.19,
+        "stop & shop": 1.79,
+        "shaw's": 1.99,
+        "aldi": 0.98,
+        "trader joe's": 1.49
+    },
+    "tropicana orange juice 52 oz": {
+        "market basket": 4.99,
+        "walmart supercenter": 4.48,
+        "hannaford supermarket": 5.29,
+        "whole foods market": 5.99,
+        "stop & shop": 5.49,
+        "shaw's": 5.79,
+        "aldi": 3.99,
+        "trader joe's": 4.79
+    },
+    "carnation evaporated milk 12 oz": {
+        "market basket": 1.89,
+        "walmart supercenter": 1.38,
+        "hannaford supermarket": 1.99,
+        "whole foods market": 2.29,
+        "stop & shop": 1.89,
+        "shaw's": 1.99,
+        "aldi": 0.89,
+        "trader joe's": 1.59
+    },
+    "heinz tomato ketchup 32 oz": {
+        "market basket": 4.49,
+        "walmart supercenter": 3.98,
+        "hannaford supermarket": 4.79,
+        "whole foods market": 5.29,
+        "stop & shop": 4.99,
+        "shaw's": 5.19,
+        "aldi": 2.99,
+        "trader joe's": 4.39
+    },
+    "planters roasted peanuts 16 oz": {
+        "market basket": 3.49,
+        "walmart supercenter": 3.18,
+        "hannaford supermarket": 3.69,
+        "whole foods market": 4.29,
+        "stop & shop": 3.99,
+        "shaw's": 4.19,
+        "aldi": 2.89,
+        "trader joe's": 3.29
+    },
+    "prego traditional pasta sauce 24 oz": {
+        "market basket": 3.79,
+        "walmart supercenter": 3.28,
+        "hannaford supermarket": 3.99,
+        "whole foods market": 4.79,
+        "stop & shop": 4.19,
+        "shaw's": 4.39,
+        "aldi": 2.69,
+        "trader joe's": 3.79
+    },
+    "arnold whole grains oatnut bread 24 oz": {
+        "market basket": 4.99,
+        "walmart supercenter": 4.28,
+        "hannaford supermarket": 5.29,
+        "whole foods market": 5.99,
+        "stop & shop": 5.49,
+        "shaw's": 5.79,
+        "aldi": 3.49,
+        "trader joe's": 4.49
+    },
+    "fresh express iceberg garden salad 12 oz": {
+        "market basket": 2.99,
+        "walmart supercenter": 2.48,
+        "hannaford supermarket": 2.99,
+        "whole foods market": 3.29,
+        "stop & shop": 3.19,
+        "shaw's": 3.39,
+        "aldi": 2.29,
+        "trader joe's": 2.79
+    },
+    "banquet brown n serve sausages 6.4 oz": {
+        "market basket": 1.49,
+        "walmart supercenter": 1.18,
+        "hannaford supermarket": 1.69,
+        "whole foods market": 1.99,
+        "stop & shop": 1.79,
+        "shaw's": 1.89,
+        "aldi": 0.99,
+        "trader joe's": 1.49
+    },
+    "pillsbury crescent rolls 8 oz": {
+        "market basket": 3.49,
+        "walmart supercenter": 3.18,
+        "hannaford supermarket": 3.69,
+        "whole foods market": 4.29,
+        "stop & shop": 3.99,
+        "shaw's": 4.19,
+        "aldi": 2.49,
+        "trader joe's": 3.49
+    },
+    "aunt jemima original pancake mix 32 oz": {
+        "market basket": 3.49,
+        "walmart supercenter": 3.18,
+        "hannaford supermarket": 3.69,
+        "whole foods market": 4.29,
+        "stop & shop": 3.99,
+        "shaw's": 4.19,
+        "aldi": 2.89,
+        "trader joe's": 3.49
+    },
+    "aunt jemima original syrup 24 oz": {
+        "market basket": 3.99,
+        "walmart supercenter": 3.48,
+        "hannaford supermarket": 4.19,
+        "whole foods market": 4.79,
+        "stop & shop": 4.29,
+        "shaw's": 4.49,
+        "aldi": 3.29,
+        "trader joe's": 3.89
+    }
+      
+
+
+}
+      
+
+  
