@@ -102,8 +102,6 @@ async function addToList(item) {
         let element = document.getElementById("myList");
         element.innerHTML += html;
         //console.log(html);
-        console.log("Value of current item: ", $(document).find('[data-itemValue = "' + item + 'Value"')[0].value);
-        console.log("Value of Rice:", $(document).find('[data-itemValue = "RiceValue"')[0].value);
         addItemDB(name, item, 1)
         //addItemToList(name, item, 1);
     }
@@ -111,7 +109,7 @@ async function addToList(item) {
 
 async function updateItemQuantity(listKey, itemName, newQuantity) {
     console.log(newQuantity);
-    let list = getItemsDB(listKey) || {};
+    let list = await getItemsDB(listKey) || {};
     console.log("list gotten from updateQuantity:", list);
     if (newQuantity > 0) {
         //list[itemName] = newQuantity;
