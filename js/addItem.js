@@ -1,5 +1,5 @@
 import {db, auth } from "./firebaseInit.js";
-import { setDoc, getDoc, updateDoc, deleteField, deleteDoc, collection, doc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+import { setDoc, getDoc, updateDoc, doc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 
 // Adds the items to the selected list when selected on the history or hot deals page
@@ -52,9 +52,10 @@ $(document).ready(function () {
                 console.log("User logged in:", user.uid);
                 init();
             }
-        });
+    });
+});
 
-async function init() {}
+async function init() {
     let selectedList = JSON.parse(localStorage.getItem('selectedList')) || [];
 
     $(document).on('click', '.addItem', function() {
@@ -71,7 +72,7 @@ async function init() {}
 
         addItemDB(selectedList, item, 1);
     });
-});
+}
 
 /*
 Not currently usable

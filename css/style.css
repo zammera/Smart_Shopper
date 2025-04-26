@@ -385,9 +385,9 @@ body {
 
 .itemName {
     display: block;
-    height: 48px;
+    height: 68px;
     margin-top: 5px;
-    font-size: 26px;
+    font-size: 20px;
     white-space: wrap;
     word-break: normal;
     overflow-y: auto;
@@ -402,7 +402,7 @@ body {
 .itemInfoContainer {
     display: inline-block;
     width: 180px;
-    height: 100px;
+    height: 80px;
     margin-top: 0px;
     border: 1px solid black;
     border-radius: 5px;
@@ -414,7 +414,7 @@ body {
 .itemPrice {
     display: block;
     width: 170px;
-    height: 40px;
+    height: 30px;
     margin-left: auto;
     margin-right: auto;
     font-size: 18px;
@@ -425,7 +425,7 @@ body {
 .itemStore {
     display: block;
     width: 170px;
-    height: 44px;
+    height: 24px;
     margin-left: auto;
     margin-right: auto;
     border-top: 1px solid black;

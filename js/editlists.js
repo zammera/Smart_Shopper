@@ -2,48 +2,29 @@ import {db, auth } from "./firebaseInit.js";
 import { setDoc, getDoc, updateDoc, deleteField, deleteDoc, collection, doc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 
-const listNames = [
-    {"name":"Taco Tuesday"}
-]
-
 let groceries = {};
 
 // grocery items loaded from the json
 async function loadGroceries() {
     try {
-        const response = await fetch('grocery.json'); 
+        const response = await fetch('items.json'); 
         groceries = await response.json();
         populateGrocery(); // After loading, call populate
     } catch (error) {
         console.error("Error loading groceries.json:", error);
     }
 }
-// items in json is all lowercase to make it easier to add items. Title case to display
-function toTitleCase(str) {
-    const lowerWords = ['lb', 'oz', 'ct', 'pack', 'each', 'g', 'mg', 'kg', 'l', 'ml', 'bunch'];
-    
-    return str.split(' ').map(word => {
-        const cleanWord = word.replace(/[^a-zA-Z]/g, '').toLowerCase();
-        
-        if (lowerWords.includes(cleanWord)) {
-            return word.toLowerCase(); 
-        } else {
-            return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-        }
-    }).join(' ');
-}
+
 
 
 function populateGrocery() {
     var LorR = false;
     for (const itemName in groceries) {
         const safeId = itemName.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '') + '-result';
-        const grocery = `
-            <li class="list-group-item d-flex justify-content-between align-items-center" id="${safeId}">
-                <h5 class="text-center flex-grow-1">${toTitleCase(itemName)}</h5>
-                <button class="btn btn-custom-color addToList" data-item="${itemName}">Add to List</button>
-            </li>
-        `;
+        const grocery = '<li class="list-group-item d-flex justify-content-between align-items-center" id="${safeId}">'
+                + '<h5 class="text-center flex-grow-1">' + itemName + '</h5>'
+                + '<button class="btn btn-custom-color addToList" data-item="' + itemName + '">Add to List</button>'
+            + '</li>';
 
         const element = LorR ? document.getElementById("result2") : document.getElementById("result1");
         LorR = !LorR;
@@ -65,7 +46,7 @@ async function addToList(item) {
             console.log(item + " is in list and not in HTML", list[item]);
             let html = '<li class="list-group-item d-flex justify-content-between align-items-center" id="' + item + '">'
                     + '<button class="btn btn-close btn-danger  removeItem" data-item="' + item + '"></button>'
-                    + '<h5 class="text-center flex-grow-1">' + toTitleCase(item) + '</h5>'
+                    + '<h5 class="text-center flex-grow-1">' + item + '</h5>'
                     + '<div class="btn-group" role="group" aria-label="Basic example">'
                         + '<button type="button" class="btn btn-danger decrementItem" data-item="' + item + '">-</button>'
                         + '<button type="button" class="form-control middle text-center" data-itemValue ="' + item + 'Value" value="' + list[item] + '" disabled>'+ list[item] +'</button>'
@@ -81,7 +62,7 @@ async function addToList(item) {
         console.log(item + " is not in list and not in HTML ");
         let html = '<li class="list-group-item d-flex justify-content-between align-items-center" id="' + item + '">'
                     + '<button class="btn btn-close btn-danger  removeItem" data-item="' + item + '"></button>'
-                    + '<h5 class="text-center flex-grow-1">' + toTitleCase(item) + '</h5>'
+                    + '<h5 class="text-center flex-grow-1">' + item + '</h5>'
                     + '<div class="btn-group" role="group" aria-label="Basic example">'
                         + '<button type="button" class="btn btn-danger decrementItem" data-item="' + item + '">-</button>'
                         + '<button type="button" class="form-control middle text-center" data-itemValue ="' + item + 'Value" value="1" disabled>1</button>'
@@ -221,50 +202,6 @@ async function init() {
     });
 }
 
-/* $(document).ready(function () {
-    
-    const listName = document.getElementById("listName").textContent;
-    const list = getItemsDB(listName) || {};
-
-    $(document).on('click', '.addToList', function() {
-        const item = $(this).data("item");
-        addToList(item);
-    });
-
-    $(document).on('click', '.removeItem', function() {
-        const list = JSON.parse(localStorage.getItem(listName)) || {};
-        const item = $(this).data("item");
-        if (list[item]) {
-            delete list[item]; 
-            localStorage.setItem(listName, JSON.stringify(list)); 
-        }
-        let element = document.getElementById(item);
-        element.remove();
-    });
-
-    
-    $(document).on('click', '.incrementItem', function() {
-        const item = $(this).data("item");
-        updateItemQuantity(listName, item, list[item] + 1);
-    });
-
-    $(document).on('click', '.decrementItem', function() {
-        const list = JSON.parse(localStorage.getItem(listName)) || {};
-        const item = $(this).data("item");
-        if (list[item] == 1) {
-            if (list[item]) {
-                delete list[item]; 
-                localStorage.setItem(listName, JSON.stringify(list)); 
-            }
-            let element = document.getElementById(item);
-            element.remove();
-        }
-        else {
-            updateItemQuantity(listName, item, list[item] - 1);
-        }
-    });
-}); */
-
 //Database Functions
 
 async function addItemDB(listName, itemName, quantity){
@@ -343,3 +280,66 @@ async function deleteItemDB(listName, itemName){
         console.error("Error deleting item:", error);
     }
 }
+
+
+
+/* Unused
+// items in json is all lowercase to make it easier to add items. Title case to display
+function toTitleCase(str) {
+    const lowerWords = ['lb', 'oz', 'ct', 'pack', 'each', 'g', 'mg', 'kg', 'l', 'ml', 'bunch'];
+    
+    return str.split(' ').map(word => {
+        const cleanWord = word.replace(/[^a-zA-Z]/g, '').toLowerCase();
+        
+        if (lowerWords.includes(cleanWord)) {
+            return word.toLowerCase(); 
+        } else {
+            return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+        }
+    }).join(' ');
+}
+
+$(document).ready(function () {
+    
+    const listName = document.getElementById("listName").textContent;
+    const list = getItemsDB(listName) || {};
+
+    $(document).on('click', '.addToList', function() {
+        const item = $(this).data("item");
+        addToList(item);
+    });
+
+    $(document).on('click', '.removeItem', function() {
+        const list = JSON.parse(localStorage.getItem(listName)) || {};
+        const item = $(this).data("item");
+        if (list[item]) {
+            delete list[item]; 
+            localStorage.setItem(listName, JSON.stringify(list)); 
+        }
+        let element = document.getElementById(item);
+        element.remove();
+    });
+
+    
+    $(document).on('click', '.incrementItem', function() {
+        const item = $(this).data("item");
+        updateItemQuantity(listName, item, list[item] + 1);
+    });
+
+    $(document).on('click', '.decrementItem', function() {
+        const list = JSON.parse(localStorage.getItem(listName)) || {};
+        const item = $(this).data("item");
+        if (list[item] == 1) {
+            if (list[item]) {
+                delete list[item]; 
+                localStorage.setItem(listName, JSON.stringify(list)); 
+            }
+            let element = document.getElementById(item);
+            element.remove();
+        }
+        else {
+            updateItemQuantity(listName, item, list[item] - 1);
+        }
+    });
+}); 
+*/

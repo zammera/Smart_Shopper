@@ -1,5 +1,9 @@
+import {db, auth } from "./firebaseInit.js";
+import { getDocs, collection } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+
 const getItemsData = async () => {
-    let items = await fetch(`./files/history.json`)
+    let items = await fetch(`./items.json`)
         .then((response) => { 
             return response.json().then((data) => {
                 return data;
@@ -153,4 +157,41 @@ const getCheapestItems = async(itemList) => {
     return cheapestItems;
 }
 
+const getLists = async() => {
+    const user = auth.currentUser;
+    if (!user) {
+        console.error("User not logged in");
+        return;
+    }
+    try {
+        const groceryListsCollection = collection(db, `users/${user.uid}/groceryLists`);
+        const querySnapshot = await getDocs(groceryListsCollection);
+        const allListsData = [];
+        querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        console.log(doc.id);
+        allListsData.push({ id: doc.id, ...doc.data() });
+        });
+        return allListsData;
+    } catch (error) {
+        console.error("Error getting grocery lists:", error);
+        return [];
+    }
+}
+
 generateItems();
+
+$(document).ready(function () {
+    onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                console.log("User logged in:", user.uid);
+                init();
+            }
+    });
+});
+
+async function init() {
+    const lists = getLists();
+    console.log(lists);
+    console.log(lists.value);
+}
