@@ -91,10 +91,10 @@ $( function() {
                 console.log("Fetched lists from Firestore:", lists);
 
                 lists.forEach(list => {
-                    if (list.name && list.name !== "Hot Deals List") {
+                    if (list.name !== "Hot Deals List" && list.name !== undefined) {
                         createListCard(list.name);
                     }
-                });                                                              
+                });                                               
 
             } catch (err) {
                 console.error("Error getting lists:", err);
@@ -187,20 +187,16 @@ async function getAllCurrentLists() {
       });
 }
 
-async function deleteList(name) {
-    let element = document.getElementById(name);
-    if (element) {
-        element.remove();
-        if (name && name !== "undefined") {
-            await deleteDBList(name);
-        } else {
-            console.warn("Skipping delete for undefined name.");
-        }
-    } else {
-        console.error("Element with ID " + name + " not found.");
+async function deleteDBList(listName){
+    const user = auth.currentUser;
+    if (!user) {
+      console.error("User not logged in");
+      return;
     }
-}
 
+    const ref = doc(db, `users/${ user.uid }/groceryLists/${listName}`);
+    await deleteDoc(ref);
+}
 
 window.createNewList = createNewList;
 window.editList = editList;
