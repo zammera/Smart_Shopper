@@ -4,6 +4,28 @@ import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.1/fi
 
 let groceries = {};
 
+function showToast(message, type = 'info') {
+    const toastContainer = document.getElementById('editToast');
+    const toastBody = document.getElementById('editToastBody');
+
+    toastBody.textContent = message;
+
+    toastContainer.classList.remove('bg-success', 'bg-danger', 'bg-info', 'bg-warning', 'text-white', 'text-dark');
+
+    if (type === 'success') {
+        toastContainer.classList.add('bg-success', 'text-white');
+    } else if (type === 'danger') {
+        toastContainer.classList.add('bg-danger', 'text-white');
+    } else if (type === 'warning') {
+        toastContainer.classList.add('bg-warning', 'text-dark');
+    } else {
+        toastContainer.classList.add('bg-info', 'text-white');
+    }
+
+    const toast = new bootstrap.Toast(toastContainer);
+    toast.show();
+}
+
 // grocery items loaded from the json
 async function loadGroceries() {
     try {
@@ -80,21 +102,23 @@ async function updateItemQuantity(listKey, itemName, newQuantity) {
     console.log(newQuantity);
     let list = await getItemsDB(listKey) || {};
     console.log("list gotten from updateQuantity:", list);
+
     if (newQuantity > 0) {
-        //list[itemName] = newQuantity;
         console.log("Value of item before increase: ", $(document).find('[data-itemValue = "' + itemName + 'Value"]')[0].value);
         $('[data-itemValue="' + itemName + 'Value"]').val(newQuantity);
         $('[data-itemValue="' + itemName + 'Value"]').text(newQuantity);
-        //$(document).find('[data-itemValue = "' + itemName + 'Value"')[0].value = newQuantity;
         console.log("Value of item after increase: ",$(document).find('[data-itemValue = "' + itemName + 'Value"]')[0].value);
         addItemDB(listKey, itemName, newQuantity);
+
+        showToast('Item quantity updated!', 'info');
     } else {
         delete list[itemName];
-        deleteItemDB(listKey, itemName)
+        await deleteItemDB(listKey, itemName);
+
+        showToast('Item removed from list!', 'danger');
     }
-    
-    //localStorage.setItem(listKey, JSON.stringify(list));
 }
+
 
 if ($('body').is('#editList')) {
     (async () => {

@@ -165,6 +165,29 @@ $(function () {
     }
 
     // —————————————————————————
+    // Toast Helper Function
+    // —————————————————————————
+    function showToast(message, type = 'info') {
+      const $toast = $('#addToListToast');
+      const $toastBody = $toast.find('.toast-body');
+
+      $toastBody.text(message);
+      $toast.removeClass('bg-success bg-danger bg-info bg-warning');
+
+      if (type === 'success') {
+          $toast.addClass('bg-success text-white');
+      } else if (type === 'danger') {
+          $toast.addClass('bg-danger text-white');
+      } else if (type === 'warning') {
+          $toast.addClass('bg-warning text-dark');
+      } else {
+          $toast.addClass('bg-info text-white');
+      }
+
+      new bootstrap.Toast($toast[0]).show();
+    }
+
+    // —————————————————————————
     // Render card grid
     // —————————————————————————
     function displayHotDeals(deals) {
@@ -309,22 +332,29 @@ $(function () {
     currentListId = listId;
     localStorage.setItem('currentListId', listId);
 
+    const itemToAdd = {
+      item: pending.item,
+      price: pending.price,
+      store: pending.store,
+      quantity: 1,
+      addedAt: new Date().toISOString()
+    };
+    
     await firebase.firestore()
       .collection('users').doc(user.uid)
       .collection('groceryLists')
       .doc(listId)
-      .update({
-        items: firebase.firestore.FieldValue.arrayUnion({
-          ...pending,
-          quantity: 1,
-          addedAt:  new Date().toISOString()
-        })
-      });
+      .set({
+        name: newName || lists.get(listId)?.name || "Unnamed List",
+        created: firebase.firestore.FieldValue.serverTimestamp(),
+        items: [itemToAdd]
+      }, { merge: true });
+    
 
     $('#selectListModal').modal('hide');
     $('#newListName, #existingLists').val('');
     displayCurrentList(listId);
-    new bootstrap.Toast($('#addToListToast')).show();
+
   });
 
   // —————————————————————————
@@ -338,29 +368,46 @@ $(function () {
       .collection('groceryLists')
       .doc(currentListId);
 
-    await firebase.firestore().runTransaction(async t => {
-      const snap = await t.get(ref);
-      if (!snap.exists) return;
-      const items = snap.data().items || [];
-      const idx = items.findIndex(i =>
-        i.item === pending.item && i.store === pending.store
-      );
-      if (idx === -1) {
-        items.push({
-          ...pending,
-          quantity: Math.max(1, delta),
-          addedAt:  new Date().toISOString()
-        });
-      } else {
-        const newQty = (items[idx].quantity||1) + delta;
-        if (newQty > 0) items[idx].quantity = newQty;
-        else          items.splice(idx, 1);
-      }
-      t.update(ref, { items });
-    });
-
-    displayCurrentList(currentListId);
-    new bootstrap.Toast($('#addToListToast')).show();
+      await firebase.firestore().runTransaction(async t => {
+        const snap = await t.get(ref);
+        if (!snap.exists) return;
+        const items = snap.data().items || [];
+        const idx = items.findIndex(i =>
+          i.item === pending.item && i.store === pending.store
+        );
+        let action = '';
+      
+        if (idx === -1) {
+          items.push({
+            ...pending,
+            quantity: Math.max(1, delta),
+            addedAt:  new Date().toISOString()
+          });
+          action = 'add';
+        } else {
+          const newQty = (items[idx].quantity || 1) + delta;
+          if (newQty > 0) {
+            items[idx].quantity = newQty;
+            action = 'update';
+          } else {
+            items.splice(idx, 1);
+            action = 'delete';
+          }
+        }
+      
+        t.update(ref, { items });
+      
+        // Show correct toast message
+        if (action === 'add') {
+          showToast('Item added to your list!', 'success');
+        } else if (action === 'update') {
+          showToast('Item updated successfully!', 'info');
+        } else if (action === 'delete') {
+          showToast('Item removed from your list!', 'danger');
+        }
+      });
+      
+      displayCurrentList(currentListId);
   }
 
   // —————————————————————————
