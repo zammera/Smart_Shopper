@@ -28,6 +28,27 @@
                 window.firebaseAuth = firebase.auth();
                 window.firebaseDb = firebase.firestore();
             }
+
+            const auth = firebase.auth();
+
+            document.getElementById('signOutBtn').addEventListener('click', (e) => {
+                e.preventDefault(); // prevent default link behavior
+                auth.signOut()
+                .then(() => {
+                    console.log("User signed out");
+                    window.location.href = "index.html"; // after successful sign out
+                })
+                .catch((error) => {
+                    console.error("Sign Out Error", error);
+                });
+            });
+
+            auth.onAuthStateChanged((user) => {
+                if (!user) {
+                    // If no user is signed in, redirect to login page
+                    window.location.href = "index.html";
+                }
+                });
             </script>
       </head>
 <body>
@@ -65,9 +86,9 @@
             <a class="nav-link text-white" href="history.html">Item History</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white signout-button" href="index.html">
+            <a class="nav-link text-white signout-button" href="#" id="signOutBtn">
                 Sign Out
-            </a>              
+            </a>                           
           </li>
         </ul>
       </div>
@@ -92,7 +113,7 @@
             <div class="col-md-4 mt-2">
                 <div class="card">
                     <div class="card-header bg-primary text-white">
-                        <h5 class="mb-0">Your Shopping list</h5>
+                        <h5 class="mb-0">Hot Deals List</h5>
                     </div>
                     <div class="card-body" id="listsContainer">
                         <div id="currentList"></div>
@@ -119,35 +140,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Add List Selection Modal -->
-<div class="modal fade" id="selectListModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Add Item to List</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <div class="mb-3">
-                    <label class="form-label">Select Existing List</label>
-                    <select class="form-select mb-3" id="existingLists">
-                        <option value="">Choose a list...</option>
-                    </select>
-                    <div class="mt-4">
-                        <label class="form-label">Or Create New List</label>
-                        <input type="text" class="form-control" id="newListName" 
-                               placeholder="Enter new list name">
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" id="confirmAddToList">Add to List</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 </body>
 

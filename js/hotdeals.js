@@ -3,7 +3,7 @@ $(function () {
     // State & globals
     // —————————————————————————
     let userLocation = null;
-    let currentListId = localStorage.getItem('currentListId') || null;
+    let currentListId = "hotDealsList";
     const lists = new Map();
 
     // —————————————————————————
@@ -216,11 +216,12 @@ $(function () {
                     </div>
                     <div class="card-footer">
                       <button class="btn btn-primary w-100 addToList"
-                              data-item="${deal.item}"
-                              data-price="${deal.discount_price}"
-                              data-store="${deal.chain}">
+                        data-item="${deal.item}"
+                        data-price="${deal.discount_price}"
+                        data-store="${deal.chain}"
+                        data-address="${deal.address}">
                         Add to List
-                      </button>
+                      </button> 
                     </div>
                   </div>
                 </div>`;
@@ -286,22 +287,16 @@ $(function () {
     });
   }
 
-  // —————————————————————————
-  // Add-to-List click: prompt only if no list selected yet
-  // —————————————————————————
   $(document).on("click", ".addToList", function() {
     const pending = {
       item:  $(this).data("item"),
       price: parseFloat($(this).data("price")),
-      store: $(this).data("store")
+      store: $(this).data("store"),
+      address: $(this).data("address") || ""
     };
-    if (currentListId) {
-      updateItemQuantity(1, pending);
-    } else {
-      $('#selectListModal').data('pendingItem', pending);
-      loadUserLists().then(() => $('#selectListModal').modal('show'));
-    }
-  });
+    
+    updateItemQuantity(1, pending);
+});
 
   // —————————————————————————
   // Confirm initial selection & add first item
@@ -357,58 +352,64 @@ $(function () {
 
   });
 
-  // —————————————————————————
-  // Transactional quantity update (add, bump, remove)
-  // —————————————————————————
   async function updateItemQuantity(delta, pending) {
     const user = firebase.auth().currentUser;
     if (!user || !currentListId) return;
+    
     const ref = firebase.firestore()
       .collection('users').doc(user.uid)
       .collection('groceryLists')
       .doc(currentListId);
-
-      await firebase.firestore().runTransaction(async t => {
-        const snap = await t.get(ref);
-        if (!snap.exists) return;
-        const items = snap.data().items || [];
-        const idx = items.findIndex(i =>
-          i.item === pending.item && i.store === pending.store
-        );
-        let action = '';
-      
-        if (idx === -1) {
-          items.push({
-            ...pending,
-            quantity: Math.max(1, delta),
-            addedAt:  new Date().toISOString()
-          });
-          action = 'add';
+  
+    await firebase.firestore().runTransaction(async t => {
+      const snap = await t.get(ref);
+      let items = [];
+      if (snap.exists) {
+        items = snap.data().items || [];
+      }
+  
+      const idx = items.findIndex(i =>
+        i.item === pending.item && i.store === pending.store
+      );
+      let action = '';
+  
+      if (idx === -1) {
+        items.push({
+          ...pending,
+          quantity: Math.max(1, delta),
+          addedAt: new Date().toISOString()
+        });
+        action = 'add';
+      } else {
+        const newQty = (items[idx].quantity || 1) + delta;
+        if (newQty > 0) {
+          items[idx].quantity = newQty;
+          action = 'update';
         } else {
-          const newQty = (items[idx].quantity || 1) + delta;
-          if (newQty > 0) {
-            items[idx].quantity = newQty;
-            action = 'update';
-          } else {
-            items.splice(idx, 1);
-            action = 'delete';
-          }
+          items.splice(idx, 1);
+          action = 'delete';
         }
-      
-        t.update(ref, { items });
-      
-        // Show correct toast message
-        if (action === 'add') {
-          showToast('Item added to your list!', 'success');
-        } else if (action === 'update') {
-          showToast('Item updated successfully!', 'info');
-        } else if (action === 'delete') {
-          showToast('Item removed from your list!', 'danger');
-        }
+      }
+  
+      t.set(ref, {
+        name: "Hot Deals List",
+        created: snap.exists ? snap.data().created : firebase.firestore.FieldValue.serverTimestamp(),
+        items: items
       });
-      
-      displayCurrentList(currentListId);
+  
+      // Show correct toast
+      if (action === 'add') {
+        showToast('Item added to your Hot Deals List!', 'success');
+      } else if (action === 'update') {
+        showToast('Item updated!', 'info');
+      } else if (action === 'delete') {
+        showToast('Item removed from your list.', 'danger');
+      }
+    });
+  
+    displayCurrentList(currentListId);
   }
+  
 
   // —————————————————————————
   // Handlers for +, – and 🗑 in sidebar
@@ -449,14 +450,7 @@ $(function () {
     if (!snap.exists) return;
     const data = snap.data();
     let total = 0;
-    let html  = `
-      <div class="d-flex justify-content-between align-items-center mb-2">
-        <h6>${data.name}</h6>
-        <button id="closeCurrentList" class="btn btn-sm btn-outline-secondary">
-          Close List
-        </button>
-      </div>
-      <ul class="list-group">`;
+    let html = `<ul class="list-group">`;
 
     (data.items||[]).forEach(i => {
       const qty   = i.quantity||1;
@@ -466,7 +460,8 @@ $(function () {
         <li class="list-group-item d-flex justify-content-between align-items-center">
           <div>
             <strong>${i.item}</strong><br>
-            <small class="text-muted">${i.store}</small>
+            <small class="text-muted">${i.store}</small><br>
+            ${i.address ? `<small class="text-muted"><i class="bi bi-geo-alt"></i> ${i.address}</small>` : ""}
           </div>
           <div class="d-flex align-items-center">
             <button class="btn btn-sm btn-outline-secondary decrementItem"
