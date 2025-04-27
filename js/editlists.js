@@ -33,7 +33,7 @@ async function loadGroceries() {
         groceries = await response.json();
         populateGrocery(); // After loading, call populate
     } catch (error) {
-        console.error("Error loading groceries.json:", error);
+        console.error("Error loading items.json:", error);
     }
 }
 
