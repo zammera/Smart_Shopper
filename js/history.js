@@ -1,8 +1,8 @@
 import {db, auth } from "./firebaseInit.js";
-import { getDocs, collection } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+import { getDoc, getDocs, collection, doc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 
-const getItemsData = async () => {
+const getStoreItemsData = async () => {
     let items = await fetch(`./items.json`)
         .then((response) => { 
             return response.json().then((data) => {
@@ -18,23 +18,21 @@ const getItemsData = async () => {
 // helpful
 // Create an array of all the items in the lists and record their frequency, recency, and sales
 const generateItems = async () => {
-    const itemsArray = [];
-    const allItems = await getItemsData();
-    const items = await getCheapestItems(allItems);
-    for (let i = 0; i < items.length; i++) {
-        const item = itemsArray.find(item => item.item === items[i].item);
-        if (item === undefined) {
-            itemsArray.push(    {"item": items[i].item, "original_price" : items[i].original_price, "discount_price" : items[i].discount_price,
-                                "store" : items[i].store, "frequency" : 1, "recency": i});
-        }
-        else {
-            // if (items[i].discount_price === null )
-            item.frequency += 1;
-            item.recency = i;
-            // put code to overwrite store if the lowest price of this item is lower than the lowest price of the item in the array
-            if (items[i].discount_price < item.discount_price || items[i].original_price < item.original_price) {
+    const listItems = await getListItems();
+    const allStoreItems = await getStoreItemsData();
+    const storeItems = await getCheapestItems(allStoreItems);
 
-            }
+    const itemsArray = [];
+
+    console.log(storeItems);
+    console.log(listItems);
+    
+    for (let i = 0; i < storeItems.length; i++) {
+        // check if the item appears in both lists
+        const item = listItems.find(item => item.item === storeItems[i].item);
+        if (item != undefined) {
+            itemsArray.push(    {"item": storeItems[i].item, "original_price" : storeItems[i].original_price, "discount_price" : storeItems[i].discount_price,
+                                "store" : storeItems[i].store, "frequency" : item.frequency, "recency": item.recency});
         }
     }
     console.log(itemsArray);
@@ -109,7 +107,6 @@ function getFrequentItems(itemsArray) {
 // post the most recently added items
 function getRecentItems(itemsArray) {
     const items = itemsArray.sort((item1, item2) => (item1.recency < item2.recency) ? 1 : (item1.recency > item2.recency) ? -1 : 0);
-    console.log(items);
     const limit = items.length < 10 ? items.length : 10;
     for (let i = 0; i < limit; i++) {
         if (items[i].discount_price != null) {
@@ -157,29 +154,51 @@ const getCheapestItems = async(itemList) => {
     return cheapestItems;
 }
 
-const getLists = async() => {
+// get the lists the user has created and then add the items on those lists
+const getListItems = async() => {
     const user = auth.currentUser;
     if (!user) {
         console.error("User not logged in");
         return;
     }
     try {
+        // get all lists
         const groceryListsCollection = collection(db, `users/${user.uid}/groceryLists`);
         const querySnapshot = await getDocs(groceryListsCollection);
-        const allListsData = [];
-        querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id);
-        allListsData.push({ id: doc.id, ...doc.data() });
-        });
-        return allListsData;
+        const listItems = [];
+        var recency = 0;
+
+        // iterate through each list
+        for (const listDoc of querySnapshot.docs) {
+            const list = doc(db, `users/${user.uid}/groceryLists/${listDoc.id}`);
+            const snapshot = await getDoc(list);
+            const data = snapshot.data();
+
+            // iterate through the items in each list, adding their name and frequency (quantity)
+            // if they aren't new update the frequency insteaad
+            for (const newItem in data.items) {
+                recency++;
+                const item = listItems.find(item => item.item === newItem);
+                if (item != undefined) {
+                    item.frequency += data.items?.[newItem];
+                    item.recency = recency;
+                } else {
+                    listItems.push({
+                        item: newItem,
+                        frequency: data.items?.[newItem],
+                        recency: recency
+                    })
+                }
+            }
+        };
+        return listItems;
+
     } catch (error) {
         console.error("Error getting grocery lists:", error);
         return [];
     }
 }
 
-generateItems();
 
 $(document).ready(function () {
     onAuthStateChanged(auth, async (user) => {
@@ -191,7 +210,5 @@ $(document).ready(function () {
 });
 
 async function init() {
-    const lists = getLists();
-    console.log(lists);
-    console.log(lists.value);
+    generateItems();
 }
