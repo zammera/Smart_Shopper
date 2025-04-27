@@ -24,6 +24,13 @@
     }
 }
 
+.scaleA {
+    width: 20%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .signout-button {
     display: inline-flex;
     align-items: center;
@@ -70,7 +77,6 @@
     width: 150px;
     font-size: 50%
 }
-
 
 /* Add styles to Hot Deals Page */
 

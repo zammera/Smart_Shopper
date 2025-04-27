@@ -16,7 +16,6 @@ async function loadGroceries() {
 }
 
 
-
 function populateGrocery() {
     var LorR = false;
     for (const itemName in groceries) {
