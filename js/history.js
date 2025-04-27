@@ -1,5 +1,9 @@
+import {db, auth } from "./firebaseInit.js";
+import { getDocs, collection } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+
 const getItemsData = async () => {
-    let items = await fetch(`./files/history.json`)
+    let items = await fetch(`./items.json`)
         .then((response) => { 
             return response.json().then((data) => {
                 return data;
@@ -15,7 +19,8 @@ const getItemsData = async () => {
 // Create an array of all the items in the lists and record their frequency, recency, and sales
 const generateItems = async () => {
     const itemsArray = [];
-    const items = await getItemsData();
+    const allItems = await getItemsData();
+    const items = await getCheapestItems(allItems);
     for (let i = 0; i < items.length; i++) {
         const item = itemsArray.find(item => item.item === items[i].item);
         if (item === undefined) {
@@ -115,4 +120,78 @@ function getRecentItems(itemsArray) {
     }
 }
 
+// find the cheapest store for a given item
+const getCheapestItems = async(itemList) => {
+
+    const cheapestItems = [];
+
+    // go through every item and compare the original_price (or sale_price if available) to the lowest price so far
+    // if that is lower, track that store data
+    // at the end push the winning store into the cheapestItems array
+    for (const itemName in itemList) {
+        let lowestPrice = Infinity;
+        let cheapestStore = null;
+        let originalPrice = null;
+        let discountPrice = null;
+
+        const stores = itemList[itemName];
+
+        for (const store in stores) {
+            const priceInfo = stores[store];
+            if ((priceInfo.discount_price != null && lowestPrice > priceInfo.discount_price)
+                || (priceInfo.original_price != null && lowestPrice > priceInfo.original_price)) {
+                lowestPrice = priceInfo.discount_price || priceInfo.original_price
+                cheapestStore = store;
+                originalPrice = priceInfo.original_price;
+                discountPrice = priceInfo.discount_price;
+            }
+        }
+        cheapestItems.push({
+            item: itemName,
+            store: cheapestStore,
+            original_price: originalPrice,
+            discount_price: discountPrice
+        })
+    }
+
+    return cheapestItems;
+}
+
+const getLists = async() => {
+    const user = auth.currentUser;
+    if (!user) {
+        console.error("User not logged in");
+        return;
+    }
+    try {
+        const groceryListsCollection = collection(db, `users/${user.uid}/groceryLists`);
+        const querySnapshot = await getDocs(groceryListsCollection);
+        const allListsData = [];
+        querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        console.log(doc.id);
+        allListsData.push({ id: doc.id, ...doc.data() });
+        });
+        return allListsData;
+    } catch (error) {
+        console.error("Error getting grocery lists:", error);
+        return [];
+    }
+}
+
 generateItems();
+
+$(document).ready(function () {
+    onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                console.log("User logged in:", user.uid);
+                init();
+            }
+    });
+});
+
+async function init() {
+    const lists = getLists();
+    console.log(lists);
+    console.log(lists.value);
+}
