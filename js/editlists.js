@@ -1,7 +1,7 @@
 import {db, auth } from "./firebaseInit.js";
 import { setDoc, getDoc, updateDoc, deleteField, deleteDoc, collection, doc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-
+  
 let groceries = {};
 
 function showToast(message, type = 'info') {
@@ -38,22 +38,43 @@ async function loadGroceries() {
 }
 
 
-function populateGrocery() {
-    var LorR = false;
+// Normalize only our unit abbreviations to lowercase for proper format
+function normalizeUnits(str) {
+    return str.replace(
+      /\b(lb|oz|ct|pack|each|g|mg|kg|l|ml|bunch)\b/gi,
+      m => m.toLowerCase()
+    );
+  }
+  
+  function populateGrocery() {
+    let LorR = false;
     for (const itemName in groceries) {
-        const safeId = itemName.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '') + '-result';
-        const grocery = '<li class="list-group-item d-flex justify-content-between align-items-center" id="${safeId}">'
-                + '<h5 class="text-center flex-grow-1">' + itemName + '</h5>'
-                + '<button class="btn btn-custom-color addToList" data-item="' + itemName + '">Add to List</button>'
-            + '</li>';
-
-        const element = LorR ? document.getElementById("result2") : document.getElementById("result1");
-        LorR = !LorR;
-        element.innerHTML += grocery;
+      const displayName = normalizeUnits(itemName);
+      const safeId = itemName
+        .toLowerCase()
+        .replace(/\s+/g, '-')
+        .replace(/[^\w-]/g, '') + '-result';
+  
+      const grocery = `
+        <li class="list-group-item d-flex justify-content-between align-items-center"
+            id="${safeId}">
+          <h5 class="text-center flex-grow-1">${displayName}</h5>
+          <button class="btn btn-custom-color addToList"
+                  data-item="${itemName}">
+            Add to List
+          </button>
+        </li>
+      `;
+      const container = LorR
+        ? document.getElementById("result2")
+        : document.getElementById("result1");
+  
+      LorR = !LorR;
+      container.innerHTML += grocery;
     }
-}
-
-
+  }
+  
+  
 async function addToList(item) {
     let name = document.getElementById("listName").textContent;
     let list = await getItemsDB(name) || {};
@@ -307,20 +328,6 @@ async function deleteItemDB(listName, itemName){
 
 
 /* Unused
-// items in json is all lowercase to make it easier to add items. Title case to display
-function toTitleCase(str) {
-    const lowerWords = ['lb', 'oz', 'ct', 'pack', 'each', 'g', 'mg', 'kg', 'l', 'ml', 'bunch'];
-    
-    return str.split(' ').map(word => {
-        const cleanWord = word.replace(/[^a-zA-Z]/g, '').toLowerCase();
-        
-        if (lowerWords.includes(cleanWord)) {
-            return word.toLowerCase(); 
-        } else {
-            return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-        }
-    }).join(' ');
-}
 
 $(document).ready(function () {
     

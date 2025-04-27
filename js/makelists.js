@@ -14,43 +14,6 @@ if (!localStorage.getItem("listNames")) {
     localStorage.setItem("listNames", JSON.stringify(listNames));
 }
 
-const groceries = [
-    {"item": "Organic Bananas", "price": "", "store": ""},
-    {"item": "Whole Milk", "price": "", "store": ""},
-    {"item": "Salmon Fillet", "price": "", "store": ""},
-    {"item": "Loaf of Bread", "price": "", "store": ""},
-    {"item": "Strawberries", "price": "", "store": ""},
-    {"item": "Ground Beef", "price": "", "store": ""},
-    {"item": "Canned Tomatoes", "price": "", "store": ""},
-    {"item": "Chicken Breast", "price": "", "store": ""},
-    {"item": "Pasta", "price": "", "store": ""},
-    {"item": "Eggs (dozen)", "price": "", "store": ""},
-    {"item": "Apples", "price": "", "store": ""},
-    {"item": "Olive Oil", "price": "", "store": ""},
-    {"item": "Blueberries", "price": "", "store": ""},
-    {"item": "Rice", "price": "", "store": ""},
-    {"item": "Cereal", "price": "", "store": ""},
-    {"item": "Avocado", "price": "", "store": ""},
-    {"item": "Cheese", "price": "", "store": ""},
-    {"item": "Yogurt", "price": "", "store": ""},
-    {"item": "Oranges", "price": "", "store": ""},
-    {"item": "Beans", "price": "", "store": ""},
-    {"item": "Chips", "price": "", "store": ""},
-    {"item": "Jumbo shrimp", "price": "", "store": ""},
-    {"item": "Coffee", "price": "", "store": ""},
-    {"item": "Grapes", "price": "", "store": ""},
-    {"item": "Butter", "price": "", "store": ""},
-    {"item": "Lobster tail", "price": "", "store": ""},
-    {"item": "Tea", "price": "", "store": ""},
-    {"item": "Soda", "price": "", "store": ""},
-    {"item": "Kiwi", "price": "", "store": ""},
-    {"item": "Honey", "price": "", "store": ""},
-    {"item": "Ice cream", "price": "", "store": ""},
-    {"item": "Mango", "price": "", "store": ""},
-    {"item": "Salt", "price": "", "store": ""},
-    {"item": "Cookies", "price": "", "store": ""}
-]
-
 //aim to change this but wanted to get this functional and pretty
 function createNewList() {
     let listName = document.getElementById('name').value;
