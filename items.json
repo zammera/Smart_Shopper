@@ -645,7 +645,7 @@
       "discount_price": 1.03
     }
   },
-  "Canned Black Beans 15 Oz": {
+  "Goya Black Beans 15 Oz": {
     "Market Basket": {
       "original_price": 1.09,
       "discount_price": 0.57
@@ -1427,7 +1427,7 @@
       "discount_price": null
     }
   },
-  "Great Value Black Beans 15 Oz": {
+  "Bush's Black Beans 15 Oz": {
     "Market Basket": {
       "original_price": 0.99,
       "discount_price": null
@@ -2413,7 +2413,7 @@
       "discount_price": 3.71
     }
   },
-  "Great Value 2% Milk 1 Gallon": {
+  "Organic Valley 2% Milk 1 Gallon": {
     "Market Basket": {
       "original_price": 3.19,
       "discount_price": 2.27
@@ -2855,7 +2855,7 @@
       "discount_price": null
     }
   },
-  "Great Value Whole Kernel Corn 15 Oz": {
+  "Dell Monte Whole Kernel Corn 15 Oz": {
     "Walmart Supercenter": {
       "original_price": 0.58,
       "discount_price": 0.35

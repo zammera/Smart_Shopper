@@ -1,378 +1,458 @@
 $(function () {
-    // Store user location globally
+    // —————————————————————————
+    // State & globals
+    // —————————————————————————
     let userLocation = null;
-  
-    // Initialize shopping cart
-    let shoppingCart = [];
-    let currentListId = null;
-    let lists = new Map();
-  
-    // Wait for auth state before getting location
-    firebase.auth().onAuthStateChanged(async function(user) {
-      if (user) {
-        userLocation = await getUserLocation(user);
-        if (userLocation) {
-          console.log(`User's Latitude: ${userLocation.userLat}, Longitude: ${userLocation.userLng}`);
-          // Load deals only after we have location
-          loadHotDeals();
+    let currentListId = localStorage.getItem('currentListId') || null;
+    const lists = new Map();
+
+    // —————————————————————————
+    // On auth: fetch location, deals, and current list
+    // —————————————————————————
+    firebase.auth().onAuthStateChanged(async user => {
+        if (user) {
+            try {
+                const userDoc = await firebase.firestore()
+                    .collection("users")
+                    .doc(user.uid)
+                    .get();
+                if (userDoc.exists && userDoc.data().address) {
+                    userLocation = {
+                        userLat: userDoc.data().address.lat,
+                        userLng: userDoc.data().address.lng
+                    };
+                }
+            } catch (error) {
+                console.error("Error retrieving user location:", error);
+            }
         }
-      } else {
-        console.error("No user is signed in.");
-        // load deals anyway without location
         loadHotDeals();
-      }
-    });
-  
-    // using user's lat and lng to get nearby grocery store locations
-    async function getUserLocation(user) {
-      try {
-        const userDoc = await firebase.firestore().collection("users").doc(user.uid).get();
-        if (userDoc.exists && userDoc.data().address) {
-          const userAddress = userDoc.data().address;
-          return {
-            userLat: userAddress.lat,
-            userLng: userAddress.lng
-          };
-        } else {
-          console.log("No address found for the user.");
-          return null;
+        if (currentListId) {
+            displayCurrentList(currentListId);
         }
-      } catch (error) {
-        console.error("Error retrieving user location:", error);
-        return null;
-      }
-    }
-  
-    // Load basic hot deals info from JSON file
-    loadHotDeals();
-  
-    // Function to load hot deals
+    });
+
+    // —————————————————————————
+    // Load & display hot-deals JSON
+    // —————————————————————————
     function loadHotDeals() {
-        $.getJSON("items.json", function(data) {
+        $.getJSON("items.json", data => {
             if (userLocation) {
                 findNearbyStores(data);
             } else {
                 processDeals(data);
             }
-        }).fail(function(jqXHR, textStatus, errorThrown) {
+        }).fail((jqXHR, textStatus, errorThrown) => {
             console.error("Error loading deals:", textStatus, errorThrown);
-            $("#hotDealsGrid").html("<div class='col-12'><p class='alert alert-danger'>Error loading hot deals. Please try again later.</p></div>");
+            $("#hotDealsGrid").html(
+                "<div class='col-12'><p class='alert alert-danger'>Error loading hot deals. Please try again later.</p></div>"
+            );
         });
     }
 
+    // —————————————————————————
+    // If we have geo, filter to within 10 mi
+    // —————————————————————————
     async function findNearbyStores(data) {
         try {
             const [{ PlacesService }, { LatLng }] = await Promise.all([
                 google.maps.importLibrary("places"),
                 google.maps.importLibrary("core")
             ]);
-
             const service = new PlacesService(document.createElement('div'));
-            const location = new LatLng(userLocation.userLat, userLocation.userLng);
+            const center = new LatLng(userLocation.userLat, userLocation.userLng);
             const storeLocations = new Map();
-
-            const searchPromises = [];
             const allStores = [...new Set(Object.values(data).flatMap(item => Object.keys(item)))];
 
-            for (const store of allStores) {
-                const promise = new Promise(resolve => {
-                    // Add 'supermarket' to the search query for more accurate results
+            await Promise.all(allStores.map(store =>
+                new Promise(resolve => {
                     service.textSearch({
-                        location: location,
-                        radius: 16093.4, // 10 mile radius
-                        query: `${store} supermarket`, // Add supermarket to force grocery store results
+                        location: center,
+                        radius: 16093.4,
+                        query: `${store} supermarket`,
                         type: 'grocery_or_supermarket'
                     }, (results, status) => {
-                        if (status === 'OK' && results.length > 0) {
-                            // Improve store name matching
-                            const matchingStore = results.find(result => 
-                                result.name.toLowerCase().includes(store.toLowerCase()) &&
-                                !result.name.toLowerCase().includes('restaurant') &&
-                                !result.name.toLowerCase().includes('house')
+                        if (status === 'OK') {
+                            const match = results.find(r =>
+                                r.name.toLowerCase().includes(store.toLowerCase()) &&
+                                !r.name.toLowerCase().includes('restaurant') &&
+                                !r.name.toLowerCase().includes('house')
                             );
-                            if (matchingStore) {
-                                const distance = calculateDistance(
-                                    userLocation.userLat,
-                                    userLocation.userLng,
-                                    matchingStore.geometry.location.lat(),
-                                    matchingStore.geometry.location.lng()
+                            if (match) {
+                                const dist = calculateDistance(
+                                    userLocation.userLat, userLocation.userLng,
+                                    match.geometry.location.lat(), match.geometry.location.lng()
                                 );
-                                if (distance <= 10) {
+                                if (dist <= 10) {
                                     storeLocations.set(store, {
-                                        distance: distance,
-                                        address: matchingStore.formatted_address,
-                                        name: store // Use original store name from JSON
+                                        name: store,
+                                        address: match.formatted_address,
+                                        distance: dist
                                     });
                                 }
                             }
                         }
                         resolve();
                     });
-                });
-                searchPromises.push(promise);
-            }
+                })
+            ));
 
-            // Wait for all store searches to complete
-            await Promise.all(searchPromises);
-
-            // Now only process deals for stores that actually exist nearby
             const allDeals = [];
             Object.entries(data).forEach(([item, stores]) => {
-                Object.entries(stores).forEach(([store, prices]) => {
-                    if (storeLocations.has(store) && prices.discount_price) {
-                        const savings = ((prices.original_price - prices.discount_price) / prices.original_price * 100);
-                        const roundedSavings = Math.round(savings / 5) * 5; // Round to nearest 5%
-                        const storeInfo = storeLocations.get(store);
+                Object.entries(stores).forEach(([chain, prices]) => {
+                    if (storeLocations.has(chain) && prices.discount_price) {
+                        const info = storeLocations.get(chain);
+                        const savings = ((prices.original_price - prices.discount_price) / prices.original_price) * 100;
+                        const rounded = Math.round(savings / 5) * 5;
                         allDeals.push({
-                            item: item,
-                            chain: storeInfo.name,
+                            item,
+                            chain:   info.name,
                             original_price: prices.original_price,
                             discount_price: prices.discount_price,
-                            savings: roundedSavings,
-                            discount: `Save ${roundedSavings}%`,
-                            address: storeInfo.address,
-                            distance: storeInfo.distance
+                            savings: rounded,
+                            discount: `Save ${rounded}%`,
+                            address: info.address,
+                            distance: info.distance
                         });
                     }
                 });
             });
 
-            if (allDeals.length > 0) {
+            if (allDeals.length) {
                 allDeals.sort((a, b) => b.savings - a.savings);
                 displayHotDeals(allDeals.slice(0, 12));
             } else {
-                $("#hotDealsGrid").html("<div class='col-12'><p class='alert alert-info'>No deals available within 10 miles of your location.</p></div>");
+                $("#hotDealsGrid").html(
+                    "<div class='col-12'><p class='alert alert-info'>No deals within 10 miles.</p></div>"
+                );
             }
-
         } catch (error) {
-            console.error('Error processing nearby stores:', error);
+            console.error("Error processing nearby stores:", error);
         }
     }
 
-    // Update the displayHotDeals function to properly show store info
-    function displayHotDeals(deals) {
-        let dealsHTML = "";
+    // —————————————————————————
+    // If no geo, just show all discounted items
+    // —————————————————————————
+    function processDeals(data) {
+        const deals = [];
+        Object.entries(data).forEach(([item, stores]) => {
+            Object.entries(stores).forEach(([chain, prices]) => {
+                if (prices.discount_price) {
+                    const savings = ((prices.original_price - prices.discount_price) / prices.original_price) * 100;
+                    const rounded = Math.round(savings / 5) * 5;
+                    deals.push({
+                        item,
+                        chain,
+                        original_price: prices.original_price,
+                        discount_price: prices.discount_price,
+                        savings: rounded,
+                        discount: `Save ${rounded}%`,
+                        address: "",
+                        distance: 0
+                    });
+                }
+            });
+        });
+        if (deals.length) {
+            deals.sort((a, b) => b.savings - a.savings);
+            displayHotDeals(deals.slice(0, 12));
+        } else {
+            $("#hotDealsGrid").html(
+                "<div class='col-12'><p class='alert alert-info'>No deals available.</p></div>"
+            );
+        }
+    }
 
-        deals.forEach(function (deal, index) {
-            dealsHTML += `
-            <div class="col-sm-6 col-lg-4 col-xl-3">
-                <div class="card h-100">
-                    <div class="card-header bg-success text-white d-flex justify-content-start align-items-center">
-                        <span class="badge bg-warning text-dark">${deal.discount}</span>
+    // —————————————————————————
+    // Render card grid
+    // —————————————————————————
+    function displayHotDeals(deals) {
+        let html = "";
+        deals.forEach(deal => {
+            html += `
+                <div class="col-sm-6 col-lg-4 col-xl-3">
+                  <div class="card h-100">
+                    <div class="card-header bg-success text-white">
+                      <span class="badge bg-warning text-dark">${deal.discount}</span>
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">${deal.item}</h5>
-                        <p class="card-text">
-                            <span class="text-decoration-line-through text-muted">$${deal.original_price.toFixed(2)}</span>
-                            <span class="text-success fw-bold ms-2 fs-5">$${deal.discount_price.toFixed(2)}</span>
-                        </p>
-                        <div class="store-info mt-3">
-                            <strong>${deal.chain}</strong><br>
-                            <small class="text-muted">
-                                <i class="bi bi-geo-alt"></i> ${deal.address}<br>
-                                <i class="bi bi-sign-turn-right"></i> ${deal.distance.toFixed(1)} miles away
-                            </small>
-                        </div>
+                      <h5 class="card-title">${deal.item}</h5>
+                      <p class="card-text">
+                        <span class="text-decoration-line-through text-muted">$${deal.original_price.toFixed(2)}</span>
+                        <span class="text-success fw-bold ms-2 fs-5">$${deal.discount_price.toFixed(2)}</span>
+                      </p>
+                      ${deal.address ? `
+                        <div class="store-info">
+                          <strong>${deal.chain}</strong><br>
+                          <small class="text-muted">
+                            <i class="bi bi-geo-alt"></i> ${deal.address}<br>
+                            <i class="bi bi-sign-turn-right"></i> ${deal.distance.toFixed(1)} mi away
+                          </small>
+                        </div>` : ""}
                     </div>
                     <div class="card-footer">
-                        <button class="btn btn-primary w-100 addToList" 
-                                data-item="${deal.item}" 
-                                data-price="${deal.discount_price}" 
-                                data-store="${deal.chain}">
-                            Add to List
-                        </button>
+                      <button class="btn btn-primary w-100 addToList"
+                              data-item="${deal.item}"
+                              data-price="${deal.discount_price}"
+                              data-store="${deal.chain}">
+                        Add to List
+                      </button>
                     </div>
-                </div>
-            </div>`;
+                  </div>
+                </div>`;
         });
-
-        if (deals.length === 0) {
-            dealsHTML = "<div class='col-12'><p class='alert alert-info'>No deals available at this time.</p></div>";
-        }
-
-        $("#hotDealsGrid").html(dealsHTML);
+        $("#hotDealsGrid").html(html);
     }
-  
-    // Helper function to calculate distance between two coordinates in miles (Haversine formula)
-    // source: https://stackoverflow.com/questions/18883601/function-to-calculate-distance-between-two-coordinates
-  
+
+    // —————————————————————————
+    // Distance calc (Haversine)
+    // —————————————————————————
     function calculateDistance(lat1, lon1, lat2, lon2) {
-      const R = 3958.8; // Earth radius in miles
-      const dLat = (lat2 - lat1) * Math.PI / 180;
-      const dLon = (lon2 - lon1) * Math.PI / 180;
-      const a = 
-        Math.sin(dLat/2) * Math.sin(dLat/2) +
-        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
-        Math.sin(dLon/2) * Math.sin(dLon/2);
-      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-      return R * c;
+        const R = 3958.8;
+        const dLat = (lat2 - lat1) * Math.PI / 180;
+        const dLon = (lon2 - lon1) * Math.PI / 180;
+        const a = Math.sin(dLat / 2) ** 2 +
+                  Math.cos(lat1 * Math.PI / 180) *
+                  Math.cos(lat2 * Math.PI / 180) *
+                  Math.sin(dLon / 2) ** 2;
+        return 2 * R * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     }
-  
-    $(document).on("click", ".addToList", async function() {
-        const itemData = {
-            item: $(this).data("item"),
-            price: parseFloat($(this).data("price")),
-            store: $(this).data("store")
-        };
-        
-        // Store item data temporarily
-        $('#selectListModal').data('pendingItem', itemData);
-        
-        // Load fresh lists before showing modal
-        await loadUserLists();
-        $('#selectListModal').modal('show');
-    });
 
-    // Function to load user lists
+    // —————————————————————————
+    // Load existing lists into the modal
+    // —————————————————————————
     async function loadUserLists() {
         const user = firebase.auth().currentUser;
-        if (!user) {
-            console.error("No user signed in");
-            return;
-        }
-
+        if (!user) return;
         try {
             const snapshot = await firebase.firestore()
-                .collection('users')
-                .doc(user.uid)
-                .collection('lists')
+                .collection('users').doc(user.uid)
+                .collection('groceryLists')
                 .get();
-
             lists.clear();
-            const $select = $('#existingLists');
-            $select.empty().append('<option value="">Choose a list...</option>');
-
+            const $sel = $('#existingLists').empty()
+                .append('<option value="">Choose a list…</option>');
             snapshot.forEach(doc => {
-                const list = doc.data();
-                lists.set(doc.id, { id: doc.id, ...list });
-                $select.append(`<option value="${doc.id}">${list.name}</option>`);
+                const data = doc.data();
+                lists.set(doc.id, data);
+                $sel.append(`<option value="${doc.id}">${data.name}</option>`);
             });
-        } catch (error) {
-            console.error("Error loading lists:", error);
+        } catch (e) {
+            console.error("Error loading lists:", e);
         }
     }
 
-    // Add confirmation handler
-    $('#confirmAddToList').click(async function() {
-        const selectedListId = $('#existingLists').val();
-        const newListName = $('#newListName').val().trim();
-        const pendingItem = $('#selectListModal').data('pendingItem');
-        
-        if (!pendingItem) {
-            alert("No item selected");
-            return;
-        }
+     // —————————————————————————
+  // Load user’s lists into the modal
+  // —————————————————————————
+  async function loadUserLists() {
+    const user = firebase.auth().currentUser;
+    if (!user) return;
+    const snap = await firebase.firestore()
+      .collection('users').doc(user.uid)
+      .collection('groceryLists')
+      .get();
+    lists.clear();
+    const $sel = $('#existingLists').empty()
+      .append('<option value="">Choose a list…</option>');
+    snap.forEach(doc => {
+      const d = doc.data();
+      lists.set(doc.id, d);
+      $sel.append(`<option value="${doc.id}">${d.name}</option>`);
+    });
+  }
 
-        try {
-            const user = firebase.auth().currentUser;
-            if (!user) throw new Error("No user signed in");
+  // —————————————————————————
+  // Add-to-List click: prompt only if no list selected yet
+  // —————————————————————————
+  $(document).on("click", ".addToList", function() {
+    const pending = {
+      item:  $(this).data("item"),
+      price: parseFloat($(this).data("price")),
+      store: $(this).data("store")
+    };
+    if (currentListId) {
+      updateItemQuantity(1, pending);
+    } else {
+      $('#selectListModal').data('pendingItem', pending);
+      loadUserLists().then(() => $('#selectListModal').modal('show'));
+    }
+  });
 
-            let listId = selectedListId;
-            
-            // Create new list if name is provided
-            if (!selectedListId && newListName) {
-                const newListRef = await firebase.firestore()
-                    .collection('users')
-                    .doc(user.uid)
-                    .collection('lists')
-                    .add({
-                        name: newListName,
-                        items: [],
-                        created: firebase.firestore.FieldValue.serverTimestamp()
-                    });
-                listId = newListRef.id;
-            }
+  // —————————————————————————
+  // Confirm initial selection & add first item
+  // —————————————————————————
+  $('#confirmAddToList').click(async function() {
+    const user = firebase.auth().currentUser;
+    if (!user) return;
+    let listId    = $('#existingLists').val();
+    const newName = $('#newListName').val().trim();
+    const pending = $('#selectListModal').data('pendingItem');
+    if (!pending) return alert("No item selected.");
 
-            if (!listId && !newListName) {
-                alert("Please select a list or create a new one");
-                return;
-            }
+    // create new if needed
+    if (!listId && newName) {
+      const ref = await firebase.firestore()
+        .collection('users').doc(user.uid)
+        .collection('groceryLists')
+        .add({
+          name: newName,
+          items: [],
+          created: firebase.firestore.FieldValue.serverTimestamp()
+        });
+      listId = ref.id;
+    }
+    if (!listId) return alert("Please choose or name a list.");
 
-            // Add item to the selected list
-            await firebase.firestore()
-                .collection('users')
-                .doc(user.uid)
-                .collection('lists')
-                .doc(listId)
-                .update({
-                    items: firebase.firestore.FieldValue.arrayUnion({
-                        ...pendingItem,
-                        addedAt: new Date().toISOString()
-                    })
-                });
+    // persist & add
+    currentListId = listId;
+    localStorage.setItem('currentListId', listId);
 
-            // Update display
-            currentListId = listId;
-            await displayCurrentList(listId);
-            
-            // Show success message and close modal
-            const toast = new bootstrap.Toast($("#addToListToast"));
-            toast.show();
-            $('#selectListModal').modal('hide');
-            
-            // Clear form
-            $('#newListName').val('');
-            $('#existingLists').val('');
+    await firebase.firestore()
+      .collection('users').doc(user.uid)
+      .collection('groceryLists')
+      .doc(listId)
+      .update({
+        items: firebase.firestore.FieldValue.arrayUnion({
+          ...pending,
+          quantity: 1,
+          addedAt:  new Date().toISOString()
+        })
+      });
 
-        } catch (error) {
-            console.error("Error adding item to list:", error);
-            alert("Failed to add item to list. Please try again.");
-        }
+    $('#selectListModal').modal('hide');
+    $('#newListName, #existingLists').val('');
+    displayCurrentList(listId);
+    new bootstrap.Toast($('#addToListToast')).show();
+  });
+
+  // —————————————————————————
+  // Transactional quantity update (add, bump, remove)
+  // —————————————————————————
+  async function updateItemQuantity(delta, pending) {
+    const user = firebase.auth().currentUser;
+    if (!user || !currentListId) return;
+    const ref = firebase.firestore()
+      .collection('users').doc(user.uid)
+      .collection('groceryLists')
+      .doc(currentListId);
+
+    await firebase.firestore().runTransaction(async t => {
+      const snap = await t.get(ref);
+      if (!snap.exists) return;
+      const items = snap.data().items || [];
+      const idx = items.findIndex(i =>
+        i.item === pending.item && i.store === pending.store
+      );
+      if (idx === -1) {
+        items.push({
+          ...pending,
+          quantity: Math.max(1, delta),
+          addedAt:  new Date().toISOString()
+        });
+      } else {
+        const newQty = (items[idx].quantity||1) + delta;
+        if (newQty > 0) items[idx].quantity = newQty;
+        else          items.splice(idx, 1);
+      }
+      t.update(ref, { items });
     });
 
-    // Function to display current list
-    async function displayCurrentList(listId) {
-        if (!listId) return;
+    displayCurrentList(currentListId);
+    new bootstrap.Toast($('#addToListToast')).show();
+  }
 
-        const user = firebase.auth().currentUser;
-        if (!user) return;
-
-        try {
-            const listDoc = await firebase.firestore()
-                .collection('users')
-                .doc(user.uid)
-                .collection('lists')
-                .doc(listId)
-                .get();
-
-            if (!listDoc.exists) return;
-
-            const list = listDoc.data();
-            let total = 0;
-            let html = `
-                <h6 class="mb-3">${list.name}</h6>
-                <ul class="list-group">`;
-
-            if (list.items && list.items.length > 0) {
-                list.items.forEach(item => {
-                    total += parseFloat(item.price);
-                    html += `
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <div>
-                                <strong>${item.item}</strong><br>
-                                <small class="text-muted">${item.store}</small>
-                            </div>
-                            <span class="text-success">$${item.price.toFixed(2)}</span>
-                        </li>`;
-                });
-            } else {
-                html += `<li class="list-group-item">No items in list</li>`;
-            }
-
-            html += '</ul>';
-            $('#currentList').html(html);
-            $('#listTotal').text(`$${total.toFixed(2)}`);
-            $('#listTotalSection').removeClass('d-none');
-
-        } catch (error) {
-            console.error("Error displaying list:", error);
-        }
-    }
-
-    // Load lists when page loads
-    firebase.auth().onAuthStateChanged(user => {
-        if (user) {
-            loadUserLists();
-        }
+  // —————————————————————————
+  // Handlers for +, – and 🗑 in sidebar
+  // —————————————————————————
+  $(document).on("click", ".incrementItem", function() {
+    updateItemQuantity(1, {
+      item:  $(this).data("item"),
+      price: parseFloat($(this).data("price")),
+      store: $(this).data("store")
     });
   });
+  $(document).on("click", ".decrementItem", function() {
+    updateItemQuantity(-1, {
+      item:  $(this).data("item"),
+      price: parseFloat($(this).data("price")),
+      store: $(this).data("store")
+    });
+  });
+  $(document).on("click", ".removeItem", function() {
+    updateItemQuantity(-9999, {
+      item:  $(this).data("item"),
+      price: parseFloat($(this).data("price")),
+      store: $(this).data("store")
+    });
+  });
+
+  // —————————————————————————
+  // Render the sidebar’s current list + “Close List” button
+  // —————————————————————————
+  async function displayCurrentList(listId) {
+    const user = firebase.auth().currentUser;
+    if (!user) return;
+    const snap = await firebase.firestore()
+      .collection('users').doc(user.uid)
+      .collection('groceryLists')
+      .doc(listId)
+      .get();
+    if (!snap.exists) return;
+    const data = snap.data();
+    let total = 0;
+    let html  = `
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h6>${data.name}</h6>
+        <button id="closeCurrentList" class="btn btn-sm btn-outline-secondary">
+          Close List
+        </button>
+      </div>
+      <ul class="list-group">`;
+
+    (data.items||[]).forEach(i => {
+      const qty   = i.quantity||1;
+      const line  = i.price * qty;
+      total += line;
+      html += `
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <div>
+            <strong>${i.item}</strong><br>
+            <small class="text-muted">${i.store}</small>
+          </div>
+          <div class="d-flex align-items-center">
+            <button class="btn btn-sm btn-outline-secondary decrementItem"
+                    data-item="${i.item}" data-store="${i.store}" data-price="${i.price}">
+              – 
+            </button>
+            <span class="mx-2">${qty}</span>
+            <button class="btn btn-sm btn-outline-secondary incrementItem"
+                    data-item="${i.item}" data-store="${i.store}" data-price="${i.price}">
+              +
+            </button>
+            <button class="btn btn-sm btn-outline-danger ms-2 removeItem"
+                    data-item="${i.item}" data-store="${i.store}" data-price="${i.price}">
+              <i class="bi bi-trash"></i>
+            </button>
+          </div>
+          <span class="text-success ms-3">$${line.toFixed(2)}</span>
+        </li>`;
+    });
+
+    html += `</ul>`;
+    $('#currentList').html(html);
+    $('#listTotal').text(`$${total.toFixed(2)}`);
+    $('#listTotalSection').removeClass('d-none');
+  }
+
+  // —————————————————————————
+  // Close list (UI only) → clear selection, hide sidebar
+  // —————————————————————————
+  $(document).on("click", "#closeCurrentList", () => {
+    currentListId = null;
+    localStorage.removeItem('currentListId');
+    $('#currentList').empty();
+    $('#listTotalSection').addClass('d-none');
+  });
+});  // end of $(function)
