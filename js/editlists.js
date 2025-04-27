@@ -1,331 +1,170 @@
-import {db, auth } from "./firebaseInit.js";
-import { setDoc, getDoc, updateDoc, deleteField, deleteDoc, collection, doc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+import { db, auth } from "./firebaseInit.js";
+import { setDoc, getDoc, runTransaction, doc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-  
+
 let groceries = {};
+let currentListName = null;
 
-function showToast(message, type = 'info') {
-    const toastContainer = document.getElementById('editToast');
-    const toastBody = document.getElementById('editToastBody');
-
-    toastBody.textContent = message;
-
-    toastContainer.classList.remove('bg-success', 'bg-danger', 'bg-info', 'bg-warning', 'text-white', 'text-dark');
-
-    if (type === 'success') {
-        toastContainer.classList.add('bg-success', 'text-white');
-    } else if (type === 'danger') {
-        toastContainer.classList.add('bg-danger', 'text-white');
-    } else if (type === 'warning') {
-        toastContainer.classList.add('bg-warning', 'text-dark');
-    } else {
-        toastContainer.classList.add('bg-info', 'text-white');
-    }
-
-    const toast = new bootstrap.Toast(toastContainer);
-    toast.show();
-}
-
-// grocery items loaded from the json
-async function loadGroceries() {
-    try {
-        const response = await fetch('items.json'); 
-        groceries = await response.json();
-        populateGrocery(); // After loading, call populate
-    } catch (error) {
-        console.error("Error loading items.json:", error);
-    }
-}
-
-
-// Normalize only our unit abbreviations to lowercase for proper format
-function normalizeUnits(str) {
-    return str.replace(
-      /\b(lb|oz|ct|pack|each|g|mg|kg|l|ml|bunch)\b/gi,
-      m => m.toLowerCase()
-    );
+// On auth: load items and initialize page
+onAuthStateChanged(auth, async user => {
+  if (!user) return;
+  try {
+    await loadGroceries();
+    initPage();
+  } catch (e) {
+    console.error('Initialization error:', e);
   }
-  
-  function populateGrocery() {
-    let LorR = false;
-    for (const itemName in groceries) {
-      const displayName = normalizeUnits(itemName);
-      const safeId = itemName
-        .toLowerCase()
-        .replace(/\s+/g, '-')
-        .replace(/[^\w-]/g, '') + '-result';
-  
-      const grocery = `
-        <li class="list-group-item d-flex justify-content-between align-items-center"
-            id="${safeId}">
-          <h5 class="text-center flex-grow-1">${displayName}</h5>
-          <button class="btn btn-custom-color addToList"
-                  data-item="${itemName}">
-            Add to List
-          </button>
-        </li>
-      `;
-      const container = LorR
-        ? document.getElementById("result2")
-        : document.getElementById("result1");
-  
-      LorR = !LorR;
-      container.innerHTML += grocery;
-    }
-  }
-  
-  
-async function addToList(item) {
-    let name = document.getElementById("listName").textContent;
-    let list = await getItemsDB(name) || {};
-   
-    if(list.hasOwnProperty(item)) {
-        if(document.getElementById(item)) {
-            console.log(item + " is in list and in HTML")
-            console.log(list[item]);
-            updateItemQuantity(name, item, list[item] + 1);
-        } else {
-            console.log(item + " is in list and not in HTML", list[item]);
-            let html = '<li class="list-group-item d-flex justify-content-between align-items-center" id="' + item + '">'
-                    + '<button class="btn btn-close btn-danger  removeItem" data-item="' + item + '"></button>'
-                    + '<h5 class="text-center flex-grow-1">' + item + '</h5>'
-                    + '<div class="btn-group" role="group" aria-label="Basic example">'
-                        + '<button type="button" class="btn btn-danger decrementItem" data-item="' + item + '">-</button>'
-                        + '<button type="button" class="form-control middle text-center" data-itemValue ="' + item + 'Value" value="' + list[item] + '" disabled>'+ list[item] +'</button>'
-                        + '<button type="button" class="btn btn-success incrementItem" data-item="' + item + '">+</button>'
-                    + '</div>'
-                + '</li>';
-            let element = document.getElementById("myList");
-            element.innerHTML += html;
-
-            console.log(name);
-        }
-    } else {
-        console.log(item + " is not in list and not in HTML ");
-        let html = '<li class="list-group-item d-flex justify-content-between align-items-center" id="' + item + '">'
-                    + '<button class="btn btn-close btn-danger  removeItem" data-item="' + item + '"></button>'
-                    + '<h5 class="text-center flex-grow-1">' + item + '</h5>'
-                    + '<div class="btn-group" role="group" aria-label="Basic example">'
-                        + '<button type="button" class="btn btn-danger decrementItem" data-item="' + item + '">-</button>'
-                        + '<button type="button" class="form-control middle text-center" data-itemValue ="' + item + 'Value" value="1" disabled>1</button>'
-                        + '<button type="button" class="btn btn-success incrementItem" data-item="' + item + '">+</button>'
-                    + '</div>'
-                + '</li>';
-        let element = document.getElementById("myList");
-        element.innerHTML += html;
-        //console.log(html);
-        addItemDB(name, item, 1)
-        //addItemToList(name, item, 1);
-    }
-}
-
-async function updateItemQuantity(listKey, itemName, newQuantity) {
-    console.log(newQuantity);
-    let list = await getItemsDB(listKey) || {};
-    console.log("list gotten from updateQuantity:", list);
-
-    if (newQuantity > 0) {
-        console.log("Value of item before increase: ", $(document).find('[data-itemValue = "' + itemName + 'Value"]')[0].value);
-        $('[data-itemValue="' + itemName + 'Value"]').val(newQuantity);
-        $('[data-itemValue="' + itemName + 'Value"]').text(newQuantity);
-        console.log("Value of item after increase: ",$(document).find('[data-itemValue = "' + itemName + 'Value"]')[0].value);
-        addItemDB(listKey, itemName, newQuantity);
-
-        showToast('Item quantity updated!', 'info');
-    } else {
-        delete list[itemName];
-        await deleteItemDB(listKey, itemName);
-
-        showToast('Item removed from list!', 'danger');
-    }
-}
-
-
-if ($('body').is('#editList')) {
-    (async () => {
-        const urlParams = new URLSearchParams(window.location.search);
-        const name = urlParams.get('name');
-        await loadGroceries();  // <-- now allowed because it's inside an async IIFE!
-
-        let header = '<h1 class="text-center" id="listName">'+ name + '</h1>';
-        $("#list").prepend(header);
-    
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                console.log("User logged in:", user.uid);
-
-                const currentList = await getItemsDB(name);
-
-                console.log("Loading items into HTML:", currentList);
-
-                for (const [key, value] of Object.entries(currentList)) {
-                    console.log(`Item: ${key}, Quantity: ${value}`);
-                    addToList(key);
-                }
-            } else {
-                console.warn("User not logged in.");
-            }
-        });
-    })(); // iife 
-}
-
-$(document).ready(function () {
-    onAuthStateChanged(auth, async (user) => {
-        if (user) {
-            console.log("User logged in:", user.uid);
-            init();
-        }
-    });
-
-    // search bar logic for edit list page
-    $("#searchBar").on("input", function () {
-        const query = $(this).val().toLowerCase();
-        let matchCount = 0;
-    
-        for (const itemName in groceries) {
-            const safeId = itemName.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '') + '-result';
-            const $element = $(`#${safeId}`);
-    
-            if (itemName.toLowerCase().includes(query)) {
-                $element.removeClass("hidden-result");
-                matchCount++;
-            } else {
-                $element.addClass("hidden-result");
-            }
-        }
-    
-        console.log(`Search for "${query}" matched ${matchCount} item(s).`);
-    });
-    
-    
 });
 
-
-async function init() {
-    const listName = document.getElementById("listName").textContent;
-    const list = await getItemsDB(listName) || {};
-
-    $(document).on('click', '.addToList', function () {
-        const item = $(this).data("item");
-        addToList(item);
-    });
-
-    $(document).on('click', '.removeItem', async function () {
-        const item = $(this).data("item");
-
-        const element = document.getElementById(item);
-        if (element) element.remove();
-
-        await updateItemQuantity(listName, item, 0); // update DB
-    });
-
-    $(document).on('click', '.incrementItem', async function () {
-        const item = $(this).data("item");
-        const input = $('[data-itemvalue="' + item + 'Value"]');
-        const currentQty = parseInt(input.val()) || 0;
-        const newQty = currentQty + 1;
-
-        input.val(newQty);
-        await updateItemQuantity(listName, item, newQty);
-    });
-
-    $(document).on('click', '.decrementItem', async function () {
-        const item = $(this).data("item");
-        const input = $('[data-itemvalue="' + item + 'Value"]');
-        const currentQty = parseInt(input.val()) || 0;
-        const newQty = currentQty - 1;
-
-        if (newQty <= 0) {
-            const element = document.getElementById(item);
-            if (element) element.remove();
-            await updateItemQuantity(listName, item, 0); // update DB
-        } else {
-            input.val(newQty);
-            await updateItemQuantity(listName, item, newQty);
-        }
-    });
+// Load items.json
+async function loadGroceries() {
+  const res = await fetch('items.json');
+  groceries = await res.json();
+  renderSearchItems();
 }
 
-//Database Functions
-
-async function addItemDB(listName, itemName, quantity){
-    const user = auth.currentUser;
-    if (!user) {
-        console.error("User not logged in");
-        return;
-    }
-
-    const ref = doc(db, `users/${user.uid}/groceryLists/${listName}`);
-
-    try {
-        const snapshot = await getDoc(ref);
-
-        if (!snapshot.exists()) {
-            // Create the document with the first item if it doesn't exist yet
-            await setDoc(ref, {
-                items: {
-                    [itemName]: quantity
-                }
-            });
-            console.log(`Created new list "${listName}" and added ${itemName} (x${quantity}).`);
-        } else {
-            const data = snapshot.data();
-            //const existingQty = data.items?.[itemName] || 0;
-
-
-            await updateDoc(ref, {
-                [`items.${itemName}`]: quantity
-            });
-
-            console.log(`Added ${itemName} (x${quantity}) to list "${listName}". Total now: ${quantity}`);
-        }
-    } catch (error) {
-        console.error("Error adding item to Firestore:", error);
-    }
+// Normalize units
+function normalizeUnits(str) {
+  return str.replace(/\b(lb|oz|ct|each)\b/gi, m => m.toLowerCase());
 }
 
-async function getItemsDB(listName) {
-    const user = auth.currentUser;
-    if (!user) {
-        console.error("User not logged in");
-        return;
-    }
-
-    const ref = doc(db, `users/${user.uid}/groceryLists/${listName}`);
-    const snapshot = await getDoc(ref);
-
-    if (!snapshot.exists()) {
-        console.warn(`List "${listName}" not found.`);
-        return {}; // Return an empty object instead of NULL (JavaScript uses null or undefined, but NULL is invalid)
-    }
-
-    const data = snapshot.data();
-    const items = data.items || {};
-
-    console.log(`Items from "${listName}":`, items);
-
-    return items;
+// Render search items into two columns
+function renderSearchItems() {
+  let toggle = true;
+  Object.keys(groceries).forEach(name => {
+    const display = normalizeUnits(name);
+    const safeId = name.toLowerCase().replace(/[^\w]+/g,'-');
+    const html = `
+      <li class="list-group-item d-flex justify-content-between align-items-center" id="${safeId}">
+        <h5 class="flex-grow-1 m-0">${display}</h5>
+        <button class="btn btn-custom-color addToList" data-item="${name}">Add</button>
+      </li>`;
+    document.querySelector(toggle ? '#result1' : '#result2').insertAdjacentHTML('beforeend', html);
+    toggle = !toggle;
+  });
 }
 
-async function deleteItemDB(listName, itemName){
-    const user = auth.currentUser;
-    if (!user) {
-        console.error("User not logged in");
-        return;
-    }
+// Initialize page: load list, setup search and button
+function initPage() {
+  const params = new URLSearchParams(window.location.search);
+  currentListName = params.get('name');
+  document.getElementById('listName').textContent = currentListName;
 
-    const listRef = doc(db, `users/${user.uid}/groceryLists/${listName}`);
-    try {
-        await updateDoc(listRef, {
-            [`items.${itemName}`]: deleteField()
-        });
-        console.log(`Item '${itemName}' deleted from list '${listName}'`);
-    } catch (error) {
-        console.error("Error deleting item:", error);
-    }
+  // Load saved quantities
+  getItemsDB(currentListName).then(items => {
+    Object.entries(items).forEach(([item, qty]) => addToList(item, qty));
+  });
+
+  // Setup search filter
+  document.getElementById('searchBar').addEventListener('input', e => {
+    const q = e.target.value.toLowerCase();
+    Object.keys(groceries).forEach(name => {
+      const id = name.toLowerCase().replace(/[^\w]+/g,'-');
+      document.getElementById(id).style.display = name.toLowerCase().includes(q) ? '' : 'none';
+    });
+  });
+
+  // Inject Find Best Stores button
+  const container = document.getElementById('myList');
+  const btnHtml = `<button id="findBestStores" class="btn btn-primary mt-3 mb-2">Find Best Stores</button>`;
+  container.insertAdjacentHTML('beforebegin', btnHtml);
 }
 
+// Event delegation for clicks
+document.addEventListener('click', e => {
+  const btn = e.target;
+  if (btn.matches('.addToList')) {
+    addToList(btn.dataset.item, 1);
+  } else if (btn.matches('.incrementItem')) {
+    updateItemQuantity(btn.dataset.item, 1);
+  } else if (btn.matches('.decrementItem')) {
+    updateItemQuantity(btn.dataset.item, -1);
+  } else if (btn.matches('.removeItem')) {
+    updateItemQuantity(btn.dataset.item, -9999);
+  } else if (btn.matches('#findBestStores')) {
+    findBestStores();
+  }
+});
 
+// Add item to UI and DB
+function addToList(itemName, qty) {
+  const list = document.getElementById('myList');
+  const existing = list.querySelector(`[data-item="${itemName}"]`);
+  if (existing) {
+    updateItemQuantity(itemName, qty);
+    return;
+  }
+  const html = `
+    <li class="list-group-item d-flex align-items-center" id="li-${itemName}">
+      <button class="btn btn-close removeItem me-2" data-item="${itemName}"></button>
+      <div class="flex-grow-1">${normalizeUnits(itemName)}</div>
+      <div class="btn-group">
+        <button class="btn btn-sm decrementItem" data-item="${itemName}">-</button>
+        <span class="px-2" data-qty-for="${itemName}">${qty}</span>
+        <button class="btn btn-sm incrementItem" data-item="${itemName}">+</button>
+      </div>
+    </li>`;
+  list.insertAdjacentHTML('beforeend', html);
+  addItemDB(currentListName, itemName, qty);
+}
+
+// Update quantity in DB and UI
+async function updateItemQuantity(itemName, delta) {
+  const ref = doc(db, `users/${auth.currentUser.uid}/groceryLists/${currentListName}`);
+  await runTransaction(db, async tx => {
+    const snap = await tx.get(ref);
+    const items = snap.exists() ? snap.data().items : {};
+    const oldQty = items[itemName] || 0;
+    const newQty = oldQty + delta;
+    if (newQty > 0) {
+      items[itemName] = newQty;
+      tx.set(ref, { items }, { merge: true });
+      document.querySelector(`[data-qty-for="${itemName}"]`).textContent = newQty;
+    } else {
+      delete items[itemName];
+      tx.set(ref, { items }, { merge: true });
+      document.getElementById(`li-${itemName}`).remove();
+    }
+  });
+}
+
+// Firestore helpers
+async function getItemsDB(name) {
+  const snap = await getDoc(doc(db, `users/${auth.currentUser.uid}/groceryLists/${name}`));
+  return snap.exists() ? snap.data().items : {};
+}
+async function addItemDB(name, item, qty) {
+  const ref = doc(db, `users/${auth.currentUser.uid}/groceryLists/${name}`);
+  const snap = await getDoc(ref);
+  const items = snap.exists() ? snap.data().items : {};
+  items[item] = (items[item] || 0) + qty;
+  await setDoc(ref, { items }, { merge: true });
+}
+
+// Compute and popup best stores by total cost
+function findBestStores() {
+  const items = {};
+  document.querySelectorAll('[data-qty-for]').forEach(el => {
+    const it = el.getAttribute('data-qty-for');
+    items[it] = parseInt(el.textContent, 10);
+  });
+  if (!Object.keys(items).length) {
+    alert('Your list is empty!');
+    return;
+  }
+  const totals = {};
+  for (const [item, qty] of Object.entries(items)) {
+    const info = groceries[item];
+    if (!info) continue;
+    Object.entries(info).forEach(([store, p]) => {
+      const price = p.discount_price ?? p.original_price;
+      if (price != null) totals[store] = (totals[store] || 0) + price * qty;
+    });
+  }
+  const sorted = Object.entries(totals).sort((a, b) => a[1] - b[1]);
+  const lines = sorted.map(([s, t], i) => `${i+1}. ${s}: $${t.toFixed(2)}`);
+  alert('Best stores by total cost:\n' + lines.join('\n'));
+}
 
 /* Unused
 
