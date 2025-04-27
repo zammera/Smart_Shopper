@@ -30,45 +30,63 @@ function normalizeUnits(str) {
 
 // Render search items into two columns
 function renderSearchItems() {
-  let toggle = true;
-  Object.keys(groceries).forEach(name => {
-    const display = normalizeUnits(name);
-    const safeId = name.toLowerCase().replace(/[^\w]+/g,'-');
-    const html = `
-      <li class="list-group-item d-flex justify-content-between align-items-center" id="${safeId}">
-        <h5 class="flex-grow-1 m-0">${display}</h5>
-        <button class="btn btn-custom-color addToList" data-item="${name}">Add</button>
-      </li>`;
-    document.querySelector(toggle ? '#result1' : '#result2').insertAdjacentHTML('beforeend', html);
-    toggle = !toggle;
-  });
-}
+    let toggle = true;
+    Object.keys(groceries).forEach(name => {
+      const display = normalizeUnits(name);
+      const html = `
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <h5 class="flex-grow-1 m-0">${display}</h5>
+          <button class="btn btn-custom-color addToList" data-item="${name}">Add</button>
+        </li>`;
+      document.querySelector(toggle ? '#result1' : '#result2').insertAdjacentHTML('beforeend', html);
+      toggle = !toggle;
+    });
+  }
+  
 
 // Initialize page: load list, setup search and button
 function initPage() {
-  const params = new URLSearchParams(window.location.search);
-  currentListName = params.get('name');
-  document.getElementById('listName').textContent = currentListName;
-
-  // Load saved quantities
-  getItemsDB(currentListName).then(items => {
-    Object.entries(items).forEach(([item, qty]) => addToList(item, qty));
-  });
-
-  // Setup search filter
-  document.getElementById('searchBar').addEventListener('input', e => {
-    const q = e.target.value.toLowerCase();
-    Object.keys(groceries).forEach(name => {
-      const id = name.toLowerCase().replace(/[^\w]+/g,'-');
-      document.getElementById(id).style.display = name.toLowerCase().includes(q) ? '' : 'none';
+    const params = new URLSearchParams(window.location.search);
+    currentListName = params.get('name');
+  
+    const listNameElem = document.getElementById('listName');
+    if (listNameElem) {
+      listNameElem.textContent = currentListName;
+    }
+  
+    // Load saved quantities
+    getItemsDB(currentListName).then(items => {
+      Object.entries(items).forEach(([item, qty]) => addToList(item, qty));
     });
-  });
-
-  // Inject Find Best Stores button
-  const container = document.getElementById('myList');
-  const btnHtml = `<button id="findBestStores" class="btn btn-primary mt-3 mb-2">Find Best Stores</button>`;
-  container.insertAdjacentHTML('beforebegin', btnHtml);
-}
+  
+    // Setup search filter
+    document.getElementById('searchBar').addEventListener('input', e => {
+        const q = e.target.value.toLowerCase();
+        
+        const allItems = document.querySelectorAll('#result1 li, #result2 li');
+      
+        allItems.forEach(li => {
+          const text = li.querySelector('h5')?.textContent.toLowerCase() || '';
+          
+          if (text.includes(q)) {
+            li.style.setProperty('display', '', 'important');
+          } else {
+            li.style.setProperty('display', 'none', 'important');
+          }
+        });
+      });
+      
+      
+      
+  
+    // Check if 'Find Best Stores' button already exists
+    if (!document.getElementById('findBestStores')) {
+      const container = document.getElementById('myList');
+      const btnHtml = `<button id="findBestStores" class="btn btn-primary mt-3 mb-2">Find Best Stores</button>`;
+      container.insertAdjacentHTML('beforebegin', btnHtml);
+    }
+  }
+  
 
 // Event delegation for clicks
 document.addEventListener('click', e => {
