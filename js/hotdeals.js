@@ -171,7 +171,7 @@ $(function () {
         let html = "";
         deals.forEach(deal => {
             html += `
-                <div class="col-sm-6 col-lg-4 col-xl-3">
+                <div class="col-sm-6 col-lg-4 col-xl-3 mb-3">
                   <div class="card h-100">
                     <div class="card-header bg-success text-white">
                       <span class="badge bg-warning text-dark">${deal.discount}</span>
