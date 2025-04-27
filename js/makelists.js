@@ -91,7 +91,7 @@ $( function() {
                 console.log("Fetched lists from Firestore:", lists);
 
                 lists.forEach(list => {
-                    if (list.name !== "Hot Deals List") {
+                    if (list.name !== "Hot Deals List" || list.name !== "undefined") {
                         createListCard(list.name);
                     }
                 });                
