@@ -106,45 +106,67 @@ document.addEventListener('click', e => {
 
 // Add item to UI and DB
 function addToList(itemName, qty) {
-  const list = document.getElementById('myList');
-  const existing = list.querySelector(`[data-item="${itemName}"]`);
-  if (existing) {
-    updateItemQuantity(itemName, qty);
-    return;
+    const list = document.getElementById('myList');
+    const existingQtySpan = list.querySelector(`[data-qty-for="${itemName}"]`);
+  
+    if (existingQtySpan) {
+      // Already exists, call update function only
+      updateItemQuantity(itemName, qty); 
+      return;
+    }
+  
+    // Otherwise, create new item
+    const html = `
+      <li class="list-group-item d-flex align-items-center" id="li-${itemName}">
+        <button class="btn btn-close removeItem me-2" data-item="${itemName}"></button>
+        <div class="flex-grow-1">${normalizeUnits(itemName)}</div>
+        <div class="btn-group">
+          <button class="btn btn-sm decrementItem" data-item="${itemName}">-</button>
+          <span class="px-2" data-qty-for="${itemName}">${qty}</span>
+          <button class="btn btn-sm incrementItem" data-item="${itemName}">+</button>
+        </div>
+      </li>`;
+    list.insertAdjacentHTML('beforeend', html);
+    
+    // And set it into Firestore
+    addItemDB(currentListName, itemName, qty);
   }
-  const html = `
-    <li class="list-group-item d-flex align-items-center" id="li-${itemName}">
-      <button class="btn btn-close removeItem me-2" data-item="${itemName}"></button>
-      <div class="flex-grow-1">${normalizeUnits(itemName)}</div>
-      <div class="btn-group">
-        <button class="btn btn-sm decrementItem" data-item="${itemName}">-</button>
-        <span class="px-2" data-qty-for="${itemName}">${qty}</span>
-        <button class="btn btn-sm incrementItem" data-item="${itemName}">+</button>
-      </div>
-    </li>`;
-  list.insertAdjacentHTML('beforeend', html);
-  addItemDB(currentListName, itemName, qty);
-}
+  
 
 // Update quantity in DB and UI
 async function updateItemQuantity(itemName, delta) {
-  const ref = doc(db, `users/${auth.currentUser.uid}/groceryLists/${currentListName}`);
-  await runTransaction(db, async tx => {
-    const snap = await tx.get(ref);
-    const items = snap.exists() ? snap.data().items : {};
-    const oldQty = items[itemName] || 0;
-    const newQty = oldQty + delta;
-    if (newQty > 0) {
-      items[itemName] = newQty;
-      tx.set(ref, { items }, { merge: true });
-      document.querySelector(`[data-qty-for="${itemName}"]`).textContent = newQty;
-    } else {
-      delete items[itemName];
-      tx.set(ref, { items }, { merge: true });
-      document.getElementById(`li-${itemName}`).remove();
+    const ref = doc(db, `users/${auth.currentUser.uid}/groceryLists/${currentListName}`);
+    await runTransaction(db, async tx => {
+      const snap = await tx.get(ref);
+      const items = snap.exists() ? snap.data().items : {};
+      const oldQty = items[itemName] || 0;
+      const newQty = oldQty + delta;
+  
+      if (newQty > 0) {
+        items[itemName] = newQty;
+        tx.set(ref, { items }, { merge: true });
+      } else {
+        delete items[itemName];
+        tx.set(ref, { items }, { merge: true });
+      }
+    });
+  
+    // update the DOM after transaction
+    const span = document.querySelector(`[data-qty-for="${CSS.escape(itemName)}"]`);
+    
+    if (span) {
+      const currentQty = parseInt(span.textContent, 10) || 0;
+      const updatedQty = currentQty + delta;
+  
+      if (updatedQty > 0) {
+        span.textContent = updatedQty;
+      } else {
+        const li = document.getElementById(`li-${itemName}`);
+        if (li) li.remove();
+      }
     }
-  });
-}
+  }
+  
 
 // Firestore helpers
 async function getItemsDB(name) {
