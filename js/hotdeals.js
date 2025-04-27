@@ -267,7 +267,7 @@ $(function () {
         }
     }
 
-     // —————————————————————————
+  // —————————————————————————
   // Load user’s lists into the modal
   // —————————————————————————
   async function loadUserLists() {

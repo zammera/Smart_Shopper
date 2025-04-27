@@ -1,9 +1,9 @@
 .blur-card {
-    background: rgba(255, 255, 255, 0.15); /* semi-transparent white */
-    backdrop-filter: blur(10px);           /* frosted glass blur */
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.25); /* optional border for depth */
-    color: white; /* change as needed */
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: white;
   }
   
 /* Background Image Container - Fixed Position */
@@ -366,8 +366,10 @@
     height: 1040px;
     margin-top: 100px;
     padding-top: 10px;
-    border-radius: 40px;
-    background-color: rgba(255, 255, 255, .5);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
 }
 
 .itemsHistorySection {
