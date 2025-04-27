@@ -91,10 +91,10 @@ $( function() {
                 console.log("Fetched lists from Firestore:", lists);
 
                 lists.forEach(list => {
-                    if (list.name !== "Hot Deals List" || list.name !== "undefined") {
+                    if (list.name && list.name !== "Hot Deals List") {
                         createListCard(list.name);
                     }
-                });                
+                });                               
 
             } catch (err) {
                 console.error("Error getting lists:", err);
