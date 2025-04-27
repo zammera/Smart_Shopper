@@ -1,3 +1,11 @@
+.blur-card {
+    background: rgba(255, 255, 255, 0.15); /* semi-transparent white */
+    backdrop-filter: blur(10px);           /* frosted glass blur */
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.25); /* optional border for depth */
+    color: white; /* change as needed */
+  }
+  
 /* Background Image Container - Fixed Position */
 .bg-image {
     position: fixed;

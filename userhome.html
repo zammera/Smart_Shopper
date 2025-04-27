@@ -31,17 +31,20 @@
 
             const auth = firebase.auth();
 
-            document.getElementById('signOutBtn').addEventListener('click', (e) => {
-                e.preventDefault(); // prevent default link behavior
-                auth.signOut()
-                .then(() => {
-                    console.log("User signed out");
-                    window.location.href = "index.html"; // after successful sign out
-                })
-                .catch((error) => {
-                    console.error("Sign Out Error", error);
+            document.addEventListener('DOMContentLoaded', function() {
+                document.getElementById('signOutBtn').addEventListener('click', (e) => {
+                    e.preventDefault(); 
+                    auth.signOut()
+                    .then(() => {
+                        console.log("User signed out");
+                        window.location.href = "index.html"; 
+                    })
+                    .catch((error) => {
+                        console.error("Sign Out Error", error);
+                    });
                 });
             });
+
 
             auth.onAuthStateChanged((user) => {
                 if (!user) {
@@ -52,8 +55,9 @@
             </script>
       </head>
 <body>
-    <!-- Fixed Background -->
-  <div class="bg-image"></div>
+
+<!-- Fixed Background -->
+<div class="bg-image"></div>
     
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-transparent px-4">

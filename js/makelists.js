@@ -2,11 +2,9 @@ import {db, auth } from "./firebaseInit.js";
 import { setDoc, getDocs, deleteDoc, collection, doc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 
-
 if (!window.firebaseDb) {
     console.error("Firebase not initialized")
 }
-
 
 const listNames = [
     {"name":"Taco Tuesday"}
@@ -77,9 +75,8 @@ function createListCard(listName) {
             <div class="card-body">
                 <div class="d-flex align-items-center justify-content-between mb-2">
                     <h5 class="card-title mb-0">${ listName }</h5>
-                    <input type="radio" class="form-check-input" name="listSelector" value="${ listName }" onchange="selectList('${ listName }')" checked/>
                 </div>
-                <input class="btn btn-custom-color list-btn" type="submit" value="Edit" onclick="editList('${ listName }')">
+                <input class="btn btn-custom-color list-btn mt-3" type="submit" value="Edit" onclick="editList('${ listName }')">
                 <input class="btn btn-danger list-btn" type="reset" value="Delete" onclick="deleteList('${ listName }')">
             </div>
         </div>`;
@@ -88,9 +85,8 @@ function createListCard(listName) {
             <div class="card-body">
                 <div class="d-flex align-items-center justify-content-between mb-2">
                     <h5 class="card-title mb-0">${ listName }</h5>
-                    <input type="radio" class="form-check-input" name="listSelector" value="${ listName }" onchange="selectList('${ listName }')" />
                 </div>
-                <input class="btn btn-custom-color list-btn" type="submit" value="Edit" onclick="editList('${ listName }')">
+                <input class="btn btn-custom-color list-btn mt-3" type="submit" value="Edit" onclick="editList('${ listName }')">
                 <input class="btn btn-danger list-btn" type="reset" value="Delete" onclick="deleteList('${ listName }')">
             </div>
         </div>`;
@@ -123,8 +119,6 @@ function selectList(name) {
     localStorage.setItem("selectedList", JSON.stringify(name));
 }
 
-
-
 $( function() {
     if ($('body').is('#makeList')) {
         (async () => {
@@ -134,8 +128,10 @@ $( function() {
                 console.log("Fetched lists from Firestore:", lists);
 
                 lists.forEach(list => {
-                    createListCard(list.name);
-                });
+                    if (list.name !== "Hot Deals List") {
+                        createListCard(list.name);
+                    }
+                });                
 
             } catch (err) {
                 console.error("Error getting lists:", err);
@@ -238,7 +234,6 @@ async function deleteDBList(listName){
     const ref = doc(db, `users/${ user.uid }/groceryLists/${listName}`);
     await deleteDoc(ref);
 }
-
 
 window.createNewList = createNewList;
 window.editList = editList;
