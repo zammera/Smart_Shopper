@@ -17,7 +17,22 @@ document.addEventListener('DOMContentLoaded', () => {
       window.firebaseDb = firebase.firestore();
   }
 
-    const auth = firebase.auth(); // Get auth from Firebase
+    const auth = firebase.auth(); // Get auth from 
+    
+    document.getElementById('googleLoginBtn').addEventListener('click', () => {
+      const provider = new firebase.auth.GoogleAuthProvider();
+  
+      auth.signInWithPopup(provider)
+        .then((result) => {
+          console.log("Signed in as:", result.user.displayName);
+          // Redirect to user dashboard or homepage
+          window.location.href = "userhome.html"; 
+        })
+        .catch((error) => {
+          console.error("Google Sign-in Error:", error);
+          alert("Failed to sign in with Google. Try again!");
+        });
+    });
   
     const signupForm = document.getElementById('signupForm');
     const loginForm = document.getElementById('loginForm');
@@ -68,5 +83,12 @@ document.addEventListener('DOMContentLoaded', () => {
           });
       });
     }
+
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        console.log("User is signed in:", user.email);
+        // Maybe auto-redirect here too
+      }
+    });
 
   });
