@@ -7,15 +7,15 @@ let selectedListName = null;
 // Fetch store items
 const getStoreItemsData = async () => {
     try {
-        const response = await fetch('./items.json');
+        const response = await fetch('items.json');
         const data = await response.json();
         return data;
     } catch (err) {
         console.error("Error loading store items:", err);
+        return {};
     }
 };
 
-// Create combined array of user's items + store items
 const generateItems = async () => {
     console.log("Starting to generate items...");
     const listItems = await getListItems();
@@ -24,24 +24,43 @@ const generateItems = async () => {
     const allStoreItems = await getStoreItemsData();
     console.log("Fetched allStoreItems:", allStoreItems);
 
-    const storeItems = await getCheapestItems(allStoreItems);
-    console.log("Cheapest storeItems:", storeItems);
-
     const itemsArray = [];
 
-    for (let i = 0; i < storeItems.length; i++) {
-        const item = listItems.find(item => item.item === storeItems[i].item);
-        if (item !== undefined) {
+    for (let i = 0; i < listItems.length; i++) {
+        const userItem = listItems[i];
+
+        // 🛑 Skip undefined or blank item names
+        if (!userItem.item || userItem.item === "undefined" || userItem.item.trim() === "") {
+            console.warn(`Skipping invalid item: ${userItem.item}`);
+            continue;
+        }
+
+        const storeInfo = allStoreItems[userItem.item] || null;
+
+        if (storeInfo) {
+            const cheapestList = await getCheapestItems({ [userItem.item]: storeInfo });
+            const cheapest = cheapestList[0];
             itemsArray.push({
-                item: storeItems[i].item,
-                original_price: storeItems[i].original_price,
-                discount_price: storeItems[i].discount_price,
-                store: storeItems[i].store,
-                frequency: item.frequency,
-                recency: item.recency
+                item: userItem.item,
+                original_price: cheapest.original_price,
+                discount_price: cheapest.discount_price,
+                store: cheapest.store,
+                frequency: userItem.frequency,
+                recency: userItem.recency
+            });
+        } else {
+            // Show something friendly if no pricing is found
+            itemsArray.push({
+                item: userItem.item,
+                original_price: 0,
+                discount_price: null,
+                store: "Store Info Unavailable",
+                frequency: userItem.frequency,
+                recency: userItem.recency
             });
         }
     }
+
     console.log("Built itemsArray:", itemsArray);
 
     getDiscountedItems(itemsArray);
@@ -49,8 +68,6 @@ const generateItems = async () => {
     getRecentItems(itemsArray);
 };
 
-
-// Post helper functions
 function postItem(item, containerName) {
     const itemDiv = document.createElement('div');
     itemDiv.className = 'item';
@@ -86,7 +103,6 @@ function postItemWithSale(item, containerName) {
     document.getElementById(containerName).appendChild(itemDiv);
 }
 
-// Post items into the sections
 function getDiscountedItems(items) {
     items.forEach(item => {
         if (item.discount_price != null) {
@@ -115,7 +131,6 @@ function getRecentItems(itemsArray) {
     });
 }
 
-// Find cheapest store
 const getCheapestItems = async (itemList) => {
     const cheapestItems = [];
 
@@ -147,7 +162,6 @@ const getCheapestItems = async (itemList) => {
     return cheapestItems;
 };
 
-// Get user's list items
 const getListItems = async () => {
     const user = auth.currentUser;
     if (!user) {
@@ -165,34 +179,43 @@ const getListItems = async () => {
         const snapshot = await getDoc(list);
         const data = snapshot.data();
 
-        if (Array.isArray(data.items)) {
-            // 🟰 Handling array format (newer structure)
-            for (const obj of data.items) {
+        const items = data.items || {};
+
+        if (Array.isArray(items)) {
+            for (const entry of items) {
+                if (!entry.name || entry.name === "undefined" || entry.name.trim() === "") {
+                    console.warn("Skipping invalid item entry:", entry);
+                    continue;
+                }
                 recency++;
-                const item = listItems.find(i => i.item === obj.name);
-                if (item !== undefined) {
-                    item.frequency += obj.qty;
-                    item.recency = recency;
+                const existingItem = listItems.find(item => item.item === entry.name);
+                if (existingItem) {
+                    existingItem.frequency += entry.qty;
+                    existingItem.recency = recency;
                 } else {
                     listItems.push({
-                        item: obj.name,
-                        frequency: obj.qty,
+                        item: entry.name,
+                        frequency: entry.qty,
                         recency: recency
                     });
                 }
             }
         } else {
-            // 🟰 Handling object format (older structure)
-            for (const newItem in data.items) {
+            for (const newItem in items) {
+                if (!newItem || newItem === "undefined" || newItem.trim() === "") {
+                    console.warn("Skipping invalid item:", newItem);
+                    continue;
+                }
                 recency++;
-                const item = listItems.find(i => i.item === newItem);
-                if (item !== undefined) {
-                    item.frequency += data.items?.[newItem];
-                    item.recency = recency;
+                const frequency = typeof items[newItem] === 'number' ? items[newItem] : 1;
+                const existingItem = listItems.find(item => item.item === newItem);
+                if (existingItem) {
+                    existingItem.frequency += frequency;
+                    existingItem.recency = recency;
                 } else {
                     listItems.push({
                         item: newItem,
-                        frequency: data.items?.[newItem],
+                        frequency: frequency,
                         recency: recency
                     });
                 }
@@ -202,8 +225,6 @@ const getListItems = async () => {
     return listItems;
 };
 
-
-// Populate the dropdown
 function populateListSelector() {
     const listSelector = document.getElementById('listSelector');
 
@@ -216,33 +237,30 @@ function populateListSelector() {
                 const listData = docSnap.data();
                 if (listData.name && listData.name !== "Hot Deals List") {
                     const option = document.createElement('option');
-                    option.value = docSnap.id; // VALUE = document ID
-                    option.setAttribute('data-list-name', listData.name); // for display purposes
-                    option.textContent = listData.name; // what the user sees
+                    option.value = docSnap.id;
+                    option.setAttribute('data-list-name', listData.name);
+                    option.textContent = listData.name;
                     listSelector.appendChild(option);
                 }
             });
 
             listSelector.addEventListener('change', async (e) => {
                 const selectedOption = e.target.options[e.target.selectedIndex];
-                selectedListName = selectedOption.value; // 💥 make sure it uses doc id
+                selectedListName = selectedOption.value;
                 const selectedListDisplayName = selectedOption.getAttribute('data-list-name');
                 console.log("Selected document ID:", selectedListName);
                 console.log("Displayed list name:", selectedListDisplayName);
 
-                // Clear previous items
                 document.getElementById('discountedItemsContainer').innerHTML = "";
                 document.getElementById('frequentItemsContainer').innerHTML = "";
                 document.getElementById('recentItemsContainer').innerHTML = "";
 
-                // Now generate
                 await generateItems();
             });
         }
     });
 }
 
-// Add item to selected list
 async function addItemToSelectedList(itemName) {
     if (!selectedListName) {
         alert("Please select a list first!");
@@ -266,7 +284,6 @@ async function addItemToSelectedList(itemName) {
         const listData = listSnap.data();
         let currentItems = listData.items || [];
 
-        // If currentItems is NOT an array, convert it (one-time migration fix)
         if (!Array.isArray(currentItems)) {
             currentItems = Object.entries(currentItems).map(([name, qty]) => ({
                 name,
@@ -274,7 +291,6 @@ async function addItemToSelectedList(itemName) {
             }));
         }
 
-        // Find if item already exists
         const existingItem = currentItems.find(item => item.name === itemName);
         if (existingItem) {
             existingItem.qty += 1;
@@ -291,8 +307,6 @@ async function addItemToSelectedList(itemName) {
     }
 }
 
-
-// Toasts
 function showToast(message, type = 'info') {
     const toastContainer = document.getElementById('addToListToast');
     const toastBody = document.getElementById('toastText');
@@ -312,13 +326,11 @@ $(document).ready(function () {
     });
 });
 
-// Initialize
 async function init() {
     populateListSelector();
     generateItems();
 }
 
-// Listen for add item clicks
 $(document).on('click', '.addItem', function () {
     const itemName = $(this).data('item');
     addItemToSelectedList(itemName);
