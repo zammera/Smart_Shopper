@@ -16,7 +16,6 @@ onAuthStateChanged(auth, async user => {
   }
 });
 
-
 // Load items.json
 async function loadGroceries() {
   const res = await fetch('items.json');
@@ -43,7 +42,6 @@ function renderSearchItems() {
       toggle = !toggle;
     });
   }
-  
 
 // Initialize page: load list, setup search and button
 function initPage() {
@@ -59,8 +57,6 @@ function initPage() {
     getItemsDB(currentListName).then(items => {
         items.forEach(obj => addToList(obj.name, obj.qty, true)); 
     });
-  
-      
   
     // Setup search filter
     document.getElementById('searchBar').addEventListener('input', e => {
@@ -78,9 +74,6 @@ function initPage() {
           }
         });
       });
-      
-      
-      
   
     // Check if 'Find Best Stores' button already exists
     if (!document.getElementById('findBestStores')) {
@@ -89,7 +82,6 @@ function initPage() {
       container.insertAdjacentHTML('beforebegin', btnHtml);
     }
   }
-  
 
 // Event delegation for clicks
 document.addEventListener('click', e => {
@@ -182,14 +174,11 @@ async function updateItemQuantity(itemName, delta) {
     }
 }
 
-  
-
 // Firestore helpers
 async function getItemsDB(name) {
     const snap = await getDoc(doc(db, `users/${auth.currentUser.uid}/groceryLists/${name}`));
     return snap.exists() ? (snap.data().items || []) : [];
   }
-  
 
 async function addItemDB(name, item, qty) {
     const ref = doc(db, `users/${auth.currentUser.uid}/groceryLists/${name}`);
@@ -206,8 +195,6 @@ async function addItemDB(name, item, qty) {
   
     await setDoc(ref, { items }, { merge: true });
   }
-  
-  
 
 // Compute and popup best stores by total cost
 // function findBestStores() {
@@ -287,52 +274,62 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
   }
   
   async function findBestStores() {
-    // build your totals
     const items = {};
     document.querySelectorAll('[data-qty-for]').forEach(el => {
-      items[ el.getAttribute('data-qty-for') ] = +el.textContent;
+      items[el.getAttribute('data-qty-for')] = +el.textContent;
     });
+  
     if (!Object.keys(items).length) {
       alert("Your list is empty!");
       return;
     }
+  
     const totals = {};
     for (let [item, qty] of Object.entries(items)) {
       const info = groceries[item];
       if (!info) continue;
-
+  
       for (let [rawStore, p] of Object.entries(info)) {
-        // strip any trailing “Supermarket” (or “Grocery”, if you like)
         const store = rawStore.replace(/\s*(Supermarket|Grocery)$/i, '').trim();
-      
         const price = p.discount_price ?? p.original_price;
-        totals[store] = (totals[store]||0) + price * qty;
+        totals[store] = (totals[store] || 0) + price * qty;
       }
-      
-
     }
   
-    // sort ascending
-    const sorted = Object.entries(totals).sort((a,b) => a[1]-b[1]);
+    const sorted = Object.entries(totals).sort((a, b) => a[1] - b[1]);
   
-    // grab the user’s lat/lng from db
     const userDoc = await getDoc(doc(db, `users/${auth.currentUser.uid}`));
     const { lat: userLat, lng: userLng } = userDoc.data().address;
   
-    // Promise.all over every store so none get dropped using Google Places API
     const enriched = await Promise.all(
       sorted.map(async ([store, cost], idx) => {
         const { address, distance } = await findNearestStore(store, userLat, userLng);
-        return `${idx+1}. ${store}: $${cost.toFixed(2)}
-  → ${address} (${distance} mi)`;
+        return {
+          rank: idx + 1,
+          store,
+          cost: cost.toFixed(2),
+          address,
+          distance
+        };
       })
     );
   
-    console.log("stores:", sorted.length, "lines:", enriched.length);
+    console.log("Best stores enriched:", enriched);
   
-    // join *all* of them
-    alert(enriched.join("\n\n"));
+    // Generate the HTML for modal
+    const modalBody = document.getElementById('bestStoresModalBody');
+    modalBody.innerHTML = enriched.map(store => `
+      <div class="mb-3">
+        <h5>${store.rank}. ${store.store}</h5>
+        <p>
+          <strong>Cost:</strong> $${store.cost}<br>
+          <strong>Address:</strong> ${store.address}<br>
+          <strong>Distance:</strong> ${store.distance} mi
+        </p>
+      </div>
+    `).join('');
+  
+    // Display the modal
+    const bestStoresModal = new bootstrap.Modal(document.getElementById('bestStoresModal'));
+    bestStoresModal.show();
   }
-  
-  
-  

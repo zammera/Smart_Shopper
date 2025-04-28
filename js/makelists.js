@@ -39,7 +39,7 @@ function createListCard(listName) {
                 <div class="d-flex align-items-center justify-content-between mb-2">
                     <h5 class="card-title mb-0">${ listName }</h5>
                 </div>
-                <input class="btn btn-custom-color list-btn mt-3" type="submit" value="Edit" onclick="editList('${ listName }')">
+                <input class="btn btn-custom-color list-btn mt-3" type="submit" value="Manage List" onclick="editList('${ listName }')">
                 <input class="btn btn-danger list-btn" type="reset" value="Delete" onclick="deleteList('${ listName }')">
             </div>
         </div>`;
