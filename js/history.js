@@ -165,21 +165,43 @@ const getListItems = async () => {
         const snapshot = await getDoc(list);
         const data = snapshot.data();
 
-        for (const newItem in data.items) {
-            recency++;
-            const item = listItems.find(item => item.item === newItem);
-            if (item !== undefined) {
-                item.frequency += data.items?.[newItem];
-                item.recency = recency;
-            } else {
-                listItems.push({
-                    item: newItem,
-                    frequency: data.items?.[newItem],
-                    recency: recency
-                });
+        const items = data.items;
+
+        if (Array.isArray(items)) {
+            // New format (array of {name, qty})
+            for (const entry of items) {
+                recency++;
+                const found = listItems.find(item => item.item === entry.name);
+                if (found) {
+                    found.frequency += entry.qty;
+                    found.recency = recency;
+                } else {
+                    listItems.push({
+                        item: entry.name,
+                        frequency: entry.qty,
+                        recency: recency
+                    });
+                }
+            }
+        } else if (typeof items === 'object') {
+            // Old format (object of itemName: quantity)
+            for (const itemName in items) {
+                recency++;
+                const found = listItems.find(item => item.item === itemName);
+                if (found) {
+                    found.frequency += items[itemName];
+                    found.recency = recency;
+                } else {
+                    listItems.push({
+                        item: itemName,
+                        frequency: items[itemName],
+                        recency: recency
+                    });
+                }
             }
         }
     }
+    console.log("Parsed listItems:", listItems);
     return listItems;
 };
 
@@ -196,30 +218,31 @@ function populateListSelector() {
                 const listData = docSnap.data();
                 if (listData.name && listData.name !== "Hot Deals List") {
                     const option = document.createElement('option');
-                    option.value = docSnap.id; // document id
-                    option.setAttribute('data-list-name', listData.name);
-                    option.textContent = listData.name;
+                    option.value = docSnap.id; // VALUE = document ID
+                    option.setAttribute('data-list-name', listData.name); // for display purposes
+                    option.textContent = listData.name; // what the user sees
                     listSelector.appendChild(option);
                 }
             });
 
             listSelector.addEventListener('change', async (e) => {
-                selectedListName = e.target.value; 
-                console.log("Selected list ID (document ID):", selectedListName);
+                const selectedOption = e.target.options[e.target.selectedIndex];
+                selectedListName = selectedOption.value; // 💥 make sure it uses doc id
+                const selectedListDisplayName = selectedOption.getAttribute('data-list-name');
+                console.log("Selected document ID:", selectedListName);
+                console.log("Displayed list name:", selectedListDisplayName);
 
-                // Clear old items first
+                // Clear previous items
                 document.getElementById('discountedItemsContainer').innerHTML = "";
                 document.getElementById('frequentItemsContainer').innerHTML = "";
                 document.getElementById('recentItemsContainer').innerHTML = "";
 
-                // Now generate the items
+                // Now generate
                 await generateItems();
             });
         }
     });
 }
-
-
 
 // Add item to selected list
 async function addItemToSelectedList(itemName) {
@@ -243,15 +266,26 @@ async function addItemToSelectedList(itemName) {
         }
 
         const listData = listSnap.data();
-        const currentItems = listData.items || {};
+        let currentItems = listData.items || [];
 
-        if (currentItems[itemName]) {
-            currentItems[itemName] += 1;
+        // If currentItems is NOT an array, convert it (one-time migration fix)
+        if (!Array.isArray(currentItems)) {
+            currentItems = Object.entries(currentItems).map(([name, qty]) => ({
+                name,
+                qty
+            }));
+        }
+
+        // Find if item already exists
+        const existingItem = currentItems.find(item => item.name === itemName);
+        if (existingItem) {
+            existingItem.qty += 1;
         } else {
-            currentItems[itemName] = 1;
+            currentItems.push({ name: itemName, qty: 1 });
         }
 
         await updateDoc(listRef, { items: currentItems });
+
         console.log(`✅ Added ${itemName} to list (document ID): ${selectedListName}`);
         showToast(`${itemName} added!`, 'success');
     } catch (error) {
@@ -283,7 +317,7 @@ $(document).ready(function () {
 // Initialize
 async function init() {
     populateListSelector();
-    // DON'T call generateItems() here anymore
+    generateItems();
 }
 
 // Listen for add item clicks
