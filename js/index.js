@@ -4,12 +4,11 @@ document.addEventListener('DOMContentLoaded', () => {
     apiKey: "AIzaSyBkk-f7ov5KB_FWgiyyJFCp1tNV_nBpKjg",
     authDomain: "smart-shopper-10261.firebaseapp.com",
     projectId: "smart-shopper-10261",
-    storageBucket: "smart-shopper-10261.firebasestorage.app",
+    storageBucket: "smart-shopper-10261.appspot.com",
     messagingSenderId: "676320767038",
     appId: "1:676320767038:web:2c258f25407c75f4b9b56f",
   };
 
-  // Initialize Firebase and make available globally
   if (!window.firebaseApp) {
     window.firebaseApp = firebase.initializeApp(firebaseConfig);
     window.firebaseAuth = firebase.auth();
@@ -19,21 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const auth = firebase.auth();
   const db = firebase.firestore(); 
   
-  // Google Login
-  document.getElementById('googleLoginBtn').addEventListener('click', () => {
-    const provider = new firebase.auth.GoogleAuthProvider();
-
-    auth.signInWithPopup(provider)
-      .then((result) => {
-        console.log("Signed in as:", result.user.displayName);
-        window.location.href = "userhome.html"; 
-      })
-      .catch((error) => {
-        console.error("Google Sign-in Error:", error);
-        alert("Failed to sign in with Google. Try again!");
-      });
-  });
-
   const signupForm = document.getElementById('signupForm');
   const loginForm = document.getElementById('loginForm');
 
@@ -89,12 +73,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Listen for Authentication State Changes
   auth.onAuthStateChanged(async (user) => {
     if (user) {
       console.log("User is signed in:", user.email);
 
-      // Check if there is a greeting span in the navbar
       const greetingElement = document.getElementById('userGreeting');
       if (greetingElement) {
         try {

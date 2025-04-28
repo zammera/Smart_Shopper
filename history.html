@@ -86,33 +86,40 @@
         <img src="images/ihistory.png" alt="Item History" class="scaleA" />
     </div>
 
-        <div id="historyContainer" class="container-lg p-4 rounded-4 shadow">
-            <div id="discountedItems" class="itemsHistorySection">
-                <h1 class="sectionTitle">Discounted Items</h1>
-                <div id="discountedItemsContainer" class="itemContainer"></div>
-            </div>
-
-            <div id="frequentItems" class="itemsHistorySection">
-                <h1 class="sectionTitle">Frequent Items</h1>
-                <div id="frequentItemsContainer"  class="itemContainer"></div>
-            </div>
-
-            <div id="recentItems" class="itemsHistorySection">
-                <h1 class="sectionTitle">Recent Items</h1>
-                <div id="recentItemsContainer"  class="itemContainer"></div>
-            </div>
+    <div class="container-lg mt-5 p-4" id="currentListContainer">
+        <div class="d-flex align-items-center">
+            <select class="form-select" id="listSelector" style="width: 300px;">
+                <option selected disabled>Select a list...</option>
+            </select>
+        </div>
+    
+    <div id="historyContainer" class="container-lg p-4 rounded-4 shadow">
+        <div id="discountedItems" class="itemsHistorySection">
+            <h1 class="sectionTitle">Discounted Items</h1>
+            <div id="discountedItemsContainer" class="itemContainer"></div>
         </div>
 
-        <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-            <div id="addToListToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-header">
-                    <strong class="me-auto">Smart Shopper</strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                </div>
-                <div class="toast-body" id="toastText">
-                </div>
+        <div id="frequentItems" class="itemsHistorySection">
+            <h1 class="sectionTitle">Frequent Items</h1>
+            <div id="frequentItemsContainer"  class="itemContainer"></div>
+        </div>
+
+        <div id="recentItems" class="itemsHistorySection">
+            <h1 class="sectionTitle">Recent Items</h1>
+            <div id="recentItemsContainer"  class="itemContainer"></div>
+        </div>
+    </div>
+
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="addToListToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto">Smart Shopper</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body" id="toastText">
             </div>
         </div>
+    </div>
         
         <div id="Popup">
             <!-- The Modal This is a place holder :)-->
