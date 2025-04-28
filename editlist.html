@@ -103,16 +103,28 @@
         </div>
     </div>
     <div class="col-md-1"></div>
-    <div class="col-md-4" id="list">
-      <ul class="list-group list-group-flush" id="myList"></ul>
-      <!--Added a button to the list to find best stores based on total cost price-->
-      <div class="d-flex justify-content-between align-items-center mb-3">
-        
-        <button id="findBestStores" class="btn btn-primary">
+    <div class="col-md-4">
+      <!-- Shopping List Card -->
+      <div class="card">
+        <div class="card-header bg-primary text-white">
+          <h5 class="mb-0">Your Shopping List</h5>
+        </div>
+        <div class="card-body p-0">
+          <ul class="list-group list-group-flush" id="myList"></ul>
+        </div>
+      </div>
+  
+      <!-- Find Best Stores Button -->
+      <div class="d-flex justify-content-between align-items-center mt-3 mb-2">
+        <button id="findBestStores" class="btn btn-primary w-100">
           Find Best Stores
         </button>
       </div>
+  
+      <!-- Best Stores Results -->
       <div id="bestStoresContainer" class="mt-3"></div>
+    </div>
+  
         
 <!--             <li class="list-group-item d-flex justify-content-between align-items-center">
                 <button class="btn btn-close btn-danger"></button>

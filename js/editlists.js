@@ -117,15 +117,19 @@ function addToList(itemName, qty) {
   
     // Otherwise, create new item
     const html = `
-      <li class="list-group-item d-flex align-items-center" id="li-${itemName}">
-        <button class="btn btn-close removeItem me-2" data-item="${itemName}"></button>
-        <div class="flex-grow-1">${normalizeUnits(itemName)}</div>
-        <div class="btn-group">
-          <button class="btn btn-sm decrementItem" data-item="${itemName}">-</button>
-          <span class="px-2" data-qty-for="${itemName}">${qty}</span>
-          <button class="btn btn-sm incrementItem" data-item="${itemName}">+</button>
-        </div>
-      </li>`;
+    <li class="list-group-item d-flex justify-content-between align-items-center" id="li-${itemName}">
+    <div>
+        ${normalizeUnits(itemName)}
+    </div>
+    <div class="d-flex align-items-center">
+        <button class="btn btn-sm btn-outline-secondary decrementItem" data-item="${itemName}">–</button>
+        <span class="mx-2" data-qty-for="${itemName}">${qty}</span>
+        <button class="btn btn-sm btn-outline-secondary incrementItem" data-item="${itemName}">+</button>
+        <button class="btn btn-sm btn-outline-danger ms-2 removeItem" data-item="${itemName}">
+        <i class="bi bi-trash"></i>
+        </button>
+    </div>
+    </li>`;
     list.insertAdjacentHTML('beforeend', html);
     
     // And set it into Firestore
