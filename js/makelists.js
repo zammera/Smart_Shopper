@@ -19,9 +19,12 @@ function createNewList() {
     let listName = document.getElementById('name').value;
     let storedLists = JSON.parse(localStorage.getItem("listNames")) || [];
 
-    if (listName == "" ) {
-        console.log("empty list cannot be created")
-    } else {
+    if (listName.trim() === "") {
+        document.getElementById('error-message').textContent = "Please enter a name for your shopping list.";
+        document.getElementById('error-message').style.display = 'block';
+        return;
+    }  else {
+        document.getElementById('error-message').style.display = 'none';
         createListCard(listName);
         createGroceryListDB(listName);
         storedLists.push({ name: listName });
@@ -33,17 +36,17 @@ function createNewList() {
 
 function createListCard(listName) {
     let selectedList = JSON.parse(localStorage.getItem('selectedList')) || [];
-    if (listName == selectedList){
-        var addNewList = `<div class="card oldList" style="width: 15rem;" id="${ listName }">
-            <div class="card-body">
-                <div class="d-flex align-items-center justify-content-between mb-2">
-                    <h5 class="card-title mb-0">${ listName }</h5>
-                </div>
-                <input class="btn btn-custom-color list-btn mt-3" type="submit" value="Manage List" onclick="editList('${ listName }')">
-                <input class="btn btn-danger list-btn" type="reset" value="Delete" onclick="deleteList('${ listName }')">
-            </div>
-        </div>`;
-    } else {
+    // if (listName == selectedList){
+    //     var addNewList = `<div class="card oldList" style="width: 15rem;" id="${ listName }">
+    //         <div class="card-body">
+    //             <div class="d-flex align-items-center justify-content-between mb-2">
+    //                 <h5 class="card-title mb-0">${ listName }</h5>
+    //             </div>
+    //             <input class="btn btn-custom-color list-btn mt-3" type="submit" value="Manage List" onclick="editList('${ listName }')">
+    //             <input class="btn btn-danger list-btn" type="reset" value="Delete" onclick="deleteList('${ listName }')">
+    //         </div>
+    //     </div>`;
+    // } else {
         var addNewList = `<div class="card oldList" style="width: 15rem;" id="${ listName }">
             <div class="card-body">
                 <div class="d-flex align-items-center justify-content-between mb-2">
@@ -53,7 +56,7 @@ function createListCard(listName) {
                 <input class="btn btn-danger list-btn" type="reset" value="Delete" onclick="deleteList('${ listName }')">
             </div>
         </div>`;
-    }
+    //}
     let Container = document.getElementById('listContainer');  
     console.log("List: " + listName + " added to the list container")
     Container.innerHTML += addNewList; 

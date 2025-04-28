@@ -248,14 +248,24 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
     return new Promise(resolve => {
       service.textSearch({
         location:  center,
-        radius:    16093.4,
+        radius:    32186.9, // 20 mile radius
         query:     `${storeName} supermarket`,
         type:      'grocery_or_supermarket'
       }, (results, status) => {
         if (status === 'OK') {
-          const match = results.find(r =>
-            r.name.toLowerCase().includes(storeName.toLowerCase())
-          );
+
+            const match = results.find(r => {
+                const dist = calculateDistance(
+                  userLat, userLng,
+                  r.geometry.location.lat(),
+                  r.geometry.location.lng()
+                );
+                return (
+                  r.name.toLowerCase().includes(storeName.toLowerCase()) &&
+                  dist <= 20 // 20 mile radius, must refilter again
+                );
+              });
+
           if (match) {
             const dist = calculateDistance(
               userLat, userLng,
@@ -316,20 +326,37 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
   
     console.log("Best stores enriched:", enriched);
   
-    // Generate the HTML for modal
-    const modalBody = document.getElementById('bestStoresModalBody');
-    modalBody.innerHTML = enriched.map(store => `
-      <div class="mb-3">
-        <h5>${store.rank}. ${store.store}</h5>
-        <p>
-          <strong>Cost:</strong> $${store.cost}<br>
-          <strong>Address:</strong> ${store.address}<br>
-          <strong>Distance:</strong> ${store.distance} mi
-        </p>
-      </div>
-    `).join('');
-  
-    // Display the modal
-    const bestStoresModal = new bootstrap.Modal(document.getElementById('bestStoresModal'));
-    bestStoresModal.show();
+    if (enriched.some(store => store.address !== 'N/A' && store.distance !== '—')) {
+        const modalBody = document.getElementById('bestStoresModalBody');
+    
+        modalBody.innerHTML = enriched
+          .filter(store => store.address !== 'N/A' && store.distance !== '—') // only real stores
+          .map(store => `
+            <div class="mb-3">
+              <h5>${store.rank}. ${store.store}</h5>
+              <p>
+                <strong>Cost:</strong> $${store.cost}<br>
+                <strong>Address:</strong> ${store.address}<br>
+                <strong>Distance:</strong> ${store.distance} mi
+              </p>
+            </div>
+          `).join('');
+    
+        const bestStoresModal = new bootstrap.Modal(document.getElementById('bestStoresModal'));
+        bestStoresModal.show();
+    }
+    else {
+        const modalBody = document.getElementById('bestStoresModalBody');
+        modalBody.innerHTML = `
+          <div class="text-center">
+            <h5>No stores available.</h5>
+            <p>Please try searching again or adjust your location.</p>
+          </div>
+        `;
+    
+        const bestStoresModal = new bootstrap.Modal(document.getElementById('bestStoresModal'));
+        bestStoresModal.show();
+    }
+    
+
   }

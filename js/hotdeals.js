@@ -51,7 +51,7 @@ $(function () {
     }
 
     // —————————————————————————
-    // If we have geo, filter to within 10 mi
+    // If we have geo, filter to within 20 mi
     // —————————————————————————
     async function findNearbyStores(data) {
         try {
@@ -64,11 +64,13 @@ $(function () {
             const storeLocations = new Map();
             const allStores = [...new Set(Object.values(data).flatMap(item => Object.keys(item)))];
 
+            const radius = 32186.9; // meters (20 miles)
+            const maxDistance = radius / 1609.34; // miles
             await Promise.all(allStores.map(store =>
                 new Promise(resolve => {
                     service.textSearch({
                         location: center,
-                        radius: 16093.4, // 10 miles
+                        radius: radius, // 20 miles defined above
                         query: `${store} supermarket`,
                         type: 'grocery_or_supermarket'
                     }, (results, status) => {
@@ -83,7 +85,7 @@ $(function () {
                                     userLocation.userLat, userLocation.userLng,
                                     match.geometry.location.lat(), match.geometry.location.lng()
                                 );
-                                if (dist <= 10) {
+                                if (dist <= maxDistance) {
                                     storeLocations.set(store, {
                                         name: store,
                                         address: match.formatted_address,
@@ -123,7 +125,7 @@ $(function () {
                 displayHotDeals(allDeals.slice(0, 12));
             } else {
                 $("#hotDealsGrid").html(
-                    "<div class='col-12'><p class='alert alert-info'>No deals within 10 miles.</p></div>"
+                    `<div class='col-12'><p class='alert alert-info'>No deals within ${Math.trunc(maxDistance)} miles.</p></div>`
                 );
             }
         } catch (error) {
