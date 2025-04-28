@@ -68,7 +68,7 @@ $(function () {
                 new Promise(resolve => {
                     service.textSearch({
                         location: center,
-                        radius: 16093.4,
+                        radius: 16093.4, // 10 miles
                         query: `${store} supermarket`,
                         type: 'grocery_or_supermarket'
                     }, (results, status) => {
@@ -231,6 +231,7 @@ $(function () {
 
     // —————————————————————————
     // Distance calc (Haversine)
+    // source: https://stackoverflow.com/questions/14560999/using-the-haversine-formula-in-javascript
     // —————————————————————————
     function calculateDistance(lat1, lon1, lat2, lon2) {
         const R = 3958.8;

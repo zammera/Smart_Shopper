@@ -186,29 +186,140 @@ async function addItemDB(name, item, qty) {
 }
 
 // Compute and popup best stores by total cost
-function findBestStores() {
-  const items = {};
-  document.querySelectorAll('[data-qty-for]').forEach(el => {
-    const it = el.getAttribute('data-qty-for');
-    items[it] = parseInt(el.textContent, 10);
-  });
-  if (!Object.keys(items).length) {
-    alert('Your list is empty!');
-    return;
+// function findBestStores() {
+//   const items = {};
+//   document.querySelectorAll('[data-qty-for]').forEach(el => {
+//     const it = el.getAttribute('data-qty-for');
+//     items[it] = parseInt(el.textContent, 10);
+//   });
+//   if (!Object.keys(items).length) {
+//     alert('Your list is empty!');
+//     return;
+//   }
+//   const totals = {};
+//   for (const [item, qty] of Object.entries(items)) {
+//     const info = groceries[item];
+//     if (!info) continue;
+//     Object.entries(info).forEach(([store, p]) => {
+//       const price = p.discount_price ?? p.original_price;
+//       if (price != null) totals[store] = (totals[store] || 0) + price * qty;
+//     });
+//   }
+//   const sorted = Object.entries(totals).sort((a, b) => a[1] - b[1]);
+//   const lines = sorted.map(([s, t], i) => `${i+1}. ${s}: $${t.toFixed(2)}`);
+//   alert('Best stores by total cost:\n' + lines.join('\n'));
+// }
+
+// … your imports, loadGroceries, renderSearchItems, initPage, etc.
+
+
+
+// copying over calculateDistane and findNearestStore functions from hotdeals.js to reuse here to display store address and distance
+function calculateDistance(lat1, lon1, lat2, lon2) {
+    const R = 3958.8;
+    const dLat = (lat2 - lat1) * Math.PI/180;
+    const dLon = (lon2 - lon1) * Math.PI/180;
+    const a = Math.sin(dLat/2)**2 +
+              Math.cos(lat1*Math.PI/180) *
+              Math.cos(lat2*Math.PI/180) *
+              Math.sin(dLon/2)**2;
+    return 2 * R * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   }
-  const totals = {};
-  for (const [item, qty] of Object.entries(items)) {
-    const info = groceries[item];
-    if (!info) continue;
-    Object.entries(info).forEach(([store, p]) => {
-      const price = p.discount_price ?? p.original_price;
-      if (price != null) totals[store] = (totals[store] || 0) + price * qty;
+  
+  async function findNearestStore(storeName, userLat, userLng) {
+    const [{ PlacesService }, { LatLng }] = await Promise.all([
+      google.maps.importLibrary("places"),
+      google.maps.importLibrary("core")
+    ]);
+    const service = new PlacesService(document.createElement('div'));
+    const center  = new LatLng(userLat, userLng);
+  
+    return new Promise(resolve => {
+      service.textSearch({
+        location:  center,
+        radius:    16093.4,
+        query:     `${storeName} supermarket`,
+        type:      'grocery_or_supermarket'
+      }, (results, status) => {
+        if (status === 'OK') {
+          const match = results.find(r =>
+            r.name.toLowerCase().includes(storeName.toLowerCase())
+          );
+          if (match) {
+            const dist = calculateDistance(
+              userLat, userLng,
+              match.geometry.location.lat(),
+              match.geometry.location.lng()
+            ).toFixed(1);
+            return resolve({
+              address: match.formatted_address,
+              distance: dist
+            });
+          }
+        }
+        resolve({ address: 'N/A', distance: '—' });
+      });
     });
   }
-  const sorted = Object.entries(totals).sort((a, b) => a[1] - b[1]);
-  const lines = sorted.map(([s, t], i) => `${i+1}. ${s}: $${t.toFixed(2)}`);
-  alert('Best stores by total cost:\n' + lines.join('\n'));
-}
+  
+  async function findBestStores() {
+    // build your totals
+    const items = {};
+    document.querySelectorAll('[data-qty-for]').forEach(el => {
+      items[ el.getAttribute('data-qty-for') ] = +el.textContent;
+    });
+    if (!Object.keys(items).length) {
+      alert("Your list is empty!");
+      return;
+    }
+    const totals = {};
+    for (let [item, qty] of Object.entries(items)) {
+      const info = groceries[item];
+      if (!info) continue;
+
+      for (let [rawStore, p] of Object.entries(info)) {
+        // strip any trailing “Supermarket” (or “Grocery”, if you like)
+        const store = rawStore.replace(/\s*(Supermarket|Grocery)$/i, '').trim();
+      
+        const price = p.discount_price ?? p.original_price;
+        totals[store] = (totals[store]||0) + price * qty;
+      }
+      
+
+    }
+  
+    // sort ascending
+    const sorted = Object.entries(totals).sort((a,b) => a[1]-b[1]);
+  
+    // grab the user’s lat/lng from db
+    const userDoc = await getDoc(doc(db, `users/${auth.currentUser.uid}`));
+    const { lat: userLat, lng: userLng } = userDoc.data().address;
+  
+    // Promise.all over every store so none get dropped using Google Places API
+    const enriched = await Promise.all(
+      sorted.map(async ([store, cost], idx) => {
+        const { address, distance } = await findNearestStore(store, userLat, userLng);
+        return `${idx+1}. ${store}: $${cost.toFixed(2)}
+  → ${address} (${distance} mi)`;
+      })
+    );
+  
+    console.log("stores:", sorted.length, "lines:", enriched.length);
+  
+    // join *all* of them
+    alert(enriched.join("\n\n"));
+  }
+  
+  
+  
+
+
+
+
+
+
+
+
 
 /* Unused
 
