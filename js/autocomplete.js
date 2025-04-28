@@ -184,18 +184,38 @@ async function changeAreaFunction() {
         const zip = document.getElementById("zip").value.trim();
         const state = document.getElementById("state").value;
 
-        if (validAddress(street, city, zip)) {
-            const manualAddress = {
-                formatted: `${street}, ${city}, ${state}, ${zip}`,
-                lat: null,
-                lng: null
-            };
-            
-            alert("Address saved:" + manualAddress);
-            // save address in database
-            await saveUserAddress(manualAddress);
-            location.reload(); // reload user's current page
+        if (!validAddress(street, city, zip)) {
+            console.log("Invalid address fields");
+            return; // Stop here if invalid
         }
+
+        const formattedAddress = `${street}, ${city}, ${state}, ${zip}`;
+
+        try {
+            const geocodeResponse = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(formattedAddress)}&key=AIzaSyAVpGwnFAlquQmJkZOEezMLWdNrzr9BQNo`);
+            const geocodeData = await geocodeResponse.json();
+            
+            if (geocodeData.status === "OK") {
+                const geoLocation = geocodeData.results[0].geometry.location;
+
+        
+                const manualAddress = {
+                    formatted: formattedAddress,
+                    lat: geoLocation.lat,
+                    lng: geoLocation.lng
+                };
+        
+                alert("Address saved: " + manualAddress.formatted);
+                await saveUserAddress(manualAddress);
+                location.reload();
+            } else {
+                alert("Failed to fetch location for entered address. Please double-check your address.");
+            }
+        } catch (error) {
+            console.error("Geocoding error:", error);
+            alert("An error occurred while fetching location.");
+        }
+
     });
 }
 
