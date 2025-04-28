@@ -57,8 +57,10 @@ function initPage() {
   
     // Load saved quantities
     getItemsDB(currentListName).then(items => {
-      Object.entries(items).forEach(([item, qty]) => addToList(item, qty));
+        items.forEach(obj => addToList(obj.name, obj.qty, true)); 
     });
+  
+      
   
     // Setup search filter
     document.getElementById('searchBar').addEventListener('input', e => {
@@ -111,17 +113,15 @@ document.addEventListener('click', e => {
   
 
 // Add item to UI and DB
-function addToList(itemName, qty) {
+function addToList(itemName, qty, skipSave = false) {
     const list = document.getElementById('myList');
     const existingQtySpan = list.querySelector(`[data-qty-for="${itemName}"]`);
   
     if (existingQtySpan) {
-      // Already exists, call update function only
       updateItemQuantity(itemName, qty); 
       return;
     }
   
-    // Otherwise, create new item
     const html = `
     <li class="list-group-item d-flex justify-content-between align-items-center" id="li-${itemName}">
     <div>
@@ -138,9 +138,11 @@ function addToList(itemName, qty) {
     </li>`;
     list.insertAdjacentHTML('beforeend', html);
     
-    // And set it into Firestore
-    addItemDB(currentListName, itemName, qty);
-  }
+    if (!skipSave) {
+      addItemDB(currentListName, itemName, qty);
+    }
+}
+
   
 
 // Update quantity in DB and UI
@@ -148,26 +150,29 @@ async function updateItemQuantity(itemName, delta) {
     const ref = doc(db, `users/${auth.currentUser.uid}/groceryLists/${currentListName}`);
     await runTransaction(db, async tx => {
       const snap = await tx.get(ref);
-      const items = snap.exists() ? snap.data().items : {};
-      const oldQty = items[itemName] || 0;
-      const newQty = oldQty + delta;
-  
-      if (newQty > 0) {
-        items[itemName] = newQty;
-        tx.set(ref, { items }, { merge: true });
-      } else {
-        delete items[itemName];
-        tx.set(ref, { items }, { merge: true });
+      let items = snap.exists() ? (snap.data().items || []) : [];
+
+      // Find the item by name
+      const idx = items.findIndex(it => it.name === itemName);
+      
+      if (idx !== -1) {
+        items[idx].qty += delta;
+
+        if (items[idx].qty <= 0) {
+          items.splice(idx, 1); // remove item completely if qty <= 0
+        }
       }
+
+      await tx.set(ref, { items }, { merge: true });
     });
-  
+
     // update the DOM after transaction
     const span = document.querySelector(`[data-qty-for="${CSS.escape(itemName)}"]`);
     
     if (span) {
       const currentQty = parseInt(span.textContent, 10) || 0;
       const updatedQty = currentQty + delta;
-  
+
       if (updatedQty > 0) {
         span.textContent = updatedQty;
       } else {
@@ -175,21 +180,34 @@ async function updateItemQuantity(itemName, delta) {
         if (li) li.remove();
       }
     }
-  }
+}
+
   
 
 // Firestore helpers
 async function getItemsDB(name) {
-  const snap = await getDoc(doc(db, `users/${auth.currentUser.uid}/groceryLists/${name}`));
-  return snap.exists() ? snap.data().items : {};
-}
+    const snap = await getDoc(doc(db, `users/${auth.currentUser.uid}/groceryLists/${name}`));
+    return snap.exists() ? (snap.data().items || []) : [];
+  }
+  
+
 async function addItemDB(name, item, qty) {
-  const ref = doc(db, `users/${auth.currentUser.uid}/groceryLists/${name}`);
-  const snap = await getDoc(ref);
-  const items = snap.exists() ? snap.data().items : {};
-  items[item] = (items[item] || 0) + qty;
-  await setDoc(ref, { items }, { merge: true });
-}
+    const ref = doc(db, `users/${auth.currentUser.uid}/groceryLists/${name}`);
+    const snap = await getDoc(ref);
+    let items = snap.exists() ? snap.data().items : [];
+  
+    // Look for existing item
+    const existing = items.find(it => it.name === item);
+    if (existing) {
+      existing.qty += qty;
+    } else {
+      items.push({ name: item, qty: qty });
+    }
+  
+    await setDoc(ref, { items }, { merge: true });
+  }
+  
+  
 
 // Compute and popup best stores by total cost
 // function findBestStores() {
