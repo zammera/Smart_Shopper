@@ -16,6 +16,7 @@ onAuthStateChanged(auth, async user => {
   }
 });
 
+
 // Load items.json
 async function loadGroceries() {
   const res = await fetch('items.json');
@@ -90,19 +91,24 @@ function initPage() {
 
 // Event delegation for clicks
 document.addEventListener('click', e => {
-  const btn = e.target;
-  if (btn.matches('.addToList')) {
-    addToList(btn.dataset.item, 1);
-  } else if (btn.matches('.incrementItem')) {
-    updateItemQuantity(btn.dataset.item, 1);
-  } else if (btn.matches('.decrementItem')) {
-    updateItemQuantity(btn.dataset.item, -1);
-  } else if (btn.matches('.removeItem')) {
-    updateItemQuantity(btn.dataset.item, -9999);
-  } else if (btn.matches('#findBestStores')) {
-    findBestStores();
-  }
-});
+    const addBtn = e.target.closest('.addToList');
+    const incrementBtn = e.target.closest('.incrementItem');
+    const decrementBtn = e.target.closest('.decrementItem');
+    const removeBtn = e.target.closest('.removeItem');
+  
+    if (addBtn) {
+      addToList(addBtn.dataset.item, 1);
+    } else if (incrementBtn) {
+      updateItemQuantity(incrementBtn.dataset.item, 1);
+    } else if (decrementBtn) {
+      updateItemQuantity(decrementBtn.dataset.item, -1);
+    } else if (removeBtn) {
+      updateItemQuantity(removeBtn.dataset.item, -9999);
+    } else if (e.target.matches('#findBestStores')) {
+      findBestStores();
+    }
+  });
+  
 
 // Add item to UI and DB
 function addToList(itemName, qty) {
@@ -312,58 +318,3 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
   
   
   
-
-
-
-
-
-
-
-
-
-/* Unused
-
-$(document).ready(function () {
-    
-    const listName = document.getElementById("listName").textContent;
-    const list = getItemsDB(listName) || {};
-
-    $(document).on('click', '.addToList', function() {
-        const item = $(this).data("item");
-        addToList(item);
-    });
-
-    $(document).on('click', '.removeItem', function() {
-        const list = JSON.parse(localStorage.getItem(listName)) || {};
-        const item = $(this).data("item");
-        if (list[item]) {
-            delete list[item]; 
-            localStorage.setItem(listName, JSON.stringify(list)); 
-        }
-        let element = document.getElementById(item);
-        element.remove();
-    });
-
-    
-    $(document).on('click', '.incrementItem', function() {
-        const item = $(this).data("item");
-        updateItemQuantity(listName, item, list[item] + 1);
-    });
-
-    $(document).on('click', '.decrementItem', function() {
-        const list = JSON.parse(localStorage.getItem(listName)) || {};
-        const item = $(this).data("item");
-        if (list[item] == 1) {
-            if (list[item]) {
-                delete list[item]; 
-                localStorage.setItem(listName, JSON.stringify(list)); 
-            }
-            let element = document.getElementById(item);
-            element.remove();
-        }
-        else {
-            updateItemQuantity(listName, item, list[item] - 1);
-        }
-    });
-}); 
-*/
