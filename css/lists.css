@@ -72,17 +72,21 @@
     overflow-y: scroll;
 }
 
-/* Optional: Styling for individual cards inside the list container */
+/* Styling for individual cards inside the list container */
 .oldList {
     width: 15rem; /* Set a fixed width for cards */
     margin-bottom: 20px; /* Optional: Adds space between rows of cards */
 }
 
-/* Optional: Styling for the card body */
+/* Styling for the card body */
 .oldList .card-body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+
+.card{
+    margin-top: 20px;
 }
 
 .editOld h1 {
