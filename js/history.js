@@ -165,45 +165,43 @@ const getListItems = async () => {
         const snapshot = await getDoc(list);
         const data = snapshot.data();
 
-        const items = data.items;
-
-        if (Array.isArray(items)) {
-            // New format (array of {name, qty})
-            for (const entry of items) {
+        if (Array.isArray(data.items)) {
+            // 🟰 Handling array format (newer structure)
+            for (const obj of data.items) {
                 recency++;
-                const found = listItems.find(item => item.item === entry.name);
-                if (found) {
-                    found.frequency += entry.qty;
-                    found.recency = recency;
+                const item = listItems.find(i => i.item === obj.name);
+                if (item !== undefined) {
+                    item.frequency += obj.qty;
+                    item.recency = recency;
                 } else {
                     listItems.push({
-                        item: entry.name,
-                        frequency: entry.qty,
+                        item: obj.name,
+                        frequency: obj.qty,
                         recency: recency
                     });
                 }
             }
-        } else if (typeof items === 'object') {
-            // Old format (object of itemName: quantity)
-            for (const itemName in items) {
+        } else {
+            // 🟰 Handling object format (older structure)
+            for (const newItem in data.items) {
                 recency++;
-                const found = listItems.find(item => item.item === itemName);
-                if (found) {
-                    found.frequency += items[itemName];
-                    found.recency = recency;
+                const item = listItems.find(i => i.item === newItem);
+                if (item !== undefined) {
+                    item.frequency += data.items?.[newItem];
+                    item.recency = recency;
                 } else {
                     listItems.push({
-                        item: itemName,
-                        frequency: items[itemName],
+                        item: newItem,
+                        frequency: data.items?.[newItem],
                         recency: recency
                     });
                 }
             }
         }
     }
-    console.log("Parsed listItems:", listItems);
     return listItems;
 };
+
 
 // Populate the dropdown
 function populateListSelector() {
