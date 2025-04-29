@@ -3608,5 +3608,39 @@
       "original_price": 3.89,
       "discount_price": 2.39
     }
+  },
+  "Celsius Energy Sparkling Vibe Variety Pack": {
+    "Market Basket": {
+      "original_price": 23.99,
+      "discount_price": 22.17
+    },
+    "Walmart Supercenter": {
+      "original_price": 23.48,
+      "discount_price": 22.17
+    },
+    "Hannaford Supermarket": {
+      "original_price": 24.19,
+      "discount_price": 22.6
+    },
+    "Whole Foods Market": {
+      "original_price": 24.79,
+      "discount_price": 23.51
+    },
+    "Stop & Shop": {
+      "original_price": 24.29,
+      "discount_price": null
+    },
+    "Shaw's": {
+      "original_price": 24.49,
+      "discount_price": null
+    },
+    "ALDI": {
+      "original_price": 23.29,
+      "discount_price": 1.97
+    },
+    "Trader Joe's": {
+      "original_price": 23.89,
+      "discount_price": 2.39
+    }
   }
 }
