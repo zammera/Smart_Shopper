@@ -6,39 +6,53 @@ if (!window.firebaseDb) {
     console.error("Firebase not initialized")
 }
 
-const listNames = [
-    {"name":"Taco Tuesday"}
-]
-
-if (!localStorage.getItem("listNames")) {
-    localStorage.setItem("listNames", JSON.stringify(listNames));
-}
-
-//aim to change this but wanted to get this functional and pretty
-function createNewList() {
-    let listName = document.getElementById('name').value;
-    let storedLists = JSON.parse(localStorage.getItem("listNames")) || [];
-
-    if (listName.trim() === "") {
+// Update createNewList to be async
+async function createNewList() {
+    let listName = document.getElementById('name').value.trim();
+    
+    if (listName === "") {
         document.getElementById('error-message').textContent = "Please enter a name for your shopping list.";
         document.getElementById('error-message').style.display = 'block';
         return;
     }
-    // Check if the list name already exists
-    if (storedLists.some(list => list.name === listName)) {
-        document.getElementById('error-message').textContent = "This shopping list already exists.";
-        document.getElementById('error-message').style.display = 'block';
-    }
-    else {
+
+    try {
+        // Get current user
+        const user = auth.currentUser;
+        if (!user) {
+            throw new Error("User not logged in");
+        }
+
+        // Get all lists from Firebase
+        const existingLists = await getAllCurrentLists();
+        console.log("Checking existing lists:", existingLists);
+        
+        // Case insensitive check for duplicates
+        const isDuplicate = existingLists.some(list => 
+            list.name && list.name.toLowerCase() === listName.toLowerCase()
+        );
+
+        if (isDuplicate) {
+            document.getElementById('error-message').textContent = "This shopping list already exists.";
+            document.getElementById('error-message').style.display = 'block';
+            return;
+        }
+
+        // Create new list in Firebase
+        await createGroceryListDB(listName);
+        
+        // Update UI
         document.getElementById('error-message').style.display = 'none';
         createListCard(listName);
-        createGroceryListDB(listName);
-        storedLists.push({ name: listName });
-        localStorage.setItem("listNames", JSON.stringify(storedLists));
-        document.getElementById('name').value = ""; 
+        selectList(listName);
+        document.getElementById('name').value = "";
+
+    } catch (error) {
+        console.error("Error creating list:", error);
+        document.getElementById('error-message').textContent = "Error creating list. Please try again.";
+        document.getElementById('error-message').style.display = 'block';
     }
-    selectList(listName);
-};
+}
 
 function createListCard(listName) {
     let selectedList = JSON.parse(localStorage.getItem('selectedList')) || [];
@@ -68,23 +82,31 @@ function createListCard(listName) {
     Container.innerHTML += addNewList; 
 }
 //Testing an async function to delete a list from both the DB and local storage
-function deleteList(name) {
+async function deleteList(name) {
+    try {
+        // Remove from UI
+        let element = document.getElementById(name);
+        if (element) {
+            element.remove();
+        }
 
-    let element = document.getElementById(name);
-    //let storedLists = JSON.parse(localStorage.getItem("listNames")) || [];
-    //let list = JSON.parse(localStorage.getItem(listKey)) || {};
-    if (element) {
-        element.remove();
-        deleteDBList(name);
-        //storedLists = storedLists.filter(list => list.name !== name);
-        //localStorage.setItem("listNames", JSON.stringify(storedLists));
-        //localStorage.removeItem(name);
-    } else {
-        console.error("Element with ID " + name + " not found.");
+        // Remove from Firebase
+        await deleteDBList(name);
+
+        // Clear from localStorage if it exists
+        const storedLists = JSON.parse(localStorage.getItem("listNames")) || [];
+        const updatedLists = storedLists.filter(list => list.name !== name);
+        localStorage.setItem("listNames", JSON.stringify(updatedLists));
+
+        console.log(`List '${name}' deleted successfully`);
+    } catch (error) {
+        console.error("Error deleting list:", error);
+        // Optionally restore the UI element if DB deletion failed
+        if (!document.getElementById(name)) {
+            createListCard(name);
+        }
     }
 }
-
-  
 
 function editList(name) {
     window.location.href = 'editlist.html?name=' + encodeURIComponent(name);
