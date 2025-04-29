@@ -47,6 +47,7 @@ function renderSearchItems() {
 function initPage() {
     const params = new URLSearchParams(window.location.search);
     currentListName = params.get('name');
+    document.getElementById('currentListNameSpan').textContent = currentListName;
   
     const listNameElem = document.getElementById('listName');
     if (listNameElem) {
