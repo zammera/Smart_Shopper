@@ -1,345 +1,362 @@
-import {db, auth } from "./firebaseInit.js";
-import { setDoc, getDoc, updateDoc, deleteField, deleteDoc, collection, doc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+import { db, auth } from "./firebaseInit.js";
+import { setDoc, getDoc, runTransaction, doc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 
 let groceries = {};
+let currentListName = null;
 
-// grocery items loaded from the json
-async function loadGroceries() {
-    try {
-        const response = await fetch('items.json'); 
-        groceries = await response.json();
-        populateGrocery(); // After loading, call populate
-    } catch (error) {
-        console.error("Error loading groceries.json:", error);
-    }
-}
-
-
-
-function populateGrocery() {
-    var LorR = false;
-    for (const itemName in groceries) {
-        const safeId = itemName.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '') + '-result';
-        const grocery = '<li class="list-group-item d-flex justify-content-between align-items-center" id="${safeId}">'
-                + '<h5 class="text-center flex-grow-1">' + itemName + '</h5>'
-                + '<button class="btn btn-custom-color addToList" data-item="' + itemName + '">Add to List</button>'
-            + '</li>';
-
-        const element = LorR ? document.getElementById("result2") : document.getElementById("result1");
-        LorR = !LorR;
-        element.innerHTML += grocery;
-    }
-}
-
-
-async function addToList(item) {
-    let name = document.getElementById("listName").textContent;
-    let list = await getItemsDB(name) || {};
-   
-    if(list.hasOwnProperty(item)) {
-        if(document.getElementById(item)) {
-            console.log(item + " is in list and in HTML")
-            console.log(list[item]);
-            updateItemQuantity(name, item, list[item] + 1);
-        } else {
-            console.log(item + " is in list and not in HTML", list[item]);
-            let html = '<li class="list-group-item d-flex justify-content-between align-items-center" id="' + item + '">'
-                    + '<button class="btn btn-close btn-danger  removeItem" data-item="' + item + '"></button>'
-                    + '<h5 class="text-center flex-grow-1">' + item + '</h5>'
-                    + '<div class="btn-group" role="group" aria-label="Basic example">'
-                        + '<button type="button" class="btn btn-danger decrementItem" data-item="' + item + '">-</button>'
-                        + '<button type="button" class="form-control middle text-center" data-itemValue ="' + item + 'Value" value="' + list[item] + '" disabled>'+ list[item] +'</button>'
-                        + '<button type="button" class="btn btn-success incrementItem" data-item="' + item + '">+</button>'
-                    + '</div>'
-                + '</li>';
-            let element = document.getElementById("myList");
-            element.innerHTML += html;
-
-            console.log(name);
-        }
-    } else {
-        console.log(item + " is not in list and not in HTML ");
-        let html = '<li class="list-group-item d-flex justify-content-between align-items-center" id="' + item + '">'
-                    + '<button class="btn btn-close btn-danger  removeItem" data-item="' + item + '"></button>'
-                    + '<h5 class="text-center flex-grow-1">' + item + '</h5>'
-                    + '<div class="btn-group" role="group" aria-label="Basic example">'
-                        + '<button type="button" class="btn btn-danger decrementItem" data-item="' + item + '">-</button>'
-                        + '<button type="button" class="form-control middle text-center" data-itemValue ="' + item + 'Value" value="1" disabled>1</button>'
-                        + '<button type="button" class="btn btn-success incrementItem" data-item="' + item + '">+</button>'
-                    + '</div>'
-                + '</li>';
-        let element = document.getElementById("myList");
-        element.innerHTML += html;
-        //console.log(html);
-        addItemDB(name, item, 1)
-        //addItemToList(name, item, 1);
-    }
-}
-
-async function updateItemQuantity(listKey, itemName, newQuantity) {
-    console.log(newQuantity);
-    let list = await getItemsDB(listKey) || {};
-    console.log("list gotten from updateQuantity:", list);
-    if (newQuantity > 0) {
-        //list[itemName] = newQuantity;
-        console.log("Value of item before increase: ", $(document).find('[data-itemValue = "' + itemName + 'Value"]')[0].value);
-        $('[data-itemValue="' + itemName + 'Value"]').val(newQuantity);
-        $('[data-itemValue="' + itemName + 'Value"]').text(newQuantity);
-        //$(document).find('[data-itemValue = "' + itemName + 'Value"')[0].value = newQuantity;
-        console.log("Value of item after increase: ",$(document).find('[data-itemValue = "' + itemName + 'Value"]')[0].value);
-        addItemDB(listKey, itemName, newQuantity);
-    } else {
-        delete list[itemName];
-        deleteItemDB(listKey, itemName)
-    }
-    
-    //localStorage.setItem(listKey, JSON.stringify(list));
-}
-
-if ($('body').is('#editList')) {
-    (async () => {
-        const urlParams = new URLSearchParams(window.location.search);
-        const name = urlParams.get('name');
-        await loadGroceries();  // <-- now allowed because it's inside an async IIFE!
-
-        let header = '<h1 class="text-center" id="listName">'+ name + '</h1>';
-        $("#list").prepend(header);
-    
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                console.log("User logged in:", user.uid);
-
-                const currentList = await getItemsDB(name);
-
-                console.log("Loading items into HTML:", currentList);
-
-                for (const [key, value] of Object.entries(currentList)) {
-                    console.log(`Item: ${key}, Quantity: ${value}`);
-                    addToList(key);
-                }
-            } else {
-                console.warn("User not logged in.");
-            }
-        });
-    })(); // iife 
-}
-
-$(document).ready(function () {
-    onAuthStateChanged(auth, async (user) => {
-        if (user) {
-            console.log("User logged in:", user.uid);
-            init();
-        }
-    });
-
-    // search bar logic for edit list page
-    $("#searchBar").on("input", function () {
-        const query = $(this).val().toLowerCase();
-        let matchCount = 0;
-    
-        for (const itemName in groceries) {
-            const safeId = itemName.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '') + '-result';
-            const $element = $(`#${safeId}`);
-    
-            if (itemName.toLowerCase().includes(query)) {
-                $element.removeClass("hidden-result");
-                matchCount++;
-            } else {
-                $element.addClass("hidden-result");
-            }
-        }
-    
-        console.log(`Search for "${query}" matched ${matchCount} item(s).`);
-    });
-    
-    
+// On auth: load items and initialize page
+onAuthStateChanged(auth, async user => {
+  if (!user) return;
+  try {
+    await loadGroceries();
+    initPage();
+  } catch (e) {
+    console.error('Initialization error:', e);
+  }
 });
 
-
-async function init() {
-    const listName = document.getElementById("listName").textContent;
-    const list = await getItemsDB(listName) || {};
-
-    $(document).on('click', '.addToList', function () {
-        const item = $(this).data("item");
-        addToList(item);
-    });
-
-    $(document).on('click', '.removeItem', async function () {
-        const item = $(this).data("item");
-
-        const element = document.getElementById(item);
-        if (element) element.remove();
-
-        await updateItemQuantity(listName, item, 0); // update DB
-    });
-
-    $(document).on('click', '.incrementItem', async function () {
-        const item = $(this).data("item");
-        const input = $('[data-itemvalue="' + item + 'Value"]');
-        const currentQty = parseInt(input.val()) || 0;
-        const newQty = currentQty + 1;
-
-        input.val(newQty);
-        await updateItemQuantity(listName, item, newQty);
-    });
-
-    $(document).on('click', '.decrementItem', async function () {
-        const item = $(this).data("item");
-        const input = $('[data-itemvalue="' + item + 'Value"]');
-        const currentQty = parseInt(input.val()) || 0;
-        const newQty = currentQty - 1;
-
-        if (newQty <= 0) {
-            const element = document.getElementById(item);
-            if (element) element.remove();
-            await updateItemQuantity(listName, item, 0); // update DB
-        } else {
-            input.val(newQty);
-            await updateItemQuantity(listName, item, newQty);
-        }
-    });
+// Load items.json
+async function loadGroceries() {
+  const res = await fetch('items.json');
+  groceries = await res.json();
+  renderSearchItems();
 }
 
-//Database Functions
-
-async function addItemDB(listName, itemName, quantity){
-    const user = auth.currentUser;
-    if (!user) {
-        console.error("User not logged in");
-        return;
-    }
-
-    const ref = doc(db, `users/${user.uid}/groceryLists/${listName}`);
-
-    try {
-        const snapshot = await getDoc(ref);
-
-        if (!snapshot.exists()) {
-            // Create the document with the first item if it doesn't exist yet
-            await setDoc(ref, {
-                items: {
-                    [itemName]: quantity
-                }
-            });
-            console.log(`Created new list "${listName}" and added ${itemName} (x${quantity}).`);
-        } else {
-            const data = snapshot.data();
-            //const existingQty = data.items?.[itemName] || 0;
-
-
-            await updateDoc(ref, {
-                [`items.${itemName}`]: quantity
-            });
-
-            console.log(`Added ${itemName} (x${quantity}) to list "${listName}". Total now: ${quantity}`);
-        }
-    } catch (error) {
-        console.error("Error adding item to Firestore:", error);
-    }
+// Normalize units
+function normalizeUnits(str) {
+  return str.replace(/\b(lb|oz|ct|each)\b/gi, m => m.toLowerCase());
 }
 
-async function getItemsDB(listName) {
-    const user = auth.currentUser;
-    if (!user) {
-        console.error("User not logged in");
-        return;
+// Render search items into two columns
+function renderSearchItems() {
+    let toggle = true;
+    Object.keys(groceries).forEach(name => {
+      const display = normalizeUnits(name);
+      const html = `
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <h5 class="flex-grow-1 m-0">${display}</h5>
+          <button class="btn btn-custom-color addToList" data-item="${name}">Add</button>
+        </li>`;
+      document.querySelector(toggle ? '#result1' : '#result2').insertAdjacentHTML('beforeend', html);
+      toggle = !toggle;
+    });
+  }
+
+// Initialize page: load list, setup search and button
+function initPage() {
+    const params = new URLSearchParams(window.location.search);
+    currentListName = params.get('name');
+  
+    const listNameElem = document.getElementById('listName');
+    if (listNameElem) {
+      listNameElem.textContent = currentListName;
     }
-
-    const ref = doc(db, `users/${user.uid}/groceryLists/${listName}`);
-    const snapshot = await getDoc(ref);
-
-    if (!snapshot.exists()) {
-        console.warn(`List "${listName}" not found.`);
-        return {}; // Return an empty object instead of NULL (JavaScript uses null or undefined, but NULL is invalid)
-    }
-
-    const data = snapshot.data();
-    const items = data.items || {};
-
-    console.log(`Items from "${listName}":`, items);
-
-    return items;
-}
-
-async function deleteItemDB(listName, itemName){
-    const user = auth.currentUser;
-    if (!user) {
-        console.error("User not logged in");
-        return;
-    }
-
-    const listRef = doc(db, `users/${user.uid}/groceryLists/${listName}`);
-    try {
-        await updateDoc(listRef, {
-            [`items.${itemName}`]: deleteField()
-        });
-        console.log(`Item '${itemName}' deleted from list '${listName}'`);
-    } catch (error) {
-        console.error("Error deleting item:", error);
-    }
-}
-
-
-
-/* Unused
-// items in json is all lowercase to make it easier to add items. Title case to display
-function toTitleCase(str) {
-    const lowerWords = ['lb', 'oz', 'ct', 'pack', 'each', 'g', 'mg', 'kg', 'l', 'ml', 'bunch'];
-    
-    return str.split(' ').map(word => {
-        const cleanWord = word.replace(/[^a-zA-Z]/g, '').toLowerCase();
+  
+    // Load saved quantities
+    getItemsDB(currentListName).then(items => {
+        items.forEach(obj => addToList(obj.name, obj.qty, true)); 
+    });
+  
+    // Setup search filter
+    document.getElementById('searchBar').addEventListener('input', e => {
+        const q = e.target.value.toLowerCase();
         
-        if (lowerWords.includes(cleanWord)) {
-            return word.toLowerCase(); 
-        } else {
-            return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-        }
-    }).join(' ');
+        const allItems = document.querySelectorAll('#result1 li, #result2 li');
+      
+        allItems.forEach(li => {
+          const text = li.querySelector('h5')?.textContent.toLowerCase() || '';
+          
+          if (text.includes(q)) {
+            li.style.setProperty('display', '', 'important');
+          } else {
+            li.style.setProperty('display', 'none', 'important');
+          }
+        });
+      });
+  
+    // Check if 'Find Best Stores' button already exists
+    if (!document.getElementById('findBestStores')) {
+      const container = document.getElementById('myList');
+      const btnHtml = `<button id="findBestStores" class="btn btn-primary mt-3 mb-2">Find Best Stores</button>`;
+      container.insertAdjacentHTML('beforebegin', btnHtml);
+    }
+  }
+
+// Event delegation for clicks
+document.addEventListener('click', e => {
+    const addBtn = e.target.closest('.addToList');
+    const incrementBtn = e.target.closest('.incrementItem');
+    const decrementBtn = e.target.closest('.decrementItem');
+    const removeBtn = e.target.closest('.removeItem');
+  
+    if (addBtn) {
+      addToList(addBtn.dataset.item, 1);
+    } else if (incrementBtn) {
+      updateItemQuantity(incrementBtn.dataset.item, 1);
+    } else if (decrementBtn) {
+      updateItemQuantity(decrementBtn.dataset.item, -1);
+    } else if (removeBtn) {
+      updateItemQuantity(removeBtn.dataset.item, -9999);
+    } else if (e.target.matches('#findBestStores')) {
+      findBestStores();
+    }
+  });
+  
+
+// Add item to UI and DB
+function addToList(itemName, qty, skipSave = false) {
+    const list = document.getElementById('myList');
+    const existingQtySpan = list.querySelector(`[data-qty-for="${itemName}"]`);
+  
+    if (existingQtySpan) {
+      updateItemQuantity(itemName, qty); 
+      return;
+    }
+  
+    const html = `
+    <li class="list-group-item d-flex justify-content-between align-items-center" id="li-${itemName}">
+    <div>
+        ${normalizeUnits(itemName)}
+    </div>
+    <div class="d-flex align-items-center">
+        <button class="btn btn-sm btn-outline-secondary decrementItem" data-item="${itemName}">–</button>
+        <span class="mx-2" data-qty-for="${itemName}">${qty}</span>
+        <button class="btn btn-sm btn-outline-secondary incrementItem" data-item="${itemName}">+</button>
+        <button class="btn btn-sm btn-outline-danger ms-2 removeItem" data-item="${itemName}">
+        <i class="bi bi-trash"></i>
+        </button>
+    </div>
+    </li>`;
+    list.insertAdjacentHTML('beforeend', html);
+    
+    if (!skipSave) {
+      addItemDB(currentListName, itemName, qty);
+    }
 }
 
-$(document).ready(function () {
+  
+
+// Update quantity in DB and UI
+async function updateItemQuantity(itemName, delta) {
+    const ref = doc(db, `users/${auth.currentUser.uid}/groceryLists/${currentListName}`);
+    await runTransaction(db, async tx => {
+      const snap = await tx.get(ref);
+      let items = snap.exists() ? (snap.data().items || []) : [];
+
+      // Find the item by name
+      const idx = items.findIndex(it => it.name === itemName);
+      
+      if (idx !== -1) {
+        items[idx].qty += delta;
+
+        if (items[idx].qty <= 0) {
+          items.splice(idx, 1); // remove item completely if qty <= 0
+        }
+      }
+
+      await tx.set(ref, { items }, { merge: true });
+    });
+
+    // update the DOM after transaction
+    const span = document.querySelector(`[data-qty-for="${CSS.escape(itemName)}"]`);
     
-    const listName = document.getElementById("listName").textContent;
-    const list = getItemsDB(listName) || {};
+    if (span) {
+      const currentQty = parseInt(span.textContent, 10) || 0;
+      const updatedQty = currentQty + delta;
 
-    $(document).on('click', '.addToList', function() {
-        const item = $(this).data("item");
-        addToList(item);
-    });
+      if (updatedQty > 0) {
+        span.textContent = updatedQty;
+      } else {
+        const li = document.getElementById(`li-${itemName}`);
+        if (li) li.remove();
+      }
+    }
+}
 
-    $(document).on('click', '.removeItem', function() {
-        const list = JSON.parse(localStorage.getItem(listName)) || {};
-        const item = $(this).data("item");
-        if (list[item]) {
-            delete list[item]; 
-            localStorage.setItem(listName, JSON.stringify(list)); 
+// Firestore helpers
+async function getItemsDB(name) {
+    const snap = await getDoc(doc(db, `users/${auth.currentUser.uid}/groceryLists/${name}`));
+    return snap.exists() ? (snap.data().items || []) : [];
+  }
+
+async function addItemDB(name, item, qty) {
+    const ref = doc(db, `users/${auth.currentUser.uid}/groceryLists/${name}`);
+    const snap = await getDoc(ref);
+    let items = snap.exists() ? snap.data().items : [];
+  
+    // Look for existing item
+    const existing = items.find(it => it.name === item);
+    if (existing) {
+      existing.qty += qty;
+    } else {
+      items.push({ name: item, qty: qty });
+    }
+  
+    await setDoc(ref, { items }, { merge: true });
+  }
+
+// Compute and popup best stores by total cost
+// function findBestStores() {
+//   const items = {};
+//   document.querySelectorAll('[data-qty-for]').forEach(el => {
+//     const it = el.getAttribute('data-qty-for');
+//     items[it] = parseInt(el.textContent, 10);
+//   });
+//   if (!Object.keys(items).length) {
+//     alert('Your list is empty!');
+//     return;
+//   }
+//   const totals = {};
+//   for (const [item, qty] of Object.entries(items)) {
+//     const info = groceries[item];
+//     if (!info) continue;
+//     Object.entries(info).forEach(([store, p]) => {
+//       const price = p.discount_price ?? p.original_price;
+//       if (price != null) totals[store] = (totals[store] || 0) + price * qty;
+//     });
+//   }
+//   const sorted = Object.entries(totals).sort((a, b) => a[1] - b[1]);
+//   const lines = sorted.map(([s, t], i) => `${i+1}. ${s}: $${t.toFixed(2)}`);
+//   alert('Best stores by total cost:\n' + lines.join('\n'));
+// }
+
+// … your imports, loadGroceries, renderSearchItems, initPage, etc.
+
+
+
+// copying over calculateDistane and findNearestStore functions from hotdeals.js to reuse here to display store address and distance
+function calculateDistance(lat1, lon1, lat2, lon2) {
+    const R = 3958.8;
+    const dLat = (lat2 - lat1) * Math.PI/180;
+    const dLon = (lon2 - lon1) * Math.PI/180;
+    const a = Math.sin(dLat/2)**2 +
+              Math.cos(lat1*Math.PI/180) *
+              Math.cos(lat2*Math.PI/180) *
+              Math.sin(dLon/2)**2;
+    return 2 * R * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  }
+  
+  async function findNearestStore(storeName, userLat, userLng) {
+    const [{ PlacesService }, { LatLng }] = await Promise.all([
+      google.maps.importLibrary("places"),
+      google.maps.importLibrary("core")
+    ]);
+    const service = new PlacesService(document.createElement('div'));
+    const center  = new LatLng(userLat, userLng);
+  
+    return new Promise(resolve => {
+      service.textSearch({
+        location:  center,
+        radius:    32186.9, // 20 mile radius
+        query:     `${storeName} supermarket`,
+        type:      'grocery_or_supermarket'
+      }, (results, status) => {
+        if (status === 'OK') {
+
+            const match = results.find(r => {
+                const dist = calculateDistance(
+                  userLat, userLng,
+                  r.geometry.location.lat(),
+                  r.geometry.location.lng()
+                );
+                return (
+                  r.name.toLowerCase().includes(storeName.toLowerCase()) &&
+                  dist <= 20 // 20 mile radius, must refilter again
+                );
+              });
+
+          if (match) {
+            const dist = calculateDistance(
+              userLat, userLng,
+              match.geometry.location.lat(),
+              match.geometry.location.lng()
+            ).toFixed(1);
+            return resolve({
+              address: match.formatted_address,
+              distance: dist
+            });
+          }
         }
-        let element = document.getElementById(item);
-        element.remove();
+        resolve({ address: 'N/A', distance: '—' });
+      });
     });
-
+  }
+  
+  async function findBestStores() {
+    const items = {};
+    document.querySelectorAll('[data-qty-for]').forEach(el => {
+      items[el.getAttribute('data-qty-for')] = +el.textContent;
+    });
+  
+    if (!Object.keys(items).length) {
+      alert("Your list is empty!");
+      return;
+    }
+  
+    const totals = {};
+    for (let [item, qty] of Object.entries(items)) {
+      const info = groceries[item];
+      if (!info) continue;
+  
+      for (let [rawStore, p] of Object.entries(info)) {
+        const store = rawStore.replace(/\s*(Supermarket|Grocery)$/i, '').trim();
+        const price = p.discount_price ?? p.original_price;
+        totals[store] = (totals[store] || 0) + price * qty;
+      }
+    }
+  
+    const sorted = Object.entries(totals).sort((a, b) => a[1] - b[1]);
+  
+    const userDoc = await getDoc(doc(db, `users/${auth.currentUser.uid}`));
+    const { lat: userLat, lng: userLng } = userDoc.data().address;
+  
+    const enriched = await Promise.all(
+      sorted.map(async ([store, cost], idx) => {
+        const { address, distance } = await findNearestStore(store, userLat, userLng);
+        return {
+          rank: idx + 1,
+          store,
+          cost: cost.toFixed(2),
+          address,
+          distance
+        };
+      })
+    );
+  
+    console.log("Best stores enriched:", enriched);
+  
+    if (enriched.some(store => store.address !== 'N/A' && store.distance !== '—')) {
+        const modalBody = document.getElementById('bestStoresModalBody');
     
-    $(document).on('click', '.incrementItem', function() {
-        const item = $(this).data("item");
-        updateItemQuantity(listName, item, list[item] + 1);
-    });
+        modalBody.innerHTML = enriched
+          .filter(store => store.address !== 'N/A' && store.distance !== '—') // only real stores
+          .map(store => `
+            <div class="mb-3">
+              <h5>${store.rank}. ${store.store}</h5>
+              <p>
+                <strong>Cost:</strong> $${store.cost}<br>
+                <strong>Address:</strong> ${store.address}<br>
+                <strong>Distance:</strong> ${store.distance} mi
+              </p>
+            </div>
+          `).join('');
+    
+        const bestStoresModal = new bootstrap.Modal(document.getElementById('bestStoresModal'));
+        bestStoresModal.show();
+    }
+    else {
+        const modalBody = document.getElementById('bestStoresModalBody');
+        modalBody.innerHTML = `
+          <div class="text-center">
+            <h5>No stores available.</h5>
+            <p>Please try searching again or adjust your location.</p>
+          </div>
+        `;
+    
+        const bestStoresModal = new bootstrap.Modal(document.getElementById('bestStoresModal'));
+        bestStoresModal.show();
+    }
+    
 
-    $(document).on('click', '.decrementItem', function() {
-        const list = JSON.parse(localStorage.getItem(listName)) || {};
-        const item = $(this).data("item");
-        if (list[item] == 1) {
-            if (list[item]) {
-                delete list[item]; 
-                localStorage.setItem(listName, JSON.stringify(list)); 
-            }
-            let element = document.getElementById(item);
-            element.remove();
-        }
-        else {
-            updateItemQuantity(listName, item, list[item] - 1);
-        }
-    });
-}); 
-*/
+  }

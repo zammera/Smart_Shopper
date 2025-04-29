@@ -1,3 +1,11 @@
+.blur-card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: white;
+  }
+  
 /* Background Image Container - Fixed Position */
 .bg-image {
     position: fixed;
@@ -22,6 +30,13 @@
     100% {
         transform: scale(1.1) translateY(10px) translateX(10px);
     }
+}
+
+.scaleA {
+    width: 20%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .signout-button {
@@ -71,17 +86,13 @@
     font-size: 50%
 }
 
-
 /* Add styles to Hot Deals Page */
 
 .hot-deals-container {
-    max-height: 700px;
     overflow-y: auto;
     padding: 10px;
     border-radius: 8px;
-    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
-    backdrop-filter: blur(5px); 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow-x: hidden;
 }
 
 .card {
@@ -354,10 +365,12 @@
 #historyContainer {
     min-width: 1200px;
     height: 1040px;
-    margin-top: 100px;
+    margin-top: 20px;
     padding-top: 10px;
-    border-radius: 40px;
-    background-color: rgba(255, 255, 255, .5);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
 }
 
 .itemsHistorySection {

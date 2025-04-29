@@ -2,11 +2,9 @@ import {db, auth } from "./firebaseInit.js";
 import { setDoc, getDocs, deleteDoc, collection, doc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 
-
 if (!window.firebaseDb) {
     console.error("Firebase not initialized")
 }
-
 
 const listNames = [
     {"name":"Taco Tuesday"}
@@ -16,51 +14,17 @@ if (!localStorage.getItem("listNames")) {
     localStorage.setItem("listNames", JSON.stringify(listNames));
 }
 
-const groceries = [
-    {"item": "Organic Bananas", "price": "", "store": ""},
-    {"item": "Whole Milk", "price": "", "store": ""},
-    {"item": "Salmon Fillet", "price": "", "store": ""},
-    {"item": "Loaf of Bread", "price": "", "store": ""},
-    {"item": "Strawberries", "price": "", "store": ""},
-    {"item": "Ground Beef", "price": "", "store": ""},
-    {"item": "Canned Tomatoes", "price": "", "store": ""},
-    {"item": "Chicken Breast", "price": "", "store": ""},
-    {"item": "Pasta", "price": "", "store": ""},
-    {"item": "Eggs (dozen)", "price": "", "store": ""},
-    {"item": "Apples", "price": "", "store": ""},
-    {"item": "Olive Oil", "price": "", "store": ""},
-    {"item": "Blueberries", "price": "", "store": ""},
-    {"item": "Rice", "price": "", "store": ""},
-    {"item": "Cereal", "price": "", "store": ""},
-    {"item": "Avocado", "price": "", "store": ""},
-    {"item": "Cheese", "price": "", "store": ""},
-    {"item": "Yogurt", "price": "", "store": ""},
-    {"item": "Oranges", "price": "", "store": ""},
-    {"item": "Beans", "price": "", "store": ""},
-    {"item": "Chips", "price": "", "store": ""},
-    {"item": "Jumbo shrimp", "price": "", "store": ""},
-    {"item": "Coffee", "price": "", "store": ""},
-    {"item": "Grapes", "price": "", "store": ""},
-    {"item": "Butter", "price": "", "store": ""},
-    {"item": "Lobster tail", "price": "", "store": ""},
-    {"item": "Tea", "price": "", "store": ""},
-    {"item": "Soda", "price": "", "store": ""},
-    {"item": "Kiwi", "price": "", "store": ""},
-    {"item": "Honey", "price": "", "store": ""},
-    {"item": "Ice cream", "price": "", "store": ""},
-    {"item": "Mango", "price": "", "store": ""},
-    {"item": "Salt", "price": "", "store": ""},
-    {"item": "Cookies", "price": "", "store": ""}
-]
-
 //aim to change this but wanted to get this functional and pretty
 function createNewList() {
     let listName = document.getElementById('name').value;
     let storedLists = JSON.parse(localStorage.getItem("listNames")) || [];
 
-    if (listName == "" ) {
-        console.log("empty list cannot be created")
-    } else {
+    if (listName.trim() === "") {
+        document.getElementById('error-message').textContent = "Please enter a name for your shopping list.";
+        document.getElementById('error-message').style.display = 'block';
+        return;
+    }  else {
+        document.getElementById('error-message').style.display = 'none';
         createListCard(listName);
         createGroceryListDB(listName);
         storedLists.push({ name: listName });
@@ -72,29 +36,27 @@ function createNewList() {
 
 function createListCard(listName) {
     let selectedList = JSON.parse(localStorage.getItem('selectedList')) || [];
-    if (listName == selectedList){
+    // if (listName == selectedList){
+    //     var addNewList = `<div class="card oldList" style="width: 15rem;" id="${ listName }">
+    //         <div class="card-body">
+    //             <div class="d-flex align-items-center justify-content-between mb-2">
+    //                 <h5 class="card-title mb-0">${ listName }</h5>
+    //             </div>
+    //             <input class="btn btn-custom-color list-btn mt-3" type="submit" value="Manage List" onclick="editList('${ listName }')">
+    //             <input class="btn btn-danger list-btn" type="reset" value="Delete" onclick="deleteList('${ listName }')">
+    //         </div>
+    //     </div>`;
+    // } else {
         var addNewList = `<div class="card oldList" style="width: 15rem;" id="${ listName }">
             <div class="card-body">
                 <div class="d-flex align-items-center justify-content-between mb-2">
                     <h5 class="card-title mb-0">${ listName }</h5>
-                    <input type="radio" class="form-check-input" name="listSelector" value="${ listName }" onchange="selectList('${ listName }')" checked/>
                 </div>
-                <input class="btn btn-custom-color list-btn" type="submit" value="Edit" onclick="editList('${ listName }')">
+                <input class="btn btn-custom-color list-btn mt-3" type="submit" value="Edit" onclick="editList('${ listName }')">
                 <input class="btn btn-danger list-btn" type="reset" value="Delete" onclick="deleteList('${ listName }')">
             </div>
         </div>`;
-    } else {
-        var addNewList = `<div class="card oldList" style="width: 15rem;" id="${ listName }">
-            <div class="card-body">
-                <div class="d-flex align-items-center justify-content-between mb-2">
-                    <h5 class="card-title mb-0">${ listName }</h5>
-                    <input type="radio" class="form-check-input" name="listSelector" value="${ listName }" onchange="selectList('${ listName }')" />
-                </div>
-                <input class="btn btn-custom-color list-btn" type="submit" value="Edit" onclick="editList('${ listName }')">
-                <input class="btn btn-danger list-btn" type="reset" value="Delete" onclick="deleteList('${ listName }')">
-            </div>
-        </div>`;
-    }
+    //}
     let Container = document.getElementById('listContainer');  
     console.log("List: " + listName + " added to the list container")
     Container.innerHTML += addNewList; 
@@ -123,8 +85,6 @@ function selectList(name) {
     localStorage.setItem("selectedList", JSON.stringify(name));
 }
 
-
-
 $( function() {
     if ($('body').is('#makeList')) {
         (async () => {
@@ -134,8 +94,10 @@ $( function() {
                 console.log("Fetched lists from Firestore:", lists);
 
                 lists.forEach(list => {
-                    createListCard(list.name);
-                });
+                    if (list.name !== "Hot Deals List" && list.name !== undefined) {
+                        createListCard(list.name);
+                    }
+                });                                               
 
             } catch (err) {
                 console.error("Error getting lists:", err);
@@ -238,7 +200,6 @@ async function deleteDBList(listName){
     const ref = doc(db, `users/${ user.uid }/groceryLists/${listName}`);
     await deleteDoc(ref);
 }
-
 
 window.createNewList = createNewList;
 window.editList = editList;

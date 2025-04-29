@@ -40,6 +40,7 @@
     </head>
 <body id="editList">
   <div class="bg-image"></div>
+  
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-transparent px-4">
     <div class="container-fluid">
@@ -69,6 +70,9 @@
           </li>
           <li class="nav-item">
             <a class="nav-link text-white" href="history.html">Item History</a>
+          </li>
+          <li class="nav-item">
+            <span id="userGreeting" class="nav-link text-white"></span>
           </li>
           <li class="nav-item">
             <a class="nav-link text-white signout-button" href="index.html">
@@ -102,8 +106,29 @@
         </div>
     </div>
     <div class="col-md-1"></div>
-    <div class="col-md-4" id="list">
-        <ul class="list-group list-group-flush" id="myList">
+    <div class="col-md-4">
+      <!-- Shopping List Card -->
+      <div class="card">
+        <div class="card-header bg-primary text-white">
+          <h5 class="mb-0">Your Shopping List</h5>
+        </div>
+        <div class="card-body p-0">
+          <ul class="list-group list-group-flush" id="myList"></ul>
+        </div>
+      </div>
+  
+      <!-- Find Best Stores Button -->
+      <div class="d-flex justify-content-between align-items-center mt-3 mb-2">
+        <button id="findBestStores" class="btn btn-primary w-100">
+          Find Best Stores
+        </button>
+      </div>
+  
+      <!-- Best Stores Results -->
+      <div id="bestStoresContainer" class="mt-3"></div>
+    </div>
+  
+        
 <!--             <li class="list-group-item d-flex justify-content-between align-items-center">
                 <button class="btn btn-close btn-danger"></button>
                 <h5 class="text-center flex-grow-1">Grocery Name</h5>
@@ -117,13 +142,44 @@
             </li>
         </ul>
     </div>
+
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+      <div id="editToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="toast-header">
+              <strong class="me-auto">SmartShopper</strong>
+              <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+          <div class="toast-body" id="editToastBody">
+              Action completed!
+          </div>
+      </div>
+  </div>
+  
 </div>
-    
+  
+<!-- Best Stores Modal -->
+<div class="modal fade" id="bestStoresModal" tabindex="-1" aria-labelledby="bestStoresModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="bestStoresModalLabel">Best Stores by Total Cost</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="bestStoresModalBody">
+        <!-- The store list will be dynamically injected here -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.10.2.js"></script> 
-<script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-<!-- <script type="modile" src="js/firebaseInit.js"></script> -->
-<script src="js/autocomplete.js"></script>
-<script type="module" src="js/editlists.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script> 
+  <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+  <!-- <script type="modile" src="js/firebaseInit.js"></script> -->
+  <script src="js/autocomplete.js"></script>
+  <script type="module" src="js/editlists.js"></script>
+  <script src="js/navbar.js"></script>
+
 </html>
