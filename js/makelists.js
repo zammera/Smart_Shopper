@@ -23,7 +23,13 @@ function createNewList() {
         document.getElementById('error-message').textContent = "Please enter a name for your shopping list.";
         document.getElementById('error-message').style.display = 'block';
         return;
-    }  else {
+    }
+    // Check if the list name already exists
+    if (storedLists.some(list => list.name === listName)) {
+        document.getElementById('error-message').textContent = "This shopping list already exists.";
+        document.getElementById('error-message').style.display = 'block';
+    }
+    else {
         document.getElementById('error-message').style.display = 'none';
         createListCard(listName);
         createGroceryListDB(listName);
@@ -61,8 +67,9 @@ function createListCard(listName) {
     console.log("List: " + listName + " added to the list container")
     Container.innerHTML += addNewList; 
 }
-
+//Testing an async function to delete a list from both the DB and local storage
 function deleteList(name) {
+
     let element = document.getElementById(name);
     //let storedLists = JSON.parse(localStorage.getItem("listNames")) || [];
     //let list = JSON.parse(localStorage.getItem(listKey)) || {};
@@ -76,6 +83,8 @@ function deleteList(name) {
         console.error("Element with ID " + name + " not found.");
     }
 }
+
+  
 
 function editList(name) {
     window.location.href = 'editlist.html?name=' + encodeURIComponent(name);
