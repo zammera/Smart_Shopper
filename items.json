@@ -3636,11 +3636,11 @@
     },
     "ALDI": {
       "original_price": 23.29,
-      "discount_price": 1.97
+      "discount_price": 21.97
     },
     "Trader Joe's": {
       "original_price": 23.89,
-      "discount_price": 2.39
+      "discount_price": 22.39
     }
   }
 }
