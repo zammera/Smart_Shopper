@@ -5,6 +5,7 @@ import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.1/fi
 let selectedListName = null;
 
 // Fetch store items
+// https://dmitripavlutin.com/javascript-fetch-async-await/
 const getStoreItemsData = async () => {
     try {
         const response = await fetch('items.json');
@@ -16,6 +17,7 @@ const getStoreItemsData = async () => {
     }
 };
 
+// this function awaits the retrieval of the data on all items in stores as well as what items are in lists
 const generateItems = async () => {
     console.log("Starting to generate items...");
     const listItems = await getListItems();
@@ -24,8 +26,10 @@ const generateItems = async () => {
     const allStoreItems = await getStoreItemsData();
     console.log("Fetched allStoreItems:", allStoreItems);
 
+    // https://www.freecodecamp.org/news/javascript-array-of-objects-tutorial-how-to-create-update-and-loop-through-objects-using-js-array-methods/
     const itemsArray = [];
 
+    // for each item in a list it tries to find the cheapest store option and pushes that to a new array
     for (let i = 0; i < listItems.length; i++) {
         const userItem = listItems[i];
 
@@ -68,7 +72,11 @@ const generateItems = async () => {
     getRecentItems(itemsArray);
 };
 
+// these functions serve to display the items that have been added to the respective arrays
+// items with a discount use the second function
+// https://stackoverflow.com/questions/4191386/jquery-how-to-find-an-element-based-on-a-data-attribute-value
 function postItem(item, containerName) {
+    // create a new div and construct the inner html to assign all needed information
     const itemDiv = document.createElement('div');
     itemDiv.className = 'item';
     itemDiv.innerHTML = `
@@ -111,6 +119,8 @@ function getDiscountedItems(items) {
     });
 }
 
+// get the top 10 most frequently appearing items (at least two appearances)
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort 
 function getFrequentItems(itemsArray) {
     const items = [...itemsArray].sort((a, b) => b.frequency - a.frequency).slice(0, 10);
     items.forEach(item => {
@@ -131,6 +141,7 @@ function getRecentItems(itemsArray) {
     });
 }
 
+// compare all the stores for each item and get the cheapest one, then push that to a new array
 const getCheapestItems = async (itemList) => {
     const cheapestItems = [];
 
@@ -162,6 +173,8 @@ const getCheapestItems = async (itemList) => {
     return cheapestItems;
 };
 
+// retrieve the lists connected to the user's account from firebase
+// https://firebase.google.com/docs/reference/js/v8/firebase.database.DataSnapshot
 const getListItems = async () => {
     const user = auth.currentUser;
     if (!user) {
@@ -174,6 +187,7 @@ const getListItems = async () => {
     const groceryListsCollection = collection(db, `users/${user.uid}/groceryLists`);
     const querySnapshot = await getDocs(groceryListsCollection);
 
+    // for each list grab the items
     for (const listDoc of querySnapshot.docs) {
         const list = doc(db, `users/${user.uid}/groceryLists/${listDoc.id}`);
         const snapshot = await getDoc(list);
@@ -181,6 +195,8 @@ const getListItems = async () => {
 
         const items = data.items || {};
 
+        // check if the item already exists in the array, in which case update the frequency and recency
+        // otherwise add a new item to the array
         if (Array.isArray(items)) {
             for (const entry of items) {
                 if (!entry.name || entry.name === "undefined" || entry.name.trim() === "") {
@@ -225,6 +241,7 @@ const getListItems = async () => {
     return listItems;
 };
 
+// get the name of the lists a user has and allow them to pick which one to add to
 function populateListSelector() {
     const listSelector = document.getElementById('listSelector');
 
@@ -261,6 +278,7 @@ function populateListSelector() {
     });
 }
 
+// ensure there is a list to add items to
 async function addItemToSelectedList(itemName) {
     if (!selectedListName) {
         alert("Please select a list first!");
@@ -307,6 +325,7 @@ async function addItemToSelectedList(itemName) {
     }
 }
 
+// visually confirm that an item has been added with this brief notification
 function showToast(message, type = 'info') {
     const toastContainer = document.getElementById('addToListToast');
     const toastBody = document.getElementById('toastText');
