@@ -4,19 +4,16 @@
     backdrop-filter: blur(4px);
     z-index: 1000;
   }
-  
-/* Optional: ensure text color stays white */
+
 .navbar-brand span,
 .navbar span {
     color: white !important;
 }
 
-/* Optional hover for logo text */
 .navbar-brand span:hover {
     text-decoration: underline;
 }
 
-/* Push content down since navbar is fixed */
 .content {
     padding-top: 80px;
 }
@@ -39,7 +36,7 @@ border: 1px solid rgba(255, 255, 255, 0.25); /* optional border for depth */
 color: white; /* change as needed */
 }
   
-  /* Change icon color inside location bubble */
+/* Change icon color inside location bubble */
 .location-bubble .location-icon {
     color: white;
     margin-right: 8px;
