@@ -45,6 +45,7 @@ function extractStreetAddress(fullAddress) {
   }
 
 // function for Google Maps API initialization
+// source: https://developers.google.com/maps/documentation/javascript, https://developers.google.com/maps/documentation/javascript/libraries
 (function(g) {
     var h, a, k, p="The Google Maps JavaScript API", c="google", l="importLibrary", q="__ib__", m=document, b=window;
     b = b[c] || (b[c] = {});
@@ -112,17 +113,19 @@ async function changeAreaFunction() {
         return isValid;
     }
 
+    // Backend logic for change area pop-up
     $('#changeAreaModal').on('shown.bs.modal', async function () {
         const userAddressInput = document.getElementById("addressSearch");
         const autocompleteList = document.getElementById("autocomplete-list");
         selectedAddress = null;
         if (autocompleteList) autocompleteList.innerHTML = '';
 
+        // calling google api based on user's search input
         if (userAddressInput) {
             const { Autocomplete } = await google.maps.importLibrary("places");
             const autocomplete = new Autocomplete(userAddressInput, {
                 types: ['geocode'],
-                fields: ['place_id', 'formatted_address', 'geometry'],
+                fields: ['place_id', 'formatted_address', 'geometry'], // formatted address to display address to user and geometry used to calculate distance
                 componentRestrictions: { country: "US" }
             });
 
@@ -178,6 +181,7 @@ async function changeAreaFunction() {
         }
     });
 
+    // when the user clicks 'Enter Address Manually' button
     $('#continue-address-btn').on('click', async function () {
         const street = document.getElementById("street").value.trim();
         const city = document.getElementById("city").value.trim();
@@ -191,6 +195,7 @@ async function changeAreaFunction() {
 
         const formattedAddress = `${street}, ${city}, ${state}, ${zip}`;
 
+        // Also using google api to get location of user (string address, lat, lng)
         try {
             const geocodeResponse = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(formattedAddress)}&key=AIzaSyAVpGwnFAlquQmJkZOEezMLWdNrzr9BQNo`);
             const geocodeData = await geocodeResponse.json();
@@ -198,7 +203,6 @@ async function changeAreaFunction() {
             if (geocodeData.status === "OK") {
                 const geoLocation = geocodeData.results[0].geometry.location;
 
-        
                 const manualAddress = {
                     formatted: formattedAddress,
                     lat: geoLocation.lat,

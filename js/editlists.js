@@ -59,7 +59,7 @@ function initPage() {
         items.forEach(obj => addToList(obj.name, obj.qty, true)); 
     });
   
-    // Setup search filter
+    // Setup search filter based on users input
     document.getElementById('searchBar').addEventListener('input', e => {
         const q = e.target.value.toLowerCase();
         
@@ -222,11 +222,11 @@ async function addItemDB(name, item, qty) {
 //   alert('Best stores by total cost:\n' + lines.join('\n'));
 // }
 
-// … your imports, loadGroceries, renderSearchItems, initPage, etc.
-
+//
 
 
 // copying over calculateDistane and findNearestStore functions from hotdeals.js to reuse here to display store address and distance
+// same source used as in autocomplete.js
 function calculateDistance(lat1, lon1, lat2, lon2) {
     const R = 3958.8;
     const dLat = (lat2 - lat1) * Math.PI/180;
@@ -284,6 +284,7 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
     });
   }
   
+  // function to calculate total for all items in list for each store and compare totals to each store 
   async function findBestStores() {
     const items = {};
     document.querySelectorAll('[data-qty-for]').forEach(el => {
@@ -359,5 +360,4 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
         bestStoresModal.show();
     }
     
-
   }

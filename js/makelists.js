@@ -101,7 +101,7 @@ async function deleteList(name) {
         console.log(`List '${name}' deleted successfully`);
     } catch (error) {
         console.error("Error deleting list:", error);
-        // Optionally restore the UI element if DB deletion failed
+        // restore the UI element if DB deletion failed
         if (!document.getElementById(name)) {
             createListCard(name);
         }
@@ -163,7 +163,7 @@ $( function() {
 //Database Functions:
 //These Functions are for accessing/editing the DB
 
-//Creates a New Grocery List as  new entry attached to the user
+// Creates a New Grocery List as  new entry attached to the user
 async function createGroceryListDB(listName) {
     const user = auth.currentUser;
     if (!user) {
@@ -221,6 +221,7 @@ async function getAllCurrentLists() {
       });
 }
 
+// deleting lists from site and database for current user
 async function deleteDBList(listName){
     const user = auth.currentUser;
     if (!user) {
