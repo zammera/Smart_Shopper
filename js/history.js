@@ -33,7 +33,7 @@ const generateItems = async () => {
     for (let i = 0; i < listItems.length; i++) {
         const userItem = listItems[i];
 
-        // 🛑 Skip undefined or blank item names
+        // Skip undefined or blank item names
         if (!userItem.item || userItem.item === "undefined" || userItem.item.trim() === "") {
             console.warn(`Skipping invalid item: ${userItem.item}`);
             continue;

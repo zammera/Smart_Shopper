@@ -197,6 +197,9 @@ async function addItemDB(name, item, qty) {
     await setDoc(ref, { items }, { merge: true });
   }
 
+
+  
+
 // Compute and popup best stores by total cost
 // function findBestStores() {
 //   const items = {};

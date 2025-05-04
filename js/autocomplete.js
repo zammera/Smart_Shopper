@@ -22,8 +22,8 @@ async function saveUserAddress(address) {
 
         await window.firebaseDb.collection("users").doc(user.uid).set({
             address: {formatted: address.formatted, lat: address.lat, lng: address.lng},
-
             lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
+
         }, { merge: true });
 
         // Update display
