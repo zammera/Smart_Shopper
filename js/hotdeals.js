@@ -63,14 +63,13 @@ $(function () {
             const center = new LatLng(userLocation.userLat, userLocation.userLng);
             const storeLocations = new Map();
             const allStores = [...new Set(Object.values(data).flatMap(item => Object.keys(item)))];
-
-            const radius = 32186.9; // meters (20 miles)
+            const radius = 16093.4; // meters (10 miles)
             const maxDistance = radius / 1609.34; // miles
             await Promise.all(allStores.map(store =>
                 new Promise(resolve => {
                     service.textSearch({
                         location: center,
-                        radius: radius, // 20 miles defined above
+                        radius: radius, // 10 miles defined above
                         query: `${store} supermarket`,
                         type: 'grocery_or_supermarket'
                     }, (results, status) => {

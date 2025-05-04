@@ -54,6 +54,7 @@ async function createNewList() {
     }
 }
 
+//creates a new list card with the given name 
 function createListCard(listName) {
     let selectedList = JSON.parse(localStorage.getItem('selectedList')) || [];
     // if (listName == selectedList){
@@ -81,6 +82,7 @@ function createListCard(listName) {
     console.log("List: " + listName + " added to the list container")
     Container.innerHTML += addNewList; 
 }
+
 //Testing an async function to delete a list from both the DB and local storage
 async function deleteList(name) {
     try {
@@ -108,15 +110,19 @@ async function deleteList(name) {
     }
 }
 
+//sets the search the paramerts to contain the name of the list being edited
 function editList(name) {
     window.location.href = 'editlist.html?name=' + encodeURIComponent(name);
 }
 
+//no longer used
 function selectList(name) {
     localStorage.setItem("selectedList", JSON.stringify(name));
 }
 
+//when the document is read 
 $( function() {
+    //runs only in makelist.html
     if ($('body').is('#makeList')) {
         (async () => {
             console.log("im in the async function");
@@ -136,6 +142,7 @@ $( function() {
         })();
         
     }
+    //runs only in the editList.html
     if ($('body').is('#editList')) {
         const urlParams = new URLSearchParams(window.location.search);
         const name = urlParams.get('name');
@@ -181,6 +188,7 @@ async function createGroceryListDB(listName) {
     console.log("List created!");
   }
 
+//gets all the current lists attached to the current user 
 async function getAllCurrentLists() {
     /* const user = auth.currentUser;
     if (!user) {
@@ -233,6 +241,7 @@ async function deleteDBList(listName){
     await deleteDoc(ref);
 }
 
+//makes the functions for the buttons available to the buttons
 window.createNewList = createNewList;
 window.editList = editList;
 window.deleteList = deleteList;
