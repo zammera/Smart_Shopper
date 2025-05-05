@@ -51,7 +51,7 @@ $(function () {
     }
 
     // —————————————————————————
-    // If we have geo, filter to within 20 mi
+    // If we have geo, filter to within 10 miles
     // —————————————————————————
     async function findNearbyStores(data) {
         try {
