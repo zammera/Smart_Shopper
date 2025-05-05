@@ -252,7 +252,7 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
     return new Promise(resolve => {
       service.textSearch({
         location:  center,
-        radius:    32186.9, // 20 mile radius
+        radius:    16093.4, // 10 mile radius
         query:     `${storeName} supermarket`,
         type:      'grocery_or_supermarket'
       }, (results, status) => {
@@ -266,7 +266,7 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
                 );
                 return (
                   r.name.toLowerCase().includes(storeName.toLowerCase()) &&
-                  dist <= 20 // 20 mile radius, must refilter again
+                  dist <= 10 // 10 mile radius, must refilter again
                 );
               });
 

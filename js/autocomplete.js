@@ -19,16 +19,14 @@ async function saveUserAddress(address) {
             alert("No user is signed in.");
             return false;
         }
-
         await window.firebaseDb.collection("users").doc(user.uid).set({
             address: {formatted: address.formatted, lat: address.lat, lng: address.lng},
             lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
-
         }, { merge: true });
 
         // Update display
         updateLocationDisplay(extractStreetAddress(address.formatted));
-        
+
         console.log("Address saved successfully!");
         return true;
     } catch (error) {
